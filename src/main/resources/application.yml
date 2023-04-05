@@ -1,0 +1,35 @@
+server:
+  port: 8082
+
+spring:
+  output:
+    ansi:
+      enabled: always
+  thymeleaf:
+    check-template-location: true
+    prefix:  classpath:/templates/
+    suffix:  .html
+    cache:  false
+  datasource:
+    driver-class-name:  oracle.jdbc.driver.OracleDriver
+    url:  jdbc:oracle:thin:@localhost:1521:xe
+    username:  sharemusic
+    password:  hateproject
+
+# mybatis mapping
+mybatis:
+# mapper.xml location
+  mapper-locations:  classpath:sqlmapper/mapper/*.xml
+  config-location:  classpath:sqlmapper/config/config.xml
+
+file:
+  path: C:/tempStorage/upload/
+
+
+logging:
+    level:
+      '[com.music.sharemusic]':  DEBUG
+
+
+
+
