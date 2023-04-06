@@ -64,8 +64,14 @@ public class MemberServiceImpl implements MemberService {
   }
 
   public MemberDto login(MemberDto memberDto) {
+    MemberDto result = null;
+    String userID = memberDto.getUserID();
     int checkMember = memberDao.login(memberDto);
-    MemberDto result = memberDto;
+    if (checkMember > 0) {
+      result = memberDao.getMemberOne(userID);
+    }
+    log.info("who?==={}", checkMember);
+    log.info("login?==={}", result);
     return result;
   }
 

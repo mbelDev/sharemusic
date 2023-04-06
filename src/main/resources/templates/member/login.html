@@ -18,6 +18,7 @@
             <div class="item">
                 <span>비밀번호</span><input type="password" name="userPW">
             </div>
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">오류 메시지</p>
 
             <div class="btns">
                 <button class="btn-confirm">로그인</button>
