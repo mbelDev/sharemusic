@@ -29,6 +29,17 @@ public class MemberController {
     return "redirect:/index";
   }
 
+  @GetMapping("/login")
+  public String loginPage() {
+    return "/member/login";
+  }
+
+  @PostMapping("/login")
+  public String login(MemberDto memberDto) {
+    // memberService.getMemberOne(memberDto);
+    return "redirect:/index";
+  }
+
   @PostMapping("/checkID")
   public Map<String, Object> checkID(String userID) {
     log.info("get ID === {}", userID);

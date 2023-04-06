@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/js/jquery-3.6.3.min.js"></script>
+</head>
+<body>
+    
+<div style="display: flex; justify-content: center;">
+    <div style="text-align: left;">
+        <form action="/member/login" method="POST">
+            <div class="item">
+                <span>아이디</span><input type="text" class="userID" name="userID">
+            </div>
+            <div class="item">
+                <span>비밀번호</span><input type="password" name="userPW">
+            </div>
+
+            <div class="btns">
+                <button class="btn-confirm">로그인</button>
+                <button class="btn-confirm">회원가입</button>
+                <p>아이디/비밀번호를 잊으셨나요?</p>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+
+<script>
+    $(".btn-checkID").on("click",()=>{
+        if ($(".userID") == ""){
+            alert("아이디를 입력 해 주세요!");
+            $(".userID").focus();
+            return false;
+        }
+        if ($(".userPW") == ""){
+            alert("비밀번호를 입력 해 주세요!");
+            $(".userPW").focus();
+            return false;
+        }
+    })
+
+</script>
+
+</html>

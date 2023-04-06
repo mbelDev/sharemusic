@@ -12,6 +12,9 @@
   <select id="checkID" parameterType="String" resultType="Integer">
     SELECT COUNT(*) FROM MEMBER WHERE USERID = #{userID}
   </select>
+  <select id="login" parameterType="MemberDto" resultType="Integer">
+    SELECT COUNT(*) FROM MEMBER WHERE USERID = #{userID} AND USERPW = #{userPW}
+  </select>
   
   <insert id="putMember" parameterType="MemberDto">
 	  INSERT INTO MEMBER VALUES(

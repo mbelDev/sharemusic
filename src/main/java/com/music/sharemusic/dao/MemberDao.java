@@ -10,6 +10,8 @@ public interface MemberDao {
 
   public int checkID(String userID);
 
+  public int login(MemberDto memberDto);
+
   public MemberDto getMemberOne(String userID);
 
   public List<MemberDto> getMemberAll();
