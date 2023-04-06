@@ -4,8 +4,11 @@ window.onload = function(){
     grabCursor: true,
     loop:false,
     autoplay: {     
-      delay: 2500, // 시간 설정
-      disableOnInteraction: false, // false-스와이프 후 자동 재생
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    mousewheel: {
+      invert: false,
     },
   });
 }

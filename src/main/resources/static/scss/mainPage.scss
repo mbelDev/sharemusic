@@ -1,16 +1,42 @@
 
 #mainPage-Area {
   width: 100%;
-  height: 100vh;
-  background-color: aqua;
-  .mainPage-Area--section {
-    .mainPage-Area--article {
+  // background-color: aqua;
+  .mainPage-Area--ranking {
+    width: 100%;
+    height: 100vh;
+    background-color: aqua;
+    .ranking--article {
       transform: translateY(15%);
-    }//.mainPage-Area--article
-  }//.mainPage-Area--section
+    }//.ranking--article
+  }//.mainPage-Area--ranking
+  .mainPage-Area--category {
+    width: 100%;
+    height: 10vh;
+    background-color: chartreuse;
+    .category--nav {
+      ul {
+        display: flex;
+        justify-content: space-around;
+        li {
+          display: grid;
+          place-items: center;
+          width: 100px;
+          height: 50px;
+          color: #fff;
+          background-color: crimson;
+        }
+      }
+    }//.category--nav
+  }//.mainPage-Area--category
 }//#mainPage-Area
 
 
+
+
+
+
+// 스와이퍼 테스트용
 .swiper {
   width: 1200px;
   height: 800px;
