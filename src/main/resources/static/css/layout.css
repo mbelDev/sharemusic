@@ -16,5 +16,5 @@
 #footerLayout-Area {
   width: 100%;
   height: 100px;
-  outline: 1px solid red;
+  background-color: #111;
 }
