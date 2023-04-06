@@ -9,12 +9,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReplysDto {
+public class MemberDto {
 
-  private int postNo;
-  private int replyNo;
-  private String replyAuth;
-  private String replyCont;
-  private int replyHidden;
-  private String replyDate;
+  private String userID;
+  private String userPW;
 }
