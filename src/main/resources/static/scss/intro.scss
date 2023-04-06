@@ -55,8 +55,10 @@ html {
     background-color: crimson;
     display: grid;
     place-items: center;
-    button {
+    a {
       text-align: center;
+      color: #fff !important;
+      font-weight: bold;
     }
   opacity: 0;
   transition: all 0.3s ease;

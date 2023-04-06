@@ -9,22 +9,30 @@
 #mainPage-Area .mainPage-Area--ranking .ranking--article {
   transform: translateY(15%);
 }
-#mainPage-Area .mainPage-Area--category {
+#mainPage-Area .mainPage-Area--category .category--nav {
   width: 100%;
-  height: 10vh;
+  padding: 20px 0;
   background-color: chartreuse;
 }
 #mainPage-Area .mainPage-Area--category .category--nav ul {
   display: flex;
   justify-content: space-around;
+  transform: translateY(8px);
 }
 #mainPage-Area .mainPage-Area--category .category--nav ul li {
   display: grid;
   place-items: center;
   width: 100px;
-  height: 50px;
+  padding: 25px 0;
   color: #fff;
+  font-weight: bold;
   background-color: crimson;
+  cursor: pointer;
+}
+#mainPage-Area .mainPage-Area--category .mainPage-Area--contents {
+  width: 100%;
+  height: 200vh;
+  background-color: deeppink;
 }
 
 .swiper {

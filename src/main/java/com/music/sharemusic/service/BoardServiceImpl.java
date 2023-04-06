@@ -13,7 +13,14 @@ public class BoardServiceImpl implements BoardService {
   BoardDao boardDao;
 
   @Override
-  public void putPost(BoardDto boardDto) {}
+  public void putPost(BoardDto boardDto) {
+    // 로그인 한 유저의 이름 받아오기
+    boardDto.setPostAuth("임시 작성자");
+
+    boardDto.setPostTags("임시 태그");
+
+    boardDao.putPost(boardDto);
+  }
 
   @Override
   public BoardDto getPostOne(int postNo) {
@@ -28,8 +35,22 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public void updatePost(BoardDto boardDto) {}
+  public void updatePost(BoardDto boardDto) {
+    boardDao.updatePost(boardDto);
+  }
 
   @Override
-  public void deletePost(BoardDto boardDto) {}
+  public void updateLike(int postNo) {
+    boardDao.updateLike(postNo);
+  }
+
+  @Override
+  public void updateHits(int postNo) {
+    boardDao.updateHits(postNo);
+  }
+
+  @Override
+  public void deletePost(BoardDto boardDto) {
+    boardDao.deletePost(boardDto);
+  }  
 }

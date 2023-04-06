@@ -60,11 +60,11 @@ body {
 }
 ol,
 ul {
-  list-style: none;
+  list-style: none !important;
 }
 a {
-  color: inherit;
-  text-decoration: none;
+  color: inherit !important;
+  text-decoration: none !important;
 }
 blockquote,
 q {

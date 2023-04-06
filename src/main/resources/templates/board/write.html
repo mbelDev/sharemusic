@@ -1,39 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-
-
+    <script src="/js/jquery-3.6.3.min.js"></script>
+  </head>
+  <body>
     <h1>글 쓰기</h1>
-    <form action="" method="post">
-        <span>곡 이름</span><input type="text">
-        <span>가수 이름</span><input type="text">
-        <span>설명(150자 이내)</span><input type="text">
-        <span>유튜브 링크</span><input type="text">
-        <span>장르</span><select name="musicGenre" id="">
-            <option value="락">락</option>
-            <option value="발라드">발라드</option>
-            <option value="팝">팝</option>
-            <option value="재즈">재즈</option>
-            <option value="메탈">메탈</option>
-            <option value="EDM">EDM</option>
-            <option value="보컬로이드">보컬로이드</option>
+
+    <form action="/board/write" method="POST">
+      <div>
+        <span>곡 이름</span
+        ><input type="text" name="postTitle" class="postTitle" />
+      </div>
+      <div>
+        <span>가수 이름</span
+        ><input type="text" name="postSinger" class="postSinger" />
+      </div>
+      <div>
+        <span>설명(150자 이내)</span
+        ><input type="text" name="postCont" class="postCont" />
+      </div>
+      <div>
+        <span>유튜브 링크</span
+        ><input type="text" name="postLink" class="postLink" />
+      </div>
+      <div>
+        <span>장르</span>
+        <select name="postGenre" id="" class="postGenre">
+          <option value="락">락</option>
+          <option value="발라드">발라드</option>
+          <option value="팝">팝</option>
+          <option value="재즈">재즈</option>
+          <option value="메탈">메탈</option>
+          <option value="EDM">EDM</option>
+          <option value="보컬로이드">보컬로이드</option>
         </select>
-        <span>갬성</span><select name="musicGenre" id="">
-            <option value="신남">신남</option>
-            <option value="우울">우울</option>
-            <option value="희열">희열</option>
-            <option value="으스스">으스스</option>
+      </div>
+      <div>
+        <span>갬성</span>
+        <select name="postEmote" id="" class="postEmote">
+          <option value="신남">신남</option>
+          <option value="우울">우울</option>
+          <option value="희열">희열</option>
+          <option value="으스스">으스스</option>
         </select>
+      </div>
+      <!-- 로그인 한 유저의 이름 보내기 -->
+      <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->
+      <button class="btn btn-confirm">등록</button>
     </form>
 
+    <script>
+      // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
+      $(".btn-confirm").on("click", function () {
+        const url = $(".postLink").val();
+        const regExp =
+          "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
+        const match = url.match(regExp);
 
-
-</body>
+        if (match) {
+          const getId = match[1];
+          $(".postLink").val(match[1]);
+          return true;
+        } else {
+          // 유튜브 링크를 다시 확인하라고 경고 창
+        }
+        return false;
+      });
+    </script>
+  </body>
 </html>
