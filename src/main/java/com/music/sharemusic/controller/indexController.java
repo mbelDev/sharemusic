@@ -15,4 +15,10 @@ public class indexController {
   public String index() {
     return "/index/index";
   }
+
+  // include 추가 2023.04.06/13:55
+  @GetMapping("/layout")
+  public String layout() {
+    return "/include/layout";
+  }
 }

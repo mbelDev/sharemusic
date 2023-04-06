@@ -1,0 +1,67 @@
+video, img {
+  vertical-align: top;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+html {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#intro-Area {
+  width: 100%;
+  height: 100vh;
+}
+#intro-Area .intro-Area--section .intro-Area--article {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  z-index: 99;
+}
+#intro-Area .intro-Area--section .intro-Area--article .intro-Area--video {
+  width: 150%;
+  height: 150vh;
+  transform: translate(-16%, -20%);
+  pointer-events: none;
+}
+#intro-Area .intro-Area--section .intro-Area--article .intro-Area--txt01 {
+  position: absolute;
+  top: 22vw;
+  left: -13vw;
+}
+#intro-Area .intro-Area--section .intro-Area--article .intro-Area--txt01 img {
+  width: 30vw;
+}
+#intro-Area .intro-Area--section .intro-Area--article .intro-Area--txt02 {
+  position: absolute;
+  top: 20vw;
+  right: -13vw;
+}
+#intro-Area .intro-Area--section .intro-Area--article .intro-Area--btn {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.intro-model {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30vw;
+  height: 20vw;
+  background-color: crimson;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.intro-model button {
+  text-align: center;
+}
+.intro-model.aaa {
+  opacity: 1;
+}
