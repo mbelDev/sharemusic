@@ -3,5 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.music.sharemusic.dao.ReplysDao">
+  <select id="getReplyAll" parameterType="Integer" resultType="ReplysDto">
+    SELECT * FROM REPLYS WHERE POSTNO = #{postNo} ORDER BY REPLYNO
+  </select>
 
-</mapper>
+  <update id="updateReply" parameterType="ReplysDto">
+    UPDATE REPLYS SET
+    REPLYCONT = #{replyCont}
+  </update>
+
+  <delete id="deleteReply" parameterType="ReplysDto">
+    DELETE FROM REPLYS WHERE REPLYNO = #{replyNo}
+  </delete>
+</mapper>  
