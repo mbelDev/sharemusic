@@ -1,14 +1,13 @@
-package com.music.sharemusic.dao;
+package com.music.sharemusic.service;
 
 import com.music.sharemusic.dto.MemberDto;
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
+import java.util.Map;
 
-@Mapper
-public interface MemberDao {
-  public int putMember(MemberDto memberDto);
+public interface MemberService {
+  public void putMember(MemberDto memberDto);
 
-  public int checkID(String userID);
+  public Map<String, Object> checkID(String userID);
 
   public MemberDto getMemberOne(String userID);
 

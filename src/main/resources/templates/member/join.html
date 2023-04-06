@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/js/jquery-3.6.3.min.js"></script>
+</head>
+<body>
+    
+<div style="display: flex; justify-content: center;">
+    <div style="text-align: left;">
+        <form action="/member/join" method="POST" enctype="multipart/form-data">
+            <div class="item">
+                <span>아이디</span><input type="text" class="userID" name="userID"><button class="btn-checkID">중복확인</button>
+                <p class="check-result"></p>
+            </div>
+            <div class="item">
+                <span>비밀번호</span><input type="password" name="userPW">
+            </div>
+            <div class="item">
+                <span>별명</span><input type="text" name="userNM">
+            </div>
+            <div class="item">
+                <span>아이콘</span><input type="file" name="userIconFile" onchange="setIcon(event);">
+                <p class="previewIcon"></p>
+            </div>
+
+            <div class="btns">
+                <button class="btn-confirm">가입</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+
+<script>
+    $(".btn-checkID").on("click",()=>{
+        const checkID = $(".userID").val();
+        console.log(checkID);
+        if (checkID != ""){
+        $.ajax({
+            url:"/member/checkID",
+            data:{"userID" : checkID},
+            type:"POST",
+            success:function(response){
+                $(".check-result").text(response.result);
+            },
+            fail:function(error){
+                 console.log(error);
+            }
+        });
+        }else{
+        alert("아이디를 입력 해 주세요!");
+        $(".userID").focus();
+        }
+        return false;
+    })
+
+
+    function setIcon(event){
+		var reader = new FileReader();
+		
+		reader.onload = function(event){
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			img.setAttribute("style", "width:150px; height:150px;");
+			document.querySelector(".previewIcon").appendChild(img);
+		};
+		
+		reader.readAsDataURL(event.target.files[0]);
+	}
+
+</script>
+
+</html>
