@@ -63,6 +63,12 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
+  public MemberDto login(MemberDto memberDto) {
+    int checkMember = memberDao.login(memberDto);
+    MemberDto result = memberDto;
+    return result;
+  }
+
   public MemberDto getMemberOne(String userID) {
     MemberDto result = memberDao.getMemberOne(userID);
     return result;
