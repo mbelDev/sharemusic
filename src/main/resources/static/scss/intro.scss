@@ -1,0 +1,68 @@
+
+video, img {
+  vertical-align: top;
+  object-fit: cover;
+}
+html {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#intro-Area {
+  width: 100%;
+  height: 100vh;
+  .intro-Area--section {
+    .intro-Area--article {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      z-index: 99;
+      .intro-Area--video {
+        width: 150%;
+        height: 150vh;
+        transform: translate(-16%, -20%);
+        pointer-events: none;
+      }//.intro-Area--video
+        .intro-Area--txt01 {
+          position: absolute;
+          top: 22vw; left: -13vw;
+          img {
+            width: 30vw;
+          }
+        }// .intro-Area--txt01
+        .intro-Area--txt02 {
+          position: absolute;
+          top: 20vw; right: -13vw;
+        }// .intro-Area--txt01
+      .intro-Area--btn {
+        position: absolute;
+        bottom: 5%; left: 50%;
+        transform: translateX(-50%);
+      }// .intro-Area--btn
+    }//.intro-Area--article
+  }//.intro-Area--section
+}//#intro-Area
+
+
+// 모달창
+.intro-model {
+    position: absolute;
+    top: 20%; left: 50%;
+    transform: translateX(-50%);
+    width: 30vw;
+    height: 20vw;
+    background-color: crimson;
+    display: grid;
+    place-items: center;
+    a {
+      text-align: center;
+      color: #fff !important;
+      font-weight: bold;
+    }
+  opacity: 0;
+  transition: all 0.3s ease;
+  &.aaa {
+    opacity: 1;
+  }
+}

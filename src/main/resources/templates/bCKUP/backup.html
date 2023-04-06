@@ -1,0 +1,29 @@
+<html lang="en" xmlns="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 메인 페이지 -->
+    <!-- 인트로에서 넘어오는 곳. 여기에 리스트를 뿌립니다. -->
+    <ul th:each="item : ${postList}">
+      <a href="/board/view" th:href="@{/board/view(postNo=${item.postNo})}">
+        <li>
+          <img
+            th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+            alt=""
+          />
+        </li>
+        <li th:text="${item.postAuth}">작성자</li>
+        <li th:text="${item.postTitle}">곡명</li>
+        <li th:text="${item.postSinger}">가수</li>
+        <li th:text="${item.postGenre}">장르</li>
+        <li th:text="${item.postEmote}">분위기</li>
+        <li th:text="${item.postLike}">추천수</li>
+        <li th:text="${item.postHits}">조회수</li>
+      </a>
+    </ul>
+  </body>
+</html>

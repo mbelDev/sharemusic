@@ -1,30 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <!-- 메인 페이지 -->
-    <!-- 인트로에서 넘어오는 곳. 여기에 리스트를 뿌립니다. -->
-    <ul th:each="item : ${postList}">
-      <a href="/board/view" th:href="@{/board/view(postNo=${item.postNo})}">
-        <li>
-          <img
-            th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-            alt=""
-          />
-        </li>
-        <li th:text="${item.postAuth}">작성자</li>
-        <li th:text="${item.postTitle}">곡명</li>
-        <li th:text="${item.postSinger}">가수</li>
-        <li th:text="${item.postGenre}">장르</li>
-        <li th:text="${item.postEmote}">분위기</li>
-        <li th:text="${item.postLike}">추천수</li>
-        <li th:text="${item.postHits}">조회수</li>
-      </a>
-    </ul>
-  </body>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/include/layout.html}"
+>
+  <main id="mainPage-Area" class="container" layout:fragment="contents">
+    <section class="mainPage-Area--ranking">
+      <article class="ranking--article">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+            <div class="swiper-slide">Slide 8</div>
+            <div class="swiper-slide">Slide 9</div>
+          </div>
+        </div>
+      </article>
+      <!-- ranking--article -->
+    </section>
+    <!-- mainPage-Area--ranking -->
+    <section class="mainPage-Area--category">
+      <article class="category--nav">
+        <ul>
+          <li><span>nav 1</span></li>
+          <li><span>nav 2</span></li>
+          <li><span>nav 3</span></li>
+          <li><span>nav 4</span></li>
+          <li><span>nav 5</span></li>
+          <li><span>nav 6</span></li>
+          <li><span>nav 7</span></li>
+          <li><span>nav 9</span></li>
+          <li><span>nav 10</span></li>
+          <li><span>nav 11</span></li>
+          <li><span>nav 12</span></li>
+        </ul>
+      </article>
+      <!-- category--nav -->
+      <article class="mainPage-Area--contents"></article>
+      <!-- mainPage-Area--contents -->
+    </section>
+    <!-- mainPage-Area--category -->
+  </main>
 </html>
