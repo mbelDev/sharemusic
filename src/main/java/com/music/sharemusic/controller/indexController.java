@@ -23,11 +23,11 @@ public class indexController {
     return "/intro";
   }
 
-  @GetMapping("/index")
+  @GetMapping("/mainPage")
   public String index(Model model) {
-    List<BoardDto> postList = boardService.getPostAll();
-    model.addAttribute("postList", postList);
-    return "/index/index";
+    // List<BoardDto> postList = boardService.getPostAll();
+    // model.addAttribute("postList", postList);
+    return "/mainPage/mainPage";
   }
 
   // include 추가 2023.04.06/13:55
