@@ -5,12 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/join.css">
     <script src="/js/jquery-3.6.3.min.js"></script>
 </head>
 <body>
-    
-<div style="display: flex; justify-content: center;">
-    <div style="text-align: left;">
+  <!-- <div class="music-bg">
+    <img src="/images/music.gif" alt="">
+  </div> -->
+
+  <main class="joinForm-Area"> 
+    <div class="joinForm-Area--bg">
+      <form action="">
+        <div class="joinForm-Area--userId asdf">
+          <span></span>
+          <input type="text" placeholder="UserId">
+        </div><!-- joinForm-Area--userId -->
+        <div class="joinForm-Area--userPw asdf">
+          <span></span>
+          <input type="password" placeholder="UserPw">
+        </div><!-- joinForm-Area--userPw -->
+        <div class="joinForm-Area--userName asdf">
+          <span></span>
+          <input type="text" placeholder="userName">
+        </div><!-- joinForm-Area--userName -->
+        <div class="joinForm-Area--userFile">
+          <label for="file"><span class="btn-uploadFile">파일</span></label>
+          <input type="file" name="" id="file">
+        </div><!-- joinForm-Area--userFile -->
+        <div class="joinForm-Area--btn">
+          <button>JOIN</button>
+        </div><!-- joinForm-Area--btn -->
+      </form><!-- form -->
+    </div><!-- joinForm-Area--bg -->
+  </main><!-- joinForm-Area -->
+<!-- <div>
+    <div>
         <form action="/member/join" method="POST" th:object="${memberDto}" enctype="multipart/form-data">
             <div class="item">
                 <span>아이디</span><input type="text" class="userID" th:field="*{userID}" name="userID"><button class="btn-checkID">중복확인</button>
@@ -33,11 +62,11 @@
             <div class="btns">
                 <button class="btn-confirm">가입</button>
             </div>
-            <!-- <p th:text="${memberDto}"></p> -->
+            <p th:text="${memberDto}"></p>
             <p th:if="${#fields.hasErrors()}" th:text="바인딩에러">호이호이</p>
         </form>
     </div>
-</div>
+</div> -->
 
 </body>
 
