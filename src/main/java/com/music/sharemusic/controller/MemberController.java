@@ -1,21 +1,29 @@
 package com.music.sharemusic.controller;
 
+import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.MemberDto;
 import com.music.sharemusic.service.MemberServiceImpl;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@SessionAttributes("loggedUser")
 @Controller
 @RequestMapping("/member")
 @Log4j2
@@ -25,14 +33,25 @@ public class MemberController {
   MemberServiceImpl memberService;
 
   @GetMapping("/join")
-  public String join() {
+  public String joinPage(@ModelAttribute MemberDto memberDto) {
     return "/member/join";
   }
 
   @PostMapping("/join")
-  public String joinprogress(MemberDto memberDto) {
+  public String join(
+    @Valid @ModelAttribute("memberDto") MemberDto memberDto,
+    BindingResult bindingResult,
+    RedirectAttributes redirectAttributes
+  ) {
+    log.info("we're going to check all validation!!");
+    if (bindingResult.hasErrors()) {
+      log.info("we have some error!!! === {}", bindingResult);
+      redirectAttributes.addFlashAttribute("memberDto", memberDto);
+      return "redirect:/member/join";
+    }
     memberService.putMember(memberDto);
-    return "redirect:/index";
+    log.info("join successful === {}", memberDto);
+    return "redirect:/member/login";
   }
 
   @GetMapping("/login")
@@ -45,23 +64,22 @@ public class MemberController {
     @ModelAttribute @Validated MemberDto memberDto,
     BindingResult bindingResult,
     @RequestParam(defaultValue = "/") String redirectURL,
-    HttpServletRequest request
+    Model model
   ) {
-    if (bindingResult.hasErrors()) {
-      return "/member/login";
-    }
-    MemberDto logInfo = memberService.login(memberDto);
-    if (logInfo == null) {
+    // if (bindingResult.hasErrors()) {
+    //   log.info("what errors? === {}", bindingResult);
+    //   return "/member/login";
+    // }
+    LoggedDto loggedUser = memberService.login(memberDto);
+    if (loggedUser == null) {
       bindingResult.reject(
-        "loginFail",
+        "loginFailed",
         "아이디 또는 비밀번호가 맞지 않습니다."
       );
+      log.info("what errors? === {}", bindingResult);
       return "/member/login";
     }
-
-    HttpSession session = request.getSession();
-    session.setAttribute("loggedUser", memberDto);
-
+    model.addAttribute("loggedUser", loggedUser);
     return "redirect:" + redirectURL;
   }
 
@@ -76,9 +94,10 @@ public class MemberController {
   }
 
   @PostMapping("/checkID")
-  public Map<String, Object> checkID(String userID) {
+  @ResponseBody
+  public Map<String, String> checkID(String userID) {
     log.info("get ID === {}", userID);
-    Map<String, Object> result = memberService.checkID(userID);
+    Map<String, String> result = memberService.checkID(userID);
     log.info("now, I got ID === {}", result);
     return result;
   }
