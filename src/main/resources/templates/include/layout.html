@@ -27,13 +27,24 @@
           <a href="#">카테고리</a>
         </div>
         <div>
-          <a href="#">로고</a>
+          <a th:href="@{/}">로고</a>
         </div>
-        <div>
-          <a href="#">글쓰기</a>
-          <a href="#">로그인</a>
-          <a href="#">회원가입</a>
-        </div>
+        <p style="color:#fff;"th:text="${loggedUser}"></p>
+        <p style="color:#fff;"th:text="${memberDto}"></p>
+        <th:block th:if="${loggedUser == null}">
+          <div>
+            <a th:href="@{/board/write}">글쓰기</a>
+            <a th:href="@{/member/login}">로그인</a>
+            <a th:href="@{/member/join}">회원가입</a>
+          </div>
+        </th:block>
+        <th:block th:unless="${loggedUser != null}">
+          <div>
+            <a th:href="@{/board/write}">글쓰기</a>
+            <a th:href="@{/member/login}">마이페이지</a>
+            <a th:href="@{/member/join}">회원정보 수정</a>
+          </div>
+        </th:block>
       </article><!-- .headerLayout-Area--article -->
     </section><!-- #headerLayout-Area -->
   </header>
