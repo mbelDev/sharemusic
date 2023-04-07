@@ -1,14 +1,14 @@
-window.onload = function(){
+
+// 스와이퍼
   let swiper = new Swiper(".mySwiper", {
-    effect: "cards",
-    grabCursor: true,
-    loop:false,
-    autoplay: {     
-      delay: 2500,
-      disableOnInteraction: false,
-    },
-    mousewheel: {
-      invert: false,
+    slidesPerView: "auto",
+    spaceBetween: 50,
+    loop: true,
+    autoplay: {   
+      delay: 2500, 
+      disableOnInteraction: false, 
     },
   });
-}
+
+
+
