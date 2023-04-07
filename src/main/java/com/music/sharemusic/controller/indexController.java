@@ -25,8 +25,8 @@ public class indexController {
 
   @GetMapping("/mainPage")
   public String index(Model model) {
-    // List<BoardDto> postList = boardService.getPostAll();
-    // model.addAttribute("postList", postList);
+    List<BoardDto> postList = boardService.getPostAll();
+    model.addAttribute("postList", postList);
     return "/mainPage/mainPage";
   }
 

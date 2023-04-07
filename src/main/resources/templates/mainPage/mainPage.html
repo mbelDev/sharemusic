@@ -5,6 +5,7 @@
   xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{/include/layout.html}">
   <main id="mainPage-Area" class="container" layout:fragment="contents">
+    <span th:text="${postList}"></span>
     <section class="main-constent--itmes">
       <article class="main-constent--slider">
         <div class="swiper mySwiper">
@@ -36,26 +37,11 @@
         </div><!-- listItem-nav -->
         <div class="getList-ItemBox">
           <ul>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">5</a></li>
+            <li th:each="item : ${postList}">
+              <a href="#">
+                
+              </a>
+            </li>
           </ul>
         </div><!-- getList-ItemBox -->
       </article><!-- main-constent--listItem -->
