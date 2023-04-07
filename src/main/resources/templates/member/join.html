@@ -11,25 +11,30 @@
     
 <div style="display: flex; justify-content: center;">
     <div style="text-align: left;">
-        <form action="/member/join" method="POST" enctype="multipart/form-data">
+        <form action="/member/join" method="POST" th:object="${memberDto}" enctype="multipart/form-data">
             <div class="item">
-                <span>아이디</span><input type="text" class="userID" name="userID"><button class="btn-checkID">중복확인</button>
+                <span>아이디</span><input type="text" class="userID" th:field="*{userID}" name="userID"><button class="btn-checkID">중복확인</button>
+                <p th:if="${#fields.hasErrors('userID')}" th:errorclass="errorTxt" th:errors="*{userID}"></p>
                 <p class="check-result"></p>
             </div>
             <div class="item">
-                <span>비밀번호</span><input type="password" name="userPW">
+                <span>비밀번호</span><input type="password" th:field="*{userPW}" name="userPW">
+                <p th:if="${#fields.hasErrors('userPW')}" th:errorclass="errorTxt" th:errors="*{userPW}"></p>
             </div>
             <div class="item">
-                <span>별명</span><input type="text" name="userNM">
+                <span>별명</span><input type="text" th:field="*{userNM}" name="userNM">
+                <p th:if="${#fields.hasErrors('userNM')}" th:errorclass="errorTxt" th:errors="*{userNM}"></p>
             </div>
             <div class="item">
-                <span>아이콘</span><input type="file" name="userIconFile" onchange="setIcon(event);">
+                <span>아이콘</span><input type="file" th:field="*{userIconFile}" name="userIconFile" onchange="setIcon(event);">
                 <p class="previewIcon"></p>
             </div>
 
             <div class="btns">
                 <button class="btn-confirm">가입</button>
             </div>
+            <!-- <p th:text="${memberDto}"></p> -->
+            <p th:if="${#fields.hasErrors()}" th:text="바인딩에러">호이호이</p>
         </form>
     </div>
 </div>
@@ -46,6 +51,7 @@
             data:{"userID" : checkID},
             type:"POST",
             success:function(response){
+                console.log(response);
                 $(".check-result").text(response.result);
             },
             fail:function(error){
@@ -66,6 +72,7 @@
 		reader.onload = function(event){
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
+            console.log(event.target.result);
 			img.setAttribute("style", "width:150px; height:150px;");
 			document.querySelector(".previewIcon").appendChild(img);
 		};

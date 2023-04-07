@@ -18,8 +18,11 @@
             <div class="item">
                 <span>비밀번호</span><input type="password" name="userPW">
             </div>
-            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">오류 메시지</p>
-
+            <!-- <div th:if="${#fields.hasGlobalErrors()}"> -->
+                <span>와! 오류다!</span>
+                <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">오류 메시지</p>
+            <!-- </div> -->
+            
             <div class="btns">
                 <button class="btn-confirm">로그인</button>
                 <button class="btn-confirm">회원가입</button>
