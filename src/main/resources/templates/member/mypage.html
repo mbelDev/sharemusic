@@ -11,6 +11,62 @@
 
     <!-- 마이페이지!! -->
     <!-- index에서 넘어오나?? 그럴걸요?? -->
+    <div style="display: flex; align-content: center; flex-direction: column;">
+    <span th:text="${memberDto}"></span>
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <!-- 기본 회원정보 -->
+            <div>
+                <img th:src="@{uploadFolder/${memberDto.userIconReal}}" alt="" style="width: 150px; height: 150px;">
+            </div>
+            <div>
+                <input type="file" class="userIcon"><span>프로필 사진 변경</span>
+            </div>
+            <div>
+                <span th:text="${memberDto.userNM}">별명</span>
+            </div>
+            <div>
+                <span th:text="${memberDto.userID}">아이디</span>
+            </div>
+            <!-- <span th:text="${memberDto.userGenre}">선호장르</span> -->
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <!-- 작성 글 목록 -->
+            <!--   BOARD에서 POSTAUTH = USERID인 것들 불러오기 -->
+            <ul>
+                <!-- <li th:each="item:${writeList}">
+                    <span th:text="${writeList.postTitle}">곡 명</span>
+                    <span th:text="${writeList.postSinger}">가수명</span>
+                    <span th:text="${writeList.postHits}">조회수</span>
+                    <span th:text="${writeList.postLike}">추천수</span>
+                    <span th:text="${writeList.postTitle}">추천버튼</span>
+                </li> -->
+                <li>
+                    <span>곡 명</span>
+                    <span>가수명</span>
+                    <span>조회수</span>
+                    <span>추천수</span>
+                    <span>추천버튼</span>
+                </li>
+            </ul>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <!-- 최근 열람 곡 목록 -->
+            <!-- Service에서 수령.. BOARD_RECORD에서 POSTNO를 받아서 BOARD에서 받아오기 -->
+            <ul>
+                <li>
+                    <span>곡 명</span>
+                    <span>가수명</span>
+                    <span>조회수</span>
+                    <span>추천수</span>
+                    <span>추천버튼</span>
+                </li>
+            </ul>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <!-- 좋아요 누른 글 목록 -->
+            <!-- BOARD_RECORD에서 WHERE LIKE = 1 의 POSTNO를 받아오기. -->
+        </div>
+    </div>
 
 
 </body>

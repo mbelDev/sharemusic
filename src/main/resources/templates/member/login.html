@@ -24,6 +24,7 @@
           <span></span>
           <input type="password" class="userPW" name="userPW" placeholder="UserPw">
         </div><!-- joinForm-Area--userPw -->
+        <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">오류 메시지</p>
         <div class="joinForm-Area--btn">
           <button>LOGIN</button>
         </div><!-- joinForm-Area--btn -->

@@ -17,6 +17,8 @@ public interface MemberService {
 
   public MemberDto getMemberOne(String userID);
 
+  public MemberDto getMemberLogged(LoggedDto loggedDto);
+
   public LoggedDto login(MemberDto memberDto);
 
   public List<MemberDto> getMemberAll();
