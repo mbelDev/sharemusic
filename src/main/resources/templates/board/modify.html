@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="/js/jquery-3.6.3.min.js"></script>
   </head>
   <body>
     <h1>글 수정하기</h1>
@@ -31,7 +32,7 @@
       </div>
       <div>
         <span>장르</span>
-        <select name="postGenre" id="">
+        <select name="postGenre" id="" class="postGenre">
           <option value="락" th:selected="${boardDto.postGenre=='락'}">
             락
           </option>
@@ -56,11 +57,16 @@
           >
             보컬로이드
           </option>
+          <option value="etc" th:selected="${boardDto.postGenre=='etc'}">
+            기타
+          </option>
         </select>
+        <!-- 기타 선택할 시 나타날 input -->
+        <input type="text" class="genreEtc" />
       </div>
       <div>
         <span>갬성</span>
-        <select name="postEmote" id="">
+        <select name="postEmote" id="" class="postEmote">
           <option value="신남" th:selected="${boardDto.postEmote=='신남'}">
             신남
           </option>
@@ -73,6 +79,11 @@
           <option value="으스스" th:selected="${boardDto.postEmote=='으스스'}">
             으스스
           </option>
+          <option value="etc" th:selected="${boardDto.postEmote=='etc'}">
+            기타
+          </option>
+          <!-- 기타 선택할 시 나타날 input -->
+          <input type="text" class="emoteEtc" />
         </select>
       </div>
       <!-- 로그인 한 유저의 이름 보내기 -->
@@ -80,5 +91,33 @@
       <input type="hidden" name="postNo" th:value="${param.postNo}" />
       <button>수정</button>
     </form>
+
+    <script>
+      // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
+      if ($(".postGenre").val() != "etc") {
+        $(".genreEtc").hide();
+      }
+
+      $(".postGenre").change(function () {
+        if ($(".postGenre").val() == "etc") {
+          $(".genreEtc").show();
+        } else {
+          $(".genreEtc").hide();
+        }
+      });
+
+      // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
+      if ($(".postEmote").val != "etc") {
+        $(".emoteEtc").hide();
+      }
+
+      $(".postEmote").change(function () {
+        if ($(".postEmote").val() == "etc") {
+          $(".emoteEtc").show();
+        } else {
+          $(".emoteEtc").hide();
+        }
+      });
+    </script>
   </body>
 </html>

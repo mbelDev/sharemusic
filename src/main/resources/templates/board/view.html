@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="/js/jquery-3.6.3.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
     <!-- 상세 보기 페이지!! -->
@@ -14,7 +15,8 @@
       <div>
         <div>
           <span>작성자: </span>
-          <span th:text="${boardDto.postAuth}">홍길동</span>
+          <!-- 글쓴이 정보 볼 수 있도록 href 수정 -->
+          <a href=""><span th:text="${boardDto.postAuth}">홍길동</span></a>
         </div>
         <div>
           <span>조회수: </span>
@@ -64,40 +66,70 @@
           <div>
             <span th:text="'#' + ${boardDto.postGenre}">장르</span>
             <span th:text="'#' + ${boardDto.postEmote}">분위기</span>
-            <span th:text="'#' + ${boardDto.postTags}">태그</span>
           </div>
         </div>
       </div>
-      <button>
-        추천수: <span th:text="${boardDto.postLike}" class="postLike">0</span>
-      </button>
+      <div>
+        <button class="btnPostLike">
+          추천:
+          <span th:text="${boardDto.postLike}" class="postLike">0</span>
+        </button>
+        <button class="btnShare">공유하기</button>
+      </div>
       <div>
         <a
           href="/board/modify"
           th:href="@{/board/modify(postNo=${boardDto.postNo})}"
           >수정</a
         >
-        <!-- modal이나 암튼 창 띄우기로 바꾸기 -->
-        <a
-          href="/board/delete"
-          th:href="@{/board/delete(postNo=${boardDto.postNo})}"
-          >삭제</a
-        >
+        <button class="btnDelete">삭제</button>
+      </div>
+
+      <div>
+        <!-- 댓글 창 -->
       </div>
     </div>
 
     <script th:inline="javascript">
       /*<![CDATA[*/
       const postNo = [[${boardDto.postNo}]];
-      const postLike = $(".postLike").val();
+      const postLike = $(".postLike").text();
 
-        $(".postLike").on("click", function () {
+        // 추천 수 누를 때 이벤트
+        $(".btnPostLike").on("click", function (){
           const sendData = {
             postNo: postNo,
             postLike: postLike
-            // 추천수 올리는거 생각 좀 해봐야 할듯
           }
+
+          $.ajax({
+            url: "/board/updateLike",
+            type: "POST",
+            data: sendData,
+            success: function(response) {
+              if (response.result != null) {
+                $(".postLike").text(response.postLike);
+              }
+            },
+            error: function(err) {
+              console.log(err);
+            }
+          })
         });
+
+        // modal로 할거면 수정
+        $(".btnDelete").on("click", function(){
+          if(confirm("정말로 삭제하시겠습니까?")){
+            $.ajax({
+              url: "/board/delete",
+              type:  "POST",
+              data: {"postNo": postNo},
+              success: function(response) {
+                location.href="/index/";
+              }
+            })
+          }
+        })
       /*]]>*/
     </script>
   </body>

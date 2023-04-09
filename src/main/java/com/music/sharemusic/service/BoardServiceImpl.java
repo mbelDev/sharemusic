@@ -40,8 +40,8 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public void updateLike(int postNo) {
-    boardDao.updateLike(postNo);
+  public int updateLike(int postNo) {
+     return boardDao.updateLike(postNo);
   }
 
   @Override

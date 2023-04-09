@@ -13,8 +13,8 @@ public class BoardDto {
 
   private int postNo; // 글 번호
   private String postAuth; // 글 작성자
-  private String postTitle; // 곡명
-  private String postSinger; // 가수
+  private String postTitle; // 곡명 varchar2 50
+  private String postSinger; // 가수 varchar2 50
   private String postCont; // 내용 varchar2 150
   private String postLink; // 유튜브 링크 varchar2 300
   private String postGenre; // 장르 
