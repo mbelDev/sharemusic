@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,8 +31,44 @@ public class MemberController {
   @Autowired
   MemberServiceImpl memberService;
 
+  @GetMapping("/view")
+  public String memberInfo(HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    if (session != null && session.getAttribute("loggedUser") != null) {
+      return "/member/mypage";
+    }
+
+    return "redirect:/member/login";
+  }
+
+  @GetMapping("/mypage")
+  public String mypage(HttpServletRequest request, Model model) {
+    HttpSession session = request.getSession(false);
+    if (session != null && session.getAttribute("loggedUser") != null) {
+      LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
+      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
+      model.addAttribute("memberDto", memberDto);
+      return "/member/mypage";
+    }
+
+    return "redirect:/member/login";
+  }
+
+  @PostMapping("/mypage")
+  public String modify(MemberDto memberDto) {
+    memberService.updateMember(memberDto);
+    return "redirect:/member/mypage";
+  }
+
   @GetMapping("/join")
-  public String joinPage(@ModelAttribute MemberDto memberDto) {
+  public String joinPage(
+    HttpServletRequest request,
+    @ModelAttribute MemberDto memberDto
+  ) {
+    HttpSession session = request.getSession();
+    if (session != null && session.getAttribute("loggedUser") != null) {
+      return "redirect:/member/view";
+    }
     return "/member/join";
   }
 
@@ -55,7 +90,11 @@ public class MemberController {
   }
 
   @GetMapping("/login")
-  public String loginPage() {
+  public String loginPage(HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    if (session != null && session.getAttribute("loggedUser") != null) {
+      return "redirect:/member/mypage";
+    }
     return "/member/login";
   }
 
@@ -64,7 +103,7 @@ public class MemberController {
     @ModelAttribute @Validated MemberDto memberDto,
     BindingResult bindingResult,
     @RequestParam(defaultValue = "/") String redirectURL,
-    Model model
+    HttpServletRequest request
   ) {
     // if (bindingResult.hasErrors()) {
     //   log.info("what errors? === {}", bindingResult);
@@ -79,18 +118,21 @@ public class MemberController {
       log.info("what errors? === {}", bindingResult);
       return "/member/login";
     }
-    model.addAttribute("loggedUser", loggedUser);
+    HttpSession session = request.getSession();
+    session.setAttribute("loggedUser", loggedUser);
+    session.setMaxInactiveInterval(30 * 60);
     return "redirect:" + redirectURL;
   }
 
-  @PostMapping("/logout")
+  @GetMapping("/logout")
   public String logout(HttpServletRequest request) {
     HttpSession session = request.getSession(false);
     if (session != null) {
       session.invalidate(); // 세션 날림
+      log.info("logout ==== {}", session);
     }
 
-    return "redirect:/";
+    return "redirect:/mainPage";
   }
 
   @PostMapping("/checkID")

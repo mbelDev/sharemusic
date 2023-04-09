@@ -1,39 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/join.css">
+    <link rel="stylesheet" href="/css/join.css" />
     <script src="/js/jquery-3.6.3.min.js"></script>
-</head>
-<body>
-  <div class="music-bg">
-    <img src="/images/music.gif" alt="">
-  </div>
+  </head>
+  <body>
+    <div class="music-bg">
+      <img src="/images/music.gif" alt="" />
+    </div>
 
-  <main class="joinForm-Area"> 
-    <div class="joinForm-Area--bg bg--login">
-      <form action="">
-        <div class="joinForm-Area--userId asdf">
-          <span></span>
-          <input type="text" placeholder="UserId">
-        </div><!-- joinForm-Area--userId -->
-        <div class="joinForm-Area--userPw asdf">
-          <span></span>
-          <input type="password" placeholder="UserPw">
-        </div><!-- joinForm-Area--userPw -->
-        <div class="joinForm-Area--btn">
-          <button>LOGIN</button>
-        </div><!-- joinForm-Area--btn -->
-      </form><!-- form -->
-    </div><!-- joinForm-Area--bg -->
-  </main><!-- joinForm-Area -->
+    <main class="joinForm-Area">
+      <div class="joinForm-Area--bg bg--login">
+        <form action="/member/login" method="POST">
+          <div class="joinForm-Area--userId asdf">
+            <span></span>
+            <input
+              type="text"
+              class="userID"
+              name="userID"
+              placeholder="UserId"
+            />
+          </div>
+          <!-- joinForm-Area--userId -->
+          <div class="joinForm-Area--userPw asdf">
+            <span></span>
+            <input
+              type="password"
+              class="userPW"
+              name="userPW"
+              placeholder="UserPw"
+            />
+          </div>
+          <!-- joinForm-Area--userPw -->
+          <p
+            class="field-error"
+            th:each="err : ${#fields.globalErrors()}"
+            th:text="${err}"
+          >
+            오류 메시지
+          </p>
+          <div class="joinForm-Area--btn">
+            <button>LOGIN</button>
+          </div>
+          <!-- joinForm-Area--btn -->
+        </form>
+        <!-- form -->
+      </div>
+      <!-- joinForm-Area--bg -->
+    </main>
+    <!-- joinForm-Area -->
 
-  
-    
-<!-- <div style="display: flex; justify-content: center;">
+    <!-- <div style="display: flex; justify-content: center;">
     <div style="text-align: left;">
         <form action="/member/login" method="POST">
             <div class="item">
@@ -55,23 +76,7 @@
         </form>
     </div>
 </div> -->
+  </body>
 
-</body>
-
-<script>
-    $(".btn-checkID").on("click",()=>{
-        if ($(".userID") == ""){
-            alert("아이디를 입력 해 주세요!");
-            $(".userID").focus();
-            return false;
-        }
-        if ($(".userPW") == ""){
-            alert("비밀번호를 입력 해 주세요!");
-            $(".userPW").focus();
-            return false;
-        }
-    })
-
-</script>
-
+  <script></script>
 </html>

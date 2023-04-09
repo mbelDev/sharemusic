@@ -1,44 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/join.css">
+    <link rel="stylesheet" href="/css/join.css" />
     <script src="/js/jquery-3.6.3.min.js"></script>
-</head>
-<body>
-  <div class="music-bg">
-    <img src="/images/music.gif" alt="">
-  </div>
+  </head>
+  <body>
+    <div class="music-bg">
+      <img src="/images/music.gif" alt="" />
+    </div>
 
-  <main class="joinForm-Area"> 
-    <div class="joinForm-Area--bg">
-      <form action="">
-        <div class="joinForm-Area--userId asdf">
-          <span></span>
-          <input type="text" placeholder="UserId">
-        </div><!-- joinForm-Area--userId -->
-        <div class="joinForm-Area--userPw asdf">
-          <span></span>
-          <input type="password" placeholder="UserPw">
-        </div><!-- joinForm-Area--userPw -->
-        <div class="joinForm-Area--userName asdf">
-          <span></span>
-          <input type="text" placeholder="userName">
-        </div><!-- joinForm-Area--userName -->
-        <div class="joinForm-Area--userFile">
-          <label for="file"><span class="btn-uploadFile">파일</span></label>
-          <input type="file" name="" id="file">
-        </div><!-- joinForm-Area--userFile -->
-        <div class="joinForm-Area--btn">
-          <button>JOIN</button>
-        </div><!-- joinForm-Area--btn -->
-      </form><!-- form -->
-    </div><!-- joinForm-Area--bg -->
-  </main><!-- joinForm-Area -->
-<!-- <div>
+    <main class="joinForm-Area">
+      <div class="joinForm-Area--bg">
+        <form
+          action="/member/join"
+          method="POST"
+          th:object="${memberDto}"
+          enctype="multipart/form-data"
+        >
+          <div class="joinForm-Area--userId asdf">
+            <span></span>
+            <input
+              type="text"
+              class="userID"
+              th:field="*{userID}"
+              placeholder="UserId"
+            />
+            <p
+              th:if="${#fields.hasErrors('userID')}"
+              th:errorclass="errorTxt"
+              th:errors="*{userID}"
+            ></p>
+          </div>
+          <!-- joinForm-Area--userId -->
+          <div class="joinForm-Area--userPw asdf">
+            <span></span>
+            <input
+              type="password"
+              calss="userPW"
+              th:field="*{userPW}"
+              placeholder="UserPw"
+            />
+          </div>
+          <!-- joinForm-Area--userPw -->
+          <div class="joinForm-Area--userName asdf">
+            <span></span>
+            <input
+              type="text"
+              class="userNM"
+              th:field="*{userNM}"
+              placeholder="userName"
+            />
+          </div>
+          <!-- joinForm-Area--userName -->
+          <div class="joinForm-Area--userFile">
+            <label for="file"><span class="btn-uploadFile">파일</span></label>
+            <p class="previewIcon" style="width: 150px; height: 150px"></p>
+            <input
+              type="file"
+              class="userIconFile"
+              th:field="*{userIconFile}"
+              id="file"
+              onchnage="setIcon(event);"
+            />
+          </div>
+          <!-- joinForm-Area--userFile -->
+          <div class="joinForm-Area--btn">
+            <button>JOIN</button>
+          </div>
+          <!-- joinForm-Area--btn -->
+        </form>
+        <!-- form -->
+      </div>
+      <!-- joinForm-Area--bg -->
+    </main>
+    <!-- joinForm-Area -->
+    <!-- <div>
     <div>
         <form action="/member/join" method="POST" th:object="${memberDto}" enctype="multipart/form-data">
             <div class="item">
@@ -67,48 +107,45 @@
         </form>
     </div>
 </div> -->
+  </body>
 
-</body>
-
-<script>
-    $(".btn-checkID").on("click",()=>{
-        const checkID = $(".userID").val();
-        console.log(checkID);
-        if (checkID != ""){
+  <script>
+    $(".btn-checkID").on("click", () => {
+      const checkID = $(".userID").val();
+      console.log(checkID);
+      if (checkID != "") {
         $.ajax({
-            url:"/member/checkID",
-            data:{"userID" : checkID},
-            type:"POST",
-            success:function(response){
-                console.log(response);
-                $(".check-result").text(response.result);
-            },
-            fail:function(error){
-                 console.log(error);
-            }
+          url: "/member/checkID",
+          data: { userID: checkID },
+          type: "POST",
+          success: function (response) {
+            console.log(response);
+            $(".check-result").text(response.result);
+          },
+          fail: function (error) {
+            console.log(error);
+          },
         });
-        }else{
+      } else {
         alert("아이디를 입력 해 주세요!");
         $(".userID").focus();
-        }
-        return false;
-    })
+      }
+      return false;
+    });
 
+    function setIcon(event) {
+      var reader = new FileReader();
 
-    function setIcon(event){
-		var reader = new FileReader();
-		
-		reader.onload = function(event){
-			var img = document.createElement("img");
-			img.setAttribute("src", event.target.result);
-            console.log(event.target.result);
-			img.setAttribute("style", "width:150px; height:150px;");
-			document.querySelector(".previewIcon").appendChild(img);
-		};
-		
-		reader.readAsDataURL(event.target.files[0]);
-	}
+      reader.onload = function (event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        console.log(event.target.result);
+        img.setAttribute("style", "width:150px; height:150px;");
+        document.querySelector(".previewIcon").appendChild(img);
+        //appendChild말고 replace방법을 찾아보자.
+      };
 
-</script>
-
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  </script>
 </html>
