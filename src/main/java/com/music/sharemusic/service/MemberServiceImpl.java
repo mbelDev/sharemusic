@@ -1,6 +1,7 @@
 package com.music.sharemusic.service;
 
 import com.music.sharemusic.dao.MemberDao;
+import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.MemberDto;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,6 +15,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -49,10 +52,22 @@ public class MemberServiceImpl implements MemberService {
     }
   }
 
-  public Map<String, Object> checkID(String userID) {
+  @Override
+  public Map<String, String> validateHandler(Errors errors) {
+    Map<String, String> validateResult = new HashMap<>();
+
+    for (FieldError error : errors.getFieldErrors()) {
+      String validKeyName = "valid_" + error.getField();
+      validateResult.put(validKeyName, error.getDefaultMessage());
+    }
+
+    return validateResult;
+  }
+
+  public Map<String, String> checkID(String userID) {
     log.info("check ID === {}", userID);
     int checkID = memberDao.checkID(userID);
-    Map<String, Object> result = new HashMap<>();
+    Map<String, String> result = new HashMap<>();
 
     if (checkID > 0) {
       result.put("result", "이미 사용중인 아이디 입니다.");
@@ -63,9 +78,19 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
-  public MemberDto login(MemberDto memberDto) {
+  public LoggedDto login(MemberDto memberDto) {
+    LoggedDto result = null;
+    String userID = memberDto.getUserID();
     int checkMember = memberDao.login(memberDto);
-    MemberDto result = memberDto;
+    if (checkMember > 0) {
+      result = new LoggedDto();
+      result.setUserID(memberDto.getUserID());
+      result.setUserNM(memberDto.getUserNM());
+      result.setUserIconReal(memberDto.getUserIconReal());
+      result.setUserPrincipal("member");
+    }
+    log.info("who?==={}", memberDto);
+    log.info("login?==={}", result);
     return result;
   }
 

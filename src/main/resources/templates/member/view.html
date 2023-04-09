@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+        <div>
+            <span>
+                회원정보 수정 페이지
+            </span>
+        </div>
+        <div>
+            <th:block th:if="${loggedUser == null}">
+              <div>
+                <a th:href="@{/board/write}">글쓰기</a>
+                <a th:href="@{/member/login}">로그인</a>
+                <a th:href="@{/member/join}">회원가입</a>
+              </div>
+            </th:block>
+            <th:block th:unless="${loggedUser == null}">
+              <div>
+                <a th:href="@{/board/write}">글쓰기</a>
+                <a th:href="@{/member/login}">마이페이지</a>
+                <a th:href="@{/member/join}">회원정보 수정</a>
+              </div>
+            </th:block>
+        </div>
+
+        <div>
+            <div class="item">
+                <span>userID</span><span th:text="${memberDto.userID}"></span>
+            </div>
+            <div class="item">
+                <span>userNM</span><span th:text="${memberDto.userNM}"></span>
+            </div>
+            <div class="item">
+                <span>userIcon</span><img th:src="${memberDto.userIconReal}">
+                <span th:text="${memberDto.userIconReal}"></span>
+            </div>
+            <div class="item">
+                <span>userPrincipal</span><span th:text="${memberDto.userPrincipal}"></span>
+            </div>
+
+        </div>
+
+
+        <p th:text="${loggedUser}">회원정보</p>
+    </div>
+</body>
+</html>

@@ -17,38 +17,74 @@
   <script src="/js/mainJs/layout.js" defer></script>
   <script src="/js/mainJs/mainPage.js" defer></script>
   <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/jquery-3.6.3.min.js"></script>
+  
 </head>
 
 <body>
   <header class="container">
     <section id="headerLayout-Area">
-      <article class="headerLayout-Area--article">
-        <div>
-          <a href="#">카테고리</a>
+      <article class="headerLayout-Area--logo">
+        <div class="logo left-items">
+          <img src="/images/logo.png" alt="logo">
         </div>
-        <div>
-          <a href="#">로고</a>
+      </article><!-- .headerLayout-Area--logo -->
+      <article class="headerLayout-Area--joinForm">
+        <div class="join left-items lien">
+          <a href="/member/login">로그인</a>
+          <a href="/member/join">회원가입</a>
         </div>
-        <div>
-          <a href="#">글쓰기</a>
-          <a href="#">로그인</a>
-          <a href="#">회원가입</a>
+      </article><!-- .headerLayout-Area--joinForm -->
+      <article class="headerLayout-Area--searchForm">
+        <div class="search left-items">
+          <form action="">
+            <input type="text" name="" placeholder="검색을 해주세요.">
+          </form>
         </div>
-      </article><!-- .headerLayout-Area--article -->
+      </article><!-- .headerLayout-Area--searchForm -->
+      <article class="headerLayout-Area--viewContents">
+        <div class="view left-items lien">
+          <ul>
+            <li><a href="#">테스트</a></li>
+            <li><a href="#">테스트</a></li>
+            <li><a href="#">테스트</a></li>
+            <li><a href="#">테스트</a></li>
+            <li><a href="#">테스트</a></li>
+          </ul>
+        </div>
+      </article><!-- .headerLayout-Area--viewContents -->
+      <article class="headerLayout-Area--viewContents">
+        <div class="view left-items">
+          <ul>
+            <li><a href="#">테스트</a></li>
+            <li><a href="#">테스트</a></li>
+            <li><a href="#">테스트</a></li>
+          </ul>
+        </div>
+      </article><!-- .headerLayout-Area--viewContents -->
+      <article class="headerLayout-Area--viewContents">
+        <div class="view left-items lien">
+          <ul>
+            <li><a href="#">테스트</a></li>
+            <li><a href="#">테스트</a></li>
+            <li><a href="#">테스트</a></li>
+          </ul>
+        </div>
+      </article><!-- .headerLayout-Area--viewContents -->
     </section><!-- #headerLayout-Area -->
   </header>
 
-  <main id="mainPage-Area" layout:fragment="contents">
+  <main id="mainPage-Area" class="container" layout:fragment="contents">
     
   </main>
 
   <footer class="container">
     <section id="footerLayout-Area">
-      <article class="footerLayout-Area--article">
 
-      </article><!-- .footerLayout-Area--article -->
     </section><!-- #footerLayout-Area -->
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </body>
 </html>
+
+<!-- 상세페이지 https://www.music-n.com/#section05 -->
