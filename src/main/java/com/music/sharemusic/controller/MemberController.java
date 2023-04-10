@@ -1,8 +1,11 @@
 package com.music.sharemusic.controller;
 
+import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.MemberDto;
 import com.music.sharemusic.service.MemberServiceImpl;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,19 +35,6 @@ public class MemberController {
   @Autowired
   MemberServiceImpl memberService;
 
-  @GetMapping("/view")
-  public String memberInfo(HttpServletRequest request, Model model) {
-    HttpSession session = request.getSession(false);
-    if (session != null && session.getAttribute("loggedUser") != null) {
-      LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
-      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
-      model.addAttribute("memberDto", memberDto);
-      return "/member/view";
-    }
-
-    return "redirect:/member/login";
-  }
-
   @GetMapping("/mypage")
   public String mypage(HttpServletRequest request, Model model) {
     HttpSession session = request.getSession(false);
@@ -57,10 +48,41 @@ public class MemberController {
     return "redirect:/member/login";
   }
 
-  @PostMapping("/mypage")
-  public String modify(MemberDto memberDto) {
-    memberService.updateMember(memberDto);
-    return "redirect:/member/mypage";
+  // @PostMapping("/mypage")
+  // public String modify(MemberDto memberDto) {
+  //   memberService.updateMember(memberDto);
+  //   return "redirect:/member/mypage";
+  // }
+
+  @GetMapping("/mypage/recent")
+  public String mypageCategories(HttpServletRequest request, Model model) {
+    HttpSession session = request.getSession(false);
+    if (session != null && session.getAttribute("loggedUser") != null) {
+      LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
+      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
+      model.addAttribute("memberDto", memberDto);
+      List<HistoryDto> historyRecent = memberService.getHistoryRecent(
+        loggedInfo
+      );
+      model.addAttribute("historyRecent", historyRecent);
+
+      return "/member/recent";
+    }
+
+    return "redirect:/member/login";
+  }
+
+  @GetMapping("/view")
+  public String memberInfo(HttpServletRequest request, Model model) {
+    HttpSession session = request.getSession(false);
+    if (session != null && session.getAttribute("loggedUser") != null) {
+      LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
+      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
+      model.addAttribute("memberDto", memberDto);
+      return "/member/view";
+    }
+
+    return "redirect:/member/login";
   }
 
   @GetMapping("/join")
@@ -133,7 +155,7 @@ public class MemberController {
     HttpSession session = request.getSession(false);
     if (session != null) {
       session.invalidate(); // 세션 날림
-      log.info("logout ==== {}", session);
+      log.info("logout");
     }
 
     return "redirect:/mainPage";

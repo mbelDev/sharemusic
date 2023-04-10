@@ -105,17 +105,9 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
-  public Map<String, Object> getMemberInfo(LoggedDto loggedUser) {
-    Map<String, Object> result = new HashMap<>();
+  public List<HistoryDto> getHistoryRecent(LoggedDto loggedUser) {
     String userID = loggedUser.getUserID();
-    MemberDto memberDto = getMemberOne(userID);
-    // List<BoardDto> myHistory = boardDao.getPostUser(userID);
-    List<HistoryDto> recently = historyDao.getHistoryRecent();
-    List<HistoryDto> liked = historyDao.getHistoryLike();
-
-    // result.put("myHistory", myHistory);
-    result.put("recentyl", recently);
-    result.put("liked", liked);
+    List<HistoryDto> result = historyDao.getHistoryRecent(userID);
     return result;
   }
 

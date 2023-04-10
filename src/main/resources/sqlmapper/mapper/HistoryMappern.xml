@@ -3,33 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.music.sharemusic.dao.HistoryDao">
-  <select id="getHistoryAll" parameterType="Integer" resultType="HistoryDto">
-    SELECT * FROM HISTORY WHERE ORDER BY READDATE
+
+  <select id="getHistoryRecent" parameterType="String" resultType="HistoryDto">
+    SELECT * FROM HISTORY WHERE USERID = #{userID} ORDER BY READDATE
+  </select>
+  <select id="getHistoryLike" parameterType="String" resultType="HistoryDto">
+    SELECT * FROM HISTORY WHERE USERID = #{userID} AND POSTLIKE = 1 ORDER BY READDATE
+  </select>
+  <select id="getHistoryBookmark" parameterType="String" resultType="HistoryDto">
+    SELECT * FROM HISTORY WHERE USERID = #{userID} AND BOOKMARK = 1 ORDER BY READDATE
   </select>
 
-<insert id="putHistory" parameterType="Integer">
-    INSERT INTO HISTORY VALUES (POSTNO, POSTLIKE, POSTDATE) = (#{postNO}, 0, SYSDATE)
+  <select id="getHistoryBoard" parameterType="HistoryDto" resultType="BoardDto">
+    SELECT * FROM BOARD a, HISTORY b WHERE a.POSTNO = b.POSTNO
+  </select>
+
+<insert id="putHistory" parameterType="Map">
+    INSERT INTO HISTORY VALUES (USERID, POSTNO, POSTAUTH, POSTTITLE,READDATE, POSTLIKE, BOOKMARK) = (#{userID}, #{postNO}, #{postAuth}, #{postTitle}, SYSTIMESTAMP, 0, 0)
 </insert>
 
-  <update id="updateHistoryDate" parameterType="Integer">
+  <update id="updateHistoryDate" parameterType="Map">
     UPDATE HISTORY SET
-    READDATE = SYSDATE WHERE POSTNO = #{postNO}
+    READDATE = SYSDATE WHERE USERID = #{userID} AND POSTNO = #{postNO}
   </update>
 
-  <update id="updateHistoryLike" parameterType="Integer">
+  <update id="updateHistoryLike" parameterType="Map">
     UPDATE HISTORY SET
     <choose>
         <when test='POSTLIKE == 0'>POSTLIKE = 1 </when>
         <otherwise> POSTLIKE = 0 </otherwise>
     </choose>
-    WHERE POSTNO = #{postNO}
+    WHERE USERID = #{userID} AND POSTNO = #{postNO}
   </update>
 
-  <delete id="deleteHistoryAll">
-    DELETE FROM HISTORY
+  <delete id="deleteHistoryAll" parameterType="String">
+    DELETE FROM HISTORY WHERE USERID = #{userID}
   </delete>
 
-  <delete id="deleteHistoryOne" parameterType="Integer">
-    DELETE FROM HISTORY WHERE POSTNO = #{postNO}
+  <delete id="deleteHistoryOne" parameterType="Map">
+    DELETE FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNO}
   </delete>
 </mapper>  

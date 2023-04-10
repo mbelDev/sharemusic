@@ -3,7 +3,9 @@ package com.music.sharemusic.service;
 import com.music.sharemusic.dao.BoardDao;
 import com.music.sharemusic.dao.HistoryDao;
 import com.music.sharemusic.dto.BoardDto;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,12 +52,12 @@ public class BoardServiceImpl implements BoardService {
 
   @Override
   public void updateHits(int postNo) {
-    if (historyDao.getHistoryOne(postNo) == 0) {
-      boardDao.updateHits(postNo);
-      historyDao.putHistory(postNo);
-    } else {
-      historyDao.updateHistoryDate(postNo);
-    }
+    boardDao.updateHits(postNo);
+    // if (historyDao.getHistoryOne(postNo) == 0) {
+    //   historyDao.putHistory(postNo);
+    // } else {
+    //   historyDao.updateHistoryDate(postNo);
+    // }
   }
 
   @Override
