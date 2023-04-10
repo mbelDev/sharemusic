@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -49,21 +50,37 @@ public class BoardController {
   }
 
   @PostMapping("/modify")
-  public String modifyprogress(BoardDto boardDto) {
+  public String modifyprogress(BoardDto boardDto, @RequestParam(required = false) String genreEtc, @RequestParam(required = false) String emoteEtc) {
+    if (genreEtc != "" && (boardDto.getPostGenre()).equals("etc")) {
+      boardDto.setPostGenre("etc-" + genreEtc);
+    }
+
+    if (emoteEtc != "" && (boardDto.getPostEmote()).equals("etc")) {
+      boardDto.setPostEmote("etc-" + emoteEtc);
+    }
+
     boardService.updatePost(boardDto);
-    return "redirect:/index/";
+    return "redirect:/mainPage/mainPage";
   }
 
   @PostMapping("/write")
-  public String writeprogress(BoardDto boardDto) {
+  public String writeprogress(BoardDto boardDto, @RequestParam(required = false) String genreEtc, @RequestParam(required = false) String emoteEtc) {
+    if (genreEtc != "" && (boardDto.getPostGenre()).equals("etc")) {
+      boardDto.setPostGenre("etc-" + genreEtc);
+    }
+
+    if (emoteEtc != "" && (boardDto.getPostEmote()).equals("etc")) {
+      boardDto.setPostEmote("etc-" + emoteEtc);
+    }
+
     boardService.putPost(boardDto);
-    return "redirect:/index/";
+    return "redirect:/mainPage/mainPage";
   }
 
   @PostMapping("/delete")
   public String delete(BoardDto boardDto) {
     boardService.deletePost(boardDto);
-    return "redirect:/index/";
+    return "redirect:/mainPage/mainPage";
   }
 
   @PostMapping("/updateLike")

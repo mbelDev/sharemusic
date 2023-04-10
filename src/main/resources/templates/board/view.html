@@ -64,8 +64,30 @@
             <span th:text="${boardDto.postCont}">설명</span>
           </div>
           <div>
-            <span th:text="'#' + ${boardDto.postGenre}">장르</span>
-            <span th:text="'#' + ${boardDto.postEmote}">분위기</span>
+            <!-- if 장르가 기타일 경우 표시 -->
+            <span
+              th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
+              th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[0]}"
+              >장르</span
+            >
+            <!-- unless 장르가 기타가 아닐 경우 표시 -->
+            <span
+              th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
+              th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[1]}"
+              >장르</span
+            >
+            <!-- if 분위기가 기타일 경우 표시 -->
+            <span
+              th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
+              th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[0]}"
+              >분위기</span
+            >
+            <!-- unless 분위기가 기타가 아닐 경우 표시 -->
+            <span
+              th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
+              th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[1]}"
+              >분위기</span
+            >
           </div>
         </div>
       </div>
@@ -125,7 +147,7 @@
               type:  "POST",
               data: {"postNo": postNo},
               success: function(response) {
-                location.href="/index/";
+                location.href="/mainPage/mainPage";
               }
             })
           }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -28,7 +28,12 @@
       </div>
       <div>
         <span>유튜브 링크</span
-        ><input type="text" name="postLink" th:value="${boardDto.postLink}" />
+        ><input
+          type="text"
+          name="postLink"
+          th:value="'https://youtu.be/' + ${boardDto.postLink}"
+          class="postLink"
+        />
       </div>
       <div>
         <span>장르</span>
@@ -57,12 +62,30 @@
           >
             보컬로이드
           </option>
-          <option value="etc" th:selected="${boardDto.postGenre=='etc'}">
+          <option
+            value="etc"
+            th:selected="${#strings.setSplit(boardDto.postGenre, '-')[0]} == 'etc'"
+          >
             기타
           </option>
         </select>
         <!-- 기타 선택할 시 나타날 input -->
-        <input type="text" class="genreEtc" />
+        <!-- if 장르가 기타일 경우 표시 -->
+        <input
+          type="text"
+          class="genreEtc"
+          th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
+          value=""
+          name="genreEtc"
+        />
+        <!-- unless 장르가 기타가 아닐 경우 표시 -->
+        <input
+          type="text"
+          class="genreEtc"
+          th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
+          th:value="${#strings.setSplit(boardDto.postGenre, '-')[1]}"
+          name="genreEtc"
+        />
       </div>
       <div>
         <span>갬성</span>
@@ -79,20 +102,55 @@
           <option value="으스스" th:selected="${boardDto.postEmote=='으스스'}">
             으스스
           </option>
-          <option value="etc" th:selected="${boardDto.postEmote=='etc'}">
+          <option
+            value="etc"
+            th:selected="${#strings.setSplit(boardDto.postEmote, '-')[0]} == 'etc'"
+          >
             기타
           </option>
           <!-- 기타 선택할 시 나타날 input -->
-          <input type="text" class="emoteEtc" />
+          <!-- if 분위기가 기타일 경우 표시 -->
+          <input
+            type="text"
+            class="emoteEtc"
+            th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
+            value=""
+            name="emoteEtc"
+          />
+          <!-- unless 장르가 기타가 아닐 경우 표시 -->
+          <input
+            type="text"
+            class="emoteEtc"
+            th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
+            th:value="${#strings.setSplit(boardDto.postEmote, '-')[1]}"
+            name="emoteEtc"
+          />
         </select>
       </div>
       <!-- 로그인 한 유저의 이름 보내기 -->
       <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->
       <input type="hidden" name="postNo" th:value="${param.postNo}" />
-      <button>수정</button>
+      <button class="btn btn-confirm">수정</button>
     </form>
 
     <script>
+      // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
+      $(".btn-confirm").on("click", function () {
+        const url = $(".postLink").val();
+        const regExp =
+          "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
+        const match = url.match(regExp);
+
+        if (match) {
+          const getId = match[1];
+          $(".postLink").val(match[1]);
+          return true;
+        } else {
+          // 유튜브 링크를 다시 확인하라고 경고 창
+        }
+        return false;
+      });
+
       // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
       if ($(".postGenre").val() != "etc") {
         $(".genreEtc").hide();
@@ -107,7 +165,7 @@
       });
 
       // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
-      if ($(".postEmote").val != "etc") {
+      if ($(".postEmote").val() != "etc") {
         $(".emoteEtc").hide();
       }
 
