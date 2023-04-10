@@ -16,8 +16,11 @@
   
     let swiper = new Swiper( ".swiper", {
       autoplay: {
-        delay: 1000, //add
+        delay: 500, //add
         disableOnInteraction: false,
+      },
+      mousewheel: {
+        invert: false,
       },
       speed: 2000,
       loop: true,
