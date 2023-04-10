@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.music.sharemusic.dao.HistoryDao">
+  <select id="getHistoryAll" parameterType="Integer" resultType="HistoryDto">
+    SELECT * FROM HISTORY WHERE ORDER BY READDATE
+  </select>
+
+<insert id="putHistory" parameterType="Integer">
+    INSERT INTO HISTORY VALUES (POSTNO, POSTLIKE, POSTDATE) = (#{postNO}, 0, SYSDATE)
+</insert>
+
+  <update id="updateHistoryDate" parameterType="Integer">
+    UPDATE HISTORY SET
+    READDATE = SYSDATE WHERE POSTNO = #{postNO}
+  </update>
+
+  <update id="updateHistoryLike" parameterType="Integer">
+    UPDATE HISTORY SET
+    <choose>
+        <when test='POSTLIKE == 0'>POSTLIKE = 1 </when>
+        <otherwise> POSTLIKE = 0 </otherwise>
+    </choose>
+    WHERE POSTNO = #{postNO}
+  </update>
+
+  <delete id="deleteHistoryAll">
+    DELETE FROM HISTORY
+  </delete>
+
+  <delete id="deleteHistoryOne" parameterType="Integer">
+    DELETE FROM HISTORY WHERE POSTNO = #{postNO}
+  </delete>
+</mapper>  

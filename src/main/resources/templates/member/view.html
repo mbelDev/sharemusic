@@ -31,7 +31,10 @@
             </th:block>
         </div>
 
-        <div>
+        <div style="align-items: center; text-align: center;">
+            <div class="item">
+                <span>userIcon</span><span th:text="${memberDto.userIcon}" style="width:150px; height:150px; display: block;"></span>
+            </div>
             <div class="item">
                 <span>userID</span><span th:text="${memberDto.userID}"></span>
             </div>
@@ -43,7 +46,7 @@
                 <span th:text="${memberDto.userIconReal}"></span>
             </div>
             <div class="item">
-                <span>userPrincipal</span><span th:text="${memberDto.userPrincipal}"></span>
+                <!-- <span>userPrincipal</span><span th:text="${memberDto.userPrincipal}"></span> -->
             </div>
 
         </div>

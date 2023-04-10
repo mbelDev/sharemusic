@@ -32,10 +32,13 @@ public class MemberController {
   MemberServiceImpl memberService;
 
   @GetMapping("/view")
-  public String memberInfo(HttpServletRequest request) {
+  public String memberInfo(HttpServletRequest request, Model model) {
     HttpSession session = request.getSession(false);
     if (session != null && session.getAttribute("loggedUser") != null) {
-      return "/member/mypage";
+      LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
+      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
+      model.addAttribute("memberDto", memberDto);
+      return "/member/view";
     }
 
     return "redirect:/member/login";
@@ -93,6 +96,7 @@ public class MemberController {
   public String loginPage(HttpServletRequest request) {
     HttpSession session = request.getSession(false);
     if (session != null && session.getAttribute("loggedUser") != null) {
+      log.info("login success");
       return "redirect:/member/mypage";
     }
     return "/member/login";
@@ -100,10 +104,10 @@ public class MemberController {
 
   @PostMapping("/login")
   public String login(
+    HttpServletRequest request,
     @ModelAttribute @Validated MemberDto memberDto,
     BindingResult bindingResult,
-    @RequestParam(defaultValue = "/") String redirectURL,
-    HttpServletRequest request
+    @RequestParam(defaultValue = "/") String redirectURL
   ) {
     // if (bindingResult.hasErrors()) {
     //   log.info("what errors? === {}", bindingResult);
@@ -116,12 +120,12 @@ public class MemberController {
         "아이디 또는 비밀번호가 맞지 않습니다."
       );
       log.info("what errors? === {}", bindingResult);
-      return "/member/login";
+      return "redirect:/member/login";
     }
     HttpSession session = request.getSession();
     session.setAttribute("loggedUser", loggedUser);
     session.setMaxInactiveInterval(30 * 60);
-    return "redirect:" + redirectURL;
+    return "redirect:/";
   }
 
   @GetMapping("/logout")

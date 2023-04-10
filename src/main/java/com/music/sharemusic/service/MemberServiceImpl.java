@@ -1,6 +1,10 @@
 package com.music.sharemusic.service;
 
+import com.music.sharemusic.dao.BoardDao;
+import com.music.sharemusic.dao.HistoryDao;
 import com.music.sharemusic.dao.MemberDao;
+import com.music.sharemusic.dto.BoardDto;
+import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.MemberDto;
 import java.io.IOException;
@@ -25,6 +29,12 @@ public class MemberServiceImpl implements MemberService {
 
   @Autowired
   MemberDao memberDao;
+
+  @Autowired
+  BoardDao boardDao;
+
+  @Autowired
+  HistoryDao historyDao;
 
   @Value("${file.path}")
   private String uploadFolder;
@@ -92,6 +102,20 @@ public class MemberServiceImpl implements MemberService {
     }
     log.info("who?==={}", memberDto);
     log.info("login?==={}", result);
+    return result;
+  }
+
+  public Map<String, Object> getMemberInfo(LoggedDto loggedUser) {
+    Map<String, Object> result = new HashMap<>();
+    String userID = loggedUser.getUserID();
+    MemberDto memberDto = getMemberOne(userID);
+    // List<BoardDto> myHistory = boardDao.getPostUser(userID);
+    List<HistoryDto> recently = historyDao.getHistoryRecent();
+    List<HistoryDto> liked = historyDao.getHistoryLike();
+
+    // result.put("myHistory", myHistory);
+    result.put("recentyl", recently);
+    result.put("liked", liked);
     return result;
   }
 

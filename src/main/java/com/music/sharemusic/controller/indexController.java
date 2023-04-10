@@ -1,8 +1,11 @@
 package com.music.sharemusic.controller;
 
 import com.music.sharemusic.dto.BoardDto;
+import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.service.BoardService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +25,12 @@ public class indexController {
   }
 
   @GetMapping("/mainPage")
-  public String index(Model model) {
+  public String index(HttpServletRequest request, Model model) {
+    HttpSession session = request.getSession();
+    if (session != null && session.getAttribute("loggedUser") != null) {
+      LoggedDto loggedUser = (LoggedDto) session.getAttribute("loggedUser");
+      model.addAttribute("loggedUser", loggedUser);
+    }
     List<BoardDto> postList = boardService.getPostAll();
     model.addAttribute("postList", postList);
     return "/mainPage/mainPage";

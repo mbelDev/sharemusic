@@ -30,10 +30,19 @@
         </div>
       </article><!-- .headerLayout-Area--logo -->
       <article class="headerLayout-Area--joinForm">
-        <div class="join left-items lien">
-          <a href="/member/login">로그인</a>
-          <a href="/member/join">회원가입</a>
-        </div>
+        <th:block th:if="${loggedUser == null}">
+          <div class="join left-items lien">
+            <a href="/member/login">로그인</a>
+            <a href="/member/join">회원가입</a>
+          </div>
+        </th:block>
+        <th:block th:unless="${loggedUser == null}">
+          <div class="join left-items lien">
+            <a href="/member/login">활동내역</a>
+            <a href="/member/join">정보수정</a>
+          </div>
+        </th:block>
+        
       </article><!-- .headerLayout-Area--joinForm -->
       <article class="headerLayout-Area--searchForm">
         <div class="search left-items">
