@@ -19,7 +19,6 @@ public class BoardDto {
   private String postLink; // 유튜브 링크 varchar2 300
   private String postGenre; // 장르 
   private String postEmote; // 분위기 
-  private String postTags; // 태그 
   private int postLike; // 추천수
   private int postHits; // 조회수
   private String postDate; // 작성일자

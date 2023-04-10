@@ -7,5 +7,6 @@
     <typeAlias alias="BoardDto" type="com.music.sharemusic.dto.BoardDto" />
     <typeAlias alias="MemberDto" type="com.music.sharemusic.dto.MemberDto" />
     <typeAlias alias="ReplysDto" type="com.music.sharemusic.dto.ReplysDto" />
+    <typeAlias alias="HistoryDto" type="com.music.sharemusic.dto.HistoryDto" />
   </typeAliases>
 </configuration>

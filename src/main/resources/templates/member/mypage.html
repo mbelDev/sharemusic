@@ -28,13 +28,23 @@
               <p th:text="${memberDto.userNM}">별명</p>
             </div>
           </li><!-- mypage-Area--left-user -->
+          <li class="mypage-Area--left-user">
+            <div class="left--userName">
+              <p th:text="${memberDto.userDate}">작성글</p>
+            </div>
+          </li><!-- mypage-Area--left-user -->
+          <li class="mypage-Area--left-user">
+            <div class="left--userName">
+              <p th:text="${memberDto.userDate}">가입일자</p>
+            </div>
+          </li><!-- mypage-Area--left-user -->
         </ul>
       </div>
     </article><!-- .mypage-Area--left -->
     <article class="mypage-Area--right">
       <div class="mypage-Area--right-userContnet">
         <ul>
-          <li><a href="/view">기본정보 수정</a></li>
+          <li><a href="/member/join">회원정보 수정</a></li>
           <li><a href="">이미지 수정</a></li>
           <li><a href="">글 수정</a></li>
         </ul>

@@ -13,7 +13,7 @@ public interface MemberService {
 
   public Map<String, String> validateHandler(Errors errors);
 
-  // public void login(MemberDto memberDto);
+  public Map<String, Object> getMemberInfo(LoggedDto loggedUser);
 
   public MemberDto getMemberOne(String userID);
 
