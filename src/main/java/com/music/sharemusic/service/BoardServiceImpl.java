@@ -23,8 +23,6 @@ public class BoardServiceImpl implements BoardService {
     // 로그인 한 유저의 이름 받아오기
     boardDto.setPostAuth("임시 작성자");
 
-    boardDto.setPostTags("임시 태그");
-
     boardDao.putPost(boardDto);
   }
 

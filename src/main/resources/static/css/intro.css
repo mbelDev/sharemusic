@@ -41,9 +41,13 @@ html {
 }
 #intro-Area .intro-Area--section .intro-Area--article .intro-Area--btn {
   position: absolute;
-  bottom: 5%;
+  bottom: 15%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 99;
+}
+#intro-Area .intro-Area--section .intro-Area--article .intro-Area--btn a img {
+  width: 500px;
 }
 
 .intro-model {

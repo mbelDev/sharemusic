@@ -7,6 +7,10 @@ ul {
   padding-left: 0;
 }
 
+.swiper-wrapper {
+  transition-timing-function: linear;
+}
+
 #mainPage-Area .main-constent--itmes .main-constent--slider .swiper {
   height: 500px;
   z-index: 2;
@@ -19,41 +23,13 @@ ul {
   border-radius: 18px;
   font-size: 22px;
   font-weight: bold;
+  margin: 0 20px;
   color: #fff;
   width: 400px !important;
   height: 400px !important;
-  transform: translateY(50px) !important;
+  transform: translate(40px, 50px) !important;
   box-shadow: 0px 10px 13px -7px #1f1f1f, -3px -3px 20px 5px rgba(43, 43, 43, 0.27);
-}
-#mainPage-Area .main-constent--itmes .main-constent--slider .swiper-slide:nth-child(1n) {
-  background-color: rgb(206, 17, 17);
-}
-#mainPage-Area .main-constent--itmes .main-constent--slider .swiper-slide:nth-child(2n) {
-  background-color: rgb(0, 140, 255);
-}
-#mainPage-Area .main-constent--itmes .main-constent--slider .swiper-slide:nth-child(3n) {
-  background-color: rgb(10, 184, 111);
-}
-#mainPage-Area .main-constent--itmes .main-constent--slider .swiper-slide:nth-child(4n) {
-  background-color: rgb(211, 122, 7);
-}
-#mainPage-Area .main-constent--itmes .main-constent--slider .swiper-slide:nth-child(5n) {
-  background-color: rgb(118, 163, 12);
-}
-#mainPage-Area .main-constent--itmes .main-constent--slider .swiper-slide:nth-child(6n) {
-  background-color: rgb(180, 10, 47);
-}
-#mainPage-Area .main-constent--itmes .main-constent--slider .swiper-slide:nth-child(7n) {
-  background-color: rgb(35, 99, 19);
-}
-#mainPage-Area .main-constent--itmes .main-constent--slider .swiper-slide:nth-child(8n) {
-  background-color: rgb(0, 68, 255);
-}
-#mainPage-Area .main-constent--itmes .main-constent--slider .swiper-slide:nth-child(9n) {
-  background-color: rgb(218, 12, 218);
-}
-#mainPage-Area .main-constent--itmes .main-constent--slider .swiper-slide:nth-child(10n) {
-  background-color: rgb(54, 94, 77);
+  outline: 1px solid red;
 }
 #mainPage-Area .main-constent--itmes .main-constent--listItem {
   color: #fff;
@@ -67,7 +43,7 @@ ul {
   margin-left: 2.5%;
   margin-right: 2.5%;
 }
-#mainPage-Area .main-constent--itmes .main-constent--listItem .listItem-nav .listItem-nav--title a {
+#mainPage-Area .main-constent--itmes .main-constent--listItem .listItem-nav .listItem-nav--title {
   font-weight: bold;
 }
 #mainPage-Area .main-constent--itmes .main-constent--listItem .listItem-nav .update-data {
@@ -84,15 +60,28 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  gap: 85px;
+  gap: 30px;
   color: #fff;
-  margin-left: 2.5%;
 }
 #mainPage-Area .main-constent--itmes .main-constent--listItem .getList-ItemBox ul a {
   display: block;
-  outline: 1px solid rgb(255, 255, 255);
-  width: 300px;
-  height: 450px;
+  border-radius: 5px;
+  width: 355px;
+  height: 340px;
   overflow: hidden;
-  box-shadow: 0px 10px 13px -7px #1f1f1f, -3px -3px 20px 5px rgba(43, 43, 43, 0.27);
+  box-shadow: 0px 10px 13px -7px #181818, -3px -3px 20px 5px rgba(24, 24, 24, 0.27);
+}
+#mainPage-Area .main-constent--itmes .main-constent--listItem .getList-ItemBox ul a .ItemBox-imgs img {
+  width: 100%;
+}
+#mainPage-Area .main-constent--itmes .main-constent--listItem .getList-ItemBox ul a .ItemBox-content {
+  font-size: 13px;
+  margin: 10px;
+  line-height: 1;
+  font-weight: 400;
+}
+#mainPage-Area .main-constent--itmes .main-constent--listItem .getList-ItemBox ul a .ItemBox-content .ItemBox-postTitle {
+  font-size: 18px;
+  height: 55px;
+  font-weight: 600;
 }

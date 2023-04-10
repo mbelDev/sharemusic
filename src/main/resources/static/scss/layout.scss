@@ -25,6 +25,7 @@ body {
 #headerLayout-Area {
   width: 15%;
   height: 100vh;
+  margin-right: 15%;
   position: fixed;
   top: 0; left: 0;
   outline: 1px solid #aaaaaa9d;
@@ -37,6 +38,32 @@ body {
       }
     }
   }//.headerLayout-Area--logo
+  .headerLayout-Area--searchForm {
+    .search-icon {
+      transform: translateX(-5%);
+      display: flex;
+      justify-content: left;
+      align-self: center;
+      padding: 5px 0;
+      background-color: #5c5c5c;
+      button {
+        border: none;
+        outline: none;
+        background-color: #5c5c5c;
+      }
+      input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: #5c5c5c;
+        caret-color: #fff;
+        color: #fff;
+      }
+      input::placeholder {
+        color: #fff;
+      }
+    }
+  }//.headerLayout-Area--searchForm
   .headerLayout-Area--viewContents {
     .view {
       ul {

@@ -15,6 +15,9 @@
 
     <main class="joinForm-Area">
       <div class="joinForm-Area--bg">
+        <div class="joinForm-Area--logo">
+          <a href="/mainPage"><img src="/images/logo.png" alt=""></a>
+        </div>
         <form
           action="/member/join"
           method="POST"
@@ -45,6 +48,15 @@
               placeholder="UserPw"
             />
           </div>
+          <!-- <div class="joinForm-Area--userPw asdf">
+            <span></span>
+            <input
+              type="password"
+              calss="userPW"
+              th:field="*{userPW}"
+              placeholder="UserPw"
+            />
+          </div> -->
           <!-- joinForm-Area--userPw -->
           <div class="joinForm-Area--userName asdf">
             <span></span>
@@ -69,7 +81,8 @@
           </div>
           <!-- joinForm-Area--userFile -->
           <div class="joinForm-Area--btn">
-            <button>JOIN</button>
+            <button type="submit" class="btn-checkID">회원가입</button>
+            <button type="button" onclick="location.href='login'">로그인</button>
           </div>
           <!-- joinForm-Area--btn -->
         </form>
