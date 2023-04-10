@@ -1,73 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<html lang="en"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorate="~{/include/layout.html}">
     
 
     <!-- 마이페이지!! -->
     <!-- index에서 넘어오나?? 그럴걸요?? -->
-    <div style="display: flex; align-content: center; flex-direction: column;">
-    <span th:text="${memberDto}"></span>
-        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-            <!-- 기본 회원정보 -->
-            <div>
-                <img th:src="@{uploadFolder/${memberDto.userIconReal}}" alt="" style="width: 150px; height: 150px;">
+<main id="mainPage-Area" class="mypage-Area" layout:fragment="contents">
+  <section class="mypage-Area--section">
+    <article class="mypage-Area--left">
+      <div class="mypage-Area--left-title">
+        <span>회원정보 (공사중)</span>
+      </div><!-- mypage-Area--left-title -->
+      <div class="mypage-Area--left-myImg">
+        <img th:src="@{uploadFolder/${memberDto.userIconReal}}" alt="">
+      </div><!-- mypage-Area--left-myImg -->
+      <div class="mypage-Area--left-userContent">
+        <ul>
+          <li class="mypage-Area--left-user">
+            <div class="left--userName">
+              <p th:text="${memberDto.userID}">아이디</p>
             </div>
-            <div>
-                <input type="file" class="userIcon"><span>프로필 사진 변경</span>
+          </li><!-- mypage-Area--left-user -->
+          <li class="mypage-Area--left-user">
+            <div class="left--userName">
+              <p th:text="${memberDto.userNM}">별명</p>
             </div>
-            <div>
-                <span th:text="${memberDto.userNM}">별명</span>
-            </div>
-            <div>
-                <span th:text="${memberDto.userID}">아이디</span>
-            </div>
-            <!-- <span th:text="${memberDto.userGenre}">선호장르</span> -->
+          </li><!-- mypage-Area--left-user -->
+        </ul>
+      </div>
+    </article><!-- .mypage-Area--left -->
+    <article class="mypage-Area--right">
+      <div class="mypage-Area--right-userContnet">
+        <ul>
+          <li><a href="/view">기본정보 수정</a></li>
+          <li><a href="">이미지 수정</a></li>
+          <li><a href="">글 수정</a></li>
+        </ul>
+      </div>
+    </article><!-- mypage-Area--right -->
+  </section><!-- .mypage-Area--section -->
+
+
+
+  <!-- <div style="display: flex; align-content: center; flex-direction: column;">
+  <span th:text="${memberDto}"></span>
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;"> -->
+
+        <!-- 기본 회원정보 -->
+        <!-- <div>
+            <img th:src="@{uploadFolder/${memberDto.userIconReal}}" alt="" style="width: 150px; height: 150px;">
         </div>
-        <div style="display: flex; justify-content: center;">
-            <!-- 작성 글 목록 -->
-            <!--   BOARD에서 POSTAUTH = USERID인 것들 불러오기 -->
-            <ul>
-                <!-- <li th:each="item:${writeList}">
-                    <span th:text="${writeList.postTitle}">곡 명</span>
-                    <span th:text="${writeList.postSinger}">가수명</span>
-                    <span th:text="${writeList.postHits}">조회수</span>
-                    <span th:text="${writeList.postLike}">추천수</span>
-                    <span th:text="${writeList.postTitle}">추천버튼</span>
-                </li> -->
-                <li>
-                    <span>곡 명</span>
-                    <span>가수명</span>
-                    <span>조회수</span>
-                    <span>추천수</span>
-                    <span>추천버튼</span>
-                </li>
-            </ul>
+        <div>
+            <input type="file" class="userIcon"><span>프로필 사진 변경</span>
         </div>
-        <div style="display: flex; justify-content: center;">
-            <!-- 최근 열람 곡 목록 -->
-            <!-- Service에서 수령.. BOARD_RECORD에서 POSTNO를 받아서 BOARD에서 받아오기 -->
-            <ul>
-                <li>
-                    <span>곡 명</span>
-                    <span>가수명</span>
-                    <span>조회수</span>
-                    <span>추천수</span>
-                    <span>추천버튼</span>
-                </li>
-            </ul>
+        <div>
+            <span th:text="${memberDto.userNM}">별명</span>
         </div>
-        <div style="display: flex; justify-content: center;">
-            <!-- 좋아요 누른 글 목록 -->
-            <!-- BOARD_RECORD에서 WHERE LIKE = 1 의 POSTNO를 받아오기. -->
-        </div>
+        <div>
+            <span th:text="${memberDto.userID}">아이디</span>
+        </div> -->
+        <!-- <span th:text="${memberDto.userGenre}">선호장르</span> -->
+    <!-- </div>
+    <div style="display: flex; justify-content: center;"> -->
+        <!-- 작성 글 목록 -->
+        <!--   BOARD에서 POSTAUTH = USERID인 것들 불러오기 -->
+        <!-- <ul> -->
+            <!-- <li th:each="item:${writeList}">
+                <span th:text="${writeList.postTitle}">곡 명</span>
+                <span th:text="${writeList.postSinger}">가수명</span>
+                <span th:text="${writeList.postHits}">조회수</span>
+                <span th:text="${writeList.postLike}">추천수</span>
+                <span th:text="${writeList.postTitle}">추천버튼</span>
+            </li> -->
+            <!-- <li>
+                <span>곡 명</span>
+                <span>가수명</span>
+                <span>조회수</span>
+                <span>추천수</span>
+                <span>추천버튼</span>
+            </li>
+        </ul>
+    </div> -->
+    <!-- <div style="display: flex; justify-content: center;"> -->
+        <!-- 최근 열람 곡 목록 -->
+        <!-- Service에서 수령.. BOARD_RECORD에서 POSTNO를 받아서 BOARD에서 받아오기 -->
+        <!-- <ul>
+            <li>
+                <span>곡 명</span>
+                <span>가수명</span>
+                <span>조회수</span>
+                <span>추천수</span>
+                <span>추천버튼</span>
+            </li>
+        </ul>
     </div>
-
-
-</body>
-</html>
+    <div style="display: flex; justify-content: center;"> -->
+        <!-- 좋아요 누른 글 목록 -->
+        <!-- BOARD_RECORD에서 WHERE LIKE = 1 의 POSTNO를 받아오기. -->
+    <!-- </div>
+  </div> -->
+</main>

@@ -1,0 +1,48 @@
+.mypage-Area {
+  display: flex;
+  justify-content: center;
+  background-color: #3b3b3b;
+  color: #111;
+  font-size: 20px;
+}
+.mypage-Area .mypage-Area--section {
+  display: flex;
+  width: 70%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.mypage-Area .mypage-Area--section .mypage-Area--left {
+  background-color: rgb(238, 238, 238);
+  width: 30%;
+}
+.mypage-Area .mypage-Area--section .mypage-Area--left .mypage-Area--left-title {
+  display: flex;
+  justify-content: space-between;
+  line-height: 2;
+}
+.mypage-Area .mypage-Area--section .mypage-Area--left .mypage-Area--left-myImg {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.mypage-Area .mypage-Area--section .mypage-Area--left .mypage-Area--left-myImg img {
+  width: 250px;
+  height: 250px;
+  outline: 1px solid red;
+}
+.mypage-Area .mypage-Area--section .mypage-Area--left .mypage-Area--left-userContent ul li {
+  height: 95px;
+  margin: 10px 10px;
+  box-shadow: 0 10px 10px rgba(17, 17, 17, 0.1568627451);
+}
+.mypage-Area .mypage-Area--section .mypage-Area--right {
+  width: 70%;
+  background-color: rgb(189, 189, 189);
+}
+.mypage-Area .mypage-Area--section .mypage-Area--right .mypage-Area--right-userContnet ul li a {
+  display: block;
+  height: 140px;
+  margin: 30px 60px;
+  background-color: rgb(238, 238, 238);
+  box-shadow: 0 10px 10px rgba(17, 17, 17, 0.1568627451);
+}
