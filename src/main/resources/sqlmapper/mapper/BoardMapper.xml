@@ -17,7 +17,7 @@
 </select>
 
 <!-- 모든 글 불러오기 -->
-<select id="getPostAll" parameterType="String" resultType="BoardDto">
+<select id="getPostAll" parameterType="HashMap" resultType="BoardDto">
   SELECT * FROM BOARD
   <if test="searchTxt != null">
     WHERE
@@ -26,7 +26,7 @@
     (postSinger LIKE '%' || #{searchTxt} || '%') OR
     (postCont LIKE '%' || #{searchTxt} || '%')
   </if>
-  ORDER BY POSTDATE DESC
+    ORDER BY ${sort} desc
 </select>
 
 <!-- 글 내용 수정하기 -->
