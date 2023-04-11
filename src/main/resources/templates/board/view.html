@@ -41,23 +41,23 @@
               allowfullscreen
             ></iframe>
           </div>
-          <a
+          <!-- <a
             href=""
             th:href="@{https://youtu.be/{postLink}(postLink=${boardDto.postLink})}"
             target="_blank"
             ><span th:text="'https://youtu.be/' + ${boardDto.postLink}"
               >링크</span
             ></a
-          >
+          > -->
         </div>
         <div>
           <div>
             <span>곡: </span>
-            <span th:text="${boardDto.postTitle}">곡</span>
+            <a href=""><span th:text="${boardDto.postTitle}">곡</span></a>
           </div>
           <div>
             <span>가수: </span>
-            <span th:text="${boardDto.postSinger}">가수</span>
+            <a href=""><span th:text="${boardDto.postSinger}">가수</span></a>
           </div>
           <div>
             <span>설명: </span>
@@ -65,29 +65,37 @@
           </div>
           <div>
             <!-- if 장르가 기타일 경우 표시 -->
-            <span
-              th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[0]}"
-              >장르</span
-            >
+            <a href="">
+              <span
+                th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
+                th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[0]}"
+                >장르</span
+              >
+            </a>
             <!-- unless 장르가 기타가 아닐 경우 표시 -->
-            <span
-              th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[1]}"
-              >장르</span
-            >
+            <a href="">
+              <span
+                th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
+                th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[1]}"
+                >장르</span
+              >
+            </a>
             <!-- if 분위기가 기타일 경우 표시 -->
-            <span
-              th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[0]}"
-              >분위기</span
-            >
+            <a href="">
+              <span
+                th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
+                th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[0]}"
+                >분위기</span
+              >
+            </a>
             <!-- unless 분위기가 기타가 아닐 경우 표시 -->
-            <span
-              th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[1]}"
-              >분위기</span
-            >
+            <a href="">
+              <span
+                th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
+                th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[1]}"
+                >분위기</span
+              >
+            </a>
           </div>
         </div>
       </div>

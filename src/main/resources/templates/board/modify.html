@@ -108,24 +108,24 @@
           >
             기타
           </option>
-          <!-- 기타 선택할 시 나타날 input -->
-          <!-- if 분위기가 기타일 경우 표시 -->
-          <input
-            type="text"
-            class="emoteEtc"
-            th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
-            value=""
-            name="emoteEtc"
-          />
-          <!-- unless 장르가 기타가 아닐 경우 표시 -->
-          <input
-            type="text"
-            class="emoteEtc"
-            th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
-            th:value="${#strings.setSplit(boardDto.postEmote, '-')[1]}"
-            name="emoteEtc"
-          />
         </select>
+        <!-- 기타 선택할 시 나타날 input -->
+        <!-- if 분위기가 기타일 경우 표시 -->
+        <input
+          type="text"
+          class="emoteEtc"
+          th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
+          value=""
+          name="emoteEtc"
+        />
+        <!-- unless 장르가 기타가 아닐 경우 표시 -->
+        <input
+          type="text"
+          class="emoteEtc"
+          th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
+          th:value="${#strings.setSplit(boardDto.postEmote, '-')[1]}"
+          name="emoteEtc"
+        />
       </div>
       <!-- 로그인 한 유저의 이름 보내기 -->
       <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->

@@ -1,102 +1,126 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-                xmlns:th="http://www.thymeleaf.org">
+<html
+  lang="ko"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/mainPage.css" />
+    <link rel="stylesheet" href="/css/mypage.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+    <script src="/js/mainJs/layout.js" defer></script>
+    <script src="/js/mainJs/mainPage.js" defer></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery-3.6.3.min.js"></script>
+  </head>
 
-  <title>Music</title>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/reset.css">
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/layout.css">
-  <link rel="stylesheet" href="/css/mainPage.css">
-  <link rel="stylesheet" href="/css/mypage.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-  <script src="/js/mainJs/layout.js" defer></script>
-  <script src="/js/mainJs/mainPage.js" defer></script>
-  <script src="/js/bootstrap.bundle.min.js"></script>
-  <script src="/js/jquery-3.6.3.min.js"></script>
-  
-</head>
-
-<body>
-  <header class="container">
-    <section id="headerLayout-Area">
-      <article class="headerLayout-Area--logo">
-        <div class="logo left-items">
-          <a href="/mainPage"><img src="/images/logo.png" alt="logo"></a>
-        </div>
-      </article><!-- .headerLayout-Area--logo -->
-      <article class="headerLayout-Area--joinForm">
-        <th:block th:if="${loggedUser == null}">
-          <div class="join left-items lien">
-            <a href="/member/login">로그인</a>
-            <a href="/member/join">회원가입</a>
+  <body>
+    <header class="container">
+      <section id="headerLayout-Area">
+        <article class="headerLayout-Area--logo">
+          <div class="logo left-items">
+            <a href="/mainPage"><img src="/images/logo.png" alt="logo" /></a>
           </div>
-        </th:block>
-        <th:block th:unless="${loggedUser == null}">
-          <div class="join left-items lien">
-            <a href="/member/login">회원정보</a>
-            <a href="/member/logout">로그아웃</a>
-          </div>
-        </th:block>
-      </article><!-- .headerLayout-Area--joinForm -->
-      <article class="headerLayout-Area--searchForm">
-        <div class="search left-items">
-          <form action="">
-            <div class="search-icon">
-              <button><img src="/images/search.svg" alt=""></button>
-              <input type="text" name="" placeholder="Search...">
+        </article>
+        <!-- .headerLayout-Area--logo -->
+        <article class="headerLayout-Area--joinForm">
+          <th:block th:if="${loggedUser == null}">
+            <div class="join left-items lien">
+              <a href="/member/login">로그인</a>
+              <a href="/member/join">회원가입</a>
             </div>
-          </form>
-        </div>
-      </article><!-- .headerLayout-Area--searchForm -->
-      <article class="headerLayout-Area--viewContents">
-        <div class="view left-items lien">
-          <ul>
-            <li><a href="#">테스트</a></li>
-            <li><a href="#">테스트</a></li>
-            <li><a href="#">테스트</a></li>
-            <li><a href="#">테스트</a></li>
-            <li><a href="#">테스트</a></li>
-          </ul>
-        </div>
-      </article><!-- .headerLayout-Area--viewContents -->
-      <article class="headerLayout-Area--viewContents">
-        <div class="view left-items">
-          <ul>
-            <li><a href="#">테스트</a></li>
-            <li><a href="#">테스트</a></li>
-            <li><a href="#">테스트</a></li>
-          </ul>
-        </div>
-      </article><!-- .headerLayout-Area--viewContents -->
-      <article class="headerLayout-Area--viewContents">
-        <div class="view left-items lien">
-          <ul>
-            <li><a href="#">테스트</a></li>
-            <li><a href="#">테스트</a></li>
-            <li><a href="#">테스트</a></li>
-          </ul>
-        </div>
-      </article><!-- .headerLayout-Area--viewContents -->
-    </section><!-- #headerLayout-Area -->
-  </header>
+          </th:block>
+          <th:block th:unless="${loggedUser == null}">
+            <div class="join left-items lien">
+              <a href="/member/login">회원정보</a>
+              <a href="/member/logout">로그아웃</a>
+            </div>
+          </th:block>
+        </article>
+        <!-- .headerLayout-Area--joinForm -->
+        <article class="headerLayout-Area--searchForm">
+          <div class="search left-items">
+            <form action="">
+              <div class="search-icon">
+                <!-- 검색 기능 -->
+                <button>
+                  <img src="/images/search.svg" alt="" />
+                </button>
+                <input
+                  type="text"
+                  name="searchTxt"
+                  placeholder="Search..."
+                  value=""
+                  th:value="${searchTxt}"
+                />
+              </div>
+            </form>
+          </div>
+        </article>
+        <!-- .headerLayout-Area--searchForm -->
+        <article class="headerLayout-Area--viewContents">
+          <div class="view left-items lien">
+            <ul>
+              <li><a href="#">테스트</a></li>
+              <li><a href="#">테스트</a></li>
+              <li><a href="#">테스트</a></li>
+              <li><a href="#">테스트</a></li>
+              <li><a href="#">테스트</a></li>
+            </ul>
+          </div>
+        </article>
+        <!-- .headerLayout-Area--viewContents -->
+        <article class="headerLayout-Area--viewContents">
+          <div class="view left-items">
+            <ul>
+              <li><a href="#">테스트</a></li>
+              <li><a href="#">테스트</a></li>
+              <li><a href="#">테스트</a></li>
+            </ul>
+          </div>
+        </article>
+        <!-- .headerLayout-Area--viewContents -->
+        <article class="headerLayout-Area--viewContents">
+          <div class="view left-items lien">
+            <ul>
+              <li><a href="#">테스트</a></li>
+              <li><a href="#">테스트</a></li>
+              <li><a href="#">테스트</a></li>
+            </ul>
+          </div>
+        </article>
+        <!-- .headerLayout-Area--viewContents -->
+      </section>
+      <!-- #headerLayout-Area -->
+    </header>
 
-  <main id="mainPage-Area" class="container" layout:fragment="contents">
-    
-  </main>
+    <main
+      id="mainPage-Area"
+      class="container"
+      layout:fragment="contents"
+    ></main>
 
-  <footer class="container">
-    <section id="footerLayout-Area">
-
-    </section><!-- #footerLayout-Area -->
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-</body>
+    <footer class="container">
+      <section id="footerLayout-Area"></section>
+      <!-- #footerLayout-Area -->
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  </body>
 </html>
 
 <!-- 상세페이지 https://www.music-n.com/#section05 -->

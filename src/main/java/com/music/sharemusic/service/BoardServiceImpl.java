@@ -33,8 +33,8 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public List<BoardDto> getPostAll() {
-    List<BoardDto> result = boardDao.getPostAll();
+  public List<BoardDto> getPostAll(String searchTxt) {
+    List<BoardDto> result = boardDao.getPostAll(searchTxt);
     return result;
   }
 
