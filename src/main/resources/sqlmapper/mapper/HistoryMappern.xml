@@ -14,7 +14,7 @@
     SELECT * FROM HISTORY WHERE USERID = #{userID} AND BOOKMARK = 1 ORDER BY READDATE DESC
   </select>
   <select id="getHistoryOne" parameterType="LoggedDto" resultType="Integer">
-    SELECT COUNT(*) FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
+    SELECT COUNT(*) AS TOTAL FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </select>
 
   <select id="getHistoryBoard" parameterType="HistoryDto" resultType="BoardDto">
@@ -22,8 +22,8 @@
   </select>
 
 <insert id="putHistory" parameterType="LoggedDto">
-    INSERT INTO HISTORY (USERID, POSTNO, POSTAUTH, POSTTITLE, READDATE, POSTLIKE, BOOKMARK) 
-    VALUES  = (#{userID}, #{postNo}, (SELECT POSTAUTH FROM BOARD WHERE POSTNO = #{postNo}),(SELECT POSTTITLE FROM BOARD WHERE POSTNO = #{postNo}), SYSTIMESTAMP, 0, 0)
+    INSERT INTO HISTORY (USERID, POSTNO, POSTAUTH, POSTTITLE, READDATE, LIKED, BOOKMARK) 
+    VALUES (#{userID}, #{postNo}, (SELECT POSTAUTH FROM BOARD WHERE POSTNO = #{postNo}),(SELECT POSTTITLE FROM BOARD WHERE POSTNO = #{postNo}), SYSTIMESTAMP, 0, 0)
 </insert>
 
   <update id="updateHistoryDate" parameterType="LoggedDto">
@@ -47,4 +47,9 @@
   <delete id="deleteHistoryOne" parameterType="Map">
     DELETE FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </delete>
+
+
+  <select id="test" resultType="int">
+    SELECT COUNT(*) AS TOTAL FROM HISTORY WHERE USERID = 'gundam'
+  </select>
 </mapper>  

@@ -31,4 +31,6 @@ public interface HistoryDao {
   public void deleteHistoryAll(String userID);
 
   public void deleteHistoryOne(LoggedDto loggdeUser);
+
+  public int test();
 }

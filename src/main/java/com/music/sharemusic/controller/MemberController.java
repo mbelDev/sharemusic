@@ -48,6 +48,25 @@ public class MemberController {
     return "redirect:/member/login";
   }
 
+  @GetMapping("/user/{userID}")
+  public String mypage(
+    HttpServletRequest request,
+    Model model,
+    @PathVariable String userID
+  ) {
+    HttpSession session = request.getSession(false);
+    if (session != null && session.getAttribute("loggedUser") != null) {
+      LoggedDto loggedInfo = new LoggedDto();
+      loggedInfo.setUserID(userID);
+      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
+      loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
+      model.addAttribute("memberDto", memberDto);
+      return "/member/mypage";
+    }
+
+    return "redirect:/member/login";
+  }
+
   // @PostMapping("/mypage")
   // public String modify(MemberDto memberDto) {
   //   memberService.updateMember(memberDto);

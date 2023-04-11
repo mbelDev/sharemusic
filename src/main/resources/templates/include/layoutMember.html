@@ -44,20 +44,20 @@
             <th:block th:unless="${loggedUser == null}">
               <!-- 기본 회원정보 -->
               <div>
-                <img th:src="@{uploadFolder/${memberDto.userIconReal}}" alt="" style="width: 150px; height: 150px;">
+                <img th:src="@{uploadFolder/${loggedUser.userIconReal}}" alt="" style="width: 150px; height: 150px;">
                         </div>
                         <div>
-                <span th:text="${memberDto.userNM}">별명</span>
+                <span th:text="${loggedUser.userNM}">별명</span>
                         </div>
                         <div>
-                <span th:text="${memberDto.userID}">아이디</span>
+                <span th:text="${loggedUser.userID}">아이디</span>
+                        </div>
+                        <!-- <div>
+                <span th:text="${loggedUser.userDate}">가입일자</span>
                         </div>
                         <div>
-                <span th:text="${memberDto.userDate}">가입일자</span>
-                        </div>
-                        <div>
-                <span th:text="${memberDto.userDate}">작성 글 갯수</span>
-                        </div>
+                <span th:text="${loggedUser.userDate}">작성 글 갯수</span>
+                        </div> -->
             </th:block>
         </div>
       </article><!-- .headerLayout-Area--searchForm -->

@@ -57,11 +57,11 @@ public class BoardController {
   @GetMapping("/view")
   public String view(HttpServletRequest request, int postNo, Model model) {
     LoggedDto loggedUser = loggedUser(request);
-    if (loggedUser == null) {
-      return "redirect:/member/login";
+    if (loggedUser != null) {
+      loggedUser.setPostNo(postNo);
+      boardService.updateHits(loggedUser);
+      //로그인 정보가 있을 때만 조회수 증가
     }
-    loggedUser.setPostNo(postNo);
-    boardService.updateHits(loggedUser);
     BoardDto boardDto = boardService.getPostOne(postNo);
     model.addAttribute("boardDto", boardDto);
     return "/board/view";

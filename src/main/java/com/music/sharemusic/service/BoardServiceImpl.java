@@ -7,10 +7,12 @@ import com.music.sharemusic.dto.LoggedDto;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Log4j2
 public class BoardServiceImpl implements BoardService {
 
   @Autowired
@@ -52,10 +54,13 @@ public class BoardServiceImpl implements BoardService {
   @Override
   public void updateHits(LoggedDto loggedUser) {
     int postNo = loggedUser.getPostNo();
-    if (historyDao.getHistoryOne(loggedUser) == 0) {
+    int test = historyDao.getHistoryOne(loggedUser);
+    log.info("you read it? === {}", test);
+    if (test == 0) {
       boardDao.updateHits(postNo);
       historyDao.putHistory(loggedUser);
     } else {
+      log.info("yes, you were read it!! {}", postNo);
       historyDao.updateHistoryDate(loggedUser);
     }
   }
