@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -27,25 +28,33 @@ public class indexController {
   }
 
   @GetMapping("/mainPage")
-  public String index(HttpServletRequest request, Model model) {
+  public String index(
+    HttpServletRequest request,
+    Model model,
+    String searchTxt,
+    @RequestParam(defaultValue = "postNo") String sort
+  ) {
     HttpSession session = request.getSession();
     if (session != null && session.getAttribute("loggedUser") != null) {
       LoggedDto loggedUser = (LoggedDto) session.getAttribute("loggedUser");
       model.addAttribute("loggedUser", loggedUser);
     }
-    List<BoardDto> postList = boardService.getPostAll();
+
+    List<BoardDto> postList = boardService.getPostAll(searchTxt, sort);
     model.addAttribute("postList", postList);
+
+    // 검색 기능 searchTxt
+    model.addAttribute("searchTxt", searchTxt);
     return "/mainPage/mainPage";
   }
 
-  @GetMapping("mainPage/{genre}")
-  //Value Path 입니다. genre를 받아서 해당 장르만 뿌려주세요.
-  public String indexGenre(Model model, @RequestParam String genre) {
-    // boardService.getPostGenre(genre)
-    List<BoardDto> postList = boardService.getPostAll(); //getPostGenre(genre)
-    model.addAttribute("postList", postList);
-    return "/mainPage/mainPage";
-  }
+  // @GetMapping("mainPage/{genre}")
+  // //Value Path 입니다. genre를 받아서 해당 장르만 뿌려주세요.
+  // public String indexGenre(Model model, String searchTxt) {
+  //   List<BoardDto> postList = boardService.getPostAll(searchTxt); //getPostGenre(genre)
+  //   model.addAttribute("postList", postList);
+  //   return "/mainPage/mainPage";
+  // }
 
   // include 추가 2023.04.06/13:55
   @GetMapping("/layout")

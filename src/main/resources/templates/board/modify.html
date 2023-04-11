@@ -1,119 +1,238 @@
 <!DOCTYPE html>
-<html lang="en" 
+<html
+  lang="en"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   xmlns:th="http://www.thymeleaf.org"
-  layout:decorate="~{/include/layout.html}">
-  
-<main id="mainPage-Area" class="container" layout:fragment="contents">
-  <section class="board-modify--page">
-    <article class="board-bodify--content">
-      <form action="/board/modify" method="POST">
-        <div class="boardModify-bg boardModify-music--title form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="곡 이름" name="postTitle" th:value="${boardDto.postTitle}">
-          <label for="floatingInput">곡 이름</label>
-        </div><!-- boardModify-music--title -->
-        <div class="boardModify-bg boardModify-music--name form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="가수 이름" name="postSinger" th:value="${boardDto.postSinger}">
-          <label for="floatingInput">가수 이름</label>
-        </div><!-- boardModify-music--name -->
-        <div class="boardModify-bg boardModify-music--txt form-floating">
-          <textarea class="form-control" placeholder="설명 (150자 이내)" id="floatingTextarea2" style="height: 100px" name="postCont" th:value="${boardDto.postCont}" th:text="${boardDto.postCont}"></textarea>
-          <label for="floatingTextarea2">내용 입력</label>
-        </div><!-- boardModify-music--txt -->
-        <div class="boardModify-bg boardModify-music--video form-floating">
-          <input type="text" class="postLink form-control" id="floatingInput" placeholder="유튜브 링크" name="postLink" th:value="'https://youtu.be/' + ${boardDto.postLink}">
-          <label for="floatingInput">유튜브 링크</label>
-        </div><!-- boardModify-music--video -->
-        <div class="boardModify-bg boardModify-music--Genre">
-          <span>장르를 선택해주세요.</span>
-          <select name="postGenre" id="" class="postGenre form-select" aria-label="Default select example">
-            <option value="락" th:selected="${boardDto.postGenre=='락'}">락</option>
-            <option value="발라드" th:selected="${boardDto.postGenre=='발라드'}">발라드</option>
-            <option value="팝" th:selected="${boardDto.postGenre=='팝'}">팝</option>
-            <option value="재즈" th:selected="${boardDto.postGenre=='재즈'}">재즈</option>
-            <option value="메탈" th:selected="${boardDto.postGenre=='메탈'}">메탈</option>
-            <option value="EDM" th:selected="${boardDto.postGenre=='EDM'}">EDM</option>
-            <option value="보컬로이드" th:selected="${boardDto.postGenre=='보컬로이드'}">보컬로이드</option>
-            <option value="etc" th:selected="${#strings.setSplit(boardDto.postGenre, '-')[0]} == 'etc'">기타</option>
-            <div class="postGenre-input form-floating">
+  layout:decorate="~{/include/layout.html}"
+>
+  <main id="mainPage-Area" class="container" layout:fragment="contents">
+    <section class="board-modify--page">
+      <article class="board-bodify--content">
+        <form action="/board/modify" method="POST">
+          <div class="boardModify-bg boardModify-music--title form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="곡 이름"
+              name="postTitle"
+              th:value="${boardDto.postTitle}"
+            />
+            <label for="floatingInput">곡 이름</label>
+          </div>
+          <!-- boardModify-music--title -->
+          <div class="boardModify-bg boardModify-music--name form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="가수 이름"
+              name="postSinger"
+              th:value="${boardDto.postSinger}"
+            />
+            <label for="floatingInput">가수 이름</label>
+          </div>
+          <!-- boardModify-music--name -->
+          <div class="boardModify-bg boardModify-music--txt form-floating">
+            <textarea
+              class="form-control"
+              placeholder="설명 (150자 이내)"
+              id="floatingTextarea2"
+              style="height: 100px"
+              name="postCont"
+              th:value="${boardDto.postCont}"
+              th:text="${boardDto.postCont}"
+            ></textarea>
+            <label for="floatingTextarea2">내용 입력</label>
+          </div>
+          <!-- boardModify-music--txt -->
+          <div class="boardModify-bg boardModify-music--video form-floating">
+            <input
+              type="text"
+              class="postLink form-control"
+              id="floatingInput"
+              placeholder="유튜브 링크"
+              name="postLink"
+              th:value="'https://youtu.be/' + ${boardDto.postLink}"
+            />
+            <label for="floatingInput">유튜브 링크</label>
+          </div>
+          <!-- boardModify-music--video -->
+          <div class="boardModify-bg boardModify-music--Genre">
+            <span>장르</span>
+            <select
+              name="postGenre"
+              id=""
+              class="postGenre form-select"
+              aria-label="Default select example"
+            >
+              <option value="락" th:selected="${boardDto.postGenre=='락'}">
+                락
+              </option>
+              <option
+                value="발라드"
+                th:selected="${boardDto.postGenre=='발라드'}"
+              >
+                발라드
+              </option>
+              <option value="팝" th:selected="${boardDto.postGenre=='팝'}">
+                팝
+              </option>
+              <option value="재즈" th:selected="${boardDto.postGenre=='재즈'}">
+                재즈
+              </option>
+              <option value="메탈" th:selected="${boardDto.postGenre=='메탈'}">
+                메탈
+              </option>
+              <option value="EDM" th:selected="${boardDto.postGenre=='EDM'}">
+                EDM
+              </option>
+              <option
+                value="보컬로이드"
+                th:selected="${boardDto.postGenre=='보컬로이드'}"
+              >
+                보컬로이드
+              </option>
+              <option
+                value="etc"
+                th:selected="${#strings.setSplit(boardDto.postGenre, '-')[0]} == 'etc'"
+              >
+                기타
+              </option>
+              <div class="postGenre-input form-floating">
+                <!-- 기타 선택할 시 나타날 input -->
+                <!-- if 장르가 기타일 경우 표시 -->
+                <input
+                  type="text"
+                  class="genreEtc form-control"
+                  id="floatingInput"
+                  th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
+                  value=""
+                  name="genreEtc"
+                  placeholder="'기타' 선택시 입력해주세요."
+                />
+                <!-- unless 장르가 기타가 아닐 경우 표시 -->
+                <input
+                  type="text"
+                  class="genreEtc"
+                  th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
+                  th:value="${#strings.setSplit(boardDto.postGenre, '-')[1]}"
+                  name="genreEtc"
+                  placeholder="'기타' 선택시 입력해주세요."
+                />
+              </div>
+              <!-- postGenre-input -->
+            </select>
+          </div>
+          <!-- boardModify-music--Genre -->
+          <div class="boardModify-bg boardModify-music--Emote">
+            <span>감성</span>
+            <select
+              name="postEmote"
+              id=""
+              class="postEmote form-select"
+              aria-label="Default select example"
+            >
+              <option value="신남" th:selected="${boardDto.postEmote=='신남'}">
+                신남
+              </option>
+              <option value="우울" th:selected="${boardDto.postEmote=='우울'}">
+                우울
+              </option>
+              <option value="희열" th:selected="${boardDto.postEmote=='희열'}">
+                희열
+              </option>
+              <option
+                value="으스스"
+                th:selected="${boardDto.postEmote=='으스스'}"
+              >
+                으스스
+              </option>
+              <option
+                value="etc"
+                th:selected="${#strings.setSplit(boardDto.postEmote, '-')[0]} == 'etc'"
+              >
+                기타
+              </option>
               <!-- 기타 선택할 시 나타날 input -->
-              <!-- if 장르가 기타일 경우 표시 -->
-              <input type="text" class="form-control" id="floatingInput" placeholder="기타 선택시 입력해 주세요.">
-              <label for="floatingInput">기타 선택시 입력해 주세요.</label>
-              <!-- <input type="text" class="genreEtc" th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1" value="" name="genreEtc" placeholder="'기타' 선택시 입력해주세요."/> -->
+              <!-- if 분위기가 기타일 경우 표시 -->
+              <input
+                type="text"
+                class="emoteEtc form-control"
+                id="floatingInput"
+                th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
+                value=""
+                name="emoteEtc"
+                placeholder="'기타' 선택시 입력해주세요."
+              />
               <!-- unless 장르가 기타가 아닐 경우 표시 -->
-              <!-- <input type="text" class="genreEtc" th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1" th:value="${#strings.setSplit(boardDto.postGenre, '-')[1]}" name="genreEtc" placeholder="'기타' 선택시 입력해주세요."/> -->
-            </div><!-- postGenre-input -->
-          </select>
-        </div><!-- boardModify-music--Genre -->
-        <div class="boardModify-bg boardModify-music--Emote">
-          <span>감성</span>
-          <select name="postEmote" id="" class="postEmote form-select" aria-label="Default select example">
-            <option value="신남" th:selected="${boardDto.postEmote=='신남'}">신남</option>
-            <option value="우울" th:selected="${boardDto.postEmote=='우울'}">우울</option>
-            <option value="희열" th:selected="${boardDto.postEmote=='희열'}">희열</option>
-            <option value="으스스" th:selected="${boardDto.postEmote=='으스스'}">으스스</option>
-            <option value="etc" th:selected="${#strings.setSplit(boardDto.postEmote, '-')[0]} == 'etc'">기타</option>
-            <!-- 기타 선택할 시 나타날 input -->
-            <!-- if 분위기가 기타일 경우 표시 -->
-            <input type="text" class="emoteEtc" th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1" value="" name="emoteEtc" placeholder="'기타' 선택시 입력해주세요."/>
-            <!-- unless 장르가 기타가 아닐 경우 표시 -->
-            <input type="text" class="emoteEtc" th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1" th:value="${#strings.setSplit(boardDto.postEmote, '-')[1]}" name="emoteEtc" placeholder="'기타' 선택시 입력해주세요."/>
-          </select>
-        </div><!-- boardModify-music--Emote -->
-        <div class="btn-submit">
-          <!-- 로그인 한 유저의 이름 보내기 -->
-          <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->
-          <input type="hidden" name="postNo" th:value="${param.postNo}" />
-          <button class="">수정완료</button>
-          <button type="reset" class="">취소</button>
-        </div>
-      </form>
-    </article><!-- board-bodify--content -->
-  </section><!-- board-modify--page -->
-</main>
+              <input
+                type="text"
+                class="emoteEtc"
+                th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
+                th:value="${#strings.setSplit(boardDto.postEmote, '-')[1]}"
+                name="emoteEtc"
+                placeholder="'기타' 선택시 입력해주세요."
+              />
+            </select>
+          </div>
+          <!-- boardModify-music--Emote -->
+          <div class="btn-submit">
+            <!-- 로그인 한 유저의 이름 보내기 -->
+            <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->
+            <input type="hidden" name="postNo" th:value="${param.postNo}" />
+            <button class="btn btn-primary">수정완료</button>
+            <button type="reset" class="btn btn-secondary">취소</button>
+          </div>
+        </form>
+      </article>
+      <!-- board-bodify--content -->
+    </section>
+    <!-- board-modify--page -->
+  </main>
 
-<script>
-  // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
-  $(".btn-confirm").on("click", function () {
-    const url = $(".postLink").val();
-    const regExp =
-      "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
-    const match = url.match(regExp);
+  <script>
+    // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
+    $(".btn-confirm").on("click", function () {
+      const url = $(".postLink").val();
+      const regExp =
+        "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
+      const match = url.match(regExp);
 
-    if (match) {
-      const getId = match[1];
-      $(".postLink").val(match[1]);
-      return true;
-    } else {
-      // 유튜브 링크를 다시 확인하라고 경고 창
-    }
-    return false;
-  });
+      if (match) {
+        const getId = match[1];
+        $(".postLink").val(match[1]);
+        return true;
+      } else {
+        // 유튜브 링크를 다시 확인하라고 경고 창
+      }
+      return false;
+    });
 
-  // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
-  if ($(".postGenre").val() != "etc") {
-    $(".genreEtc").hide();
-  }
-
-  $(".postGenre").change(function () {
-    if ($(".postGenre").val() == "etc") {
-      $(".genreEtc").show();
-    } else {
+    // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
+    if ($(".postGenre").val() != "etc") {
       $(".genreEtc").hide();
     }
-  });
 
-  // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
-  if ($(".postEmote").val() != "etc") {
-    $(".emoteEtc").hide();
-  }
+    $(".postGenre").change(function () {
+      if ($(".postGenre").val() == "etc") {
+        $(".genreEtc").show();
+      } else {
+        $(".genreEtc").hide();
+      }
+    });
 
-  $(".postEmote").change(function () {
-    if ($(".postEmote").val() == "etc") {
-      $(".emoteEtc").show();
-    } else {
+    // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
+    if ($(".postEmote").val() != "etc") {
       $(".emoteEtc").hide();
     }
-  });
-</script>
+
+    $(".postEmote").change(function () {
+      if ($(".postEmote").val() == "etc") {
+        $(".emoteEtc").show();
+      } else {
+        $(".emoteEtc").hide();
+      }
+    });
+  </script>
+</html>

@@ -1,6 +1,8 @@
 package com.music.sharemusic.dao;
 
 import com.music.sharemusic.dto.BoardDto;
+
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,7 +16,7 @@ public interface BoardDao {
 
   //view 에서 요청. 한 글 불러오기
 
-  public List<BoardDto> getPostAll();
+  public List<BoardDto> getPostAll(HashMap<String, String> hashMap);
 
   //index 에서 요청. 모든 글 불러오기
   //paging작업은 아직^^

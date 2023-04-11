@@ -4,15 +4,17 @@ import com.music.sharemusic.dao.BoardDao;
 import com.music.sharemusic.dao.HistoryDao;
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
+import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@Log4j2
+@Slf4j
 public class BoardServiceImpl implements BoardService {
 
   @Autowired
@@ -36,8 +38,12 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public List<BoardDto> getPostAll() {
-    List<BoardDto> result = boardDao.getPostAll();
+  public List<BoardDto> getPostAll(String searchTxt, String sort) {
+    HashMap<String, String> hashMap = new HashMap<>();
+    hashMap.put("searchTxt", searchTxt);
+    hashMap.put("sort", sort);
+
+    List<BoardDto> result = boardDao.getPostAll(hashMap);
     return result;
   }
 

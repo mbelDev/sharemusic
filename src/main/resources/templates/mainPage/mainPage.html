@@ -3,7 +3,8 @@
   lang="en"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   xmlns:th="http://www.thymeleaf.org"
-  layout:decorate="~{/include/layout.html}">
+  layout:decorate="~{/include/layout.html}"
+>
   <main id="mainPage-Area" class="container" layout:fragment="contents">
     <span th:text="${postList}"></span>
     <section class="main-constent--itmes">
@@ -21,37 +22,70 @@
             <div class="swiper-slide">Slide 9</div>
           </div>
         </div>
-      </article><!-- main-constent--slider -->
+      </article>
+      <!-- main-constent--slider -->
       <article class="main-constent--listItem listItem--center">
         <div class="listItem-nav">
-          <div class="listItem-nav--title">
-            매거진
-          </div>
+          <div class="listItem-nav--title">매거진</div>
           <div class="update-data">
             <ul>
-              <li><a href="#">최신순</a></li>
-              <li><a href="#">조회순</a></li>
-              <li><a href="#">추천순</a></li>
+              <!-- 정렬 -->
+              <li>
+                <a
+                  href="#"
+                  th:href="@{/mainPage(sort=postNo, searchTxt=${param.searchTxt})}"
+                  >최신순</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  th:href="@{/mainPage(sort=postHits, searchTxt=${param.searchTxt})}"
+                  >조회순</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  th:href="@{/mainPage(sort=postNo, searchTxt=${param.searchTxt})}"
+                  >추천순</a
+                >
+              </li>
             </ul>
           </div>
-        </div><!-- listItem-nav -->
+        </div>
+        <!-- listItem-nav -->
         <div class="getList-ItemBox">
           <ul>
             <li th:each="item : ${postList}">
-              <a href="#">
+              <a
+                href="/board/view"
+                th:href="@{/board/view(postNo=${item.postNo})}"
+              >
                 <div class="ItemBox-imgs">
-                  <img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}" alt="">
-                </div><!-- ItemBox-imgs -->
+                  <img
+                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                    alt=""
+                  />
+                </div>
+                <!-- ItemBox-imgs -->
                 <div class="ItemBox-content">
                   <p class="ItemBox-postAuth" th:text="${item.postAuth}"></p>
                   <p class="ItemBox-postTitle" th:text="${item.postTitle}"></p>
-                  <p class="ItemBox-postSinger" th:text="${item.postSinger}"></p>
-                </div><!-- ItemBox-content -->
+                  <p
+                    class="ItemBox-postSinger"
+                    th:text="${item.postSinger}"
+                  ></p>
+                </div>
+                <!-- ItemBox-content -->
               </a>
             </li>
           </ul>
-        </div><!-- getList-ItemBox -->
-      </article><!-- main-constent--listItem -->
-    </section><!-- main-constent--itmes -->
+        </div>
+        <!-- getList-ItemBox -->
+      </article>
+      <!-- main-constent--listItem -->
+    </section>
+    <!-- main-constent--itmes -->
   </main>
 </html>

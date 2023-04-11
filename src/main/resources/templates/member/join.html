@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/join.css" />
     <script src="/js/jquery-3.6.3.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
     <div class="music-bg">
@@ -18,54 +20,21 @@
         <div class="joinForm-Area--logo">
           <a href="/mainPage"><img src="/images/logo.png" alt=""></a>
         </div>
-        <form
-          action="/member/join"
-          method="POST"
-          th:object="${memberDto}"
-          enctype="multipart/form-data"
-        >
-          <div class="joinForm-Area--userId asdf">
-            <span></span>
-            <input
-              type="text"
-              class="userID"
-              th:field="*{userID}"
-              placeholder="UserId"
-            />
-            <p
-              th:if="${#fields.hasErrors('userID')}"
-              th:errorclass="errorTxt"
-              th:errors="*{userID}"
-            ></p>
+        <form action="/member/join" method="POST" th:object="${memberDto}" enctype="multipart/form-data">
+          <div class="joinForm-Area--userId form-floating">
+            <input type="text" class="form-control" id="floatingPassword" placeholder="UserId" th:field="*{userID}">
+            <p th:if="${#fields.hasErrors('userID')}" th:errorclass="errorTxt" th:errors="*{userID}"></p>
+            <label for="floatingPassword">UserId</label>
           </div>
           <!-- joinForm-Area--userId -->
-          <div class="joinForm-Area--userPw asdf">
-            <span></span>
-            <input
-              type="password"
-              calss="userPW"
-              th:field="*{userPW}"
-              placeholder="UserPw"
-            />
+          <div class="joinForm-Area--userPw form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="UserPw" th:field="*{userPW}">
+            <label for="floatingPassword">UserPw</label>
           </div>
-          <!-- <div class="joinForm-Area--userPw asdf">
-            <span></span>
-            <input
-              type="password"
-              calss="userPW"
-              th:field="*{userPW}"
-              placeholder="UserPw"
-            />
-          </div> -->
           <!-- joinForm-Area--userPw -->
-          <div class="joinForm-Area--userName asdf">
-            <span></span>
-            <input
-              type="text"
-              class="userNM"
-              th:field="*{userNM}"
-              placeholder="userName"
-            />
+          <div class="joinForm-Area--userName form-floating">
+            <input type="text" class="form-control" id="floatingPassword" placeholder="UserName" th:field="*{userNM}">
+            <label for="floatingPassword">UserName</label>
           </div>
           <!-- joinForm-Area--userName -->
           <div class="joinForm-Area--userFile">
@@ -75,14 +44,14 @@
               type="file"
               class="userIconFile"
               th:field="*{userIconFile}"
-              id="file"
+              id="formFileMultiple"
               onchange="setIcon(event);"
             />
           </div>
           <!-- joinForm-Area--userFile -->
           <div class="joinForm-Area--btn">
-            <button type="submit" class="">회원가입</button>
-            <button type="button" onclick="location.href='login'">로그인</button>
+            <button type="submit" class="btn btn-primary">회원가입</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href='login'">로그인</button>
           </div>
           <!-- joinForm-Area--btn -->
         </form>

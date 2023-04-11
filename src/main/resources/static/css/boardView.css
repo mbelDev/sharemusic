@@ -98,8 +98,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 400px;
-  height: 250px;
+  width: 400px !important;
+  height: 250px !important;
 }
 .board-view--subPage .swiper-slide img {
   display: block;
