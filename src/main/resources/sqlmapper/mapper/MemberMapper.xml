@@ -24,7 +24,8 @@
                     #{userIcon},
 	  								#{userIconReal},
                     0, <!--  userBann  --> 
-	  								SYSDATE
+	  								SYSDATE,
+                    #{userPrincipal}
 	  								)
   </insert>
 

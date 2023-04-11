@@ -45,7 +45,7 @@
         <th:block th:unless="${loggedUser == null}">
           <div class="join left-items lien">
             <a href="/member/login">회원정보</a>
-            <a href="/member/logout">로그아웃</a>
+            <a th:href="@{/member/logout}">로그아웃</a>
           </div>
         </th:block>
       </article><!-- .headerLayout-Area--joinForm -->

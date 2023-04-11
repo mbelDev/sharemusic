@@ -54,8 +54,9 @@ public class BoardServiceImpl implements BoardService {
   @Override
   public void updateHits(LoggedDto loggedUser) {
     int postNo = loggedUser.getPostNo();
-    int test = historyDao.getHistoryOne(loggedUser);
-    log.info("you read it? === {}", test);
+    // log.info("loggedUser === {}", loggedUser);
+    int test = historyDao.getHistory(loggedUser);
+    // log.info("you read it? === {}", test);
     if (test == 0) {
       boardDao.updateHits(postNo);
       historyDao.putHistory(loggedUser);

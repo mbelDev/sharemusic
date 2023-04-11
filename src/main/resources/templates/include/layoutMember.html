@@ -44,20 +44,20 @@
             <th:block th:unless="${loggedUser == null}">
               <!-- 기본 회원정보 -->
               <div>
-                <img th:src="@{uploadFolder/${loggedUser.userIconReal}}" alt="" style="width: 150px; height: 150px;">
-                        </div>
-                        <div>
+                <img th:src="@{/upload/}+${loggedUser.userIconReal}" alt="" style="width: 150px; height: 150px;">
+              </div>
+              <div>
                 <span th:text="${loggedUser.userNM}">별명</span>
-                        </div>
-                        <div>
+              </div>
+              <div>
                 <span th:text="${loggedUser.userID}">아이디</span>
-                        </div>
-                        <!-- <div>
+              </div>
+              <!-- <div>
                 <span th:text="${loggedUser.userDate}">가입일자</span>
-                        </div>
-                        <div>
+              </div>
+              <div>
                 <span th:text="${loggedUser.userDate}">작성 글 갯수</span>
-                        </div> -->
+              </div> -->
             </th:block>
         </div>
       </article><!-- .headerLayout-Area--searchForm -->
@@ -81,8 +81,8 @@
       <article class="headerLayout-Area--viewContents">
         <div class="view left-items lien">
           <ul>
-            <li><a href="#">작성 글 목록</a></li>
-            <li><a href="#">최근 감상 기록</a></li>
+            <li><a href="/member/mypage/written">작성 글 목록</a></li>
+            <li><a href="/member/mypage/recent">최근 감상 기록</a></li>
             <li><a href="#">리스트</a></li>
             <li><a href="#">테스트</a></li>
             <li><a href="#">테스트</a></li>
@@ -92,7 +92,7 @@
       <article class="headerLayout-Area--viewContents">
         <div class="view left-items lien">
           <ul>
-            <li><a href="#">회원정보 수정</a></li>
+            <li><a href="/member/view">회원정보 수정</a></li>
             <li><a href="#">회원 탈퇴</a></li>
             <li><a href="#">이용 약관</a></li>
           </ul>

@@ -4,7 +4,6 @@ import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
 import java.util.List;
-import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -15,7 +14,7 @@ public interface HistoryDao {
 
   public List<BoardDto> getHistoryBoard(HistoryDto historyDto);
 
-  public int getHistoryOne(LoggedDto loggdeUser);
+  public int getHistory(LoggedDto loggdeUser);
 
   public void putHistory(LoggedDto loggdeUser);
 

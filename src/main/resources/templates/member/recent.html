@@ -22,16 +22,26 @@
                             <span>작성자</span>
                             <span>조회수</span>
                             <span>시청일자</span>
-                            <span>추천수</span>
                             <span>추천버튼</span>
+                            <span>북마크버튼</span>
                         </li>
                         <li th:each="item:${historyRecent}">
-                            <img src="" alt="" style="display:inline-block; width:246px; height: 138px;">
-                            <span th:text="${item.postAuth}">작성자</span>
-                            <span th:text="${item.postTitle}">곡 명</span>
-                            <span th:text="${item.readDate}">시청일자</span>
-                            <span th:text="${item.liked}">추천버튼</span>
-                            <span th:text="${item.bookmark}">북마크버튼</span>
+                            <a th:href="@{/board/view(postNo=${item.postNo})}">
+                                <img  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                                alt="" style="display:inline-block; width:246px; height: 138px;">
+                            </a>
+                                <span th:text="${item.postAuth}">작성자</span>
+                                <span th:text="${item.postTitle}">곡 명</span>
+                                <span th:text="${item.postSinger}">가수 명</span>
+                                <span th:text="${item.readDate}">시청일자</span>
+                                <span class="btn-like" style="display:inline-block; width:15px; height:15px; background:#fff"></span>
+                                <input class="val-like" type="hidden" th:values="${item.liked}"></input>
+                                <span class="btn-bookmark" style="display:inline-block; width:15px; height:15px; background:#777"></span>
+                                <input class="val-bookmark" type="hidden" th:values="${item.bookmark}"></input>
+                        </li>
+                        
+                        <li th:if="${#lists.isEmpty(historyRecent)}">
+                                <span> 아직 열람하신 곡이 한 곡도 없어요!! </span>
                         </li>
                     </ul>
                 </div>
@@ -43,4 +53,9 @@
             </div>
     </section><!-- main-constent--itmes -->
   </main>
+  <script>
+    like($(".btn-like"),$(".btn-like").val());
+    bookmark($(".btn-bookmark"),$(".btn-bookmark").val());
+
+  </script>
 </html>

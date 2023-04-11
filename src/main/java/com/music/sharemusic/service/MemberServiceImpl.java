@@ -41,20 +41,28 @@ public class MemberServiceImpl implements MemberService {
 
   public void putMember(MemberDto memberDto) {
     log.info("=========upload========");
-    UUID uuid = UUID.randomUUID();
     MultipartFile uploadFile = memberDto.getUserIconFile();
-    String userIconPath = uploadFile.getOriginalFilename();
-    String userIconReal = uuid + "_" + userIconPath;
-    Path imgFilePath = Paths.get(uploadFolder + userIconReal); // C:\tempStorage
-    memberDto.setUserIcon(userIconPath);
-    memberDto.setUserIconReal(imgFilePath.toString());
-
-    //저장되는 경로
-    try {
-      Files.write(imgFilePath, uploadFile.getBytes());
-    } catch (IOException e) {
-      e.printStackTrace();
+    if (uploadFile.getOriginalFilename() != "") {
+      UUID uuid = UUID.randomUUID();
+      String userIconPath = uploadFile.getOriginalFilename();
+      String userIconReal = uuid + "_" + userIconPath;
+      Path imgFilePath = Paths.get(uploadFolder + userIconReal); // C:\tempStorage
+      memberDto.setUserIcon(userIconPath);
+      memberDto.setUserIconReal(userIconReal);
+      //저장되는 경로
+      try {
+        Files.write(imgFilePath, uploadFile.getBytes());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    } else {
+      String userIcon = "sampleprofile.jpg";
+      String userIconReal = "sampleprofile.jpg";
+      memberDto.setUserIcon(userIcon);
+      memberDto.setUserIconReal(userIconReal);
+      memberDto.setUserPrincipal(0);
     }
+
     if (memberDao.putMember(memberDto) > 0) {
       log.info("회원가입 성공  === {} ", memberDto);
     } else {
@@ -108,6 +116,14 @@ public class MemberServiceImpl implements MemberService {
   public List<HistoryDto> getHistoryRecent(LoggedDto loggedUser) {
     String userID = loggedUser.getUserID();
     List<HistoryDto> result = historyDao.getHistoryRecent(userID);
+    for (HistoryDto item : result) {
+      int postNo = item.getPostNo();
+      BoardDto tempDto = boardDao.getPostOne(postNo);
+      String link = tempDto.getPostLink();
+      String singer = tempDto.getPostSinger();
+      item.setPostLink(link);
+      item.setPostSinger(singer);
+    }
     return result;
   }
 

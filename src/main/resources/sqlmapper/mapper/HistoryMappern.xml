@@ -13,8 +13,8 @@
   <select id="getHistoryBookmark" parameterType="String" resultType="HistoryDto">
     SELECT * FROM HISTORY WHERE USERID = #{userID} AND BOOKMARK = 1 ORDER BY READDATE DESC
   </select>
-  <select id="getHistoryOne" parameterType="LoggedDto" resultType="Integer">
-    SELECT COUNT(*) AS TOTAL FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
+  <select id="getHistory" parameterType="LoggedDto" resultType="Integer">
+    SELECT COUNT(*) FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </select>
 
   <select id="getHistoryBoard" parameterType="HistoryDto" resultType="BoardDto">
