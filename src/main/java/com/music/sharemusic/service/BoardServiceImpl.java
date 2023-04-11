@@ -3,6 +3,7 @@ package com.music.sharemusic.service;
 import com.music.sharemusic.dao.BoardDao;
 import com.music.sharemusic.dao.HistoryDao;
 import com.music.sharemusic.dto.BoardDto;
+import com.music.sharemusic.dto.LoggedDto;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,13 +50,14 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public void updateHits(int postNo) {
-    boardDao.updateHits(postNo);
-    // if (historyDao.getHistoryOne(postNo) == 0) {
-    //   historyDao.putHistory(postNo);
-    // } else {
-    //   historyDao.updateHistoryDate(postNo);
-    // }
+  public void updateHits(LoggedDto loggedUser) {
+    int postNo = loggedUser.getPostNo();
+    if (historyDao.getHistoryOne(loggedUser) == 0) {
+      boardDao.updateHits(postNo);
+      historyDao.putHistory(loggedUser);
+    } else {
+      historyDao.updateHistoryDate(loggedUser);
+    }
   }
 
   @Override

@@ -8,5 +8,6 @@
     <typeAlias alias="MemberDto" type="com.music.sharemusic.dto.MemberDto" />
     <typeAlias alias="ReplysDto" type="com.music.sharemusic.dto.ReplysDto" />
     <typeAlias alias="HistoryDto" type="com.music.sharemusic.dto.HistoryDto" />
+    <typeAlias alias="LoggedDto" type="com.music.sharemusic.dto.LoggedDto" />
   </typeAliases>
 </configuration>
