@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: #111;
+  background-color: #000;
 }
 
 .left-items {
@@ -26,7 +26,7 @@ body {
   top: 0;
   left: 0;
   outline: 1px solid rgba(170, 170, 170, 0.6156862745);
-  background-color: #111;
+  background-color: #000;
   z-index: 99;
 }
 #headerLayout-Area .headerLayout-Area--logo .logo img {
@@ -68,11 +68,4 @@ body {
   width: 85%;
   height: 100%;
   margin-left: 15%;
-}
-
-#footerLayout-Area {
-  width: 85%;
-  height: 20vh;
-  margin-left: 15%;
-  background-color: #272727;
 }

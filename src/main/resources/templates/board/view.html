@@ -1,158 +1,119 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="/js/jquery-3.6.3.min.js"></script>
-    <script src="/js/bootstrap.bundle.min.js"></script>
-  </head>
-  <body>
-    <!-- 상세 보기 페이지!! -->
-    <!-- index에서 넘어옵니다. -->
-    <div>
-      <div>
-        <div>
-          <span>작성자: </span>
-          <!-- 글쓴이 정보 볼 수 있도록 href 수정 -->
-          <a href=""><span th:text="${boardDto.postAuth}">홍길동</span></a>
-        </div>
-        <div>
-          <span>조회수: </span>
-          <span th:text="${boardDto.postHits}">0</span>
-        </div>
-        <div>
-          <span>작성일자: </span>
-          <span th:text="${boardDto.postDate}">0</span>
-        </div>
-      </div>
+<html lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/include/layout.html}">>
 
-      <div>
+<main id="mainPage-Area" class="container" layout:fragment="contents">
+  <section class="board-view--page">
+    <article class="board-view--img">
+      <iframe 
+        src="" th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </article><!-- board-view--img -->
+    <article class="board-view--listItem">
+      <div class="board-view--listItem-name">
+        <p th:text="${boardDto.postTitle}">곡</p>
+        <p th:text="${boardDto.postSinger}">가수</p>
         <div>
-          <div>
-            <iframe
-              width="560"
-              height="315"
-              src=""
-              th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}"
-              frameborder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-          <a
-            href=""
-            th:href="@{https://youtu.be/{postLink}(postLink=${boardDto.postLink})}"
-            target="_blank"
-            ><span th:text="'https://youtu.be/' + ${boardDto.postLink}"
-              >링크</span
-            ></a
-          >
+          등록 <span th:text="${boardDto.postDate}">0</span>
+          * 조회수 <span th:text="${boardDto.postHits}">0</span>
         </div>
         <div>
-          <div>
-            <span>곡: </span>
-            <span th:text="${boardDto.postTitle}">곡</span>
-          </div>
-          <div>
-            <span>가수: </span>
-            <span th:text="${boardDto.postSinger}">가수</span>
-          </div>
-          <div>
-            <span>설명: </span>
-            <span th:text="${boardDto.postCont}">설명</span>
-          </div>
-          <div>
-            <!-- if 장르가 기타일 경우 표시 -->
-            <span
-              th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[0]}"
-              >장르</span
-            >
-            <!-- unless 장르가 기타가 아닐 경우 표시 -->
-            <span
-              th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[1]}"
-              >장르</span
-            >
-            <!-- if 분위기가 기타일 경우 표시 -->
-            <span
-              th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[0]}"
-              >분위기</span
-            >
-            <!-- unless 분위기가 기타가 아닐 경우 표시 -->
-            <span
-              th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[1]}"
-              >분위기</span
-            >
-          </div>
+          <!-- if 장르가 기타일 경우 표시 -->
+          <span th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1" th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[0]}">장르</span>
+          <!-- unless 장르가 기타가 아닐 경우 표시 -->
+          <span th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1" th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[1]}">장르</span>
+          <!-- if 분위기가 기타일 경우 표시 -->
+          <span th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1" th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[0]}">분위기</span>
+          <!-- unless 분위기가 기타가 아닐 경우 표시 -->
+          <span th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1" th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[1]}">분위기</span>
         </div>
+      </div><!-- board-view--listItem-name -->
+      <div class="board-view--listItem-controller">
+        <div class="listItem-controller01">
+          <div class="good">
+            <img src="/images/good.svg" alt=""> 
+            <span th:text="${boardDto.postLike}" class="postLike">0</span>
+          </div>
+          <button class="btnShare">
+            <img src="/images/open.svg" alt="">
+          </button>
+        </div>
+        <div class="listItem-controller02">
+          <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}">수정</a>
+          <button class="btnDelete">삭제</button>
+        </div>
+      </div><!-- board-view--listItem-controller -->
+    </article><!-- board-view--listItem -->
+    <article class="board-view--textBox">
+      <div class="textBox--title">
+        <a href="">
+          <span th:text="${boardDto.postAuth}">홍길동</span>
+        </a>
       </div>
-      <div>
-        <button class="btnPostLike">
-          추천:
-          <span th:text="${boardDto.postLike}" class="postLike">0</span>
-        </button>
-        <button class="btnShare">공유하기</button>
+      <div class="textBox--txt">
+        <span th:text="${boardDto.postCont}">설명</span>
       </div>
-      <div>
-        <a
-          href="/board/modify"
-          th:href="@{/board/modify(postNo=${boardDto.postNo})}"
-          >수정</a
-        >
-        <button class="btnDelete">삭제</button>
-      </div>
-
-      <div>
-        <!-- 댓글 창 -->
+    </article><!-- board-view--textBox -->
+  </section><!-- board-view--page -->
+  <section class="board-view--subPage">
+    <div class="boardView-swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+        <div class="swiper-slide">Slide 4</div>
+        <div class="swiper-slide">Slide 5</div>
+        <div class="swiper-slide">Slide 6</div>
+        <div class="swiper-slide">Slide 7</div>
+        <div class="swiper-slide">Slide 8</div>
+        <div class="swiper-slide">Slide 9</div>
       </div>
     </div>
+  </section><!-- board-view--subPage -->
+</main>   
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  const postNo = [[${boardDto.postNo}]];
+  const postLike = $(".postLike").text();
 
-    <script th:inline="javascript">
-      /*<![CDATA[*/
-      const postNo = [[${boardDto.postNo}]];
-      const postLike = $(".postLike").text();
+    // 추천 수 누를 때 이벤트
+    $(".btnPostLike").on("click", function (){
+      const sendData = {
+        postNo: postNo,
+        postLike: postLike
+      }
 
-        // 추천 수 누를 때 이벤트
-        $(".btnPostLike").on("click", function (){
-          const sendData = {
-            postNo: postNo,
-            postLike: postLike
+      $.ajax({
+        url: "/board/updateLike",
+        type: "POST",
+        data: sendData,
+        success: function(response) {
+          if (response.result != null) {
+            $(".postLike").text(response.postLike);
           }
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      })
+    });
 
-          $.ajax({
-            url: "/board/updateLike",
-            type: "POST",
-            data: sendData,
-            success: function(response) {
-              if (response.result != null) {
-                $(".postLike").text(response.postLike);
-              }
-            },
-            error: function(err) {
-              console.log(err);
-            }
-          })
-        });
-
-        // modal로 할거면 수정
-        $(".btnDelete").on("click", function(){
-          if(confirm("정말로 삭제하시겠습니까?")){
-            $.ajax({
-              url: "/board/delete",
-              type:  "POST",
-              data: {"postNo": postNo},
-              success: function(response) {
-                location.href="/mainPage/mainPage";
-              }
-            })
+    // modal로 할거면 수정
+    $(".btnDelete").on("click", function(){
+      if(confirm("정말로 삭제하시겠습니까?")){
+        $.ajax({
+          url: "/board/delete",
+          type:  "POST",
+          data: {"postNo": postNo},
+          success: function(response) {
+            location.href="/mainPage/mainPage";
           }
         })
-      /*]]>*/
-    </script>
-  </body>
-</html>
+      }
+    })
+  /*]]>*/
+</script>

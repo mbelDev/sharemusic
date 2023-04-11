@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #111;
+  background-color: #000;
 }
 
 .left-items {
@@ -29,7 +29,7 @@ body {
   position: fixed;
   top: 0; left: 0;
   outline: 1px solid #aaaaaa9d;
-  background-color: #111;
+  background-color: #000;
   z-index: 99;
   .headerLayout-Area--logo {
     .logo {
@@ -81,11 +81,11 @@ body {
 }//#mainPage-Area
 
 
-#footerLayout-Area {
-  width: 85%;
-  height: 20vh;
-  margin-left: 15%;
-  background-color: #272727;
-}//#footerLayout-Area
+// #footerLayout-Area {
+//   width: 85%;
+//   height: 20vh;
+//   margin-left: 15%;
+//   background-color: #272727;
+// }//#footerLayout-Area
 
 
