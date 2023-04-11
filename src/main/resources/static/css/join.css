@@ -7,6 +7,10 @@ a {
   color: inherit;
 }
 
+input {
+  margin: 10px 0;
+}
+
 .music-bg img {
   width: 100%;
   height: 100%;
@@ -20,20 +24,6 @@ a {
   left: 0;
 }
 
-.asdf {
-  padding: 15px 50px;
-  margin: 15px 0;
-  background-color: #141414;
-  border-radius: 5px;
-}
-.asdf input {
-  width: 200px;
-  height: 3vh;
-  border: none;
-  outline: none;
-  background-color: #141414;
-  color: #fff;
-}
 .bg--login {
   padding: 100px !important;
 }
@@ -72,14 +62,13 @@ a {
   display: none;
 }
 .joinForm-Area .joinForm-Area--bg .joinForm-Area--btn {
-  margin-top: 20px;
+  margin-top: 40px;
   text-align: center;
 }
 .joinForm-Area .joinForm-Area--bg .joinForm-Area--btn button {
   display: block;
   border: none;
   outline: none;
-  background-color: #909090;
   width: 400px;
   height: 50px;
   cursor: pointer;

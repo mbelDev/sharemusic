@@ -32,32 +32,17 @@ body {
 #headerLayout-Area .headerLayout-Area--logo .logo img {
   width: 150px;
 }
-#headerLayout-Area .headerLayout-Area--searchForm .search-icon {
-  transform: translateX(-5%);
-  display: flex;
-  justify-content: left;
-  align-self: center;
-  padding: 5px 0;
-  background-color: #5c5c5c;
+#headerLayout-Area .headerLayout-Area--searchForm .input-group {
+  transform: translateX(-10%);
 }
-#headerLayout-Area .headerLayout-Area--searchForm .search-icon button {
-  border: none;
-  outline: none;
-  background-color: #5c5c5c;
+#headerLayout-Area .headerLayout-Area--searchForm .input-group .form-outline .form-control {
+  background-color: #fff;
 }
-#headerLayout-Area .headerLayout-Area--searchForm .search-icon input {
-  width: 100%;
-  border: none;
-  outline: none;
-  background-color: #5c5c5c;
-  caret-color: #fff;
-  color: #fff;
+#headerLayout-Area .headerLayout-Area--searchForm .input-group button {
+  width: 10px;
 }
-#headerLayout-Area .headerLayout-Area--searchForm .search-icon input::-moz-placeholder {
-  color: #fff;
-}
-#headerLayout-Area .headerLayout-Area--searchForm .search-icon input::placeholder {
-  color: #fff;
+#headerLayout-Area .headerLayout-Area--searchForm .input-group button img {
+  transform: translateX(-50%);
 }
 #headerLayout-Area .headerLayout-Area--viewContents .view ul {
   padding: 0;

@@ -6,6 +6,9 @@ a {
   text-decoration: none;
   color: inherit;
 }
+input {
+  margin: 10px 0;
+}
 
 .music-bg {
   img {
@@ -20,23 +23,6 @@ a {
   }
 }
 
-.asdf {
-  padding: 15px 50px;
-  margin: 15px 0;
-  background-color: #141414;
-  border-radius: 5px;
-  input {
-    width: 200px;
-    height: 3vh;
-    border: none;
-    outline: none;
-    background-color: #141414;
-    color: #fff;
-    &:focus {
-
-    }
-  }
-}
 .bg--login {
   padding: 100px !important;
 }
@@ -74,13 +60,13 @@ a {
       }
     }//.joinForm-Area--userFile
     .joinForm-Area--btn {
-      margin-top: 20px;
+      margin-top: 40px;
       text-align: center;
       button {
         display: block;
         border: none;
         outline: none;
-        background-color: #909090;
+        // background-color: #909090;
         width: 400px;
         height: 50px;
         cursor: pointer;

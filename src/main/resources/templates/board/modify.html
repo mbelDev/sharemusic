@@ -25,7 +25,7 @@
           <label for="floatingInput">유튜브 링크</label>
         </div><!-- boardModify-music--video -->
         <div class="boardModify-bg boardModify-music--Genre">
-          <span>장르를 선택해주세요.</span>
+          <span>장르</span>
           <select name="postGenre" id="" class="postGenre form-select" aria-label="Default select example">
             <option value="락" th:selected="${boardDto.postGenre=='락'}">락</option>
             <option value="발라드" th:selected="${boardDto.postGenre=='발라드'}">발라드</option>
@@ -38,11 +38,9 @@
             <div class="postGenre-input form-floating">
               <!-- 기타 선택할 시 나타날 input -->
               <!-- if 장르가 기타일 경우 표시 -->
-              <input type="text" class="form-control" id="floatingInput" placeholder="기타 선택시 입력해 주세요.">
-              <label for="floatingInput">기타 선택시 입력해 주세요.</label>
-              <!-- <input type="text" class="genreEtc" th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1" value="" name="genreEtc" placeholder="'기타' 선택시 입력해주세요."/> -->
+              <input type="text" class="genreEtc form-control" id="floatingInput" th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1" value="" name="genreEtc" placeholder="'기타' 선택시 입력해주세요."/>
               <!-- unless 장르가 기타가 아닐 경우 표시 -->
-              <!-- <input type="text" class="genreEtc" th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1" th:value="${#strings.setSplit(boardDto.postGenre, '-')[1]}" name="genreEtc" placeholder="'기타' 선택시 입력해주세요."/> -->
+              <input type="text" class="genreEtc" th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1" th:value="${#strings.setSplit(boardDto.postGenre, '-')[1]}" name="genreEtc" placeholder="'기타' 선택시 입력해주세요."/>
             </div><!-- postGenre-input -->
           </select>
         </div><!-- boardModify-music--Genre -->
@@ -56,7 +54,7 @@
             <option value="etc" th:selected="${#strings.setSplit(boardDto.postEmote, '-')[0]} == 'etc'">기타</option>
             <!-- 기타 선택할 시 나타날 input -->
             <!-- if 분위기가 기타일 경우 표시 -->
-            <input type="text" class="emoteEtc" th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1" value="" name="emoteEtc" placeholder="'기타' 선택시 입력해주세요."/>
+            <input type="text" class="emoteEtc form-control" id="floatingInput"  th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1" value="" name="emoteEtc" placeholder="'기타' 선택시 입력해주세요."/>
             <!-- unless 장르가 기타가 아닐 경우 표시 -->
             <input type="text" class="emoteEtc" th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1" th:value="${#strings.setSplit(boardDto.postEmote, '-')[1]}" name="emoteEtc" placeholder="'기타' 선택시 입력해주세요."/>
           </select>
@@ -65,8 +63,8 @@
           <!-- 로그인 한 유저의 이름 보내기 -->
           <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->
           <input type="hidden" name="postNo" th:value="${param.postNo}" />
-          <button class="">수정완료</button>
-          <button type="reset" class="">취소</button>
+          <button class="btn btn-primary">수정완료</button>
+          <button type="reset" class="btn btn-secondary">취소</button>
         </div>
       </form>
     </article><!-- board-bodify--content -->

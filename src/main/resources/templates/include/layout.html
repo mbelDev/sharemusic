@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/mdb.min.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/mainPage.css">
   <link rel="stylesheet" href="/css/mypage.css">
@@ -23,6 +24,7 @@
   <script src="/js/mainJs/mainPage.js" defer></script>
   <script src="/js/board/view.js" defer></script>
   <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/mdb.min.js"></script>
   <script src="/js/jquery-3.6.3.min.js"></script>
   
 </head>
@@ -52,9 +54,14 @@
       <article class="headerLayout-Area--searchForm">
         <div class="search left-items">
           <form action="">
-            <div class="search-icon">
-              <button><img src="/images/search.svg" alt=""></button>
-              <input type="text" name="" placeholder="Search...">
+            <div class="input-group">
+              <div class="form-outline">
+                <input type="search" id="form1" class="form-control" />
+                <label class="form-label" for="form1">Search</label>
+              </div>
+              <button type="button" class="btn btn-primary">
+                <img src="/images/search.svg" class="fas fa-search"></img>
+              </button>
             </div>
           </form>
         </div>
