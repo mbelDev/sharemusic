@@ -29,6 +29,13 @@
     ORDER BY ${sort} desc
 </select>
 
+<!-- 랭킹 글 불러오기 -->
+<select id="getRankPost" resultType="BoardDto">
+  SELECT * FROM (
+    SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
+  ) WHERE ROWNUM <![CDATA[<=]]> 5
+</select>
+
 <!-- 글 내용 수정하기 -->
 <update id="updatePost" parameterType="BoardDto">
   UPDATE BOARD SET POSTTITLE = #{postTitle}, POSTSINGER = #{postSinger},

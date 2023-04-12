@@ -48,6 +48,12 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
+  public List<BoardDto> getRankPost() {
+    List<BoardDto> result = boardDao.getRankPost();
+    return result;
+  }
+
+  @Override
   public void updatePost(BoardDto boardDto) {
     boardDao.updatePost(boardDto);
   }

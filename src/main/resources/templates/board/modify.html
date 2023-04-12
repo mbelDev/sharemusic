@@ -181,7 +181,7 @@
             <!-- 로그인 한 유저의 이름 보내기 -->
             <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->
             <input type="hidden" name="postNo" th:value="${param.postNo}" />
-            <button class="btn btn-primary">수정완료</button>
+            <button class="btn btn-primary btnConfirm">수정완료</button>
             <button type="reset" class="btn btn-secondary">취소</button>
           </div>
         </form>
@@ -189,50 +189,50 @@
       <!-- board-bodify--content -->
     </section>
     <!-- board-modify--page -->
-  </main>
 
-  <script>
-    // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
-    $(".btn-confirm").on("click", function () {
-      const url = $(".postLink").val();
-      const regExp =
-        "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
-      const match = url.match(regExp);
+    <script>
+      // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
+      $(".btnConfirm").on("click", function () {
+        const url = $(".postLink").val();
+        const regExp =
+          "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
+        const match = url.match(regExp);
 
-      if (match) {
-        const getId = match[1];
-        $(".postLink").val(match[1]);
-        return true;
-      } else {
-        // 유튜브 링크를 다시 확인하라고 경고 창
-      }
-      return false;
-    });
+        if (match) {
+          const getId = match[1];
+          $(".postLink").val(match[1]);
+          return true;
+        } else {
+          // 유튜브 링크를 다시 확인하라고 경고 창
+        }
+        return false;
+      });
 
-    // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
-    if ($(".postGenre").val() != "etc") {
-      $(".genreEtc").hide();
-    }
-
-    $(".postGenre").change(function () {
-      if ($(".postGenre").val() == "etc") {
-        $(".genreEtc").show();
-      } else {
+      // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
+      if ($(".postGenre").val() != "etc") {
         $(".genreEtc").hide();
       }
-    });
 
-    // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
-    if ($(".postEmote").val() != "etc") {
-      $(".emoteEtc").hide();
-    }
+      $(".postGenre").change(function () {
+        if ($(".postGenre").val() == "etc") {
+          $(".genreEtc").show();
+        } else {
+          $(".genreEtc").hide();
+        }
+      });
 
-    $(".postEmote").change(function () {
-      if ($(".postEmote").val() == "etc") {
-        $(".emoteEtc").show();
-      } else {
+      // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
+      if ($(".postEmote").val() != "etc") {
         $(".emoteEtc").hide();
       }
-    });
-  </script>
+
+      $(".postEmote").change(function () {
+        if ($(".postEmote").val() == "etc") {
+          $(".emoteEtc").show();
+        } else {
+          $(".emoteEtc").hide();
+        }
+      });
+    </script>
+  </main>
 </html>

@@ -21,6 +21,10 @@ public interface BoardDao {
   //index 에서 요청. 모든 글 불러오기
   //paging작업은 아직^^
 
+  public List<BoardDto> getRankPost();
+
+  // 랭킹 글들 불러오기
+
   public void updatePost(BoardDto boardDto);
 
   //modify 에서 요청. 글 내용 수정하기

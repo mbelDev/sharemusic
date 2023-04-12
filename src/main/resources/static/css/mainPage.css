@@ -28,6 +28,7 @@ ul {
   width: 400px !important;
   height: 400px !important;
   transform: translate(40px, 50px) !important;
+  -webkit-box-shadow: 0px 10px 13px -7px #272727, -3px -3px 20px 5px rgba(36, 36, 36, 0.27);
   box-shadow: 0px 10px 13px -7px #1f1f1f, -3px -3px 20px 5px rgba(43, 43, 43, 0.27);
   outline: 1px solid red;
 }
@@ -69,6 +70,7 @@ ul {
   width: 355px;
   height: 340px;
   overflow: hidden;
+  -webkit-box-shadow: 0px 10px 13px -7px #1b1b1b, -3px -3px 20px 5px rgba(19, 19, 19, 0.27);
   box-shadow: 0px 10px 13px -7px #181818, -3px -3px 20px 5px rgba(24, 24, 24, 0.27);
 }
 #mainPage-Area .main-constent--itmes .main-constent--listItem .getList-ItemBox ul a .ItemBox-imgs img {

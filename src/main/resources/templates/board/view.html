@@ -58,7 +58,8 @@
         <!-- board-view--listItem-name -->
         <div class="board-view--listItem-controller">
           <div class="listItem-controller01">
-            <div class="good">
+            <div class="good" onclick="postGood()">
+              <!-- <a href="#" class="btnPostLike"> -->
               <img src="/images/good.svg" alt="" />
               <span th:text="${boardDto.postLike}" class="postLike">0</span>
             </div>
@@ -68,6 +69,7 @@
           </div>
           <div class="listItem-controller02">
             <a
+              class="btnModify"
               href="/board/modify"
               th:href="@{/board/modify(postNo=${boardDto.postNo})}"
               >수정</a
@@ -108,47 +110,61 @@
       </div>
     </section>
     <!-- board-view--subPage -->
-  </main>
-  <script th:inline="javascript">
-    /*<![CDATA[*/
-    const postNo = [[${boardDto.postNo}]];
-    const postLike = $(".postLike").text();
 
-      // 추천 수 누를 때 이벤트
-      $(".btnPostLike").on("click", function (){
-        const sendData = {
-          postNo: postNo,
-          postLike: postLike
-        }
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      const postNo = [[${boardDto.postNo}]];
+      const postLike = $(".postLike").text();
+      const postAuth = [[${boardDto.postAuth}]];
+      const loggedUserNM = [[${session.loggedUser.userNM}]];
 
-        $.ajax({
-          url: "/board/updateLike",
-          type: "POST",
-          data: sendData,
-          success: function(response) {
-            if (response.result != null) {
-              $(".postLike").text(response.postLike);
-            }
-          },
-          error: function(err) {
-            console.log(err);
+        // 추천 수 누를 때 이벤트
+        function postGood() {
+          console.log("btnPostLikeClicked");
+          const sendData = {
+            postNo: postNo,
+            postLike: postLike
           }
-        })
-      });
 
-      // modal로 할거면 수정
-      $(".btnDelete").on("click", function(){
-        if(confirm("정말로 삭제하시겠습니까?")){
           $.ajax({
-            url: "/board/delete",
-            type:  "POST",
-            data: {"postNo": postNo},
+            url: "/board/updateLike",
+            type: "POST",
+            data: sendData,
             success: function(response) {
-              location.href="/mainPage/mainPage";
+              if (response.result != null) {
+                $(".postLike").text(response.postLike);
+              }
+            },
+            error: function(err) {
+              console.log(err);
             }
           })
         }
-      })
-    /*]]>*/
-  </script>
+
+        // modal로 수정
+        $(".btnDelete").on("click", function(){
+          console.log("clicked");
+          if(confirm("정말로 삭제하시겠습니까?")){
+            $.ajax({
+              url: "/board/delete",
+              type:  "POST",
+              data: {"postNo": postNo},
+              success: function(response) {
+                //location.href="/mainPage/";
+              }
+            })
+          }
+        })
+
+        // 로그인한 유저와 등록한 유저가 같을 때만 수정, 삭제 표시
+        if (loggedUserNM == postAuth) {
+          $(".btnDelete").show();
+          $(".btnModify").show();
+        } else {
+          $(".btnDelete").hide();
+          $(".btnModify").hide();
+        }
+      /*]]>*/
+    </script>
+  </main>
 </html>

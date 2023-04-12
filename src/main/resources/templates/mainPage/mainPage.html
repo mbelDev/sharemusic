@@ -9,18 +9,31 @@
     <span th:text="${postList}"></span>
     <section class="main-constent--itmes">
       <article class="main-constent--slider">
+        <!-- 상위 랭킹 -->
         <div class="swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
-            <div class="swiper-slide">Slide 4</div>
-            <div class="swiper-slide">Slide 5</div>
-            <div class="swiper-slide">Slide 6</div>
-            <div class="swiper-slide">Slide 7</div>
-            <div class="swiper-slide">Slide 8</div>
-            <div class="swiper-slide">Slide 9</div>
-          </div>
+          <ul class="swiper-wrapper">
+            <li th:each="item, i : ${rankList}" class="swiper-slide">
+              <a
+                href="/board/view"
+                th:href="@{/board/view(postNo=${item.postNo})}"
+              >
+                <div class="" th:text="${i.count}"></div>
+                <div class="">
+                  <img
+                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                    alt=""
+                  />
+                </div>
+                <!-- ItemBox-imgs -->
+                <div class="">
+                  <p class="" th:text="${item.postAuth}"></p>
+                  <p class="" th:text="${item.postTitle}"></p>
+                  <p class="" th:text="${item.postSinger}"></p>
+                </div>
+                <!-- ItemBox-content -->
+              </a>
+            </li>
+          </ul>
         </div>
       </article>
       <!-- main-constent--slider -->
@@ -47,7 +60,7 @@
               <li>
                 <a
                   href="#"
-                  th:href="@{/mainPage(sort=postNo, searchTxt=${param.searchTxt})}"
+                  th:href="@{/mainPage(sort=postLike, searchTxt=${param.searchTxt})}"
                   >추천순</a
                 >
               </li>

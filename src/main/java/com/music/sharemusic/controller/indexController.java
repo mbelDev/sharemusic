@@ -27,7 +27,7 @@ public class indexController {
   }
 
   @GetMapping("/mainPage")
-  public String index(HttpServletRequest request, Model model, String searchTxt, 
+  public String index(HttpServletRequest request, Model model, @RequestParam(defaultValue = "") String searchTxt, 
   @RequestParam(defaultValue = "postNo") String sort) {
     HttpSession session = request.getSession();
     if (session != null && session.getAttribute("loggedUser") != null) {
@@ -35,6 +35,11 @@ public class indexController {
       model.addAttribute("loggedUser", loggedUser);
     }
 
+    // 상위 랭킹
+    List<BoardDto> rankList = boardService.getRankPost();
+    model.addAttribute("rankList", rankList);
+
+    // 게시판 글
     List<BoardDto> postList = boardService.getPostAll(searchTxt, sort);
     model.addAttribute("postList", postList);
     

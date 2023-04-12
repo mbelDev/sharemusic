@@ -9,7 +9,7 @@ main {
       width: 1205px;
       height: 677px;
     }
-  }//.board-view--img
+  } //.board-view--img
   .board-view--listItem {
     font-size: 30px;
     font-weight: bold;
@@ -32,7 +32,7 @@ main {
         font-weight: 400;
         color: #999;
       }
-    }//.board-view--listItem-name
+    } //.board-view--listItem-name
     .board-view--listItem-controller {
       margin-top: 20px;
       padding-bottom: 80px;
@@ -46,6 +46,7 @@ main {
           display: flex;
           align-items: center;
           transform: translateX(-50%);
+          cursor: pointer;
           span {
             padding-left: 5px;
           }
@@ -55,7 +56,7 @@ main {
           outline: none;
           background-color: #000;
         }
-      }//.listItem-controller01
+      } //.listItem-controller01
       .listItem-controller02 {
         display: flex;
         align-items: center;
@@ -67,9 +68,9 @@ main {
           background-color: #000;
           padding-left: 20px;
         }
-      }//.listItem-controller02
-    }//.board-view--listItem-controller
-  }//.board-view--listItem
+      } //.listItem-controller02
+    } //.board-view--listItem-controller
+  } //.board-view--listItem
   .board-view--textBox {
     border-top: 1px solid #999;
     padding-top: 50px;
@@ -80,9 +81,9 @@ main {
       margin-top: 10px;
       font-size: 17px;
       font-weight: 500;
-    }//.textBox--txt
-  }//.board-view--textBox
-}//.board-view--page
+    } //.textBox--txt
+  } //.board-view--textBox
+} //.board-view--page
 .board-view--subPage {
   margin: 50px 0;
   .boardView-swiper {
@@ -108,4 +109,4 @@ main {
     height: 100%;
     object-fit: cover;
   }
-}//.board-view--subPage
+} //.board-view--subPage

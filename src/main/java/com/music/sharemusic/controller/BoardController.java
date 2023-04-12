@@ -57,7 +57,7 @@ public class BoardController {
     }
 
     boardService.updatePost(boardDto);
-    return "redirect:/mainPage/mainPage";
+    return "redirect:/board/view?postNo=" + boardDto.getPostNo();
   }
 
   @PostMapping("/write")
@@ -71,13 +71,13 @@ public class BoardController {
     }
 
     boardService.putPost(boardDto);
-    return "redirect:/mainPage/mainPage";
+    return "redirect:/mainPage/";
   }
 
   @PostMapping("/delete")
   public String delete(BoardDto boardDto) {
     boardService.deletePost(boardDto);
-    return "redirect:/mainPage/mainPage";
+    return "redirect:/mainPage/";
   }
 
   @PostMapping("/updateLike")
