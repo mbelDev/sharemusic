@@ -14,7 +14,7 @@
         <div class="control-area01--profile">
           <div class="control-area01--profile-img">
             <div class="filebox bs3-primary">
-              <div><img src="" alt=""></div>
+              <div><img th:src="@{/upload/}+${loggedUser.userIconReal}" alt=""></div>
               <label for="ex_file2">프로필 변경</label> 
               <input type="file" id="ex_file2"> 
             </div>
@@ -37,7 +37,7 @@
                   <li>
                     <div>
                       * <span>가입일</span>
-                      <p>0</p>*
+                      <p th:text="${loggedUser.userDate}">0</p>*
                       <span>작성 글</span>
                       <p>0</p>*
                       <span>작성 덧글</span>
@@ -58,45 +58,54 @@
       <div class="mypage-Area--control-area02">
         <div class="control-area02--title">
           <h4>작성글</h4>
-          <span class="btn btn-primary">더 보기</span>
+          <span class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></span>
         </div>
         <div class="control-area02--boxContent">
           <ul>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
+            <li th:each="item : ${history.listWritten}">
+              <a href="">
+                <img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}" alt="">
+                <span th:text="${item.postAuth}"></span>
+                <span th:text="${item.postTitle}"></span>
+                <span th:text="${item.readDate}"></span>
+              </a>
+            </li>
           </ul>
         </div><!-- control-area02--boxContent -->
       </div><!-- mypage-Area--control-area02 -->
       <div class="mypage-Area--control-area03 mypage-Area--control-area02">
         <div class="control-area02--title">
           <h4>최근 감상</h4>
-          <span class="btn btn-primary">더 보기</span>
+          <span class="btn btn-primary"><a th:href="@{/member/mypage/list(category=recent)}">더 보기</a></span>
         </div>
         <div class="control-area02--boxContent">
           <ul>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
+            <li th:each="item : ${history.listRecent}">
+              <a href="">
+                <img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}" alt="">
+                <span th:text="${item.postAuth}"></span>
+                <span th:text="${item.postTitle}"></span>
+                <span th:text="${item.readDate}"></span>
+              </a>
+            </li>
           </ul>
         </div><!-- control-area02--boxContent -->
       </div><!-- mypage-Area--control-area02 -->
       <div class="mypage-Area--control-area04 mypage-Area--control-area02">
         <div class="control-area02--title">
           <h4>복마크</h4>
-          <span class="btn btn-primary">더 보기</span>
+          <span class="btn btn-primary"><a th:href="@{/member/mypage/list(category=bookmark)}">더 보기</a></span>
         </div>
         <div class="control-area02--boxContent">
           <ul>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
+            <li th:each="item : ${history.listBookmark}">
+              <a href="">
+                <img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}" alt="">
+                <span th:text="${item.postAuth}"></span>
+                <span th:text="${item.postTitle}"></span>
+                <span th:text="${item.readDate}"></span>
+              </a>
+            </li>
           </ul>
         </div><!-- control-area02--boxContent -->
       </div><!-- mypage-Area--control-area02 -->
@@ -104,15 +113,18 @@
         <h4></h4>
         <div class="control-area02--title">
           <h4>좋아요</h4>
-          <span class="btn btn-primary">더 보기</span>
+          <span class="btn btn-primary"><a th:href="@{/member/mypage/list(category=liked)}">더 보기</a></span>
         </div>
         <div class="control-area02--boxContent">
           <ul>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
+            <li th:each="item : ${history.listLiked}">
+              <a href="">
+                <img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}" alt="">
+                <span th:text="${item.postAuth}"></span>
+                <span th:text="${item.postTitle}"></span>
+                <span th:text="${item.readDate}"></span>
+              </a>
+            </li>
           </ul>
         </div><!-- control-area02--boxContent -->
       </div><!-- mypage-Area--control-area02 -->
