@@ -46,21 +46,21 @@
               <li>
                 <a
                   href="#"
-                  th:href="@{/mainPage(sort=postNo, searchTxt=${param.searchTxt})}"
+                  th:href="@{/mainPage/{genre}(genre=${genre}, sort=postNo, searchTxt=${param.searchTxt})}"
                   >최신순</a
                 >
               </li>
               <li>
                 <a
                   href="#"
-                  th:href="@{/mainPage(sort=postHits, searchTxt=${param.searchTxt})}"
+                  th:href="@{/mainPage/{genre}(genre=${genre}, sort=postHits, searchTxt=${param.searchTxt})}"
                   >조회순</a
                 >
               </li>
               <li>
                 <a
                   href="#"
-                  th:href="@{/mainPage(sort=postLike, searchTxt=${param.searchTxt})}"
+                  th:href="@{/mainPage/{genre}(genre=${genre}, sort=postLike, searchTxt=${param.searchTxt})}"
                   >추천순</a
                 >
               </li>

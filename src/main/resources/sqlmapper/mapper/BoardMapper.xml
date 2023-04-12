@@ -20,11 +20,16 @@
 <select id="getPostAll" parameterType="HashMap" resultType="BoardDto">
   SELECT * FROM BOARD
   <if test="searchTxt != null">
-    WHERE
-    (postAuth LIKE '%' || #{searchTxt} || '%') OR
-    (postTitle LIKE '%' || #{searchTxt} || '%') OR
-    (postSinger LIKE '%' || #{searchTxt} || '%') OR
-    (postCont LIKE '%' || #{searchTxt} || '%')
+    WHERE (
+    (POSTAUTH LIKE '%' || #{searchTxt} || '%') OR
+    (POSTTITLE LIKE '%' || #{searchTxt} || '%') OR
+    (POSTSINGER LIKE '%' || #{searchTxt} || '%') OR
+    (POSTCONT LIKE '%' || #{searchTxt} || '%')
+    )
+  </if>
+  <if test="genre != null">
+    AND
+    POSTGENRE = #{genre}
   </if>
     ORDER BY ${sort} desc
 </select>
