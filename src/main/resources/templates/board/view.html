@@ -23,7 +23,9 @@
       <article class="board-view--listItem">
         <div class="board-view--listItem-name">
           <p th:text="${boardDto.postTitle}">곡</p>
-          <p th:text="${boardDto.postSinger}">가수</p>
+          <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
+            <p th:text="${boardDto.postSinger}">가수</p>
+          </a>
           <div>
             등록 <span th:text="${boardDto.postDate}">0</span> * 조회수
             <span th:text="${boardDto.postHits}">0</span>
@@ -66,7 +68,7 @@
               <img src="/images/open.svg" alt="" />
             </button>
           </div>
-          <div class="listItem-controller02">
+          <div th:if="${boardDto.postAuth == loggedUser.userID}" class="listItem-controller02">
             <a
               href="/board/modify"
               th:href="@{/board/modify(postNo=${boardDto.postNo})}"
@@ -80,8 +82,11 @@
       <!-- board-view--listItem -->
       <article class="board-view--textBox">
         <div class="textBox--title">
-          <a href="">
+          <a th:href="@{|/member/user/${boardDto.postAuth}|}">
             <span th:text="${boardDto.postAuth}">홍길동</span>
+          </a>
+          <a th:href="@{/mainPage/(searchTxt=${boardDto.postAuth})}">
+            <span>작성 글 보기</span>
           </a>
         </div>
         <div class="textBox--txt">

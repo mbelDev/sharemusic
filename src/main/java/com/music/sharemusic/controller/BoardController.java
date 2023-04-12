@@ -4,6 +4,7 @@ import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.service.BoardService;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,9 +31,11 @@ public class BoardController {
   @ModelAttribute("loggedUser")
   public LoggedDto loggedUser(HttpServletRequest request) {
     HttpSession session = request.getSession(false);
-    LoggedDto loggedUser = (LoggedDto) session.getAttribute("loggedUser");
-    if (session == null || loggedUser == null) {
+    LoggedDto loggedUser = null;
+    if (session == null || session.getAttribute("loggedUser") == null) {
       return null;
+    } else {
+      loggedUser = (LoggedDto) session.getAttribute("loggedUser");
     }
     return loggedUser;
   }
@@ -62,6 +65,7 @@ public class BoardController {
       //로그인 정보가 있을 때만 조회수 증가
     }
     BoardDto boardDto = boardService.getPostOne(postNo);
+    // List<BoardDto> recentDto = boardService.getRecentAuth(boardDto.getUserID());
     model.addAttribute("boardDto", boardDto);
     return "/board/view";
   }

@@ -26,66 +26,43 @@
     <section id="headerLayout-Area">
       <article class="headerLayout-Area--logo">
         <div class="logo left-items">
-          <img src="/images/logo.png" alt="logo">
+          <a href="/mainPage"><img src="/images/logo.png" alt="logo" /></a>
         </div>
 
       </article><!-- .headerLayout-Area--joinForm -->
       <article class="headerLayout-Area--infoForm">
         <div class="left-items">
-            <th:block th:if="${loggedUser == null}">
-              <!-- 기본 회원정보 -->
-              <div>
-                <img th:src="" alt="" style="width: 150px; height: 150px;">
-                        </div>
-                        <div>
-                <span th:text="로그인 해 주세요">별명</span>
-
-            </th:block>
-            <th:block th:unless="${loggedUser == null}">
-              <!-- 기본 회원정보 -->
-              <div>
-                <img th:src="@{/upload/}+${loggedUser.userIconReal}" alt="" style="width: 150px; height: 150px;">
-              </div>
-              <div>
-                <span th:text="${loggedUser.userNM}">별명</span>
-              </div>
-              <div>
-                <span th:text="${loggedUser.userID}">아이디</span>
-              </div>
-              <!-- <div>
-                <span th:text="${loggedUser.userDate}">가입일자</span>
-              </div>
-              <div>
-                <span th:text="${loggedUser.userDate}">작성 글 갯수</span>
-              </div> -->
-            </th:block>
+            <!-- 기본 회원정보 -->
+            <div>
+              <img th:if="${loggedUser.userIconReal != null}" th:src="@{/upload/}+${loggedUser.userIconReal}" alt="" style="width: 150px; height: 150px;">
+              <img th:if="${loggedUser.userIconReal == null}" th:src="@{/images/sampleprofile.jpg}" alt="" style="width: 150px; height: 150px;">
+            </div>
+            <div>
+              <span th:text="${loggedUser.userNM}">별명</span>
+            </div>
+            <div>
+              <span th:text="${loggedUser.userID}">아이디</span>
+            </div>
+            <div>
+              <span th:text="${loggedUser.userDate}">가입일자</span>
+            </div>
         </div>
       </article><!-- .headerLayout-Area--searchForm -->
 
       </article><!-- .headerLayout-Area--logo -->
       <article class="headerLayout-Area--joinForm">
-        <th:block th:if="${loggedUser == null}">
           <div class="join left-items lien">
-            <a href="/member/login">로그인</a>
-            <a href="/member/join">회원가입</a>
+            <a href="/member/mypage">활동내역</a>
+            <a href="/member/view">정보수정</a>
           </div>
-        </th:block>
-        <th:block th:unless="${loggedUser == null}">
-          <div class="join left-items lien">
-            <a href="/member/login">활동내역</a>
-            <a href="/member/join">정보수정</a>
-          </div>
-        </th:block>
-        
-
+      </article>
       <article class="headerLayout-Area--viewContents">
         <div class="view left-items lien">
           <ul>
             <li><a href="/member/mypage/written">작성 글 목록</a></li>
-            <li><a href="/member/mypage/recent">최근 감상 기록</a></li>
-            <li><a href="#">리스트</a></li>
-            <li><a href="#">테스트</a></li>
-            <li><a href="#">테스트</a></li>
+            <li><a href="/member/mypage/list?category=recent">최근 감상 기록</a></li>
+            <li><a href="/member/mypage/list?category=bookmark">즐겨찾기 목록</a></li>
+            <li><a href="/member/mypage/list?category=liked">좋아요를 표시한 곡</a></li>
           </ul>
         </div>
       </article><!-- .headerLayout-Area--viewContents -->

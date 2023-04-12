@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,6 +22,18 @@ public class indexController {
 
   @Autowired
   BoardService boardService;
+
+  @ModelAttribute("loggedUser")
+  public LoggedDto loggedUser(HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    LoggedDto loggedUser = null;
+    if (session == null || session.getAttribute("loggedUser") == null) {
+      return null;
+    } else {
+      loggedUser = (LoggedDto) session.getAttribute("loggedUser");
+    }
+    return loggedUser;
+  }
 
   @GetMapping("/")
   public String intro() {
@@ -34,9 +47,8 @@ public class indexController {
     String searchTxt,
     @RequestParam(defaultValue = "postNo") String sort
   ) {
-    HttpSession session = request.getSession();
-    if (session != null && session.getAttribute("loggedUser") != null) {
-      LoggedDto loggedUser = (LoggedDto) session.getAttribute("loggedUser");
+    LoggedDto loggedUser = loggedUser(request);
+    if (loggedUser != null) {
       model.addAttribute("loggedUser", loggedUser);
     }
 

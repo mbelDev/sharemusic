@@ -14,8 +14,6 @@ public interface MemberService {
 
   public Map<String, String> validateHandler(Errors errors);
 
-  public List<HistoryDto> getHistoryRecent(LoggedDto loggedUser);
-
   public MemberDto getMemberOne(String userID);
 
   public MemberDto getMemberLogged(LoggedDto loggedDto);

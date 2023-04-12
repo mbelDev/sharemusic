@@ -51,22 +51,6 @@
           </div>
         </th:block>
       </article><!-- .headerLayout-Area--joinForm -->
-      <article class="headerLayout-Area--searchForm">
-        <div class="search left-items">
-          <form action="">
-            <div class="search-icon">
-              <button><img src="/images/search.svg" alt=""></button>
-              <input type="text" name="" placeholder="Search...">
-            </div>
-          </th:block>
-          <th:block th:unless="${loggedUser == null}">
-            <div class="join left-items lien">
-              <a href="/member/login">회원정보</a>
-              <a href="/member/logout">로그아웃</a>
-            </div>
-          </th:block>
-        </article>
-        <!-- .headerLayout-Area--joinForm -->
         <article class="headerLayout-Area--searchForm">
           <div class="search left-items">
             <form action="/mainPage">
@@ -90,11 +74,8 @@
         <article class="headerLayout-Area--viewContents">
           <div class="view left-items lien">
             <ul>
-              <li><a href="#">테스트</a></li>
-              <li><a href="#">테스트</a></li>
-              <li><a href="#">테스트</a></li>
-              <li><a href="#">테스트</a></li>
-              <li><a href="#">테스트</a></li>
+              <li><a href="#">월간 베스트</a></li>
+              <li><a href="#">주간 베스트</a></li>
             </ul>
           </div>
         </article>
@@ -102,9 +83,9 @@
         <article class="headerLayout-Area--viewContents">
           <div class="view left-items">
             <ul>
-              <li><a href="#">테스트</a></li>
-              <li><a href="#">테스트</a></li>
-              <li><a href="#">테스트</a></li>
+              <li><a href="#">전체보기</a></li>
+              <li><a href="#">장르별 모아보기</a></li>
+              <li><a href="#">감성별 모아보기</a></li>
             </ul>
           </div>
         </article>
@@ -112,7 +93,7 @@
         <article class="headerLayout-Area--viewContents">
           <div class="view left-items lien">
             <ul>
-              <li><a href="#">테스트</a></li>
+              <li><a href="#">감성별 모아보기</a></li>
               <li><a href="#">테스트</a></li>
               <li><a href="#">테스트</a></li>
             </ul>

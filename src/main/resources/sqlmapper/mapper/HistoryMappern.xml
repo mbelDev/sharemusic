@@ -7,13 +7,19 @@
   <select id="getHistoryRecent" parameterType="String" resultType="HistoryDto">
     SELECT * FROM HISTORY WHERE USERID = #{userID} ORDER BY READDATE DESC
   </select>
-  <select id="getHistoryLike" parameterType="String" resultType="HistoryDto">
-    SELECT * FROM HISTORY WHERE USERID = #{userID} AND POSTLIKE = 1 ORDER BY READDATE DESC
+  <select id="getHistoryWritten" parameterType="String" resultType="BoardDto">
+    SELECT * FROM BOARD WHERE POSTAUTH = #{userID} ORDER BY POSTDATE DESC
+  </select>
+  <select id="getHistoryWrittenRecent3" parameterType="String" resultType="BoardDto">
+    SELECT * FROM (SELECT * FROM BOARD WHERE POSTAUTH = #{userID} ORDER BY POSTDATE DESC) WHERE ROWNUM <![CDATA[<]]> 4
+  </select>
+  <select id="getHistoryLiked" parameterType="String" resultType="HistoryDto">
+    SELECT h.*, b.POSTDATE  FROM HISTORY h, BOARD b WHERE h.USERID = #{userID} AND h.LIKED = 1 AND h.POSTNO = b.POSTNO ORDER BY b.POSTDATE DESC
   </select>
   <select id="getHistoryBookmark" parameterType="String" resultType="HistoryDto">
-    SELECT * FROM HISTORY WHERE USERID = #{userID} AND BOOKMARK = 1 ORDER BY READDATE DESC
+    SELECT h.*, b.POSTDATE  FROM HISTORY h, BOARD b WHERE h.USERID = #{userID} AND h.BOOKMARK = 1 AND h.POSTNO = b.POSTNO ORDER BY b.POSTDATE DESC
   </select>
-  <select id="getHistory" parameterType="LoggedDto" resultType="Integer">
+  <select id="getHistory" parameterType="LoggedDto" resultType="Integer"> 
     SELECT COUNT(*) FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </select>
 
@@ -31,11 +37,20 @@
     READDATE = SYSTIMESTAMP WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </update>
 
-  <update id="updateHistoryLike" parameterType="LoggedDto">
+  <update id="updateHistoryLike" parameterType="SendDataDto">
     UPDATE HISTORY SET
     <choose>
-        <when test='POSTLIKE == 0'>POSTLIKE = 1 </when>
-        <otherwise> POSTLIKE = 0 </otherwise>
+        <when test="liked == 0">LIKED = 1 </when>
+        <otherwise> LIKED = 0 </otherwise>
+    </choose>
+    WHERE USERID = #{userID} AND POSTNO = #{postNo}
+  </update>
+
+  <update id="updateHistoryBookmark" parameterType="SendDataDto">
+    UPDATE HISTORY SET
+    <choose>
+        <when test='bookmark == 0'>BOOKMARK = 1 </when>
+        <otherwise> BOOKMARK = 0 </otherwise>
     </choose>
     WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </update>

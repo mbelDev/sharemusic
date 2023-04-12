@@ -1,8 +1,10 @@
 package com.music.sharemusic.controller;
 
+import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.MemberDto;
+import com.music.sharemusic.dto.SendDataDto;
 import com.music.sharemusic.service.MemberServiceImpl;
 import java.util.HashMap;
 import java.util.List;
@@ -35,17 +37,27 @@ public class MemberController {
   @Autowired
   MemberServiceImpl memberService;
 
+  @ModelAttribute("loggedUser")
+  public LoggedDto loggedUser(HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    LoggedDto loggedUser = null;
+    if (session == null || session.getAttribute("loggedUser") == null) {
+      return null;
+    } else {
+      loggedUser = (LoggedDto) session.getAttribute("loggedUser");
+    }
+    return loggedUser;
+  }
+
   @GetMapping("/mypage")
   public String mypage(HttpServletRequest request, Model model) {
-    HttpSession session = request.getSession(false);
-    if (session != null && session.getAttribute("loggedUser") != null) {
-      LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
-      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
-      model.addAttribute("memberDto", memberDto);
-      return "/member/mypage";
+    LoggedDto loggedUser = loggedUser(request);
+    if (loggedUser == null) {
+      return "redirect:/member/login";
     }
-
-    return "redirect:/member/login";
+    MemberDto memberDto = memberService.getMemberLogged(loggedUser);
+    model.addAttribute("memberDto", memberDto);
+    return "/member/mypage";
   }
 
   @GetMapping("/user/{userID}")
@@ -54,41 +66,75 @@ public class MemberController {
     Model model,
     @PathVariable String userID
   ) {
-    HttpSession session = request.getSession(false);
-    if (session != null && session.getAttribute("loggedUser") != null) {
-      LoggedDto loggedInfo = new LoggedDto();
-      loggedInfo.setUserID(userID);
-      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
-      loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
-      model.addAttribute("memberDto", memberDto);
-      return "/member/mypage";
+    LoggedDto loggedUser = loggedUser(request);
+    if (loggedUser == null) {
+      return "redirect:/member/login";
     }
-
-    return "redirect:/member/login";
+    MemberDto memberDto = memberService.getMemberLogged(loggedUser);
+    model.addAttribute("memberDto", memberDto);
+    return "/member/mypage";
   }
 
-  // @PostMapping("/mypage")
-  // public String modify(MemberDto memberDto) {
-  //   memberService.updateMember(memberDto);
-  //   return "redirect:/member/mypage";
+  @GetMapping("/mypage/list")
+  public String mypageCategories(
+    HttpServletRequest request,
+    Model model,
+    String category
+  ) {
+    LoggedDto loggedUser = loggedUser(request);
+    if (loggedUser == null) {
+      return "redirect:/member/login";
+    }
+    MemberDto memberDto = memberService.getMemberLogged(loggedUser);
+    model.addAttribute("memberDto", memberDto);
+
+    List<HistoryDto> historyList = null;
+    switch (category) {
+      case "recent":
+        historyList = memberService.getHistoryRecent(loggedUser);
+        break;
+      case "bookmark":
+        historyList = memberService.getHistoryBookmark(loggedUser);
+        break;
+      case "liked":
+        historyList = memberService.getHistoryLiked(loggedUser);
+        break;
+    }
+    log.info("historyList");
+    model.addAttribute("historyList", historyList);
+
+    return "/member/recent";
+  }
+
+  // @GetMapping("/mypage/recent")
+  // public String mypageCategories(HttpServletRequest request, Model model) {
+  //   HttpSession session = request.getSession(false);
+  //   if (session != null && session.getAttribute("loggedUser") != null) {
+  //     LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
+  //     MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
+  //     model.addAttribute("memberDto", memberDto);
+  //     List<HistoryDto> historyRecent = memberService.getHistoryRecent(
+  //       loggedInfo
+  //     );
+  //     model.addAttribute("historyRecent", historyRecent);
+
+  //     return "/member/recent";
+  //   }
+
+  //   return "redirect:/member/login";
   // }
 
-  @GetMapping("/mypage/recent")
-  public String mypageCategories(HttpServletRequest request, Model model) {
-    HttpSession session = request.getSession(false);
-    if (session != null && session.getAttribute("loggedUser") != null) {
-      LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
-      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
-      model.addAttribute("memberDto", memberDto);
-      List<HistoryDto> historyRecent = memberService.getHistoryRecent(
-        loggedInfo
-      );
-      model.addAttribute("historyRecent", historyRecent);
-
-      return "/member/recent";
+  @GetMapping("/mypage/written")
+  public String myPost(HttpServletRequest request, Model model) {
+    LoggedDto loggedUser = loggedUser(request);
+    if (loggedUser == null) {
+      return "redirect:/member/login";
     }
-
-    return "redirect:/member/login";
+    MemberDto memberDto = memberService.getMemberLogged(loggedUser);
+    List<BoardDto> historyList = memberService.getHistoryWritten(loggedUser);
+    model.addAttribute("memberDto", memberDto);
+    model.addAttribute("historyList", historyList);
+    return "/member/written";
   }
 
   @GetMapping("/view")
@@ -167,6 +213,22 @@ public class MemberController {
     session.setAttribute("loggedUser", loggedUser);
     session.setMaxInactiveInterval(30 * 60);
     return "redirect:/";
+  }
+
+  @PostMapping("/like")
+  public String setLike(SendDataDto data) {
+    log.info("Controller result==={}", data);
+    int result = 0;
+    result = memberService.updateLike(data);
+    log.info("Controller result==={}", result);
+    return "redirect:/member/mypage";
+  }
+
+  @PostMapping("/bookmark")
+  public int setBookmark(SendDataDto data) {
+    int result = 0;
+    result = memberService.updateBookmark(data);
+    return result;
   }
 
   @GetMapping("/logout")

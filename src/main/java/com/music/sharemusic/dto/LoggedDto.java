@@ -13,5 +13,6 @@ public class LoggedDto {
   private String userNM;
   private String userIconReal;
   private String userPrincipal;
+  private String userDate;
   private int postNo;
 }
