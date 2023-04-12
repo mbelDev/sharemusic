@@ -1,0 +1,46 @@
+main {
+  position: relative;
+}
+.boardWrite-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  .boardWrite-page--form {
+    margin-top: 100px;
+    width: 70%;
+    button {
+      background-color: #264d8b;
+      color: #fff;
+    }
+    .boardWrite-pag--item {
+      margin-bottom: 30px;
+    }
+  }//.boardWrite-page--form
+}//.boardWrite-page
+
+// 모달창
+#ModalThis {
+  width: 100%;
+  height: 100%;
+  background-color: #111111f3;
+  position: absolute;
+  top: 0%; left: 0%;
+  z-index: 99;
+  display: none;
+  &.ModalThis-ok {
+    display: block;
+  }
+  .ModalThis-item {
+    width: 70%;
+    height: 60%;
+    background-color: #fff;
+    border-radius: 13px;
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-40%, -50%);
+    .closeModel {
+      
+    }
+  }
+}//.write-modal

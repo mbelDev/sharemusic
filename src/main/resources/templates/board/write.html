@@ -1,63 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="/js/jquery-3.6.3.min.js"></script>
-  </head>
-  <body>
-    <h1>글 쓰기</h1>
+<html lang="en"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:th="http://www.thymeleaf.org"
+layout:decorate="~{/include/layout.html}">
 
-    <form action="/board/write" method="POST">
-      <div>
-        <span>곡 이름</span
-        ><input type="text" name="postTitle" class="postTitle" />
-      </div>
-      <div>
-        <span>가수 이름</span
-        ><input type="text" name="postSinger" class="postSinger" />
-      </div>
-      <div>
-        <span>설명(150자 이내)</span
-        ><input type="text" name="postCont" class="postCont" />
-      </div>
-      <div>
-        <span>유튜브 링크</span
-        ><input type="text" name="postLink" class="postLink" />
-      </div>
-      <div>
-        <span>장르</span>
-        <select name="postGenre" id="" class="postGenre">
-          <option value="락">락</option>
-          <option value="발라드">발라드</option>
-          <option value="팝">팝</option>
-          <option value="재즈">재즈</option>
-          <option value="메탈">메탈</option>
-          <option value="EDM">EDM</option>
-          <option value="보컬로이드">보컬로이드</option>
-          <option value="etc">기타</option>
-        </select>
-        <!-- 기타 선택할 시 나타날 input -->
-        <input type="text" class="genreEtc" name="genreEtc" />
-      </div>
-      <div>
-        <span>갬성</span>
-        <select name="postEmote" id="" class="postEmote">
-          <option value="신남">신남</option>
-          <option value="우울">우울</option>
-          <option value="희열">희열</option>
-          <option value="으스스">으스스</option>
-          <option value="etc">기타</option>
-        </select>
-        <!-- 기타 선택할 시 나타날 input -->
-        <input type="text" class="emoteEtc" name="emoteEtc" />
-      </div>
-      <!-- 로그인 한 유저의 이름 보내기 -->
-      <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->
-      <button class="btn btn-confirm">등록</button>
-    </form>
+<main id="mainPage-Area" class="container" layout:fragment="contents">
+  <section class="boardWrite-page">
+    <article class="boardWrite-page--form">
+      <form action="">
+        <div class="boardWrite-pag--item form-floating">
+          <input type="text" class="form-control" id="floatingPassword" placeholder="곡 이름">
+          <label for="floatingPassword">곡 이름</label>
+        </div>
+        <div class="boardWrite-pag--item form-floating">
+          <input type="text" class="form-control" id="floatingPassword" placeholder="가수 이름">
+          <label for="floatingPassword">가수 이름</label>
+        </div>
+        <div class="boardWrite-pag--item form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+          <label for="floatingTextarea">설명(150자 이내)</label>
+        </div>
+        <div class="boardWrite-pag--item form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+          <label for="floatingTextarea">유튜브 링크</label>
+        </div>
+        <p>장르</p>
+        <div class="boardWrite-pag--item input-group">
+          <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+            <option value="락">락</option>
+            <option value="발라드">발라드</option>
+            <option value="팝">팝</option>
+            <option value="재즈">재즈</option>
+            <option value="메탈">메탈</option>
+            <option value="EDM">EDM</option>
+            <option value="보컬로이드">보컬로이드</option>
+            <option value="etc">기타</option>
+          </select>
+          <button id="ModalBox" class="btn btn-outline-secondary" type="button">Button</button>
+        </div>
+        <p>감성</p>
+        <div class="boardWrite-pag--item input-group">
+          <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+            <option value="신남">신남</option>
+            <option value="우울">우울</option>
+            <option value="희열">희열</option>
+            <option value="으스스">으스스</option>
+            <option value="etc">기타</option>
+          </select>
+          <button id="ModalBox02" class="btn btn-outline-secondary" type="button">Button</button>
+        </div>
+        <div>
+          <button type="submit">등록</button>
+          <button>취소</button>
+        </div>
+      </form>
+    </article>
+  </section><!-- boardWrite-page -->
+
+  <!-- 모달창 -->
+  <div id="ModalThis">
+    <div class="ModalThis-item">
+      <button class="closeModel">닫기</button>
+      <div class="ModalThis-content">
+
+        <!-- 모달창 안에 여기 내용 작성 -->
+        
+      </div><!-- ModalThis-content -->
+    </div><!-- write-modal--item -->
+  </div><!-- write-modal -->
+  
+</main>
+    
 
     <script>
       // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
@@ -97,5 +110,3 @@
         }
       });
     </script>
-  </body>
-</html>
