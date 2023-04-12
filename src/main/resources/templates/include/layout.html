@@ -10,7 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Music</title>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/mdb.min.css" />
@@ -22,7 +25,10 @@
     <link rel="stylesheet" href="/css/boardModify.css" />
     <link rel="stylesheet" href="/css/boardWrite.css" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
     <script src="/js/mainJs/layout.js" defer></script>
     <script src="/js/mainJs/mainPage.js" defer></script>
     <script src="/js/board/view.js" defer></script>
@@ -58,15 +64,22 @@
         <!-- .headerLayout-Area--joinForm -->
         <article class="headerLayout-Area--searchForm">
           <div class="search left-items">
-            <form action="/mainPage">
-              <div class="input-group">
-                <div class="form-outline">
-                  <input type="search" id="form1" class="form-control" name="searchTxt" th:value="${searchTxt}"/>
-                  <!-- <label class="form-label" for="form1">Search</label> -->
-                </div>
-                <button type="submit" class="btn btn-primary">
+            <!-- 검색 기능 -->
+            <form
+              th:action="@{/mainPage/{genre}(genre=${genre}, sort=${param.sort})}"
+            >
+              <div class="search-icon">
+                <button>
                   <img src="/images/search.svg" alt="" />
                 </button>
+                <input type="hidden" name="sort" th:value="${param.sort}" />
+                <input
+                  type="text"
+                  name="searchTxt"
+                  placeholder="Search..."
+                  value=""
+                  th:value="${searchTxt}"
+                />
               </div>
 
               <!-- <div class="search-icon">
@@ -82,8 +95,26 @@
         <article class="headerLayout-Area--viewContents">
           <div class="view left-items lien">
             <ul>
-              <li><a href="#">월간 베스트</a></li>
-              <li><a href="#">주간 베스트</a></li>
+              <li>
+                <a
+                  th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}"
+                  >락</a
+                >
+              </li>
+              <li>
+                <a
+                  th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}"
+                  >발라드</a
+                >
+              </li>
+              <li>
+                <a
+                  th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}"
+                  >팝</a
+                >
+              </li>
+              <li><a href="#">테스트</a></li>
+              <li><a href="#">테스트</a></li>
             </ul>
           </div>
         </article>

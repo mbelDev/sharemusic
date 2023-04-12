@@ -1,112 +1,152 @@
 <!DOCTYPE html>
-<html lang="en"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-xmlns:th="http://www.thymeleaf.org"
-layout:decorate="~{/include/layout.html}">
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/include/layout.html}"
+>
+  <main id="mainPage-Area" class="container" layout:fragment="contents">
+    <section class="boardWrite-page">
+      <article class="boardWrite-page--form">
+        <form action="">
+          <div class="boardWrite-pag--item form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="곡 이름"
+            />
+            <label for="floatingPassword">곡 이름</label>
+          </div>
+          <div class="boardWrite-pag--item form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="가수 이름"
+            />
+            <label for="floatingPassword">가수 이름</label>
+          </div>
+          <div class="boardWrite-pag--item form-floating">
+            <textarea
+              class="form-control"
+              placeholder="Leave a comment here"
+              id="floatingTextarea"
+            ></textarea>
+            <label for="floatingTextarea">설명(150자 이내)</label>
+          </div>
+          <div class="boardWrite-pag--item form-floating">
+            <textarea
+              class="form-control"
+              placeholder="Leave a comment here"
+              id="floatingTextarea"
+            ></textarea>
+            <label for="floatingTextarea">유튜브 링크</label>
+          </div>
+          <p>장르</p>
+          <div class="boardWrite-pag--item input-group">
+            <select
+              class="form-select"
+              id="inputGroupSelect04"
+              aria-label="Example select with button addon"
+            >
+              <option value="락">락</option>
+              <option value="발라드">발라드</option>
+              <option value="팝">팝</option>
+              <option value="재즈">재즈</option>
+              <option value="메탈">메탈</option>
+              <option value="EDM">EDM</option>
+              <option value="보컬로이드">보컬로이드</option>
+              <option value="etc">기타</option>
+            </select>
+            <button
+              id="ModalBox"
+              class="btn btn-outline-secondary"
+              type="button"
+            >
+              Button
+            </button>
+          </div>
+          <p>감성</p>
+          <div class="boardWrite-pag--item input-group">
+            <select
+              class="form-select"
+              id="inputGroupSelect04"
+              aria-label="Example select with button addon"
+            >
+              <option value="신남">신남</option>
+              <option value="우울">우울</option>
+              <option value="희열">희열</option>
+              <option value="으스스">으스스</option>
+              <option value="etc">기타</option>
+            </select>
+            <button
+              id="ModalBox02"
+              class="btn btn-outline-secondary"
+              type="button"
+            >
+              Button
+            </button>
+          </div>
+          <div>
+            <button type="submit">등록</button>
+            <button>취소</button>
+          </div>
+        </form>
+      </article>
+    </section>
+    <!-- boardWrite-page -->
 
-<main id="mainPage-Area" class="container" layout:fragment="contents">
-  <section class="boardWrite-page">
-    <article class="boardWrite-page--form">
-      <form action="">
-        <div class="boardWrite-pag--item form-floating">
-          <input type="text" class="form-control" id="floatingPassword" placeholder="곡 이름">
-          <label for="floatingPassword">곡 이름</label>
+    <!-- 모달창 -->
+    <div id="ModalThis">
+      <div class="ModalThis-item">
+        <button class="closeModel">닫기</button>
+        <div class="ModalThis-content">
+          <!-- 모달창 안에 여기 내용 작성 -->
         </div>
-        <div class="boardWrite-pag--item form-floating">
-          <input type="text" class="form-control" id="floatingPassword" placeholder="가수 이름">
-          <label for="floatingPassword">가수 이름</label>
-        </div>
-        <div class="boardWrite-pag--item form-floating">
-          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-          <label for="floatingTextarea">설명(150자 이내)</label>
-        </div>
-        <div class="boardWrite-pag--item form-floating">
-          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-          <label for="floatingTextarea">유튜브 링크</label>
-        </div>
-        <p>장르</p>
-        <div class="boardWrite-pag--item input-group">
-          <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-            <option value="락">락</option>
-            <option value="발라드">발라드</option>
-            <option value="팝">팝</option>
-            <option value="재즈">재즈</option>
-            <option value="메탈">메탈</option>
-            <option value="EDM">EDM</option>
-            <option value="보컬로이드">보컬로이드</option>
-            <option value="etc">기타</option>
-          </select>
-          <button id="ModalBox" class="btn btn-outline-secondary" type="button">Button</button>
-        </div>
-        <p>감성</p>
-        <div class="boardWrite-pag--item input-group">
-          <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-            <option value="신남">신남</option>
-            <option value="우울">우울</option>
-            <option value="희열">희열</option>
-            <option value="으스스">으스스</option>
-            <option value="etc">기타</option>
-          </select>
-          <button id="ModalBox02" class="btn btn-outline-secondary" type="button">Button</button>
-        </div>
-        <div>
-          <button type="submit">등록</button>
-          <button>취소</button>
-        </div>
-      </form>
-    </article>
-  </section><!-- boardWrite-page -->
+        <!-- ModalThis-content -->
+      </div>
+      <!-- write-modal--item -->
+    </div>
+    <!-- write-modal -->
+  </main>
 
-  <!-- 모달창 -->
-  <div id="ModalThis">
-    <div class="ModalThis-item">
-      <button class="closeModel">닫기</button>
-      <div class="ModalThis-content">
+  <script>
+    // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
+    $(".btnConfirm").on("click", function () {
+      const url = $(".postLink").val();
+      const regExp =
+        "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
+      const match = url.match(regExp);
 
-        <!-- 모달창 안에 여기 내용 작성 -->
-        
-      </div><!-- ModalThis-content -->
-    </div><!-- write-modal--item -->
-  </div><!-- write-modal -->
-  
-</main>
-    
+      if (match) {
+        const getId = match[1];
+        $(".postLink").val(match[1]);
+        return true;
+      } else {
+        // 유튜브 링크를 다시 확인하라고 경고 창
+      }
+      return false;
+    });
 
-    <script>
-      // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
-      $(".btn-confirm").on("click", function () {
-        const url = $(".postLink").val();
-        const regExp =
-          "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
-        const match = url.match(regExp);
+    // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
+    $(".genreEtc").hide();
+    $(".postGenre").change(function () {
+      if ($(".postGenre").val() == "etc") {
+        $(".genreEtc").show();
+      } else {
+        $(".genreEtc").hide();
+      }
+    });
 
-        if (match) {
-          const getId = match[1];
-          $(".postLink").val(match[1]);
-          return true;
-        } else {
-          // 유튜브 링크를 다시 확인하라고 경고 창
-        }
-        return false;
-      });
-
-      // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
-      $(".genreEtc").hide();
-      $(".postGenre").change(function () {
-        if ($(".postGenre").val() == "etc") {
-          $(".genreEtc").show();
-        } else {
-          $(".genreEtc").hide();
-        }
-      });
-
-      // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
-      $(".emoteEtc").hide();
-      $(".postEmote").change(function () {
-        if ($(".postEmote").val() == "etc") {
-          $(".emoteEtc").show();
-        } else {
-          $(".emoteEtc").hide();
-        }
-      });
-    </script>
+    // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
+    $(".emoteEtc").hide();
+    $(".postEmote").change(function () {
+      if ($(".postEmote").val() == "etc") {
+        $(".emoteEtc").show();
+      } else {
+        $(".emoteEtc").hide();
+      }
+    });
+  </script>
+</html>

@@ -13,10 +13,14 @@ public interface BoardService {
 
   //view 에서 요청. 한 글 불러오기
 
-  public List<BoardDto> getPostAll(String searchTxt, String sort);
+  public List<BoardDto> getPostAll(String genre, String searchTxt, String sort);
 
   //index 에서 요청. 모든 글 불러오기
   //paging작업은 아직^^
+
+  public List<BoardDto> getRankPost();
+
+  // 랭킹 글들 불러오기
 
   public void updatePost(BoardDto boardDto);
 
