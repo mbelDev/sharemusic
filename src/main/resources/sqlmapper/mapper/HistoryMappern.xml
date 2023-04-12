@@ -5,35 +5,54 @@
 <mapper namespace="com.music.sharemusic.dao.HistoryDao">
 
   <select id="getHistoryRecent" parameterType="String" resultType="HistoryDto">
-    SELECT * FROM HISTORY WHERE USERID = #{userID} ORDER BY READDATE
+    SELECT * FROM HISTORY WHERE USERID = #{userID} ORDER BY READDATE DESC
   </select>
-  <select id="getHistoryLike" parameterType="String" resultType="HistoryDto">
-    SELECT * FROM HISTORY WHERE USERID = #{userID} AND POSTLIKE = 1 ORDER BY READDATE
+  <select id="getHistoryWritten" parameterType="String" resultType="BoardDto">
+    SELECT * FROM BOARD WHERE POSTAUTH = #{userID} ORDER BY POSTDATE DESC
+  </select>
+  <select id="getHistoryWrittenRecent3" parameterType="String" resultType="BoardDto">
+    SELECT * FROM (SELECT * FROM BOARD WHERE POSTAUTH = #{userID} ORDER BY POSTDATE DESC) WHERE ROWNUM <![CDATA[<]]> 4
+  </select>
+  <select id="getHistoryLiked" parameterType="String" resultType="HistoryDto">
+    SELECT h.*, b.POSTDATE  FROM HISTORY h, BOARD b WHERE h.USERID = #{userID} AND h.LIKED = 1 AND h.POSTNO = b.POSTNO ORDER BY b.POSTDATE DESC
   </select>
   <select id="getHistoryBookmark" parameterType="String" resultType="HistoryDto">
-    SELECT * FROM HISTORY WHERE USERID = #{userID} AND BOOKMARK = 1 ORDER BY READDATE
+    SELECT h.*, b.POSTDATE  FROM HISTORY h, BOARD b WHERE h.USERID = #{userID} AND h.BOOKMARK = 1 AND h.POSTNO = b.POSTNO ORDER BY b.POSTDATE DESC
+  </select>
+  <select id="getHistory" parameterType="LoggedDto" resultType="Integer"> 
+    SELECT COUNT(*) FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </select>
 
   <select id="getHistoryBoard" parameterType="HistoryDto" resultType="BoardDto">
     SELECT * FROM BOARD a, HISTORY b WHERE a.POSTNO = b.POSTNO
   </select>
 
-<insert id="putHistory" parameterType="Map">
-    INSERT INTO HISTORY VALUES (USERID, POSTNO, POSTAUTH, POSTTITLE,READDATE, POSTLIKE, BOOKMARK) = (#{userID}, #{postNO}, #{postAuth}, #{postTitle}, SYSTIMESTAMP, 0, 0)
+<insert id="putHistory" parameterType="LoggedDto">
+    INSERT INTO HISTORY (USERID, POSTNO, POSTAUTH, POSTTITLE, READDATE, LIKED, BOOKMARK) 
+    VALUES (#{userID}, #{postNo}, (SELECT POSTAUTH FROM BOARD WHERE POSTNO = #{postNo}),(SELECT POSTTITLE FROM BOARD WHERE POSTNO = #{postNo}), SYSTIMESTAMP, 0, 0)
 </insert>
 
-  <update id="updateHistoryDate" parameterType="Map">
+  <update id="updateHistoryDate" parameterType="LoggedDto">
     UPDATE HISTORY SET
-    READDATE = SYSDATE WHERE USERID = #{userID} AND POSTNO = #{postNO}
+    READDATE = SYSTIMESTAMP WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </update>
 
-  <update id="updateHistoryLike" parameterType="Map">
+  <update id="updateHistoryLike" parameterType="SendDataDto">
     UPDATE HISTORY SET
     <choose>
-        <when test='POSTLIKE == 0'>POSTLIKE = 1 </when>
-        <otherwise> POSTLIKE = 0 </otherwise>
+        <when test="liked == 0">LIKED = 1 </when>
+        <otherwise> LIKED = 0 </otherwise>
     </choose>
-    WHERE USERID = #{userID} AND POSTNO = #{postNO}
+    WHERE USERID = #{userID} AND POSTNO = #{postNo}
+  </update>
+
+  <update id="updateHistoryBookmark" parameterType="SendDataDto">
+    UPDATE HISTORY SET
+    <choose>
+        <when test='bookmark == 0'>BOOKMARK = 1 </when>
+        <otherwise> BOOKMARK = 0 </otherwise>
+    </choose>
+    WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </update>
 
   <delete id="deleteHistoryAll" parameterType="String">
@@ -41,6 +60,11 @@
   </delete>
 
   <delete id="deleteHistoryOne" parameterType="Map">
-    DELETE FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNO}
+    DELETE FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </delete>
+
+
+  <select id="test" resultType="int">
+    SELECT COUNT(*) AS TOTAL FROM HISTORY WHERE USERID = 'gundam'
+  </select>
 </mapper>  

@@ -27,4 +27,5 @@ public class MemberDto {
   private String userIconReal;
   private int userBann;
   private String userDate;
+  private int userPrincipal;
 }

@@ -46,7 +46,6 @@ main {
           display: flex;
           align-items: center;
           transform: translateX(-50%);
-          cursor: pointer;
           span {
             padding-left: 5px;
           }
@@ -54,7 +53,7 @@ main {
         .btnShare {
           border: none;
           outline: none;
-          background-color: #000;
+          background-color: #2e2e2e;
         }
       } //.listItem-controller01
       .listItem-controller02 {
@@ -71,6 +70,34 @@ main {
       } //.listItem-controller02
     } //.board-view--listItem-controller
   } //.board-view--listItem
+        // .btnOpen {
+        //   transition: all 0.25s ease;
+        //   img {
+        //     &:hover {
+        //       transform: scale(110%);
+        //     }
+        //   }
+        // }
+        // .settings {
+        //   margin-left: 12px;
+        //   img {
+        //     transition: all 0.25s ease;
+        //     &:hover {
+        //       transform: rotate(150deg);
+        //     }
+        //   }
+        // }
+      }//.listItem-controller01
+    }//.board-view--listItem-controller
+    .board-view--listItem-setSplit {
+      margin-bottom: 30px;
+    }
+    .listItem-controller02 {
+      margin: 40px 0;
+      color: #fff !important;
+      font-weight: bold !important;
+    }//.listItem-controller02
+  }//.board-view--listItem
   .board-view--textBox {
     border-top: 1px solid #999;
     padding-top: 50px;

@@ -12,9 +12,11 @@ import lombok.NoArgsConstructor;
 public class HistoryDto {
 
   private String userID;
-  private int postNO;
-  private String PostAuth;
-  private String PostTitle;
+  private int postNo;
+  private String postAuth;
+  private String postTitle;
+  private String postLink;
+  private String postSinger;
   private String readDate;
   private int liked;
   private int bookmark;

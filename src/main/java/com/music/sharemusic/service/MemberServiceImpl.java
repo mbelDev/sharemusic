@@ -7,6 +7,7 @@ import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.MemberDto;
+import com.music.sharemusic.dto.SendDataDto;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,20 +42,28 @@ public class MemberServiceImpl implements MemberService {
 
   public void putMember(MemberDto memberDto) {
     log.info("=========upload========");
-    UUID uuid = UUID.randomUUID();
     MultipartFile uploadFile = memberDto.getUserIconFile();
-    String userIconPath = uploadFile.getOriginalFilename();
-    String userIconReal = uuid + "_" + userIconPath;
-    Path imgFilePath = Paths.get(uploadFolder + userIconReal); // C:\tempStorage
-    memberDto.setUserIcon(userIconPath);
-    memberDto.setUserIconReal(imgFilePath.toString());
-
-    //저장되는 경로
-    try {
-      Files.write(imgFilePath, uploadFile.getBytes());
-    } catch (IOException e) {
-      e.printStackTrace();
+    if (uploadFile.getOriginalFilename() != "") {
+      UUID uuid = UUID.randomUUID();
+      String userIconPath = uploadFile.getOriginalFilename();
+      String userIconReal = uuid + "_" + userIconPath;
+      Path imgFilePath = Paths.get(uploadFolder + userIconReal); // C:\tempStorage
+      memberDto.setUserIcon(userIconPath);
+      memberDto.setUserIconReal(userIconReal);
+      //저장되는 경로
+      try {
+        Files.write(imgFilePath, uploadFile.getBytes());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    } else {
+      String userIcon = "sampleprofile.jpg";
+      String userIconReal = "sampleprofile.jpg";
+      memberDto.setUserIcon(userIcon);
+      memberDto.setUserIconReal(userIconReal);
+      memberDto.setUserPrincipal(0);
     }
+
     if (memberDao.putMember(memberDto) > 0) {
       log.info("회원가입 성공  === {} ", memberDto);
     } else {
@@ -72,6 +81,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     return validateResult;
+  }
+
+  public void dependency(List<HistoryDto> list) {
+    for (HistoryDto item : list) {
+      int postNo = item.getPostNo();
+      BoardDto tempDto = boardDao.getPostOne(postNo);
+      if (tempDto != null) {
+        String link = tempDto.getPostLink();
+        String singer = tempDto.getPostSinger();
+        item.setPostLink(link);
+        item.setPostSinger(singer);
+      }
+    }
   }
 
   public Map<String, String> checkID(String userID) {
@@ -105,15 +127,48 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
+  public List<BoardDto> getHistoryWritten(LoggedDto loggedUser) {
+    String userID = loggedUser.getUserID();
+    List<BoardDto> result = historyDao.getHistoryWritten(userID);
+    return result;
+  }
+
   public List<HistoryDto> getHistoryRecent(LoggedDto loggedUser) {
     String userID = loggedUser.getUserID();
     List<HistoryDto> result = historyDao.getHistoryRecent(userID);
+    dependency(result);
+    return result;
+  }
+
+  public List<HistoryDto> getHistoryLiked(LoggedDto loggedUser) {
+    String userID = loggedUser.getUserID();
+    List<HistoryDto> result = historyDao.getHistoryLiked(userID);
+    dependency(result);
+    return result;
+  }
+
+  public List<HistoryDto> getHistoryBookmark(LoggedDto loggedUser) {
+    String userID = loggedUser.getUserID();
+    List<HistoryDto> result = historyDao.getHistoryBookmark(userID);
+    dependency(result);
+    return result;
+  }
+
+  public int updateLike(SendDataDto data) {
+    int result = historyDao.updateHistoryLike(data);
+    log.info("result==={}", result);
+    return result;
+  }
+
+  public int updateBookmark(SendDataDto data) {
+    int result = historyDao.updateHistoryBookMark(data);
     return result;
   }
 
   public MemberDto getMemberLogged(LoggedDto loggedDto) {
     String userID = loggedDto.getUserID();
     MemberDto result = getMemberOne(userID);
+    loggedDto.setUserDate(result.getUserDate());
     return result;
   }
 

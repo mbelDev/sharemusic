@@ -23,6 +23,7 @@
 
     <link rel="stylesheet" href="/css/boardView.css" />
     <link rel="stylesheet" href="/css/boardModify.css" />
+    <link rel="stylesheet" href="/css/boardWrite.css" />
 
     <link
       rel="stylesheet"
@@ -31,6 +32,7 @@
     <script src="/js/mainJs/layout.js" defer></script>
     <script src="/js/mainJs/mainPage.js" defer></script>
     <script src="/js/board/view.js" defer></script>
+    <script src="/js/board/write.js" defer></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/mdb.min.js"></script>
     <script src="/js/jquery-3.6.3.min.js"></script>
@@ -79,6 +81,13 @@
                   th:value="${searchTxt}"
                 />
               </div>
+
+              <!-- <div class="search-icon">
+                검색 기능
+                <button>
+                </button>
+                <input type="text"  placeholder="Search..." value="" />
+              </div> -->
             </form>
           </div>
         </article>
@@ -113,9 +122,9 @@
         <article class="headerLayout-Area--viewContents">
           <div class="view left-items">
             <ul>
-              <li><a href="#">테스트</a></li>
-              <li><a href="#">테스트</a></li>
-              <li><a href="#">테스트</a></li>
+              <li><a href="#">전체보기</a></li>
+              <li><a href="#">장르별 모아보기</a></li>
+              <li><a href="#">감성별 모아보기</a></li>
             </ul>
           </div>
         </article>
@@ -123,7 +132,7 @@
         <article class="headerLayout-Area--viewContents">
           <div class="view left-items lien">
             <ul>
-              <li><a href="#">테스트</a></li>
+              <li><a href="#">감성별 모아보기</a></li>
               <li><a href="#">테스트</a></li>
               <li><a href="#">테스트</a></li>
             </ul>

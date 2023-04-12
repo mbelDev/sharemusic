@@ -6,48 +6,159 @@
   layout:decorate="~{/include/layoutMember.html}">
 <main id="mainPage-Area" class="mypage-Area" layout:fragment="contents">
   <section class="mypage-Area--section">
-    <article class="mypage-Area--left">
-      <div class="mypage-Area--left-title">
-        <span>회원정보 (공사중)</span>
-      </div><!-- mypage-Area--left-title -->
-      <div class="mypage-Area--left-myImg">
-        <img th:src="@{uploadFolder/${memberDto.userIconReal}}" alt="">
-      </div><!-- mypage-Area--left-myImg -->
-      <div class="mypage-Area--left-userContent">
-        <ul>
-          <li class="mypage-Area--left-user">
-            <div class="left--userName">
-              <p th:text="${memberDto.userID}">아이디</p>
+    <article class="mypage-Area--control">
+      <div class="mypage-Area--control-area01">
+        <div class="control-area01--title">
+          <h4>회원 정보 수정</h4>
+        </div><!-- control-area01-title -->
+        <div class="control-area01--profile">
+          <div class="control-area01--profile-img">
+            <div class="filebox bs3-primary">
+              <div><img src="" alt=""></div>
+              <label for="ex_file2">프로필 변경</label> 
+              <input type="file" id="ex_file2"> 
             </div>
-          </li><!-- mypage-Area--left-user -->
-          <li class="mypage-Area--left-user">
-            <div class="left--userName">
-              <p th:text="${memberDto.userNM}">별명</p>
-            </div>
-          </li><!-- mypage-Area--left-user -->
-          <li class="mypage-Area--left-user">
-            <div class="left--userName">
-              <p th:text="${memberDto.userDate}">작성글</p>
-            </div>
-          </li><!-- mypage-Area--left-user -->
-          <li class="mypage-Area--left-user">
-            <div class="left--userName">
-              <p th:text="${memberDto.userDate}">가입일자</p>
-            </div>
-          </li><!-- mypage-Area--left-user -->
-        </ul>
-      </div>
-    </article><!-- .mypage-Area--left -->
-    <article class="mypage-Area--right">
-      <div class="mypage-Area--right-userContnet">
-        <ul>
-          <li><a href="/member/join">회원정보 수정</a></li>
-          <li><a href="">이미지 수정</a></li>
-          <li><a href="">글 수정</a></li>
-        </ul>
-      </div>
-    </article><!-- mypage-Area--right -->
+          </div><!-- control-area01--profile-img -->
+          <div class="control-area01--profile-item">
+            <div class="control-area01--profile-list">
+              <form action="">
+                <ul>
+                  <li>
+                    <span>닉네임</span>
+                    <label for="exampleFormControlInput1" class="form-label"></label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                    <button class="btn btn-primary">수정</button>
+                  </li>
+                  <li>
+                    <span>아이디</span>
+                    <label for="exampleFormControlInput1" class="form-label"></label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" disabled>
+                  </li>
+                  <li>
+                    <div>
+                      * <span>가입일</span>
+                      <p>0</p>*
+                      <span>작성 글</span>
+                      <p>0</p>*
+                      <span>작성 덧글</span>
+                      <p>0</p>*
+                      <span>받은 추천</span>
+                      <p>0</p>
+                    </div>
+                  </li>
+                </ul>
+                <div>
+                  <button class="btn btn-primary">수정완료</button>
+                </div>
+              </form>
+            </div><!-- control-area01--profile-list -->
+          </div><!-- control-area01--profile-item -->
+        </div><!-- control-area01--profile -->
+      </div><!-- mypage-Area--control-area01 -->
+      <div class="mypage-Area--control-area02">
+        <div class="control-area02--title">
+          <h4>작성글</h4>
+          <span class="btn btn-primary">더 보기</span>
+        </div>
+        <div class="control-area02--boxContent">
+          <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+          </ul>
+        </div><!-- control-area02--boxContent -->
+      </div><!-- mypage-Area--control-area02 -->
+      <div class="mypage-Area--control-area03 mypage-Area--control-area02">
+        <div class="control-area02--title">
+          <h4>최근 감상</h4>
+          <span class="btn btn-primary">더 보기</span>
+        </div>
+        <div class="control-area02--boxContent">
+          <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+          </ul>
+        </div><!-- control-area02--boxContent -->
+      </div><!-- mypage-Area--control-area02 -->
+      <div class="mypage-Area--control-area04 mypage-Area--control-area02">
+        <div class="control-area02--title">
+          <h4>복마크</h4>
+          <span class="btn btn-primary">더 보기</span>
+        </div>
+        <div class="control-area02--boxContent">
+          <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+          </ul>
+        </div><!-- control-area02--boxContent -->
+      </div><!-- mypage-Area--control-area02 -->
+      <div class="mypage-Area--control-area05 mypage-Area--control-area02">
+        <h4></h4>
+        <div class="control-area02--title">
+          <h4>좋아요</h4>
+          <span class="btn btn-primary">더 보기</span>
+        </div>
+        <div class="control-area02--boxContent">
+          <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+          </ul>
+        </div><!-- control-area02--boxContent -->
+      </div><!-- mypage-Area--control-area02 -->
+    </article><!-- mypage-Area--control -->
   </section><!-- .mypage-Area--section -->
+
+
+  <!-- <div class="mypage-Area--left-title">
+    <span>회원정보 (공사중)</span>
+  </div> mypage-Area--left-title 
+  <div class="mypage-Area--left-myImg">
+    <img th:src="@{uploadFolder/${memberDto.userIconReal}}" alt="">
+  </div><!-- mypage-Area--left-myImg
+  <div class="mypage-Area--left-userContent">
+    <ul>
+      <li class="mypage-Area--left-user">
+        <div class="left--userName">
+          <p th:text="${memberDto.userID}">아이디</p>
+        </div>
+      </li><!-- mypage-Area--left-user
+      <li class="mypage-Area--left-user">
+        <div class="left--userName">
+          <p th:text="${memberDto.userNM}">별명</p>
+        </div>
+      </li><!-- mypage-Area--left-user
+      <li class="mypage-Area--left-user">
+        <div class="left--userName">
+          <p th:text="${memberDto.userDate}">작성글</p>
+        </div>
+      </li><!-- mypage-Area--left-user
+      <li class="mypage-Area--left-user">
+        <div class="left--userName">
+          <p th:text="${memberDto.userDate}">가입일자</p>
+        </div>
+      </li><!-- mypage-Area--left-user
+    </ul>
+  </div>
+</article><!-- .mypage-Area--left 
+<article class="mypage-Area--right">
+  <div class="mypage-Area--right-userContnet">
+    <ul>
+      <li><a href="/member/join">회원정보 수정</a></li>
+      <li><a href="">이미지 수정</a></li>
+      <li><a href="">글 수정</a></li>
+    </ul>
+  </div> -->
 
 
 

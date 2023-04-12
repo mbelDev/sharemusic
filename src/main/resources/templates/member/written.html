@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/include/layoutMember.html}">
+  <main id="mainPage-Area" class="container" layout:fragment="contents">
+    <section class="main-constent--itmes">
+        <div style="display: flex; align-content: center; flex-direction: column;">
+            <span th:text="${memberDto}"></span>
+            <span th:text="${historyList}"></span>
+
+                <div style="display: flex; justify-content: center;">
+                    <!-- 작성 글 목록 -->
+                    <!--   BOARD에서 POSTAUTH = USERID인 것들 불러오기 -->
+                    <ul>
+                        <li th:each="item:${historyList}">
+                            <a th:href="@{/board/view(postNo=${item.postNo})}">
+                                <img  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                                alt="" style="display:inline-block; width:246px; height: 138px;">
+                            </a>
+                                <span th:text="${item.postAuth}">작성자</span>
+                                <span th:text="${item.postTitle}">곡 명</span>
+                                <span th:text="${item.postSinger}">가수 명</span>
+                                <span th:text="${item.postDate}">시청일자</span>
+                                <span th:text="${item.postLike}">시청일자</span>
+                                <span class="btn-like" style="display:inline-block; width:15px; height:15px; background:#fff"></span>
+                                <span class="btn-like" style="display:inline-block; width:15px; height:15px; background:#fff"></span>
+                        </li>
+                        
+                        <li th:if="${#lists.isEmpty(historyList)}">
+                                <div style="display:block; height:200px; width: 600px; border: 1px solid #fff;">
+                                    <span style="display:block ;color:#fff; font-style: bold; margin-top: 90px;">아직 작성하신 곡이 한 곡도 없어요!! </span>
+                                </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="display: flex; justify-content: center;">
+                    <!-- 좋아요 누른 글 목록 -->
+                    <!-- BOARD_RECORD에서 WHERE LIKE = 1 의 POSTNO를 받아오기. -->
+                </div>
+            </div>
+    </section><!-- main-constent--itmes -->
+  </main>
+  <script>
+    like($(".btn-like"),$(".btn-like").val());
+    bookmark($(".btn-bookmark"),$(".btn-bookmark").val());
+
+  </script>
+</html>
