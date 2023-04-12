@@ -8,15 +8,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Music</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/mdb.min.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/mainPage.css" />
+  <link rel="stylesheet" href="/css/mypage.css" />
 
-  <link rel="stylesheet" href="/css/reset.css">
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/layout.css">
-  <link rel="stylesheet" href="/css/mainPage.css">
+  <link rel="stylesheet" href="/css/boardView.css" />
+  <link rel="stylesheet" href="/css/boardModify.css" />
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
   <script src="/js/mainJs/layout.js" defer></script>
   <script src="/js/mainJs/mainPage.js" defer></script>
+  <script src="/js/board/view.js" defer></script>
   <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/mdb.min.js"></script>
   <script src="/js/jquery-3.6.3.min.js"></script>
   
 </head>
@@ -26,21 +34,13 @@
     <section id="headerLayout-Area">
       <article class="headerLayout-Area--logo">
         <div class="logo left-items">
-          <img src="/images/logo.png" alt="logo">
+          <a href="/mainPage"><img src="/images/logo.png" alt="logo"></a>
         </div>
 
       </article><!-- .headerLayout-Area--joinForm -->
       <article class="headerLayout-Area--infoForm">
         <div class="left-items">
-            <th:block th:if="${loggedUser == null}">
-              <!-- 기본 회원정보 -->
-              <div>
-                <img th:src="" alt="" style="width: 150px; height: 150px;">
-                        </div>
-                        <div>
-                <span th:text="로그인 해 주세요">별명</span>
-
-            </th:block>
+    
             <th:block th:unless="${loggedUser == null}">
               <!-- 기본 회원정보 -->
               <div>
@@ -52,12 +52,6 @@
               <div>
                 <span th:text="${loggedUser.userID}">아이디</span>
               </div>
-              <!-- <div>
-                <span th:text="${loggedUser.userDate}">가입일자</span>
-              </div>
-              <div>
-                <span th:text="${loggedUser.userDate}">작성 글 갯수</span>
-              </div> -->
             </th:block>
         </div>
       </article><!-- .headerLayout-Area--searchForm -->

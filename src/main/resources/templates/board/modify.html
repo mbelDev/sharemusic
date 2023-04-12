@@ -182,7 +182,7 @@
             <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->
             <input type="hidden" name="postNo" th:value="${param.postNo}" />
             <button class="btn btn-primary">수정완료</button>
-            <button type="reset" class="btn btn-secondary">취소</button>
+            <a th:href="@{/board/view(postNo=${boardDto.postNo})}" type="reset" class="btn btn-secondary">취소</a>
           </div>
         </form>
       </article>

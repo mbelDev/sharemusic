@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: #000;
+  background-color: #2e2e2e;
 }
 
 .left-items {
@@ -14,8 +14,7 @@ body {
   margin: 0 8% 0 8%;
 }
 .left-items.lien {
-  border-top: 1px solid rgba(170, 170, 170, 0.6156862745);
-  border-bottom: 1px solid rgba(170, 170, 170, 0.6156862745);
+  border-bottom: 1px solid #555554;
 }
 
 #headerLayout-Area {
@@ -25,8 +24,8 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  outline: 1px solid rgba(170, 170, 170, 0.6156862745);
-  background-color: #000;
+  border-right: 3px solid #555554;
+  background-color: #333;
   z-index: 99;
 }
 #headerLayout-Area .headerLayout-Area--logo .logo img {

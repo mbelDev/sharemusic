@@ -10,10 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Music</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/mdb.min.css" />
@@ -23,14 +20,13 @@
 
     <link rel="stylesheet" href="/css/boardView.css" />
     <link rel="stylesheet" href="/css/boardModify.css" />
+    <link rel="stylesheet" href="/css/boardWrite.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <script src="/js/mainJs/layout.js" defer></script>
     <script src="/js/mainJs/mainPage.js" defer></script>
     <script src="/js/board/view.js" defer></script>
+    <script src="/js/board/write.js" defer></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/mdb.min.js"></script>
     <script src="/js/jquery-3.6.3.min.js"></script>
@@ -43,20 +39,13 @@
           <div class="logo left-items">
             <a href="/mainPage"><img src="/images/logo.png" alt="logo" /></a>
           </div>
-        </th:block>
-        <th:block th:unless="${loggedUser == null}">
-          <div class="join left-items lien">
-            <a href="/member/login">회원정보</a>
-            <a th:href="@{/member/logout}">로그아웃</a>
-          </div>
-        </th:block>
-      </article><!-- .headerLayout-Area--joinForm -->
-      <article class="headerLayout-Area--searchForm">
-        <div class="search left-items">
-          <form action="">
-            <div class="search-icon">
-              <button><img src="/images/search.svg" alt=""></button>
-              <input type="text" name="" placeholder="Search...">
+        </article>
+        <!-- .headerLayout-Area--logo -->
+        <article class="headerLayout-Area--joinForm">
+          <th:block th:if="${loggedUser == null}">
+            <div class="join left-items lien">
+              <a href="/member/login">로그인</a>
+              <a href="/member/join">회원가입</a>
             </div>
           </th:block>
           <th:block th:unless="${loggedUser == null}">
@@ -70,19 +59,22 @@
         <article class="headerLayout-Area--searchForm">
           <div class="search left-items">
             <form action="/mainPage">
-              <div class="search-icon">
-                <!-- 검색 기능 -->
-                <button>
+              <div class="input-group">
+                <div class="form-outline">
+                  <input type="search" id="form1" class="form-control" name="searchTxt" th:value="${searchTxt}"/>
+                  <!-- <label class="form-label" for="form1">Search</label> -->
+                </div>
+                <button type="submit" class="btn btn-primary">
                   <img src="/images/search.svg" alt="" />
                 </button>
-                <input
-                  type="text"
-                  name="searchTxt"
-                  placeholder="Search..."
-                  value=""
-                  th:value="${searchTxt}"
-                />
               </div>
+
+              <!-- <div class="search-icon">
+                검색 기능
+                <button>
+                </button>
+                <input type="text"  placeholder="Search..." value="" />
+              </div> -->
             </form>
           </div>
         </article>

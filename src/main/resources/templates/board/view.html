@@ -3,10 +3,7 @@
   lang="en"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   xmlns:th="http://www.thymeleaf.org"
-  layout:decorate="~{/include/layout.html}"
->
-  >
-
+  layout:decorate="~{/include/layout.html}">
   <main id="mainPage-Area" class="container" layout:fragment="contents">
     <section class="board-view--page">
       <article class="board-view--img">
@@ -28,7 +25,7 @@
             등록 <span th:text="${boardDto.postDate}">0</span> * 조회수
             <span th:text="${boardDto.postHits}">0</span>
           </div>
-          <div>
+          <div class="board-view--listItem-setSplit">
             <!-- if 장르가 기타일 경우 표시 -->
             <span
               th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
@@ -53,6 +50,10 @@
               th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[1]}"
               >분위기</span
             >
+          </div><!-- board-view--listItem-setSplit -->
+          <div class="listItem-controller02">
+            <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btn btn-primary">수정</a>
+            <button id="ModalBox" class="btn btn-secondary">삭제</button>
           </div>
         </div>
         <!-- board-view--listItem-name -->
@@ -62,17 +63,12 @@
               <img src="/images/good.svg" alt="" />
               <span th:text="${boardDto.postLike}" class="postLike">0</span>
             </div>
-            <button class="btnShare">
+            <button class="btnOpen btnShare">
               <img src="/images/open.svg" alt="" />
             </button>
-          </div>
-          <div class="listItem-controller02">
-            <a
-              href="/board/modify"
-              th:href="@{/board/modify(postNo=${boardDto.postNo})}"
-              >수정</a
-            >
-            <button class="btnDelete">삭제</button>
+            <!-- <button class="btnShare settings">
+              <img src="/images/settings.svg" alt="" />
+            </button> -->
           </div>
         </div>
         <!-- board-view--listItem-controller -->
@@ -94,20 +90,34 @@
     <section class="board-view--subPage">
       <div class="boardView-swiper mySwiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div th:each="item : ${postList}">
-              <a href="">
-                <img
-                  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                  alt=""
-                />
-              </a>
-            </div>
-          </div>
+          <div class="swiper-slide">1</div>
+          <div class="swiper-slide">2</div>
+          <div class="swiper-slide">3</div>
+          <div class="swiper-slide">4</div>
+          <div class="swiper-slide">5</div>
+          <div class="swiper-slide">6</div>
+          <div class="swiper-slide">7</div>
+          <div class="swiper-slide">8</div>
+          <div class="swiper-slide">9</div>
         </div>
       </div>
+
+      <!-- 모달창 -->
+      <div id="ModalThis">
+        <div class="ModalThis-item">
+          <button class="closeModel">닫기</button>
+          <div class="ModalThis-content">
+
+            <!-- 모달창 안에 여기 내용 작성 -->
+            
+          </div><!-- ModalThis-content -->
+        </div><!-- write-modal--item -->
+      </div><!-- write-modal -->
+
     </section>
     <!-- board-view--subPage -->
+
+
   </main>
   <script th:inline="javascript">
     /*<![CDATA[*/

@@ -58,10 +58,7 @@
         <div class="getList-ItemBox">
           <ul>
             <li th:each="item : ${postList}">
-              <a
-                href="/board/view"
-                th:href="@{/board/view(postNo=${item.postNo})}"
-              >
+              <a href="/board/view" th:href="@{/board/view(postNo=${item.postNo})}">
                 <div class="ItemBox-imgs">
                   <img
                     th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
