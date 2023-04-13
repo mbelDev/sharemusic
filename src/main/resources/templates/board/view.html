@@ -3,7 +3,8 @@
   lang="en"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   xmlns:th="http://www.thymeleaf.org"
-  layout:decorate="~{/include/layout.html}">
+  layout:decorate="~{/include/layout.html}"
+>
   <main id="mainPage-Area" class="container" layout:fragment="contents">
     <section class="board-view--page">
       <article class="board-view--img">
@@ -52,9 +53,18 @@
               th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[1]}"
               >분위기</span
             >
-          </div><!-- board-view--listItem-setSplit -->
-          <div class="listItem-controller02">
-            <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btn btn-primary">수정</a>
+          </div>
+          <!-- board-view--listItem-setSplit -->
+          <div
+            class="listItem-controller02"
+            th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}"
+          >
+            <a
+              href="/board/modify"
+              th:href="@{/board/modify(postNo=${boardDto.postNo})}"
+              class="btn btn-primary"
+              >수정</a
+            >
             <button id="ModalBox" class="btn btn-secondary">삭제</button>
           </div>
         </div>
@@ -68,14 +78,6 @@
             <button class="btnOpen btnShare">
               <img src="/images/open.svg" alt="" />
             </button>
-          </div>
-          <div th:if="${boardDto.postAuth == loggedUser.userID}" class="listItem-controller02">
-            <a
-              href="/board/modify"
-              th:href="@{/board/modify(postNo=${boardDto.postNo})}"
-              >수정</a
-            >
-            <button class="btnDelete">삭제</button>
           </div>
         </div>
         <!-- board-view--listItem-controller -->
@@ -117,59 +119,65 @@
         <div class="ModalThis-item">
           <button class="closeModel">닫기</button>
           <div class="ModalThis-content">
-
             <!-- 모달창 안에 여기 내용 작성 -->
-            
-          </div><!-- ModalThis-content -->
-        </div><!-- write-modal--item -->
-      </div><!-- write-modal -->
-
+            <h3>정말로 삭제하시겠습니까?</h3>
+            <button id="btnDeleteConfirm">확인</button>
+            <button>취소</button>
+          </div>
+          <!-- ModalThis-content -->
+        </div>
+        <!-- write-modal--item -->
+      </div>
+      <!-- write-modal -->
     </section>
     <!-- board-view--subPage -->
 
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      const postNo = [[${boardDto.postNo}]];
+      const postLike = $(".postLike").text();
+      const postAuth = [[${boardDto.postAuth}]];
 
-
-  </main>
-  <script th:inline="javascript">
-    /*<![CDATA[*/
-    const postNo = [[${boardDto.postNo}]];
-    const postLike = $(".postLike").text();
-
-      // 추천 수 누를 때 이벤트
-      $(".btnPostLike").on("click", function (){
-        const sendData = {
-          postNo: postNo,
-          postLike: postLike
-        }
-
-        $.ajax({
-          url: "/board/updateLike",
-          type: "POST",
-          data: sendData,
-          success: function(response) {
-            if (response.result != null) {
-              $(".postLike").text(response.postLike);
-            }
-          },
-          error: function(err) {
-            console.log(err);
+        // 추천 수 누를 때 이벤트
+        function postGood() {
+          console.log("btnPostLikeClicked");
+          const sendData = {
+            postNo: postNo,
+            postLike: postLike
           }
-        })
-      });
 
-      // modal로 할거면 수정
-      $(".btnDelete").on("click", function(){
-        if(confirm("정말로 삭제하시겠습니까?")){
           $.ajax({
-            url: "/board/delete",
-            type:  "POST",
-            data: {"postNo": postNo},
+            url: "/board/updateLike",
+            type: "POST",
+            data: sendData,
             success: function(response) {
-              location.href="/mainPage/mainPage";
+              if (response.result != null) {
+                $(".postLike").text(response.postLike);
+              }
+            },
+            error: function(err) {
+              console.log(err);
             }
           })
         }
-      })
-    /*]]>*/
-  </script>
+
+        $("#btnDeleteConfirm").on("click", function() {
+          console.log("btnDeleteClicked");
+          $.ajax({
+            url: "/board/delete",
+            type: "POST",
+            data: {"postNo": postNo},
+            success: function(response) {
+              if (response.msg == "ok") {
+                 location.href="/mainPage/";
+              } else {
+                location.reload();
+              }
+            }
+          })
+        })
+
+      /*]]>*/
+    </script>
+  </main>
 </html>

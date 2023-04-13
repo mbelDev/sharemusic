@@ -57,6 +57,9 @@ public class MemberController {
     }
     MemberDto memberDto = memberService.getMemberLogged(loggedUser);
     model.addAttribute("memberDto", memberDto);
+    Map<String, Object> historyList = new HashMap<>();
+    historyList = memberService.getHistoryList(loggedUser);
+    model.addAttribute("history", historyList);
     return "/member/mypage";
   }
 

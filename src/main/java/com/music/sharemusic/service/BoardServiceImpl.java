@@ -25,9 +25,6 @@ public class BoardServiceImpl implements BoardService {
 
   @Override
   public void putPost(BoardDto boardDto) {
-    // 로그인 한 유저의 이름 받아오기
-    boardDto.setPostAuth("임시 작성자");
-
     boardDao.putPost(boardDto);
   }
 
@@ -38,12 +35,20 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public List<BoardDto> getPostAll(String searchTxt, String sort) {
+  public List<BoardDto> getPostAll(String genre, String searchTxt, String sort) {
     HashMap<String, String> hashMap = new HashMap<>();
+    hashMap.put("genre", genre);
     hashMap.put("searchTxt", searchTxt);
     hashMap.put("sort", sort);
+    log.info("==========" + hashMap);
 
     List<BoardDto> result = boardDao.getPostAll(hashMap);
+    return result;
+  }
+
+  @Override
+  public List<BoardDto> getRankPost() {
+    List<BoardDto> result = boardDao.getRankPost();
     return result;
   }
 
@@ -73,7 +78,8 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public void deletePost(BoardDto boardDto) {
-    boardDao.deletePost(boardDto);
+  public int deletePost(BoardDto boardDto) {
+    int result = boardDao.deletePost(boardDto);
+    return result;
   }
 }

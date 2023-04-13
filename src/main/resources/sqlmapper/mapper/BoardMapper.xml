@@ -20,13 +20,25 @@
 <select id="getPostAll" parameterType="HashMap" resultType="BoardDto">
   SELECT * FROM BOARD
   <if test="searchTxt != null">
-    WHERE
-    (postAuth LIKE '%' || #{searchTxt} || '%') OR
-    (postTitle LIKE '%' || #{searchTxt} || '%') OR
-    (postSinger LIKE '%' || #{searchTxt} || '%') OR
-    (postCont LIKE '%' || #{searchTxt} || '%')
+    WHERE (
+    (LOWER(POSTAUTH) LIKE '%' || #{searchTxt} || '%') OR
+    (LOWER(POSTTITLE) LIKE '%' || #{searchTxt} || '%') OR
+    (LOWER(POSTSINGER) LIKE '%' || #{searchTxt} || '%') OR
+    (LOWER(POSTCONT) LIKE '%' || #{searchTxt} || '%')
+    )
+  </if>
+  <if test="genre != null">
+    AND
+    POSTGENRE = #{genre}
   </if>
     ORDER BY ${sort} desc
+</select>
+
+<!-- 랭킹 글 불러오기 -->
+<select id="getRankPost" resultType="BoardDto">
+  SELECT * FROM (
+    SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
+  ) WHERE ROWNUM <![CDATA[<=]]> 5
 </select>
 
 <!-- 글 내용 수정하기 -->

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/board")
@@ -78,45 +80,32 @@ public class BoardController {
   }
 
   @PostMapping("/modify")
-  public String modifyprogress(
-    BoardDto boardDto,
-    @RequestParam(required = false) String genreEtc,
-    @RequestParam(required = false) String emoteEtc
-  ) {
-    if (genreEtc != "" && (boardDto.getPostGenre()).equals("etc")) {
-      boardDto.setPostGenre("etc-" + genreEtc);
-    }
-
-    if (emoteEtc != "" && (boardDto.getPostEmote()).equals("etc")) {
-      boardDto.setPostEmote("etc-" + emoteEtc);
-    }
-
+  public String modifyprogress(BoardDto boardDto) {
     boardService.updatePost(boardDto);
-    return "redirect:/mainPage/mainPage";
+    return "redirect:/board/view?postNo=" + boardDto.getPostNo();
   }
 
   @PostMapping("/write")
-  public String writeprogress(
-    BoardDto boardDto,
-    @RequestParam(required = false) String genreEtc,
-    @RequestParam(required = false) String emoteEtc
-  ) {
-    if (genreEtc != "" && (boardDto.getPostGenre()).equals("etc")) {
-      boardDto.setPostGenre("etc-" + genreEtc);
-    }
-
-    if (emoteEtc != "" && (boardDto.getPostEmote()).equals("etc")) {
-      boardDto.setPostEmote("etc-" + emoteEtc);
-    }
-
+  public String writeprogress(HttpServletRequest request, BoardDto boardDto) {
+    LoggedDto loggedUser = loggedUser(request);
+    boardDto.setPostAuth(loggedUser.getUserNM());
     boardService.putPost(boardDto);
-    return "redirect:/mainPage/mainPage";
+    return "redirect:/mainPage/";
   }
 
   @PostMapping("/delete")
-  public String delete(BoardDto boardDto) {
-    boardService.deletePost(boardDto);
-    return "redirect:/mainPage/mainPage";
+  @ResponseBody
+  public Map<String, Object> delete(BoardDto boardDto) {
+    int result = boardService.deletePost(boardDto);
+    Map<String, Object> sendJson = new HashMap<>();
+
+    if (result > 0) {
+      sendJson.put("msg", "ok");
+    } else {
+      sendJson.put("msg", "fail");
+    }
+    
+    return sendJson;
   }
 
   @PostMapping("/updateLike")
