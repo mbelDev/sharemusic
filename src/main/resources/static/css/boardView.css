@@ -104,3 +104,25 @@ main {
   -o-object-fit: cover;
      object-fit: cover;
 }
+
+.good-img {
+  width: 34px;
+  height: 34px;
+  border-radius: 100%;
+  background-color: #2e2e2e;
+  cursor: pointer;
+}
+
+.liked {
+  animation: blink 0.25s forwards;
+}
+
+@keyframes blink {
+  10% {
+    transform: scale(0.42);
+    background: #8815b7;
+  }
+  100% {
+    background: #e01f4f;
+  }
+}

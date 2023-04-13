@@ -1,0 +1,82 @@
+
+.recent-page {
+  .recent-page--listBox {
+    .recent-page--list {
+      ul {
+        width: 100%;
+        .liLine {
+          width: 100%;
+          border-bottom: 1px solid #555556;
+        }
+        li {
+          display: flex;
+        justify-content: center;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin: 30px 0;
+          width: 100%;
+          // border-top: 1px solid #fff;
+          // border-bottom: 1px solid #fff;
+          a {
+            display: inline-block;
+            width: 1000px;
+            .recent-listImg--box {
+              display: flex;
+              p {
+                margin-bottom: 0;
+              }
+              .recent-listImg--img {
+                width: 246px;
+                img {
+                  width: 246px;
+                  height: 138px;
+                }
+              }//.recent-listImg--img
+              .recent-listImg--content {
+                width: 100%;
+                margin-left: 20px;
+                .recent-music--title-All {
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  .recent-music--title {
+                    p {
+                      font-size: 26px;
+                      font-weight: bold;
+                      color: #fff;
+                      z-index: 1;
+                    }
+                  }//.recent-music--title
+                  .recent-music--title01 {
+                    height: 70%;
+                    display: flex;
+                    justify-content: space-between;
+                    p {
+                      &:nth-child(2) {
+                        font-size: 17px;
+                        font-weight: 500;
+                      }
+                    }
+                    .btn-like, .btn-bookmark {
+                      z-index: 1;
+                    }
+                  }//.recent-music--title01
+                  .recent-music--title02 {
+                    height: 20%;
+                    display: flex;
+                    justify-content: space-between;
+                    p {
+                      font-size: 14px;
+                      font-weight: 300;
+                    }
+                  }//.recent-music--title02
+                }//.recent-music--title-All
+              }//.recent-listImg--content
+            }//.recent-listImg--box
+          }
+        }
+      }
+    }//.recent-page--list
+  }//.recent-page--listBox
+}//.recent-page
