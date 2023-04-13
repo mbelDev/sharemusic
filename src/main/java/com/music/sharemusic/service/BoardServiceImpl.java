@@ -25,9 +25,6 @@ public class BoardServiceImpl implements BoardService {
 
   @Override
   public void putPost(BoardDto boardDto) {
-    // 로그인 한 유저의 이름 받아오기
-    boardDto.setPostAuth("임시 작성자");
-
     boardDao.putPost(boardDto);
   }
 
@@ -81,7 +78,8 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public void deletePost(BoardDto boardDto) {
-    boardDao.deletePost(boardDto);
+  public int deletePost(BoardDto boardDto) {
+    int result = boardDao.deletePost(boardDto);
+    return result;
   }
 }

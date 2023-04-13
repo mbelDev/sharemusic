@@ -121,6 +121,9 @@
           <button class="closeModel">닫기</button>
           <div class="ModalThis-content">
             <!-- 모달창 안에 여기 내용 작성 -->
+            <h3>정말로 삭제하시겠습니까?</h3>
+            <button id="btnDeleteConfirm">확인</button>
+            <button>취소</button>
           </div>
           <!-- ModalThis-content -->
         </div>
@@ -159,19 +162,20 @@
           })
         }
 
-        // modal로 수정
-        $(".btnDelete").on("click", function(){
-          console.log("clicked");
-          if(confirm("정말로 삭제하시겠습니까?")){
-            $.ajax({
-              url: "/board/delete",
-              type:  "POST",
-              data: {"postNo": postNo},
-              success: function(response) {
-                //location.href="/mainPage/";
+        $("#btnDeleteConfirm").on("click", function() {
+          console.log("btnDeleteClicked");
+          $.ajax({
+            url: "/board/delete",
+            type: "POST",
+            data: {"postNo": postNo},
+            success: function(response) {
+              if (response.msg == "ok") {
+                 location.href="/mainPage/";
+              } else {
+                location.reload();
               }
-            })
-          }
+            }
+          })
         })
 
       /*]]>*/

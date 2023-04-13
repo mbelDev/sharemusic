@@ -93,35 +93,9 @@
               >
                 보컬로이드
               </option>
-              <option
-                value="etc"
-                th:selected="${#strings.setSplit(boardDto.postGenre, '-')[0]} == 'etc'"
-              >
+              <option value="etc" th:selected="${boardDto.postGenre=='etc'}">
                 기타
               </option>
-              <div class="postGenre-input form-floating">
-                <!-- 기타 선택할 시 나타날 input -->
-                <!-- if 장르가 기타일 경우 표시 -->
-                <input
-                  type="text"
-                  class="genreEtc form-control"
-                  id="floatingInput"
-                  th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
-                  value=""
-                  name="genreEtc"
-                  placeholder="'기타' 선택시 입력해주세요."
-                />
-                <!-- unless 장르가 기타가 아닐 경우 표시 -->
-                <input
-                  type="text"
-                  class="genreEtc"
-                  th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
-                  th:value="${#strings.setSplit(boardDto.postGenre, '-')[1]}"
-                  name="genreEtc"
-                  placeholder="'기타' 선택시 입력해주세요."
-                />
-              </div>
-              <!-- postGenre-input -->
             </select>
           </div>
           <!-- boardModify-music--Genre -->
@@ -148,32 +122,9 @@
               >
                 으스스
               </option>
-              <option
-                value="etc"
-                th:selected="${#strings.setSplit(boardDto.postEmote, '-')[0]} == 'etc'"
-              >
+              <option value="etc" th:selected="${boardDto.postEmote=='etc'}">
                 기타
               </option>
-              <!-- 기타 선택할 시 나타날 input -->
-              <!-- if 분위기가 기타일 경우 표시 -->
-              <input
-                type="text"
-                class="emoteEtc form-control"
-                id="floatingInput"
-                th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
-                value=""
-                name="emoteEtc"
-                placeholder="'기타' 선택시 입력해주세요."
-              />
-              <!-- unless 장르가 기타가 아닐 경우 표시 -->
-              <input
-                type="text"
-                class="emoteEtc"
-                th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
-                th:value="${#strings.setSplit(boardDto.postEmote, '-')[1]}"
-                name="emoteEtc"
-                placeholder="'기타' 선택시 입력해주세요."
-              />
             </select>
           </div>
           <!-- boardModify-music--Emote -->
@@ -211,32 +162,6 @@
           // 유튜브 링크를 다시 확인하라고 경고 창
         }
         return false;
-      });
-
-      // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
-      if ($(".postGenre").val() != "etc") {
-        $(".genreEtc").hide();
-      }
-
-      $(".postGenre").change(function () {
-        if ($(".postGenre").val() == "etc") {
-          $(".genreEtc").show();
-        } else {
-          $(".genreEtc").hide();
-        }
-      });
-
-      // input 숨겨뒀다가 select에서 기타를 선택할 시 input 보이기
-      if ($(".postEmote").val() != "etc") {
-        $(".emoteEtc").hide();
-      }
-
-      $(".postEmote").change(function () {
-        if ($(".postEmote").val() == "etc") {
-          $(".emoteEtc").show();
-        } else {
-          $(".emoteEtc").hide();
-        }
       });
     </script>
   </main>

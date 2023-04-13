@@ -37,6 +37,6 @@ public interface BoardDao {
 
   // 글 누르면 조회수 업데이트
 
-  public void deletePost(BoardDto boardDto);
+  public int deletePost(BoardDto boardDto);
   //view 에서 요청. 글 삭제하기
 }
