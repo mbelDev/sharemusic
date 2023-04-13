@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@SessionAttributes("loggedUser")
 @Controller
+@SessionAttributes("loggedUser")
 @RequestMapping("/member")
 @Log4j2
 public class MemberController {
@@ -38,8 +38,7 @@ public class MemberController {
   MemberServiceImpl memberService;
 
   @ModelAttribute("loggedUser")
-  public LoggedDto loggedUser(HttpServletRequest request) {
-    HttpSession session = request.getSession(false);
+  public LoggedDto loggedUser(HttpSession session) {
     LoggedDto loggedUser = null;
     if (session == null || session.getAttribute("loggedUser") == null) {
       return null;
