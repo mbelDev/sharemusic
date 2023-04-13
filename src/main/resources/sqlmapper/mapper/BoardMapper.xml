@@ -21,10 +21,10 @@
   SELECT * FROM BOARD
   <if test="searchTxt != null">
     WHERE (
-    (POSTAUTH LIKE '%' || #{searchTxt} || '%') OR
-    (POSTTITLE LIKE '%' || #{searchTxt} || '%') OR
-    (POSTSINGER LIKE '%' || #{searchTxt} || '%') OR
-    (POSTCONT LIKE '%' || #{searchTxt} || '%')
+    (LOWER(POSTAUTH) LIKE '%' || #{searchTxt} || '%') OR
+    (LOWER(POSTTITLE) LIKE '%' || #{searchTxt} || '%') OR
+    (LOWER(POSTSINGER) LIKE '%' || #{searchTxt} || '%') OR
+    (LOWER(POSTCONT) LIKE '%' || #{searchTxt} || '%')
     )
   </if>
   <if test="genre != null">

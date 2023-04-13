@@ -68,26 +68,23 @@
             <form
               th:action="@{/mainPage/{genre}(genre=${genre}, sort=${param.sort})}"
             >
-              <div class="search-icon">
-                <button>
+              <div class="input-group">
+                <div class="form-outline">
+                  <input type="hidden" name="sort" th:value="${param.sort}" />
+                  <input
+                    type="search"
+                    id="form1"
+                    class="form-control"
+                    name="searchTxt"
+                    placeholder="Search..."
+                    value=""
+                    th:value="${searchTxt}"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
                   <img src="/images/search.svg" alt="" />
                 </button>
-                <input type="hidden" name="sort" th:value="${param.sort}" />
-                <input
-                  type="text"
-                  name="searchTxt"
-                  placeholder="Search..."
-                  value=""
-                  th:value="${searchTxt}"
-                />
               </div>
-
-              <!-- <div class="search-icon">
-                검색 기능
-                <button>
-                </button>
-                <input type="text"  placeholder="Search..." value="" />
-              </div> -->
             </form>
           </div>
         </article>

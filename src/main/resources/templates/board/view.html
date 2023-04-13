@@ -55,7 +55,10 @@
             >
           </div>
           <!-- board-view--listItem-setSplit -->
-          <div class="listItem-controller02">
+          <div
+            class="listItem-controller02"
+            th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}"
+          >
             <a
               href="/board/modify"
               th:href="@{/board/modify(postNo=${boardDto.postNo})}"
@@ -76,18 +79,6 @@
             <button class="btnOpen btnShare">
               <img src="/images/open.svg" alt="" />
             </button>
-          </div>
-          <div
-            th:if="${boardDto.postAuth == loggedUser.userID}"
-            class="listItem-controller02"
-          >
-            <a
-              class="btnModify"
-              href="/board/modify"
-              th:href="@{/board/modify(postNo=${boardDto.postNo})}"
-              >수정</a
-            >
-            <button class="btnDelete">삭제</button>
           </div>
         </div>
         <!-- board-view--listItem-controller -->
@@ -144,7 +135,6 @@
       const postNo = [[${boardDto.postNo}]];
       const postLike = $(".postLike").text();
       const postAuth = [[${boardDto.postAuth}]];
-      const loggedUserNM = [[${session.loggedUser.userNM}]];
 
         // 추천 수 누를 때 이벤트
         function postGood() {
@@ -184,14 +174,6 @@
           }
         })
 
-        // 로그인한 유저와 등록한 유저가 같을 때만 수정, 삭제 표시
-        if (loggedUserNM == postAuth) {
-          $(".btnDelete").show();
-          $(".btnModify").show();
-        } else {
-          $(".btnDelete").hide();
-          $(".btnModify").hide();
-        }
       /*]]>*/
     </script>
   </main>
