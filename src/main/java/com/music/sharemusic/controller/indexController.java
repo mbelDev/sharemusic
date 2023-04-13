@@ -4,28 +4,25 @@ import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.service.BoardService;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes("loggedUser")
 @Slf4j
 public class indexController {
 
   @Autowired
   BoardService boardService;
 
-  @ModelAttribute("loggedUser")
-  public LoggedDto loggedUser(HttpServletRequest request) {
-    HttpSession session = request.getSession(false);
+  public LoggedDto loggedUser(HttpSession session) {
     LoggedDto loggedUser = null;
     if (session == null || session.getAttribute("loggedUser") == null) {
       return null;
@@ -40,14 +37,17 @@ public class indexController {
     return "/intro";
   }
 
- 
-  @GetMapping(value = {"/mainPage", "mainPage/{genre}"})
+  @GetMapping(value = { "/mainPage", "mainPage/{genre}" })
   //Value Path 입니다. genre를 받아서 해당 장르만 뿌려주세요.
-  public String indexGenre(HttpServletRequest request, Model model, @PathVariable(name = "genre", required = false) String genre, @RequestParam(defaultValue = "") String searchTxt, 
-  @RequestParam(defaultValue = "postNo") String sort) {
-    HttpSession session = request.getSession();
-    if (session != null && session.getAttribute("loggedUser") != null) {
-      LoggedDto loggedUser = (LoggedDto) session.getAttribute("loggedUser");
+  public String indexGenre(
+    HttpSession session,
+    Model model,
+    @PathVariable(name = "genre", required = false) String genre,
+    @RequestParam(defaultValue = "") String searchTxt,
+    @RequestParam(defaultValue = "postNo") String sort
+  ) {
+    if (loggedUser(session) != null) {
+      LoggedDto loggedUser = loggedUser(session);
       model.addAttribute("loggedUser", loggedUser);
     }
 

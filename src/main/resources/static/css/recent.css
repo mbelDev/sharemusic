@@ -56,6 +56,7 @@
   font-weight: 500;
 }
 .recent-page .recent-page--listBox .recent-page--list ul li a .recent-listImg--box .recent-listImg--content .recent-music--title-All .recent-music--title01 .btn-like, .recent-page .recent-page--listBox .recent-page--list ul li a .recent-listImg--box .recent-listImg--content .recent-music--title-All .recent-music--title01 .btn-bookmark {
+  position: static;
   z-index: 1;
 }
 .recent-page .recent-page--listBox .recent-page--list ul li a .recent-listImg--box .recent-listImg--content .recent-music--title-All .recent-music--title02 {

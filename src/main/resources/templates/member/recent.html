@@ -28,7 +28,7 @@
                         <div>
                           <input type="button" class="btn-like" style="display:inline-block; width:15px; height:15px; background:#fff" th:data-userID="${loggedUser.userID}" th:data-postNo="${item.postNo}" th:data-liked="${item.liked}">
                           </input>
-                          <input type="button" class="btn-bookmark" style="display:inline-block; width:15px; height:15px; background:#777" th:data-userID="${loggedUser.userID}" th:data-postNo="${item.postNo}" th:data-liked="${item.bookmark}">
+                          <input type="button" class="btn-bookmark" style="display:inline-block; width:15px; height:15px; background:#777" th:data-userID="${loggedUser.userID}" th:data-postNo="${item.postNo}" th:data-bookmark="${item.bookmark}">
                           </input>
                         </div>
                       </div>
@@ -53,9 +53,11 @@
     </section><!-- .recent-page -->
   <script>
     likeEvent();
+    bookmarkEvent();
+    followEvent();
     function likeEvent(){
-        const btns = document.querySelectorAll(".btn-like");
-        btns.forEach((item)=>{
+        const btnsLike = document.querySelectorAll(".btn-like");
+        btnsLike.forEach((item)=>{
             item.addEventListener("click",(e)=>{
                 const sendData = {
                     "postNo":item.dataset.postno,
@@ -78,8 +80,32 @@
                 })
             })
         })
-
-
+      }
+    function bookmarkEvent(){
+        const btnsBookmark = document.querySelectorAll(".btn-bookmark");
+        btnsBookmark.forEach((item)=>{
+            item.addEventListener("click",(e)=>{
+                const sendData = {
+                    "postNo":item.dataset.postno,
+                    "userID":item.dataset.userid,
+                    "bookmark":item.dataset.bookmark
+                }
+                console.log(sendData);
+                $.ajax({
+                    url:"/member/like",
+                    type:"post",
+                    data:sendData,
+                    success:function(response){
+                        console.log(response.result);
+                        alert("북마크 했어요!");
+                        item.classList.add("");
+                    },
+                    error:function(err){
+                        console.log(err);
+                    }
+                })
+            })
+        })
     }
 
     

@@ -4,7 +4,6 @@ import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.service.BoardService;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,11 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes("loggedUser")
 @RequestMapping("/board")
 @Slf4j
 public class BoardController {
@@ -31,8 +30,7 @@ public class BoardController {
   BoardService boardService;
 
   @ModelAttribute("loggedUser")
-  public LoggedDto loggedUser(HttpServletRequest request) {
-    HttpSession session = request.getSession(false);
+  public LoggedDto loggedUser(HttpSession session) {
     LoggedDto loggedUser = null;
     if (session == null || session.getAttribute("loggedUser") == null) {
       return null;
@@ -45,11 +43,10 @@ public class BoardController {
   //세션을 만들고 세션과 모델에 LoggedDto loggedUser 를 담아주는 물건
 
   @GetMapping("/write")
-  public String write(HttpServletRequest request) {
-    LoggedDto loggedUser = loggedUser(request);
+  public String write(HttpSession session) {
     //로그인 정보를 받아온다
     //loggedUser 내부 정보 userID, userNM, userIcon
-    if (loggedUser == null) {
+    if (loggedUser(session) == null) {
       //로그인 정보가 없다면
       return "redirect:/member/login";
       //로그인 페이지로 보낸다
@@ -59,9 +56,9 @@ public class BoardController {
   }
 
   @GetMapping("/view")
-  public String view(HttpServletRequest request, int postNo, Model model) {
-    LoggedDto loggedUser = loggedUser(request);
-    if (loggedUser != null) {
+  public String view(HttpSession session, int postNo, Model model) {
+    if (loggedUser(session) != null) {
+      LoggedDto loggedUser = loggedUser(session);
       loggedUser.setPostNo(postNo);
       boardService.updateHits(loggedUser);
       //로그인 정보가 있을 때만 조회수 증가
@@ -86,8 +83,8 @@ public class BoardController {
   }
 
   @PostMapping("/write")
-  public String writeprogress(HttpServletRequest request, BoardDto boardDto) {
-    LoggedDto loggedUser = loggedUser(request);
+  public String writeprogress(HttpSession session, BoardDto boardDto) {
+    LoggedDto loggedUser = loggedUser(session);
     boardDto.setPostAuth(loggedUser.getUserNM());
     boardService.putPost(boardDto);
     return "redirect:/mainPage/";
@@ -104,7 +101,7 @@ public class BoardController {
     } else {
       sendJson.put("msg", "fail");
     }
-    
+
     return sendJson;
   }
 

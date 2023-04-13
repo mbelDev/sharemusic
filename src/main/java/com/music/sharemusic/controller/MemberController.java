@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -37,7 +38,6 @@ public class MemberController {
   @Autowired
   MemberServiceImpl memberService;
 
-  @ModelAttribute("loggedUser")
   public LoggedDto loggedUser(HttpSession session) {
     LoggedDto loggedUser = null;
     if (session == null || session.getAttribute("loggedUser") == null) {
@@ -49,11 +49,11 @@ public class MemberController {
   }
 
   @GetMapping("/mypage")
-  public String mypage(HttpServletRequest request, Model model) {
-    LoggedDto loggedUser = loggedUser(request);
-    if (loggedUser == null) {
+  public String mypage(HttpSession session, Model model) {
+    if (loggedUser(session) == null) {
       return "redirect:/member/login";
     }
+    LoggedDto loggedUser = loggedUser(session);
     MemberDto memberDto = memberService.getMemberLogged(loggedUser);
     model.addAttribute("memberDto", memberDto);
     Map<String, Object> historyList = new HashMap<>();
@@ -64,14 +64,14 @@ public class MemberController {
 
   @GetMapping("/user/{userID}")
   public String mypage(
-    HttpServletRequest request,
+    HttpSession session,
     Model model,
     @PathVariable String userID
   ) {
-    LoggedDto loggedUser = loggedUser(request);
-    if (loggedUser == null) {
+    if (loggedUser(session) == null) {
       return "redirect:/member/login";
     }
+    LoggedDto loggedUser = loggedUser(session);
     MemberDto memberDto = memberService.getMemberLogged(loggedUser);
     model.addAttribute("memberDto", memberDto);
     return "/member/mypage";
@@ -79,11 +79,11 @@ public class MemberController {
 
   @GetMapping("/mypage/list")
   public String mypageCategories(
-    HttpServletRequest request,
+    HttpSession session,
     Model model,
     String category
   ) {
-    LoggedDto loggedUser = loggedUser(request);
+    LoggedDto loggedUser = loggedUser(session);
     if (loggedUser == null) {
       return "redirect:/member/login";
     }
@@ -127,8 +127,8 @@ public class MemberController {
   // }
 
   @GetMapping("/mypage/written")
-  public String myPost(HttpServletRequest request, Model model) {
-    LoggedDto loggedUser = loggedUser(request);
+  public String myPost(HttpSession session, Model model) {
+    LoggedDto loggedUser = loggedUser(session);
     if (loggedUser == null) {
       return "redirect:/member/login";
     }
@@ -140,8 +140,7 @@ public class MemberController {
   }
 
   @GetMapping("/view")
-  public String memberInfo(HttpServletRequest request, Model model) {
-    HttpSession session = request.getSession(false);
+  public String memberInfo(HttpSession session, Model model) {
     if (session != null && session.getAttribute("loggedUser") != null) {
       LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
       MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
@@ -154,14 +153,13 @@ public class MemberController {
 
   @GetMapping("/join")
   public String joinPage(
-    HttpServletRequest request,
+    HttpSession session,
     @ModelAttribute MemberDto memberDto
   ) {
-    HttpSession session = request.getSession();
-    if (session != null && session.getAttribute("loggedUser") != null) {
-      return "redirect:/member/view";
+    if (loggedUser(session) == null) {
+      return "/member/join";
     }
-    return "/member/join";
+    return "redirect:/member/mypage";
   }
 
   @PostMapping("/join")
@@ -182,18 +180,17 @@ public class MemberController {
   }
 
   @GetMapping("/login")
-  public String loginPage(HttpServletRequest request) {
-    HttpSession session = request.getSession(false);
-    if (session != null && session.getAttribute("loggedUser") != null) {
-      log.info("login success");
-      return "redirect:/member/mypage";
+  public String loginPage(HttpSession session) {
+    if (loggedUser(session) == null) {
+      return "/member/login";
     }
-    return "/member/login";
+    log.info("login success");
+    return "redirect:/member/mypage";
   }
 
   @PostMapping("/login")
   public String login(
-    HttpServletRequest request,
+    HttpSession session,
     @ModelAttribute @Validated MemberDto memberDto,
     BindingResult bindingResult,
     @RequestParam(defaultValue = "/") String redirectURL
@@ -211,7 +208,6 @@ public class MemberController {
       log.info("what errors? === {}", bindingResult);
       return "redirect:/member/login";
     }
-    HttpSession session = request.getSession();
     session.setAttribute("loggedUser", loggedUser);
     session.setMaxInactiveInterval(30 * 60);
     return "redirect:/";
@@ -219,25 +215,24 @@ public class MemberController {
 
   @PostMapping("/like")
   public String setLike(SendDataDto data) {
-    log.info("Controller result==={}", data);
-    int result = 0;
-    result = memberService.updateLike(data);
+    Map<String, Integer> result = new HashMap<>();
+    int update = memberService.updateLike(data);
+    result.put("result", update);
     log.info("Controller result==={}", result);
     return "redirect:/member/mypage";
   }
 
   @PostMapping("/bookmark")
-  public int setBookmark(SendDataDto data) {
+  public String setBookmark(SendDataDto data) {
     int result = 0;
     result = memberService.updateBookmark(data);
-    return result;
+    return "redirect:/member/mypage";
   }
 
   @GetMapping("/logout")
-  public String logout(HttpServletRequest request) {
-    HttpSession session = request.getSession(false);
+  public String logout(HttpSession session, SessionStatus status) {
     if (session != null) {
-      session.invalidate(); // 세션 날림
+      status.setComplete(); // 세션 날림
       log.info("logout");
     }
 
