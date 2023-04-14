@@ -72,7 +72,12 @@
         <div class="board-view--listItem-controller">
           <div class="listItem-controller01">
             <div class="good">
-              <img class="good-img" src="/images/good.svg" alt="" onclick="test();">
+              <img
+                class="good-img"
+                src="/images/good.svg"
+                alt=""
+                onclick="test();postGood();"
+              />
               <span th:text="${boardDto.postLike}" class="postLike">0</span>
             </div>
             <button class="btnOpen btnShare">
@@ -136,7 +141,6 @@
       /*<![CDATA[*/
       const postNo = [[${boardDto.postNo}]];
       const postLike = $(".postLike").text();
-      const postAuth = [[${boardDto.postAuth}]];
 
         // 추천 수 누를 때 이벤트
         function postGood() {

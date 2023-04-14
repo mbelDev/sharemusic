@@ -49,8 +49,8 @@
 </update>
 
 <!-- 추천수 업데이트 -->
-<update id="updateLike" parameterType="Integer">
-  UPDATE BOARD SET POSTLIKE = POSTLIKE + 1 WHERE POSTNO = #{postNo}
+<update id="updateLike" parameterType="HashMap">
+  UPDATE BOARD SET POSTLIKE = POSTLIKE + #{updateLike} WHERE POSTNO = #{postNo}
 </update>
 
 <!-- 조회수 업데이트 -->
