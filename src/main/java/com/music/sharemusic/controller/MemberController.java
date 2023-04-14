@@ -214,19 +214,24 @@ public class MemberController {
   }
 
   @PostMapping("/like")
-  public String setLike(SendDataDto data) {
-    Map<String, Integer> result = new HashMap<>();
+  @ResponseBody
+  public int setLike(SendDataDto data) {
     int update = memberService.updateLike(data);
-    result.put("result", update);
-    log.info("Controller result==={}", result);
-    return "redirect:/member/mypage";
+    return update;
   }
 
   @PostMapping("/bookmark")
-  public String setBookmark(SendDataDto data) {
-    int result = 0;
-    result = memberService.updateBookmark(data);
-    return "redirect:/member/mypage";
+  @ResponseBody
+  public int setBookmark(SendDataDto data) {
+    int result = memberService.updateBookmark(data);
+    return result;
+  }
+
+  @PostMapping("/follow")
+  @ResponseBody
+  public int setfollow(SendDataDto data) {
+    int result = memberService.updateFollow(data);
+    return result;
   }
 
   @GetMapping("/logout")

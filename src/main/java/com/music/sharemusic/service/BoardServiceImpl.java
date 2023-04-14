@@ -4,11 +4,8 @@ import com.music.sharemusic.dao.BoardDao;
 import com.music.sharemusic.dao.HistoryDao;
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
-import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +32,11 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public List<BoardDto> getPostAll(String genre, String searchTxt, String sort) {
+  public List<BoardDto> getPostAll(
+    String genre,
+    String searchTxt,
+    String sort
+  ) {
     HashMap<String, String> hashMap = new HashMap<>();
     hashMap.put("genre", genre);
     hashMap.put("searchTxt", searchTxt);
@@ -85,4 +86,8 @@ public class BoardServiceImpl implements BoardService {
     int result = boardDao.deletePost(boardDto);
     return result;
   }
+  ///권인호 2023.04.14
+  // public int getLiked(LoggedDto loggedUser){
+  //   historyDao.get
+  // }
 }

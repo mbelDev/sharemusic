@@ -24,19 +24,19 @@
     SELECT h.*, b.POSTDATE  FROM HISTORY h, BOARD b WHERE h.USERID = #{userID} AND h.LIKED = 1 AND h.POSTNO = b.POSTNO ORDER BY b.POSTDATE DESC
   </select>
 
+<!-- 좋아요 여부 -->
+  <select id="getLiked" parameterType="SendDataDto" resultType="Integer">
+    SELECT LIKED FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
+  </select>
+
 <!-- 북마크 목록 -->
   <select id="getHistoryBookmark" parameterType="String" resultType="HistoryDto">
     SELECT h.*, b.POSTDATE  FROM HISTORY h, BOARD b WHERE h.USERID = #{userID} AND h.BOOKMARK = 1 AND h.POSTNO = b.POSTNO ORDER BY b.POSTDATE DESC
   </select>
 
-<!-- 삭제 요망 -->
+<!-- 읽었는지 안 읽었는지 파악하는 용도로 사용중 -->
   <select id="getHistory" parameterType="LoggedDto" resultType="Integer"> 
     SELECT COUNT(*) FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
-  </select>
-
-<!-- 삭제 요망 -->
-  <select id="getHistoryBoard" parameterType="HistoryDto" resultType="BoardDto">
-    SELECT * FROM BOARD a, HISTORY b WHERE a.POSTNO = b.POSTNO
   </select>
 
 <!-- 기록 -->
@@ -70,6 +70,21 @@
     </choose>
     WHERE USERID = #{userID} AND POSTNO = #{postNo}
   </update>
+
+<!-- 팔로우 확인 -->
+  <insert id="getFollow" parameterType="SendDataDto">
+    SELECT FOLLOWID FROM FOLLOW WHERE USERID = #{userID} AND FOLLOWID = #{followID}
+  </insert>
+
+<!-- 팔로우 등록 -->
+  <insert id="putFollow" parameterType="SendDataDto">
+    INSERT INTO FOLLOW VALUES (#{userID}, #{followID}, SYSTIMESTAMP)
+  </insert>
+
+<!-- 팔로우 취소 -->
+  <insert id="unFollow" parameterType="SendDataDto">
+    DELETE FROM FOLLOW WHERE USERID = #{userID} AND FOLLOWID = #{followID}
+  </insert>
 
 <!-- userID의 모든 기록 삭제 -->
   <delete id="deleteHistoryAll" parameterType="String">

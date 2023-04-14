@@ -101,6 +101,29 @@
           <span th:text="${boardDto.postCont}">설명</span>
         </div>
       </article>
+      <article class="board-view--replyBox">
+        <ul id="reply-container" th:if="${replys} != null">
+          <li th:Each="item:${replys}">
+            <div class="reply--icon">
+              <a th:href="@{|/member/user/${item.replyAuth}|}">
+                <img th:src="@{/upload/}+${item.replyIcon}" alt="" style="width:30px; height:30px; border-radius: 5px;">
+                <span th:text="${item.replyAuth}">홍길동</span>
+              </a>
+            </div>
+            <div class="reply--contents">
+              <span th:text="${item.replyCont}">내용</span>
+            </div>
+            <div class="reply--btns" th:if="{session.loggedUser.userID = item.replyAuth}">
+              <span th:text="${item.replyCont}">수정</span>
+              <span th:text="${item.replyCont}">삭제</span>
+            </div>
+          </li>
+        </ul>
+        <div class="board-view--replyBox__input">
+          <input type="text" name="replyCont">
+          <input type="button" class="btn-primary btn-reply">작성</input>
+        </div>
+      </article>
       <!-- board-view--textBox -->
     </section>
     <!-- board-view--page -->
@@ -136,7 +159,24 @@
       <!-- write-modal -->
     </section>
     <!-- board-view--subPage -->
-
+    <script>
+        function like(){
+          $.ajax({
+            url:"member/like",
+            type:"POST",
+            data:{},
+            success:function(response){
+              console.log(response);
+              if(response.result){
+                  
+              }
+            },
+            error:function(err){
+              console.log(err);
+            }
+          })
+        }
+    </script>
     <script th:inline="javascript">
       /*<![CDATA[*/
       const postNo = [[${boardDto.postNo}]];
