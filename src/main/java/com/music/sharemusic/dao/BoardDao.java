@@ -29,7 +29,7 @@ public interface BoardDao {
 
   //modify 에서 요청. 글 내용 수정하기
 
-  public int updateLike(int postNo);
+  public int updateLike(HashMap<String, Integer> hashMap);
 
   // 추천 누르면 추천수 업데이트
 

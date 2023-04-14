@@ -107,7 +107,10 @@ public class BoardController {
 
   @PostMapping("/updateLike")
   public ResponseEntity<Object> updateLike(BoardDto boardDto) {
-    int result = boardService.updateLike(boardDto.getPostNo());
+    int updateLike = 1; /////////////// history 
+
+    int result = boardService.updateLike(updateLike, boardDto.getPostNo());
+
     Map<String, Integer> resultMap = new HashMap<>();
     resultMap.put("result", result);
 

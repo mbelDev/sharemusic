@@ -40,7 +40,6 @@ public class BoardServiceImpl implements BoardService {
     hashMap.put("genre", genre);
     hashMap.put("searchTxt", searchTxt);
     hashMap.put("sort", sort);
-    log.info("==========" + hashMap);
 
     List<BoardDto> result = boardDao.getPostAll(hashMap);
     return result;
@@ -58,8 +57,12 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public int updateLike(int postNo) {
-    return boardDao.updateLike(postNo);
+  public int updateLike(int updateLike, int postNo) {
+    HashMap<String, Integer> hashMap = new HashMap<>();
+    hashMap.put("postNo", postNo);
+    hashMap.put("updateLike", updateLike);
+
+    return boardDao.updateLike(hashMap);
   }
 
   @Override

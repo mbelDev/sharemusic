@@ -19,22 +19,21 @@
     <link rel="stylesheet" href="/css/mainPage.css" />
     <link rel="stylesheet" href="/css/mypage.css" />
     <link rel="stylesheet" href="/css/recent.css" />
-
     <link rel="stylesheet" href="/css/boardView.css" />
     <link rel="stylesheet" href="/css/boardModify.css" />
     <link rel="stylesheet" href="/css/boardWrite.css" />
-
+    
     <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
     />
     <script src="/js/mainJs/layout.js" defer></script>
     <script src="/js/mainJs/mainPage.js" defer></script>
     <script src="/js/board/view.js" defer></script>
-    <script src="/js/board/write.js" defer></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/mdb.min.js"></script>
     <script src="/js/jquery-3.6.3.min.js"></script>
+    <script src="/js/modal.js"></script>
 
   </head>
 
@@ -47,6 +46,26 @@
           </div>
         </article>
         <!-- .headerLayout-Area--logo -->
+        <article class="headerLayout-Area--infoForm">
+          <div class="left-items">
+              <!-- 기본 회원정보 -->
+              <th:block th:unless="${loggedUser == null}">
+                <div>
+                  <img th:if="${loggedUser.userIconReal != null}" th:src="@{/upload/}+${loggedUser.userIconReal}" alt="" style="width: 150px; height: 150px;">
+                  <img th:if="${loggedUser.userIconReal == null}" th:src="@{/images/sampleprofile.jpg}" alt="" style="width: 150px; height: 150px;">
+                </div>
+                <div>
+                  <span th:text="${loggedUser.userNM}">별명</span>
+                </div>
+                <div>
+                  <span th:text="${loggedUser.userID}">아이디</span>
+                </div>
+                <div>
+                  <span th:text="${loggedUser.userDate}">가입일자</span>
+                </div>
+              </th:block>
+          </div>
+        </article><!-- .headerLayout-Area--searchForm -->
         <article class="headerLayout-Area--joinForm">
           <th:block th:if="${loggedUser == null}">
             <div class="join left-items lien">
@@ -56,7 +75,7 @@
           </th:block>
           <th:block th:unless="${loggedUser == null}">
             <div class="join left-items lien">
-              <a href="/member/login">회원정보</a>
+              <a href="/member/login">마이 페이지</a>
               <a href="/member/logout">로그아웃</a>
             </div>
           </th:block>
@@ -92,7 +111,7 @@
         <article class="headerLayout-Area--viewContents">
           <div class="view left-items lien">
             <ul>
-              <li>
+              <!-- <li>
                 <a
                   th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}"
                   >락</a
@@ -109,19 +128,9 @@
                   th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}"
                   >팝</a
                 >
-              </li>
-              <li><a href="#">테스트</a></li>
-              <li><a href="#">테스트</a></li>
-            </ul>
-          </div>
-        </article>
-        <!-- .headerLayout-Area--viewContents -->
-        <article class="headerLayout-Area--viewContents">
-          <div class="view left-items">
-            <ul>
-              <li><a href="#">전체보기</a></li>
-              <li><a href="#">장르별 모아보기</a></li>
-              <li><a href="#">감성별 모아보기</a></li>
+              </li> -->
+              <li><a href="#">월간 랭킹</a></li>
+              <li><a href="#">주간 랭킹</a></li>
             </ul>
           </div>
         </article>
@@ -129,9 +138,20 @@
         <article class="headerLayout-Area--viewContents">
           <div class="view left-items lien">
             <ul>
-              <li><a href="#">감성별 모아보기</a></li>
-              <li><a href="#">테스트</a></li>
-              <li><a href="#">테스트</a></li>
+              <li><a href="#">전체보기</a></li>
+              <li id="modalGenreBtn"><a href="#">장르별 모아보기</a></li>
+              <li id="modalEmoteBtn"><a href="#">감성별 모아보기</a></li>
+            </ul>
+          </div>
+        </article>
+        <!-- .headerLayout-Area--viewContents -->
+        <article class="headerLayout-Area--viewContents">
+          <div class="view left-items lien">
+            <span>골라보기</span>
+            <ul>
+              <li><a href="#">북마크</a></li>
+              <li><a href="#">좋아요</a></li>
+              <li><a href="#">구독</a></li>
             </ul>
           </div>
         </article>
@@ -150,7 +170,35 @@
       <section id="footerLayout-Area"></section>
       <!-- #footerLayout-Area -->
     </footer>
+      <!-- 모달창 -->
+      <div id="modalGenre">
+        <div class="modalThis-item">
+          <button id="closeModalGenre">닫기</button>
+          <div class="modalContents">
+            <!-- 모달창 안에 여기 내용 작성 -->
+
+          </div>
+          <!-- ModalThis-content -->
+        </div>
+        <!-- modal--item -->
+      </div>
+      <div id="modalEmote">
+        <div class="modalThis-item">
+          <button id="closeModalEmote">닫기</button>
+          <div class="modalContents">
+            <!-- 모달창 안에 여기 내용 작성 -->
+
+          </div>
+          <!-- ModalThis-content -->
+        </div>
+        <!-- modal--item -->
+      </div>
+      <!-- modal -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script defer>
+        getModal($("#modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
+        getModal($("#modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));
+    </script>
   </body>
 </html>
 
