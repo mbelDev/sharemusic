@@ -20,7 +20,7 @@ main {
   margin-bottom: 30px;
 }
 
-#ModalThis {
+.modal-wnd {
   width: 100%;
   height: 100%;
   background-color: rgba(17, 17, 17, 0.9529411765);
@@ -30,10 +30,10 @@ main {
   z-index: 99;
   display: none;
 }
-#ModalThis.ModalThis-ok {
+.modal-wnd.modal-open {
   display: block;
 }
-#ModalThis .ModalThis-item {
+.modal-wnd-item {
   width: 70%;
   height: 60%;
   background-color: #fff;

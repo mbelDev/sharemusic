@@ -4,13 +4,11 @@ function getModal(getBtn,getModal,getClose){
     let closeBtn = getClose//document.getElementById("closeModal***");
 
     $(closeBtn).click(()=>{
-        console.log(Modal);
-        $(Modal).removeClass("ModalThis-ok");
+        $(Modal).removeClass("modal-open");
     });
     
     $(ModalBtn).click(()=>{
-        alert("test");
-    $(Modal).addClass("ModalThis-ok");
+         $(Modal).addClass("modal-open");
     });
   }
   

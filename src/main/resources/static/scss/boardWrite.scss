@@ -20,7 +20,7 @@ main {
 }//.boardWrite-page
 
 // 모달창
-#ModalThis {
+.modal-wnd {
   width: 100%;
   height: 100%;
   background-color: #111111f3;
@@ -28,10 +28,10 @@ main {
   top: 0%; left: 0%;
   z-index: 99;
   display: none;
-  &.ModalThis-ok {
+  &.modal-open{
     display: block;
   }
-  .ModalThis-item {
+  &-item {
     width: 70%;
     height: 60%;
     background-color: #fff;
@@ -39,8 +39,6 @@ main {
     position: fixed;
     top: 50%; left: 50%;
     transform: translate(-40%, -50%);
-    .closeModel {
-      
-    }
   }
 }//.write-modal
+

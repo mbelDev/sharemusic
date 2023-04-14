@@ -65,7 +65,7 @@
               <option value="etc">기타</option>
             </select>
             <button
-              id="ModalBox"
+              id="modalBox01"
               class="btn btn-outline-secondary"
               type="button"
             >
@@ -87,7 +87,7 @@
               <option value="etc">기타</option>
             </select>
             <button
-              id="ModalBox02"
+              id="modalBox02"
               class="btn btn-outline-secondary"
               type="button"
             >
@@ -104,11 +104,24 @@
     <!-- boardWrite-page -->
 
     <!-- 모달창 -->
-    <div id="ModalThis">
-      <div class="ModalThis-item">
-        <button id="closeModel">닫기</button>
-        <div class="ModalThis-content">
+    <div id="modal01" class="modal-wnd">
+      <div class="modal-wnd-item">
+        <button id="closeModal01">닫기</button>
+        <div class="modal-content">
           <!-- 모달창 안에 여기 내용 작성 -->
+          <span>TEST01</span>
+        </div>
+        <!-- ModalThis-content -->
+      </div>
+      <!-- write-modal--item -->
+    </div>
+    <div id="modal02" class="modal-wnd">
+      <div class="modal-wnd-item">
+        <button id="closeModal02">닫기</button>
+        <div class="modal-content">
+          <span>TEST02</span>
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <span>TEST</span>
         </div>
         <!-- ModalThis-content -->
       </div>
@@ -116,7 +129,8 @@
     </div>
     <!-- write-modal -->
     <script>
-      getModal($("#ModalBox02"),$("#ModalThis"),$("#closeModel"));
+      getModal($("#modalBox01"),$("#modal01"),$("#closeModal01"));
+      getModal($("#modalBox02"),$("#modal02"),$("#closeModal02"));
     </script>
     <script>
       // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
