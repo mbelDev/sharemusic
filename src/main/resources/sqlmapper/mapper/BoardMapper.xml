@@ -8,7 +8,7 @@
 <insert id="putPost" parameterType="BoardDto">
   INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{postAuth}, 
     #{postTitle}, #{postSinger}, #{postCont}, #{postLink},
-    #{postGenre}, #{postEmote}, 0, 0, SYSDATE)
+    #{postGenre}, #{postEmote},0, 0, 0, SYSDATE)
 </insert>
 
 <!-- 한 글 불러오기 -->

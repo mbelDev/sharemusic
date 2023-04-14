@@ -69,7 +69,7 @@
         </div>
         <!-- listItem-nav -->
         <div class="getList-ItemBox">
-          <ul>
+          <ul id="test">
             <li th:each="item : ${postList}">
               <a href="/board/view" th:href="@{/board/view(postNo=${item.postNo})}">
                 <div class="ItemBox-imgs">
@@ -98,6 +98,49 @@
     </section>
     <!-- main-constent--itmes -->
 
-
+    <script>
+      function testRespone01(genre){
+        
+        $.ajax({
+            url:"/reload/"+genre,
+            type:"GET",
+            data:{
+              "genre":genre,
+              "searchTxt":"",
+              "sort":"postNo"
+            },
+            async:false,
+            success:function(response){
+                console.log(response);
+                    alert("댓글이 등록되었습니다.");
+            },
+        })
+        .done(function( fragment ){
+            $("#test").replaceWith(fragment);
+        });
+    }
+    </script>
+    <script>
+      function testRespone02(genre,searchTxt,sort){
+        
+        $.ajax({
+            url:"/reload/",
+            type:"POST",
+            data:{
+              "genre":genre,
+              "searchTxt":searchTxt,
+              "sort":sort
+            },
+            async:false,
+            success:function(response){
+                console.log(response);
+                    alert("댓글이 등록되었습니다.");
+            },
+        })
+        .done(function( fragment ){
+            $("#test").replaceWith(fragment);
+        });
+    }
+    </script>
   </main>
 </html>

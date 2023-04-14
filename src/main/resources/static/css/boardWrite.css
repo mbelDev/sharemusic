@@ -24,7 +24,7 @@ main {
   width: 100%;
   height: 100%;
   background-color: rgba(17, 17, 17, 0.9529411765);
-  position: absolute;
+  position: fixed;
   top: 0%;
   left: 0%;
   z-index: 99;
@@ -42,4 +42,36 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-40%, -50%);
+}
+.modal-wnd .modalCategory {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.modal-wnd .modalCategory__box {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px auto;
+  width: 680px;
+  height: 330px;
+  background: transparent;
+  justify-content: space-between;
+}
+.modal-wnd .modalCategory__box__option {
+  display: block;
+  text-align: center;
+  width: 120px;
+  height: 60px;
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 13px;
+}
+.modal-wnd .modalCategory__box__option a {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: auto 0px;
+  align-items: center;
 }

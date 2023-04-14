@@ -171,27 +171,39 @@
       <!-- #footerLayout-Area -->
     </footer>
       <!-- 모달창 -->
-      <div id="modalGenre">
-        <div class="modalThis-item">
-          <button id="closeModalGenre">닫기</button>
-          <div class="modalContents">
+      <div id="modalGenre" class="modal-wnd">
+          <div id="closeModalGenre" class="modalContents modalCategory">
             <!-- 모달창 안에 여기 내용 작성 -->
-
+            <div class="modalCategory__box">
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">락</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">발라드</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            </div>
           </div>
           <!-- ModalThis-content -->
-        </div>
-        <!-- modal--item -->
       </div>
-      <div id="modalEmote">
-        <div class="modalThis-item">
-          <button id="closeModalEmote">닫기</button>
-          <div class="modalContents">
-            <!-- 모달창 안에 여기 내용 작성 -->
-
+      <div id="modalEmote" class="modal-wnd">
+        <div id="closeModalEmote" class="modalContents modalCategory">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <div class="modalCategory__box">
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">신남</a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">우울</a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">희열</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
           </div>
-          <!-- ModalThis-content -->
         </div>
-        <!-- modal--item -->
+        <!-- ModalThis-content -->
       </div>
       <!-- modal -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
