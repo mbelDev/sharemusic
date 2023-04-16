@@ -29,30 +29,8 @@
             <span th:text="${boardDto.postHits}">0</span>
           </div>
           <div class="board-view--listItem-setSplit">
-            <!-- if 장르가 기타일 경우 표시 -->
-            <span
-              th:if="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[0]}"
-              >장르</span
-            >
-            <!-- unless 장르가 기타가 아닐 경우 표시 -->
-            <span
-              th:unless="${#lists.size(#strings.setSplit(boardDto.postGenre, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postGenre, '-')[1]}"
-              >장르</span
-            >
-            <!-- if 분위기가 기타일 경우 표시 -->
-            <span
-              th:if="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[0]}"
-              >분위기</span
-            >
-            <!-- unless 분위기가 기타가 아닐 경우 표시 -->
-            <span
-              th:unless="${#lists.size(#strings.setSplit(boardDto.postEmote, '-'))} == 1"
-              th:text="'#' + ${#strings.setSplit(boardDto.postEmote, '-')[1]}"
-              >분위기</span
-            >
+            <span th:text="'#' + ${boardDto.postGenre}">장르</span>
+            <span th:text="'#' + ${boardDto.postEmote}">감성</span>
           </div>
           <!-- board-view--listItem-setSplit -->
           <div
@@ -65,7 +43,7 @@
               class="btn btn-primary"
               >수정</a
             >
-            <button id="ModalBox" class="btn btn-secondary">삭제</button>
+            <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
           </div>
         </div>
         <!-- board-view--listItem-name -->
@@ -80,7 +58,7 @@
               />
               <span th:text="${boardDto.postLike}" class="postLike">0</span>
             </div>
-            <button class="btnOpen btnShare">
+            <button class="btnOpen btnShare" id="shareModalBox">
               <img src="/images/open.svg" alt="" />
             </button>
           </div>
@@ -106,22 +84,29 @@
           <li th:Each="item:${replys}">
             <div class="reply--icon">
               <a th:href="@{|/member/user/${item.replyAuth}|}">
-                <img th:src="@{/upload/}+${item.replyIcon}" alt="" style="width:30px; height:30px; border-radius: 5px;">
+                <img
+                  th:src="@{/upload/}+${item.replyIcon}"
+                  alt=""
+                  style="width: 30px; height: 30px; border-radius: 5px"
+                />
                 <span th:text="${item.replyAuth}">홍길동</span>
               </a>
             </div>
             <div class="reply--contents">
               <span th:text="${item.replyCont}">내용</span>
             </div>
-            <div class="reply--btns" th:if="{session.loggedUser.userID = item.replyAuth}">
+            <div
+              class="reply--btns"
+              th:if="{session.loggedUser.userID = item.replyAuth}"
+            >
               <span th:text="${item.replyCont}">수정</span>
               <span th:text="${item.replyCont}">삭제</span>
             </div>
           </li>
         </ul>
         <div class="board-view--replyBox__input">
-          <input type="text" name="replyCont">
-          <input type="button" class="btn-primary btn-reply">작성</input>
+          <input type="text" name="replyCont" />
+          <input type="button" class="btn-primary btn-reply" />작성
         </div>
       </article>
       <!-- board-view--textBox -->
@@ -142,11 +127,11 @@
         </div>
       </div>
 
-      <!-- 모달창 -->
-      <div id="ModalThis">
-        <div class="ModalThis-item">
-          <button class="closeModel">닫기</button>
-          <div class="ModalThis-content">
+      <!-- 삭제 모달창 -->
+      <div id="deleteModal" class="modal-wnd">
+        <div class="modal-wnd-item">
+          <button id="closeDeleteModal">닫기</button>
+          <div class="modal-content">
             <!-- 모달창 안에 여기 내용 작성 -->
             <h3>정말로 삭제하시겠습니까?</h3>
             <button id="btnDeleteConfirm">확인</button>
@@ -156,28 +141,54 @@
         </div>
         <!-- write-modal--item -->
       </div>
+
+      <!-- 공유 모달창 -->
+      <div id="shareModal" class="modal-wnd">
+        <div class="modal-wnd-item">
+          <button id="closeShareModal">닫기</button>
+          <div class="modal-content">
+            <!-- 모달창 안에 여기 내용 작성 -->
+            <div>
+              <input
+                type="text"
+                class="shareUrl"
+                th:value="'https://youtu.be/' + ${boardDto.postLink}"
+                readonly
+              />
+              <button onclick="copyUrl();">복사</button>
+              <button class="shareTwitter">트위터로 공유</button>
+              <button class="shareFacebook">페이스북으로 공유</button>
+              <button class="shareKakaoTalk">카카오톡으로 공유</button>
+            </div>
+          </div>
+          <!-- ModalThis-content -->
+        </div>
+        <!-- write-modal--item -->
+      </div>
       <!-- write-modal -->
     </section>
     <!-- board-view--subPage -->
     <script>
-        function like(){
-          $.ajax({
-            url:"member/like",
-            type:"POST",
-            data:{},
-            success:function(response){
-              console.log(response);
-              if(response.result){
-                  
-              }
-            },
-            error:function(err){
-              console.log(err);
+      function like() {
+        $.ajax({
+          url: "member/like",
+          type: "POST",
+          data: {},
+          success: function (response) {
+            console.log(response);
+            if (response.result) {
             }
-          })
-        }
+          },
+          error: function (err) {
+            console.log(err);
+          },
+        });
+      }
     </script>
     <script th:inline="javascript">
+      getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
+      getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
+
       /*<![CDATA[*/
       const postNo = [[${boardDto.postNo}]];
       const postLike = $(".postLike").text();
@@ -222,6 +233,28 @@
         })
 
       /*]]>*/
+
+      // 복사 버튼 누르면 url 복사
+      async function copyUrl() {
+        const shareUrl = $(".shareUrl").val();
+        await navigator.clipboard.writeText(shareUrl);
+      }
+
+      // 트위터 공유
+      $(".shareTwitter").on("click", function() {
+        const sendText = '테스트 중';
+        const pageUrl = 'https://github.com/mbelDev/sharemusic';
+        window.open(`https://twitter.com/intent/tweet?text=${sendText}&url=${pageUrl}`);
+      })
+
+      // 페이스북 공유
+      $(".shareFacebook").on("click", function() {
+        const pageUrl = 'https://github.com/mbelDev/sharemusic';
+        window.open(`http://www.facebook.com/sharer/sharer.php?u=${pageUrl}`)
+
+      })
+
+      // 카카오톡 공유
     </script>
   </main>
 </html>
