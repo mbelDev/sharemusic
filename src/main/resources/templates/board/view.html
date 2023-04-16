@@ -20,10 +20,10 @@
       <!-- board-view--img -->
       <article class="board-view--listItem">
         <div class="board-view--listItem-name">
-          <p th:text="${boardDto.postTitle}">곡</p>
-          <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
-            <p th:text="${boardDto.postSinger}">가수</p>
-          </a>
+            <span th:text="${boardDto.postTitle}">곡</span>
+            <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
+              <span th:text="'&#40;'+${boardDto.postSinger}+'&#41;'">가수</span>
+            </a>
           <div>
             등록 <span th:text="${boardDto.postDate}">0</span> * 조회수
             <span th:text="${boardDto.postHits}">0</span>
@@ -55,18 +55,7 @@
             >
           </div>
           <!-- board-view--listItem-setSplit -->
-          <div
-            class="listItem-controller02"
-            th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}"
-          >
-            <a
-              href="/board/modify"
-              th:href="@{/board/modify(postNo=${boardDto.postNo})}"
-              class="btn btn-primary"
-              >수정</a
-            >
-            <button id="ModalBox" class="btn btn-secondary">삭제</button>
-          </div>
+          
         </div>
         <!-- board-view--listItem-name -->
         <div class="board-view--listItem-controller">
@@ -84,6 +73,18 @@
               <img src="/images/open.svg" alt="" />
             </button>
           </div>
+          <div
+          class="listItem-controller02"
+          th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}"
+        >
+          <a
+            href="/board/modify"
+            th:href="@{/board/modify(postNo=${boardDto.postNo})}"
+            class="btn btn-primary"
+            >수정</a
+          >
+          <button id="modalDeleteBtn" class="btn btn-secondary">삭제</button>
+        </div>
         </div>
         <!-- board-view--listItem-controller -->
       </article>
@@ -91,10 +92,12 @@
       <article class="board-view--textBox">
         <div class="textBox--title">
           <a th:href="@{|/member/user/${boardDto.postAuth}|}">
-            <span th:text="${boardDto.postAuth}">홍길동</span>
+            <span class="iconSample" stlye="width:45px; height:45px; background:#fff; border-radius:15px;"></span>
+            <span th:text="(${boardDto.postAuth})">글 작성자</span>
           </a>
           <a th:href="@{/mainPage/(searchTxt=${boardDto.postAuth})}">
             <span>작성 글 보기</span>
+            <span>구독</span>
           </a>
         </div>
         <div class="textBox--txt">
@@ -107,13 +110,13 @@
             <div class="reply--icon">
               <a th:href="@{|/member/user/${item.replyAuth}|}">
                 <img th:src="@{/upload/}+${item.replyIcon}" alt="" style="width:30px; height:30px; border-radius: 5px;">
-                <span th:text="${item.replyAuth}">홍길동</span>
+                <span th:text="${item.replyAuth}">덧글 작성자</span>
               </a>
             </div>
             <div class="reply--contents">
-              <span th:text="${item.replyCont}">내용</span>
+              <span th:text="${item.replyCont}">덧글 내용</span>
             </div>
-            <div class="reply--btns" th:if="{session.loggedUser.userID = item.replyAuth}">
+            <div class="reply--btns" th:if="${session.loggedUser.userID == item.replyAuth}">
               <span th:text="${item.replyCont}">수정</span>
               <span th:text="${item.replyCont}">삭제</span>
             </div>
@@ -143,14 +146,13 @@
       </div>
 
       <!-- 모달창 -->
-      <div id="ModalThis">
-        <div class="ModalThis-item">
-          <button class="closeModel">닫기</button>
-          <div class="ModalThis-content">
+      <div id="modalDelete" class="modal-wnd">
+        <div class="modal-wnd-item">
+          <div class="modal-wnd-item-contents">
             <!-- 모달창 안에 여기 내용 작성 -->
             <h3>정말로 삭제하시겠습니까?</h3>
             <button id="btnDeleteConfirm">확인</button>
-            <button>취소</button>
+            <button id="closeDelete">취소</button>
           </div>
           <!-- ModalThis-content -->
         </div>
@@ -160,6 +162,8 @@
     </section>
     <!-- board-view--subPage -->
     <script>
+        getModal($("#modalDeleteBtn"),$("#modalDelete"),$("#closeDelete"));
+
         function like(){
           $.ajax({
             url:"member/like",
