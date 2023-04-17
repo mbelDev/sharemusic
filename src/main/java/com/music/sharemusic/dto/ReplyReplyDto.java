@@ -3,12 +3,11 @@ package com.music.sharemusic.dto;
 import lombok.Data;
 
 @Data
-public class SendDataDto {
+public class ReplyReplyDto {
 
-  private String userID;
   private int postNo;
   private int replyNo;
   private int replyHidden;
-  private int liked;
-  private int bookmark;
+  private int replyStep;
+  private int replyLevel;
 }

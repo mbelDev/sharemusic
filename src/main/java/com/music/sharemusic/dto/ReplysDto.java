@@ -18,7 +18,7 @@ public class ReplysDto {
   private String replyCont;
   private int replyHidden;
   private String replyDate;
-  private int replayGroup;
+  private int replyGroup;
   private int replyLevel;
   private int replyStep;
 }

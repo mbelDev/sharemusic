@@ -114,26 +114,26 @@
                 <a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝
                 </a>
               </li> -->
-              <li><a href="#"><img src="/images/navIcon01.png" alt=""><span>월간랭킹</span></a></li>
-              <li><a href="#"><img src="/images/navIcon02.png" alt=""><span>주간랭킹</span></a></li>
+              <li><div><img src="/images/navIcon01.png" alt=""><span>월간랭킹</span></div></li>
+              <li><div><img src="/images/navIcon02.png" alt=""><span>주간랭킹</span></div></li>
             </ul>
           </div>
         </article><!-- .headerLayout-Area--viewContents -->
         <article class="headerLayout-Area--viewContents topAndbut">
           <div class="view view02">
             <ul>
-              <li><a href="#"><img src="/images/navIcon03.png" alt=""><span>전체보기</span></a></li>
-              <li id="modalGenreBtn"><a href="#"><img src="/images/navIcon04.png" alt=""><span>장르별</span></a></li>
-              <li id="modalEmoteBtn"><a href="#"><img src="/images/navIcon06.png" alt=""><span>감성별</span></a></li>
+              <li><div><img src="/images/navIcon03.png" alt=""><span>전체보기</span></div></li>
+              <li id="modalGenreBtn"><div><img src="/images/navIcon04.png" alt=""><span>장르별</span></div></li>
+              <li id="modalEmoteBtn"><div><img src="/images/navIcon06.png" alt=""><span>감성별</span></div></li>
             </ul>
           </div>
         </article><!-- .headerLayout-Area--viewContents -->
         <article class="headerLayout-Area--viewContents topAndbut">
           <div class="view view03 line">
             <ul>
-              <li><a href="#"><img src="/images/navIcon07.png" alt=""><span>북마크</span></a></li>
-              <li><a href="#"><img src="/images/navIcon08.png" alt=""><span>좋아요</span></a></li>
-              <li><a href="#"><img src="/images/navIcon09.png" alt=""><span>구독</span></a></li>
+              <li><div><img src="/images/navIcon07.png" alt=""><span>북마크</span></div></li>
+              <li><div><img src="/images/navIcon08.png" alt=""><span>좋아요</span></div></li>
+              <li><div><img src="/images/navIcon09.png" alt=""><span>구독</span></div></li>
             </ul>
           </div>
         </article><!-- .headerLayout-Area--viewContents -->
@@ -147,28 +147,27 @@
 
 
     <!-- 모달창 -->
-    <div id="modalGenre">
-      <div class="modalThis-item">
-        <button id="closeModalGenre">닫기</button>
+    <div id="modalGenre" class="modal-wnd">
+      <div class="modal-wnd-category" id="closeModalGenre">
         <div class="modalContents">
           <!-- 모달창 안에 여기 내용 작성 -->
+          <span th:text="${session.loggedUser}"></span>
           <div class="modalCategory__box">
             <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">락</a></span>
             <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">발라드</a></span>
             <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝</a></span>
-            <span class="modalCategory__box__option" th:onclick="testRespone01('락')">테스트용 락 버튼</span>
+            <span class="modalCategory__box__option" th:onclick="this.getAttribute('data-loc') == 1 ? testRespone01('락') : location.href='/mainPage/락' " th:data-loc="1">테스트용 락 버튼</span>
             <span class="modalCategory__box__option" th:onclick="testRespone01('발라드')">테스트용 발라드 버튼</span>
             <span class="modalCategory__box__option" th:onclick="testRespone01('팝')">테스트용 팝 버튼</span>
             <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
             <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
             <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
           </div>
-        </div><!-- ModalThis-content -->
-      </div><!-- modal--item -->
+        </div><!-- Modal-content -->
+      </div><!-- modal--category -->
     </div>
-    <div id="modalEmote">
-      <div class="modalThis-item">
-        <button id="closeModalEmote">닫기</button>
+    <div id="modalEmote" class="modal-wnd">
+      <div class="modal-wnd-category" id="closeModalEmote">
         <div class="modalContents">
           <!-- 모달창 안에 여기 내용 작성 -->
           <div class="modalCategory__box">
@@ -182,13 +181,13 @@
             <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
             <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
           </div>
-        </div><!-- ModalThis-content -->
-      </div><!-- modal--item -->
+        </div><!-- Modal-content -->
+      </div><!-- modal--category -->
     </div><!-- modal -->
 
     <!-- 로그인, 회원가입 -->
-    <div id="modalLogin">
-      <div class="modalThis-item">
+    <div id="modalLogin" class="modal-wnd">
+      <div class="modal-wnd-item">
         <button id="closeModalLogin">닫기</button>
         <div class="modalContents">
           <!-- 모달창 안에 여기 내용 작성 -->

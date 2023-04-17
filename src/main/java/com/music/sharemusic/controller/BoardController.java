@@ -3,10 +3,15 @@ package com.music.sharemusic.controller;
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
+import com.music.sharemusic.dto.ReplyReplyDto;
+import com.music.sharemusic.dto.ReplysDto;
 import com.music.sharemusic.service.BoardService;
 import com.music.sharemusic.service.MemberService;
 import com.music.sharemusic.service.MemberServiceImpl;
+import com.music.sharemusic.service.ReplysService;
+import com.music.sharemusic.service.ReplysServiceImpl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,6 +36,9 @@ public class BoardController {
 
   @Autowired
   BoardService boardService;
+
+  @Autowired
+  ReplysServiceImpl replysService;
 
   @ModelAttribute("loggedUser")
   public LoggedDto loggedUser(HttpSession session) {
@@ -70,6 +78,8 @@ public class BoardController {
     BoardDto boardDto = boardService.getPostOne(postNo);
     // List<BoardDto> recentDto = boardService.getRecentAuth(boardDto.getUserID());
     model.addAttribute("boardDto", boardDto);
+    List<ReplysDto> replysList = replysService.getReplyAll(postNo);
+    model.addAttribute("replysList", replysList);
     return "/board/view";
   }
 
@@ -127,5 +137,71 @@ public class BoardController {
     } else {
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body(resultMap);
     }
+  }
+
+  //덧글작성 권인호
+  @PostMapping("/reply")
+  public String writeReply(
+    ReplysDto replysDto,
+    Model model,
+    HttpSession session
+  ) {
+    if (session.getAttribute("loggedUser") == null) {
+      return "redirect:/member/login";
+    } else {
+      LoggedDto replyAuth = (LoggedDto) session.getAttribute("loggedUser");
+      int postNo = replyAuth.getPostNo();
+      replysService.putReply(replyAuth, replysDto);
+      List<ReplysDto> replysList = replysService.getReplyAll(postNo);
+      model.addAttribute("replysList", replysList);
+      BoardDto boardDto = boardService.getPostOne(postNo);
+      model.addAttribute("boardDto", boardDto);
+      return "/board/view :: #reply-container";
+    }
+  }
+
+  //덧글의 덧글작성 권인호
+  @PostMapping("/reply/reply")
+  public String writeReplyReply(
+    ReplysDto replysDto,
+    Model model,
+    HttpSession session
+  ) {
+    if (session.getAttribute("loggedUser") == null) {
+      return "redirect:/member/login";
+    } else {
+      LoggedDto replysAuth = (LoggedDto) session.getAttribute("loggedUser");
+      log.info("reply==={}", replysDto);
+      replysService.putReplyReply(replysAuth, replysDto);
+
+      int postNo = replysAuth.getPostNo();
+      List<ReplysDto> replysList = replysService.getReplyAll(postNo);
+      model.addAttribute("replysList", replysList);
+      BoardDto boardDto = boardService.getPostOne(postNo);
+      model.addAttribute("boardDto", boardDto);
+      return "/board/view :: #reply-container";
+    }
+  }
+
+  //덧글삭제 권인호
+  @PostMapping("/reply/delete")
+  public String deleteReply(
+    ReplysDto replysDto,
+    Model model,
+    HttpSession session
+  ) {
+    if (session.getAttribute("loggedUser") == null) {
+      return "redirect:/member/login";
+    }
+    LoggedDto replysAuth = (LoggedDto) session.getAttribute("loggedUser");
+    int postNo = replysAuth.getPostNo();
+    replysDto.setPostNo(postNo);
+    replysDto.setReplyAuthID(replysAuth.getUserID());
+    replysService.deleteReply(replysDto);
+    List<ReplysDto> replysList = replysService.getReplyAll(postNo);
+    model.addAttribute("replysList", replysList);
+    BoardDto boardDto = boardService.getPostOne(postNo);
+    model.addAttribute("boardDto", boardDto);
+    return "/board/view :: #reply-container";
   }
 }

@@ -94,33 +94,48 @@
         </div>
       </article>
       <article class="board-view--replyBox">
-        <ul id="reply-container" th:if="${replys} != null">
-          <li th:Each="item:${replys}">
-            <div class="reply--icon">
-              <a th:href="@{|/member/user/${item.replyAuth}|}">
-                <img
-                  th:src="@{/upload/}+${item.replyIcon}"
-                  alt=""
-                  style="width: 30px; height: 30px; border-radius: 5px"
-                />
-                <span th:text="${item.replyAuth}">홍길동</span>
-              </a>
+        <ul id="reply-container" th:if="${replysList} != null">
+          <li th:Each="item:${replysList}" class="reply">
+            <div class="reply-contents" 
+            th:if="${item.replyHidden == 0}
+             or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
+             or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
+              <div class="reply-contents--icon">
+                <a th:href="@{|/member/user/${item.replyAuthID}|}">
+                  <!-- th:src="@{/upload/}+${item.replyIcon}" -->
+                  <img
+                    src="/images/sampleprofile.jpg"
+                    alt=""
+                    style="width: 30px; height: 30px; border-radius: 5px"
+                  />
+                  <span th:text="${item.replyAuthNM}">홍길동</span>
+                </a>
+              </div>
+              <div class="reply-contents--text">
+                <span th:text="${item.replyCont}">덧글 내용</span>
+                <!-- <span th:text="${item}"></span> -->
+              </div>
             </div>
-            <div class="reply--contents">
-              <span th:text="${item.replyCont}">덧글 내용</span>
+            <div class="reply-contents reply-hidden"
+             th:if="${item.replyHidden != 0} and (${session.loggedUser == null ? true : session.loggedUser.userID == item.replyAuthID ? false : session.loggedUser.userNM == boardDto.postAuth ? false : true})">
+              <div class="reply-contents--icon"></div>
+              <span class="reply-contents--text" >비공개 덧글입니다.</span>
             </div>
-            <div
-              class="reply--btns"
-              th:if="{session.loggedUser.userID = item.replyAuth}"
-            >
-              <span th:text="${item.replyCont}">수정</span>
-              <span th:text="${item.replyCont}">삭제</span>
+            <div class="reply-date" th:text="${item.replyDate}">작성일자</div>
+            <div class="reply-contents--btns">
+              <span id="replyReplyBtn" class="replyReplyBtn" th:data-replyno="${item.replyNo}">답글</span>
+              <th:block th:if="${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false}">
+                
+                <span id="modifyReplyBtn">수정</span>
+                <span id="deleteReplyBtn" th:data-replyno="${item.replyNo}">삭제</span>
+              </th:block>
             </div>
           </li>
         </ul>
         <div class="board-view--replyBox__input">
-          <input type="text" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }"/>
+          <input type="text" class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }"/>
           <input type="button" class="btn-primary btn-reply" value="작성"/>
+          <input type="checkbox" class="check-hidden"><span>비밀글로 작성하기</span>
         </div>
       </article>
       <!-- board-view--textBox -->
@@ -189,9 +204,91 @@
         <!-- write-modal--item -->
       </div>
       <!-- write-modal -->
+
+      <!-- 덧글 삭제 모달창 -->
+      <div id="deleteReplyModal" class="modal-wnd">
+        <div class="modal-wnd-item">
+          <div class="modal-content modal-ReplyDelete">
+            <!-- 모달창 안에 여기 내용 작성 -->
+            <h3>정말로 삭제하시겠습니까?</h3>
+            <button id="deleteReplyConfirm">확인</button>
+            <button id="closeDeleteReply">취소</button>
+          </div>
+          <!-- ModalThis-content -->
+        </div>
+        <!-- write-modal--item -->
+      </div>
     </section>
     <!-- board-view--subPage -->
-    <script>
+    <script src="/js/board/replys.js"></script>
+    <script defer>
+      addReplyEvent();
+      addDeleteReplyEvent();
+      function addDeleteReplyEvent() {
+        const deleteReplyBtns = document.querySelectorAll("#deleteReplyBtn");
+        deleteReplyBtns.forEach((item)=>{
+          item.addEventListener("click",(e)=>{
+            const target = document.querySelector("#deleteReplyConfirm");
+            const replyNo = e.target.dataset.replyno;
+            target.dataset.replyno = replyNo;
+            $("#deleteReplyModal").addClass("modal-open");
+          })
+        })
+
+      }
+      
+      $("#deleteReplyConfirm").click((e)=>{
+        console.log(e.target.dataset.replyno);
+        $.ajax({
+            url:"/board/reply/delete",
+            type:"POST",
+            data:{
+              replyNo:e.target.dataset.replyno
+            },
+            success:function(reponse){
+              console.log("삭제 완료");
+              
+              $(deleteReplyModal).removeClass("modal-open");
+              
+            },
+            error:function(err){
+              console.log(err);
+              alert("로그인 해 주세요.");
+            }
+        })
+        .done(function( fragment ){
+            $("#reply-container").replaceWith(fragment);
+            alert("삭제되었습니다.");
+            addDeleteReplyEvent();
+        });
+      })
+
+        $(".btn-reply").click(()=>{
+          $.ajax({
+            url: "/board/reply",
+            type:"POST",
+            data:{
+            replyCont:$(".replyCont").val(),
+            replyHidden:$(".check-hidden").is(":checked")==true ? 1 : 0,
+            replyGroup:0,
+            replyLevel:0,
+            replyStep:0
+          },
+          success: function(response){
+            console.log(response);
+            alert("덧글을 작성했습니다!");
+          },
+          error:function(err){
+            console.log(err);
+            alert("로그인 해 주세요.");
+          }
+        })
+        .done(function( fragment ){
+            $("#reply-container").replaceWith(fragment);
+            addDeleteReplyEvent();
+        });
+      })
+    
       function like() {
         $.ajax({
           url: "member/like",
@@ -211,6 +308,7 @@
     <script th:inline="javascript">
       getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
       getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
+      getModal($("#deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
 
       /*<![CDATA[*/
       const postNo = [[${boardDto.postNo}]];

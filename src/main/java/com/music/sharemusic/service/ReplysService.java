@@ -1,11 +1,13 @@
 package com.music.sharemusic.service;
 
+import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.ReplysDto;
+import java.util.List;
 
 public interface ReplysService {
-  public ReplysDto getReplyAll(int postNo);
+  public List<ReplysDto> getReplyAll(int postNo);
 
-  public void putReply(ReplysDto replysDto);
+  public void putReply(LoggedDto replyAuth, ReplysDto replysDto);
 
   public void updateReply(ReplysDto replysDto);
 

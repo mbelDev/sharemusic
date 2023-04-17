@@ -130,7 +130,7 @@ body {
             padding-left: 0;
             li {
               margin: 7px 0;
-              a {
+              div {
                 display: flex;
                 align-items: center;
                 transition: all .7s ease;
@@ -148,7 +148,7 @@ body {
         .view01 {
           li {
             &:nth-child(1) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon01-o.png");
                   background-repeat: no-repeat;
@@ -165,7 +165,7 @@ body {
               }
             }
             &:nth-child(2) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon02-o.png");
                   background-repeat: no-repeat;
@@ -186,7 +186,7 @@ body {
         .view02 {
           li {
             &:nth-child(1) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon03-o.png");
                   background-repeat: no-repeat;
@@ -203,7 +203,7 @@ body {
               }
             }
             &:nth-child(2) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon04-o.png");
                   background-repeat: no-repeat;
@@ -220,7 +220,7 @@ body {
               }
             }
             &:nth-child(3) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon06-o.png");
                   background-repeat: no-repeat;
@@ -241,7 +241,7 @@ body {
         .view03 {
           li {
             &:nth-child(1) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon07-o.png");
                   background-repeat: no-repeat;
@@ -258,7 +258,7 @@ body {
               }
             }
             &:nth-child(2) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon08-o.png");
                   background-repeat: no-repeat;
@@ -275,7 +275,7 @@ body {
               }
             }
             &:nth-child(3) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon09-o.png");
                   background-repeat: no-repeat;
