@@ -58,9 +58,9 @@
             <label for="floatingInput">유튜브 링크</label>
           </div>
           <!-- boardModify-music--video -->
-          <div class="boardModify-bg boardModify-music--Genre">
-            <span>장르</span>
-            <select
+          <p>장르</p>
+          <div class="boardModify-bg boardModify-music--Genre input-group">
+            <!-- <select
               name="postGenre"
               id=""
               class="postGenre form-select"
@@ -96,7 +96,21 @@
               <option value="etc" th:selected="${boardDto.postGenre=='etc'}">
                 기타
               </option>
-            </select>
+            </select> -->
+            <input
+              type="text"
+              class="form-select"
+              id="modifyPostGenre"
+              name="postGenre"
+              th:value="${boardDto.postGenre}"
+            />
+            <button
+              id="modalModifyGenreBtn"
+              class="btn btn-outline-secondary"
+              type="button"
+            >
+              선택하기
+            </button>
           </div>
           <!-- boardModify-music--Genre -->
           <div class="boardModify-bg boardModify-music--Emote">
@@ -132,7 +146,7 @@
             <!-- 로그인 한 유저의 이름 보내기 -->
             <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->
             <input type="hidden" name="postNo" th:value="${param.postNo}" />
-            <button class="btn btn-primary btnConfirm">수정완료</button>
+            <button class="btn btn-primary btnModifyConfirm">수정완료</button>
             <a
               th:href="@{/board/view(postNo=${boardDto.postNo})}"
               type="reset"
@@ -145,24 +159,36 @@
       <!-- board-bodify--content -->
     </section>
     <!-- board-modify--page -->
-
-    <script>
-      // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
-      $(".btnConfirm").on("click", function () {
-        const url = $(".postLink").val();
-        const regExp =
-          "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
-        const match = url.match(regExp);
-
-        if (match) {
-          const getId = match[1];
-          $(".postLink").val(match[1]);
-          return true;
-        } else {
-          // 유튜브 링크를 다시 확인하라고 경고 창
-        }
-        return false;
-      });
-    </script>
+    <!-- 모달창 -->
+    <div id="modalModifyGenre" class="modal-wnd">
+      <div id="closeModalModifyGenre" class="modalContents modalCategory">
+        <!-- 모달창 안에 여기 내용 작성 -->
+        <div class="modalCategory__box">
+          <span class="modalCategory__box__option" id="modifyDance"
+            >댄스/팝</span
+          >
+          <span class="modalCategory__box__option" id="modifyFolk"
+            >포크/어쿠스틱</span
+          >
+          <span class="modalCategory__box__option" id="modifyIdol">아이돌</span>
+          <span class="modalCategory__box__option" id="modifyRap">랩/힙합</span>
+          <span class="modalCategory__box__option" id="modifyRB"
+            >알앤비/소울</span
+          >
+          <span class="modalCategory__box__option" id="modifyElect"
+            >일렉트로닉</span
+          >
+          <span class="modalCategory__box__option" id="modifyRock"
+            >락/메탈</span
+          >
+          <span class="modalCategory__box__option" id="modifyjazz">재즈</span>
+          <span class="modalCategory__box__option" id="modifyIndie">인디</span>
+          <span class="modalCategory__box__option" id="modifyAdult"
+            >성인가요</span
+          >
+        </div>
+      </div>
+      <!-- ModalThis-content -->
+    </div>
   </main>
 </html>

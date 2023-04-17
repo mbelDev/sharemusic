@@ -44,8 +44,6 @@ public class BoardServiceImpl implements BoardService {
     hashMap.put("searchTxt", searchTxt);
     hashMap.put("sort", sort);
 
-    log.info("========" + hashMap);
-
     List<BoardDto> result = boardDao.getPostAll(hashMap);
     return result;
   }

@@ -30,10 +30,13 @@
     <script src="/js/mainJs/layout.js" defer></script>
     <script src="/js/mainJs/mainPage.js" defer></script>
     <script src="/js/board/view.js" defer></script>
+    <script src="/js/board/write.js" defer></script>
+    <script src="/js/board/modify.js" defer></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/mdb.min.js"></script>
     <script src="/js/jquery-3.6.3.min.js"></script>
     <script src="/js/modal.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
   </head>
 
@@ -180,15 +183,16 @@
           <div id="closeModalGenre" class="modalContents modalCategory">
             <!-- 모달창 안에 여기 내용 작성 -->
             <div class="modalCategory__box">
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=postNo)}">락</a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='발라드', sort=postNo)}">발라드</a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='팝', sort=postNo)}">팝</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='댄스/팝', sort=postNo)}">댄스/팝</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='포크/어쿠스틱', sort=postNo)}">포크/어쿠스틱</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='아이돌', sort=postNo)}">아이돌</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='랩/힙합', sort=postNo)}">랩/힙합</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='알앤비/소울', sort=postNo)}">알앤비/소울</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='일렉트로닉', sort=postNo)}">일렉트로닉</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락/메탈', sort=postNo)}">락/메탈</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='재즈', sort=postNo)}">재즈</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='인디', sort=postNo)}">인디</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='성인가요', sort=postNo)}">성인가요</a></span>
             </div>
           </div>
           <!-- ModalThis-content -->
