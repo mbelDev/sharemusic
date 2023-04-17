@@ -8,6 +8,9 @@
   <main id="mainPage-Area" class="container" layout:fragment="contents">
     <section class="board-view--page">
       <article class="board-view--img">
+        <div class="board-view--title">
+          <h1 class="topAndbut">VIDEO</h1>
+        </div>
         <iframe
           src=""
           th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}+'?&controls=0&autohide=0&rel=0'"
@@ -20,9 +23,9 @@
       <!-- board-view--img -->
       <article class="board-view--listItem">
         <div class="board-view--listItem-name">
-            <span th:text="${boardDto.postTitle}">곡</span>
+            <p th:text="${boardDto.postTitle}">곡</p>
             <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
-              <span th:text="'&#40;'+${boardDto.postSinger}+'&#41;'">가수</span>
+              <p th:text="'&#40;'+${boardDto.postSinger}+'&#41;'">가수</p>
             </a>
           <div>
             등록 <span th:text="${boardDto.postDate}">0</span> * 조회수

@@ -10,6 +10,12 @@ body {
 .topAndbut {
   margin: 30px 0 25px 0;
 }
+h1 {
+  font-family: 'SBAggroB';
+  font-weight: bold;
+  font-size: 40px;
+  color: #fff !important;
+}
 @font-face {
   font-family: 'SBAggroB';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
@@ -130,7 +136,7 @@ body {
             padding-left: 0;
             li {
               margin: 7px 0;
-              a {
+              div {
                 display: flex;
                 align-items: center;
                 transition: all .7s ease;
@@ -148,7 +154,7 @@ body {
         .view01 {
           li {
             &:nth-child(1) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon01-o.png");
                   background-repeat: no-repeat;
@@ -165,7 +171,7 @@ body {
               }
             }
             &:nth-child(2) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon02-o.png");
                   background-repeat: no-repeat;
@@ -186,7 +192,7 @@ body {
         .view02 {
           li {
             &:nth-child(1) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon03-o.png");
                   background-repeat: no-repeat;
@@ -203,7 +209,7 @@ body {
               }
             }
             &:nth-child(2) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon04-o.png");
                   background-repeat: no-repeat;
@@ -220,7 +226,7 @@ body {
               }
             }
             &:nth-child(3) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon06-o.png");
                   background-repeat: no-repeat;
@@ -241,7 +247,7 @@ body {
         .view03 {
           li {
             &:nth-child(1) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon07-o.png");
                   background-repeat: no-repeat;
@@ -258,7 +264,7 @@ body {
               }
             }
             &:nth-child(2) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon08-o.png");
                   background-repeat: no-repeat;
@@ -275,7 +281,7 @@ body {
               }
             }
             &:nth-child(3) {
-              a {
+              div {
                 &:hover {
                   background-image: url("/images/navIcon09-o.png");
                   background-repeat: no-repeat;
