@@ -25,7 +25,7 @@
         <div class="board-view--listItem-name">
             <p th:text="${boardDto.postTitle}">곡</p>
             <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
-              <p th:text="'&#40;'+${boardDto.postSinger}+'&#41;'">가수</p>
+            <p th:text="'&#40;'+${boardDto.postSinger}+'&#41;'">가수</p>
             </a>
           <div>
             등록 <span th:text="${boardDto.postDate}">0</span> * 조회수

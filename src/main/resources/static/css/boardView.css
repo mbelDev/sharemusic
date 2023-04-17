@@ -25,7 +25,8 @@ main {
 }
 .board-view--page .board-view--listItem {
   font-size: 30px;
-  font-weight: bold;
+  font-family: "TheJamsil";
+  font-weight: 800;
   color: #fff;
   display: flex;
   justify-content: space-between;
@@ -34,12 +35,8 @@ main {
   margin-top: 20px;
 }
 .board-view--page .board-view--listItem .board-view--listItem-name p {
-  margin-bottom: auto;
-}
-.board-view--page .board-view--listItem .board-view--listItem-name p:nth-child(2) {
-  margin-top: 6px;
-  font-size: 17px;
-  font-weight: 400;
+  margin: 0;
+  padding: 0;
 }
 .board-view--page .board-view--listItem .board-view--listItem-name div {
   margin-top: 6px;

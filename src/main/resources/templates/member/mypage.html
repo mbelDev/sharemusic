@@ -5,230 +5,160 @@
   xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{/include/layoutMember.html}">
 <main id="mainPage-Area" class="mypage-Area" layout:fragment="contents">
-  <section class="main-constent--itmes">
-    <article class="mypage-Area--control">
-      <div class="mypage-Area--control-area01">
-        <div class="control-area01--title">
-          <h4>회원 정보 수정</h4>
-        </div><!-- control-area01-title -->
-        <div class="control-area01--profile">
-          <div class="control-area01--profile-img">
-            <div class="filebox bs3-primary">
-              <div><img th:src="@{/upload/}+${loggedUser.userIconReal}" alt=""></div>
-              <label for="ex_file2">프로필 변경</label> 
-              <input type="file" id="ex_file2"> 
+  <section class="mainContent">
+    <article class="mainContent-Area01">
+      <div class="mainContent-Area01-title">
+        <h1 class="topAndbut">회원정보</h1>
+      </div><!-- mainConstent-Area-title -->
+      <div class="mainContent-Area01-item">
+        <div class="Area01-item--profile">
+          <div class="Area01-item--profile-img topAndbut">
+            <img th:src="@{/upload/}+${loggedUser.userIconReal}">
+            <div class="fileArea">
+              <label for="file">이미지선택</label> 
+              <input type="file" id="file">
+            </div><!-- fileArea -->
+          </div><!-- Area01-item--profile-img -->
+          <div class="Area01-item--profile-form topAndbut">
+            <div class="formArea">
+              <span>닉네임</span>
+              <span><input type="text"></span>
+              <span><button>수정</button></span>
+            </div><!-- formArea -->
+            <div class="formArea">
+              <span>아이디</span>
+              <span><input type="text" disabled></span>
+            </div><!-- formArea -->
+            <div class="formArea">
+              <div class="formArea-sub">
+                <p>가입일</p>
+                <spna th:text="${loggedUser.userDate}">0</spna>
+              </div>
+              <div class="formArea-sub">
+                <p>작성 글</p>
+                <spna>0</spna>
+              </div>
+              <div class="formArea-sub">
+                <p>작성덧글</p>
+                <spna>0</spna>
+              </div>
+              <div class="formArea-sub">
+                <p>받은추천</p>
+                <spna>0</spna>
+              </div>
+            </div><!-- formArea -->
+          </div><!-- Area01-item--profile-form -->
+        </div><!-- Area-item--profile -->
+      </div><!-- mainConstent-Area-item -->
+    </article><!-- mainConstent-Area01 -->
+    <article class="mainContent-Area02">
+      <div class="mainContent-Area02-title topAndbut">
+        <h1>작성 글</h1>
+        <button><a th:href="@{/member/mypage/written}">더 보기</a></button>
+      </div><!-- mainConstent-Area02-title -->
+      <div class="mainContent-Area02-item">
+        <div class="Area02-item--profile">
+          <div class="Area02-item--profile-list topAndbut">
+            <div class="swiper mySwiper profileMySwiper">
+              <ul class="swiper-wrapper">
+                <li class="swiper-slide" th:each="item : ${history.listWritten}">
+                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                    <div class="profile-list">
+                      <div class="profile-list-txt">
+                        <p th:text="${item.postAuth}"></p>
+                        <p th:text="${item.postTitle}"></p>
+                        <p th:text="${item.postDate}"></p>
+                      </div>
+                    </div><!-- profile-list -->
+                  </a>
+                </li>
+              </ul>
             </div>
-          </div><!-- control-area01--profile-img -->
-          <div class="control-area01--profile-item">
-            <div class="control-area01--profile-list">
-              <form action="">
-                <ul>
-                  <li>
-                    <span>닉네임</span>
-                    <label for="exampleFormControlInput1" class="form-label"></label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                    <button class="btn btn-primary">수정</button>
-                  </li>
-                  <li>
-                    <span>아이디</span>
-                    <label for="exampleFormControlInput1" class="form-label"></label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" disabled>
-                  </li>
-                  <li>
-                    <div>
-                      * <span>가입일</span>
-                      <p th:text="${loggedUser.userDate}">0</p>*
-                      <span>작성 글</span>
-                      <p>0</p>*
-                      <span>작성 덧글</span>
-                      <p>0</p>*
-                      <span>받은 추천</span>
-                      <p>0</p>
-                    </div>
-                  </li>
-                </ul>
-                <div>
-                  <button class="btn btn-primary">수정완료</button>
-                </div>
-              </form>
-            </div><!-- control-area01--profile-list -->
-          </div><!-- control-area01--profile-item -->
-        </div><!-- control-area01--profile -->
-      </div><!-- mypage-Area--control-area01 -->
-      <div class="mypage-Area--control-area02">
-        <div class="control-area02--title">
-          <h4>작성글</h4>
-          <span class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></span>
-        </div>
-        <div class="control-area02--boxContent">
-          <ul>
-            <li th:each="item : ${history.listWritten}">
-              <a href="">
-                <img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}" alt="">
-                <span th:text="${item.postAuth}"></span>
-                <span th:text="${item.postTitle}"></span>
-                <span th:text="${item.postDate}"></span>
-              </a>
-            </li>
-          </ul>
-        </div><!-- control-area02--boxContent -->
-      </div><!-- mypage-Area--control-area02 -->
-      <div class="mypage-Area--control-area03 mypage-Area--control-area02">
-        <div class="control-area02--title">
-          <h4>최근 감상</h4>
-          <span class="btn btn-primary"><a th:href="@{/member/mypage/list(category=recent)}">더 보기</a></span>
-        </div>
-        <div class="control-area02--boxContent">
-          <ul>
-            <li th:each="item : ${history.listRecent}">
-              <a href="">
-                <img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}" alt="">
-                <span th:text="${item.postAuth}"></span>
-                <span th:text="${item.postTitle}"></span>
-                <span th:text="${item.readDate}"></span>
-              </a>
-            </li>
-          </ul>
-        </div><!-- control-area02--boxContent -->
-      </div><!-- mypage-Area--control-area02 -->
-      <div class="mypage-Area--control-area04 mypage-Area--control-area02">
-        <div class="control-area02--title">
-          <h4>복마크</h4>
-          <span class="btn btn-primary"><a th:href="@{/member/mypage/list(category=bookmark)}">더 보기</a></span>
-        </div>
-        <div class="control-area02--boxContent">
-          <ul>
-            <li th:each="item : ${history.listBookmark}">
-              <a href="">
-                <img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}" alt="">
-                <span th:text="${item.postAuth}"></span>
-                <span th:text="${item.postTitle}"></span>
-                <span th:text="${item.readDate}"></span>
-              </a>
-            </li>
-          </ul>
-        </div><!-- control-area02--boxContent -->
-      </div><!-- mypage-Area--control-area02 -->
-      <div class="mypage-Area--control-area05 mypage-Area--control-area02">
-        <h4></h4>
-        <div class="control-area02--title">
-          <h4>좋아요</h4>
-          <span class="btn btn-primary"><a th:href="@{/member/mypage/list(category=liked)}">더 보기</a></span>
-        </div>
-        <div class="control-area02--boxContent">
-          <ul>
-            <li th:each="item : ${history.listLiked}">
-              <a href="">
-                <img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}" alt="">
-                <span th:text="${item.postAuth}"></span>
-                <span th:text="${item.postTitle}"></span>
-                <span th:text="${item.readDate}"></span>
-              </a>
-            </li>
-          </ul>
-        </div><!-- control-area02--boxContent -->
-      </div><!-- mypage-Area--control-area02 -->
-    </article><!-- mypage-Area--control -->
-  </section><!-- .mypage-Area--section -->
-
-
-  <!-- <div class="mypage-Area--left-title">
-    <span>회원정보 (공사중)</span>
-  </div> mypage-Area--left-title 
-  <div class="mypage-Area--left-myImg">
-    <img th:src="@{uploadFolder/${memberDto.userIconReal}}" alt="">
-  </div><!-- mypage-Area--left-myImg
-  <div class="mypage-Area--left-userContent">
-    <ul>
-      <li class="mypage-Area--left-user">
-        <div class="left--userName">
-          <p th:text="${memberDto.userID}">아이디</p>
-        </div>
-      </li><!-- mypage-Area--left-user
-      <li class="mypage-Area--left-user">
-        <div class="left--userName">
-          <p th:text="${memberDto.userNM}">별명</p>
-        </div>
-      </li><!-- mypage-Area--left-user
-      <li class="mypage-Area--left-user">
-        <div class="left--userName">
-          <p th:text="${memberDto.userDate}">작성글</p>
-        </div>
-      </li><!-- mypage-Area--left-user
-      <li class="mypage-Area--left-user">
-        <div class="left--userName">
-          <p th:text="${memberDto.userDate}">가입일자</p>
-        </div>
-      </li><!-- mypage-Area--left-user
-    </ul>
-  </div>
-</article><!-- .mypage-Area--left 
-<article class="mypage-Area--right">
-  <div class="mypage-Area--right-userContnet">
-    <ul>
-      <li><a href="/member/join">회원정보 수정</a></li>
-      <li><a href="">이미지 수정</a></li>
-      <li><a href="">글 수정</a></li>
-    </ul>
-  </div> -->
-
-
-
-  <!-- <div style="display: flex; align-content: center; flex-direction: column;">
-  <span th:text="${memberDto}"></span>
-    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;"> -->
-
-        <!-- 기본 회원정보 -->
-        <!-- <div>
-            <img th:src="@{uploadFolder/${memberDto.userIconReal}}" alt="" style="width: 150px; height: 150px;">
-        </div>
-        <div>
-            <input type="file" class="userIcon"><span>프로필 사진 변경</span>
-        </div>
-        <div>
-            <span th:text="${memberDto.userNM}">별명</span>
-        </div>
-        <div>
-            <span th:text="${memberDto.userID}">아이디</span>
-        </div> -->
-        <!-- <span th:text="${memberDto.userGenre}">선호장르</span> -->
-    <!-- </div>
-    <div style="display: flex; justify-content: center;"> -->
-        <!-- 작성 글 목록 -->
-        <!--   BOARD에서 POSTAUTH = USERID인 것들 불러오기 -->
-        <!-- <ul> -->
-            <!-- <li th:each="item:${writeList}">
-                <span th:text="${writeList.postTitle}">곡 명</span>
-                <span th:text="${writeList.postSinger}">가수명</span>
-                <span th:text="${writeList.postHits}">조회수</span>
-                <span th:text="${writeList.postLike}">추천수</span>
-                <span th:text="${writeList.postTitle}">추천버튼</span>
-            </li> -->
-            <!-- <li>
-                <span>곡 명</span>
-                <span>가수명</span>
-                <span>조회수</span>
-                <span>추천수</span>
-                <span>추천버튼</span>
-            </li>
-        </ul>
-    </div> -->
-    <!-- <div style="display: flex; justify-content: center;"> -->
-        <!-- 최근 열람 곡 목록 -->
-        <!-- Service에서 수령.. BOARD_RECORD에서 POSTNO를 받아서 BOARD에서 받아오기 -->
-        <!-- <ul>
-            <li>
-                <span>곡 명</span>
-                <span>가수명</span>
-                <span>조회수</span>
-                <span>추천수</span>
-                <span>추천버튼</span>
-            </li>
-        </ul>
-    </div>
-    <div style="display: flex; justify-content: center;"> -->
-        <!-- 좋아요 누른 글 목록 -->
-        <!-- BOARD_RECORD에서 WHERE LIKE = 1 의 POSTNO를 받아오기. -->
-    <!-- </div>
-  </div> -->
+          </div><!-- Area02-item--profile-img -->
+        </div><!-- Area02-item--profile -->
+      </div><!-- mainConstent-Area02-item -->
+    </article><!-- mainContent-Area02 -->
+    <article class="mainContent-Area02">
+      <div class="mainContent-Area02-title topAndbut">
+        <h1>작성 글</h1>
+        <button><a th:href="@{/member/mypage/written}">더 보기</a></button>
+      </div><!-- mainConstent-Area02-title -->
+      <div class="mainContent-Area02-item">
+        <div class="Area02-item--profile">
+          <div class="Area02-item--profile-list topAndbut">
+            <div class="swiper mySwiper profileMySwiper">
+              <ul class="swiper-wrapper">
+                <li class="swiper-slide" th:each="item : ${history.listRecent}">
+                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                    <div class="profile-list">
+                      <div class="profile-list-txt">
+                        <p th:text="${item.postAuth}"></p>
+                        <p th:text="${item.postTitle}"></p>
+                        <p th:text="${item.readDate}"></p>
+                      </div>
+                    </div><!-- profile-list -->
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- Area02-item--profile-img -->
+        </div><!-- Area02-item--profile -->
+      </div><!-- mainConstent-Area02-item -->
+    </article><!-- mainContent-Area02 -->
+    <article class="mainContent-Area02">
+      <div class="mainContent-Area02-title topAndbut">
+        <h1>작성 글</h1>
+        <button><a th:href="@{/member/mypage/written}">더 보기</a></button>
+      </div><!-- mainConstent-Area02-title -->
+      <div class="mainContent-Area02-item">
+        <div class="Area02-item--profile">
+          <div class="Area02-item--profile-list topAndbut">
+            <div class="swiper mySwiper profileMySwiper">
+              <ul class="swiper-wrapper">
+                <li class="swiper-slide" th:each="item : ${history.listBookmark}">
+                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                    <div class="profile-list">
+                      <div class="profile-list-txt">
+                        <p th:text="${item.postAuth}"></p>
+                        <p th:text="${item.postTitle}"></p>
+                        <p th:text="${item.readDate}"></p>
+                      </div>
+                    </div><!-- profile-list -->
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- Area02-item--profile-img -->
+        </div><!-- Area02-item--profile -->
+      </div><!-- mainConstent-Area02-item -->
+    </article><!-- mainContent-Area02 -->
+    <article class="mainContent-Area02">
+      <div class="mainContent-Area02-title topAndbut">
+        <h1>작성 글</h1>
+        <button><a th:href="@{/member/mypage/written}">더 보기</a></button>
+      </div><!-- mainConstent-Area02-title -->
+      <div class="mainContent-Area02-item">
+        <div class="Area02-item--profile">
+          <div class="Area02-item--profile-list topAndbut">
+            <div class="swiper mySwiper profileMySwiper">
+              <ul class="swiper-wrapper">
+                <li class="swiper-slide" th:each="item : ${history.listLiked}">
+                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                    <div class="profile-list">
+                      <div class="profile-list-txt">
+                        <p th:text="${item.postAuth}"></p>
+                        <p th:text="${item.postTitle}"></p>
+                        <p th:text="${item.readDate}"></p>
+                      </div>
+                    </div><!-- profile-list -->
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- Area02-item--profile-img -->
+        </div><!-- Area02-item--profile -->
+      </div><!-- mainConstent-Area02-item -->
+    </article><!-- mainContent-Area02 -->
+    
+  </section><!-- mypage-Area--section -->
 </main>

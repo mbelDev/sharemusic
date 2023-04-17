@@ -1,14 +1,15 @@
 
 // 스와이퍼
-  // let swiper = new Swiper(".swiper", {
-  //   slidesPerView: "auto",
-  //   spaceBetween: 50,
-  //   loop: true,
-  //   autoplay: {   
-  //     delay: 2500, 
-  //     disableOnInteraction: false, 
-  //   },
-  // });
+// var swiper = new Swiper(".profileMySwiper", {
+//   speed: 3000,
+//   loop: true,
+//   slidesPerView: 5,
+//   spaceBetween: 10,
+//   autoplay: {
+//     delay: 3000,
+//     disableOnInteraction: false,
+//   },
+// });
 
   $('.swiper').each(function(index) {
     t = $(this);
@@ -24,8 +25,8 @@
       },
       speed: 3000,
       loop: true,
-      loopAdditionalSlides: 4,
-      slidesPerView: "auto",
+      slidesPerView: 5,
+      spaceBetween: 10,
     });
   });
 
