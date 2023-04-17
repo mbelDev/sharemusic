@@ -13,8 +13,12 @@ public class ReplysDto {
 
   private int postNo;
   private int replyNo;
-  private String replyAuth;
+  private String replyAuthID;
+  private String replyAuthNM;
   private String replyCont;
   private int replyHidden;
   private String replyDate;
+  private int replayGroup;
+  private int replyLevel;
+  private int replyStep;
 }

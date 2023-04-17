@@ -139,8 +139,8 @@
           <div class="view left-items lien">
             <ul>
               <li><a href="#">전체보기</a></li>
-              <li id="modalGenreBtn"><a href="#">장르별 모아보기</a></li>
-              <li id="modalEmoteBtn"><a href="#">감성별 모아보기</a></li>
+              <li id="modalGenreBtn">장르별 모아보기</li>
+              <li id="modalEmoteBtn">감성별 모아보기</li>
             </ul>
           </div>
         </article>
@@ -178,9 +178,9 @@
               <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">락</a></span>
               <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">발라드</a></span>
               <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option" th:onclick="testRespone01('락')">테스트용 락 버튼</span>
+              <span class="modalCategory__box__option" th:onclick="testRespone01('발라드')">테스트용 발라드 버튼</span>
+              <span class="modalCategory__box__option" th:onclick="testRespone01('팝')">테스트용 팝 버튼</span>
               <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
               <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
               <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
@@ -195,8 +195,8 @@
             <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">신남</a></span>
             <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">우울</a></span>
             <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">희열</a></span>
-            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option" th:onclick="testRespone01('락')">테스트용 버튼</span>
+            <span class="modalCategory__box__option" th:onclick="testRespone01('발라드')">테스트용 버튼</span>
             <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
             <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
             <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
