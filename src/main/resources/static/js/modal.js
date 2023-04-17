@@ -8,7 +8,13 @@ function getModal(getBtn,getModal,getClose){
     });
     
     $(ModalBtn).click(()=>{
-         $(Modal).addClass("modal-open");
+        $(Modal).addClass("modal-open");
     });
-  }
-  
+
+    
+}
+
+
+
+
+
