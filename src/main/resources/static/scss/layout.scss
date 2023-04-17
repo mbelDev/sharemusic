@@ -5,6 +5,10 @@ body {
   color: #fff;
   font-weight: 200;
 }
+p {
+  margin: 0; left: 0;
+  line-height: 1;
+}
 .line {
   border: 1px solid hsla(0,0%,100%,.1);
   border-width: 1px 0;
@@ -89,6 +93,12 @@ h1 {
           }//.infoForm-userNM
         }//.infoForm-All
       }//.headerLayout-Area--infoForm
+      .comment-txt {
+        margin: 16px 0;
+          button {
+            font-size: 16px;
+          }
+      }//.comment
       .headerLayout-Area--joinForm {
         .join {
           display: flex;
@@ -309,7 +319,7 @@ h1 {
   #mainPage-Area {
     width: 100%;
     height: 100%;
-    margin-left: 13%;
+    margin-left: 12%;
     background-color: #0e0e0e;
   }//#mainPage-Area
 }//.flex-box

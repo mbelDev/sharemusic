@@ -51,7 +51,7 @@
             <a href="/mainPage"><img src="/images/logo.png" alt="logo" /></a>
           </div>
         </article><!-- .headerLayout-Area--logo -->
-        <article class="headerLayout-Area--infoForm topAndbut">
+        <article class="headerLayout-Area--infoForm">
           <!-- 기본 회원정보 -->
           <th:block th:unless="${loggedUser == null}">
             <div class="infoForm-All line">
@@ -71,7 +71,7 @@
             </div>
           </th:block>
         </article><!-- .headerLayout-Area--infoForm -->
-        <article class="headerLayout-Area--joinForm topAndbut">
+        <article class="headerLayout-Area--joinForm">
           <th:block th:if="${loggedUser == null}">
             <div class="join line">
               <span><img src="/images/myimg.png" alt=""></span>
@@ -80,6 +80,9 @@
             </div>
           </th:block>
           <th:block th:unless="${loggedUser == null}">
+            <div class="comment-txt">
+              <button class="btn btn-info">글 작성</button>
+            </div>
             <div class="join line">
               <a href="/member/login"><span>마이페이지</span></a>
               <a href="/member/logout"><span>로그아웃</span></a>

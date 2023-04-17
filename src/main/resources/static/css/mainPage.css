@@ -8,7 +8,7 @@
   font-weight: bold;
 }
 .main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper {
-  gap: 200px;
+  gap: 5px;
 }
 .main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide {
   width: 530px;

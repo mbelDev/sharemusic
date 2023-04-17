@@ -5,195 +5,52 @@
   xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{/include/layout.html}"
 >
-  <main id="mainPage-Area" class="container" layout:fragment="contents">
-    <section class="board-view--page">
-      <article class="board-view--img">
-        <div class="board-view--title">
-          <h1 class="topAndbut">VIDEO</h1>
-        </div>
-        <iframe
-          src=""
-          th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}+'?&controls=0&autohide=0&rel=0'"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        >
+<main id="mainPage-Area" class="" layout:fragment="contents">
+  <section class="boardView">
+    <article class="boardView-Area">
+      <div class="boardView-Area-title topAndbut">
+        <h1>VIDEO</h1>
+      </div><!-- boardView-Area-title -->
+      <div class="boardView-Video">
+        <iframe th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}+'?&controls=0&autohide=0&rel=0'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
-      </article>
-      <!-- board-view--img -->
-      <article class="board-view--listItem">
-        <div class="board-view--listItem-name">
-            <p th:text="${boardDto.postTitle}">곡</p>
-            <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
-            <p th:text="'&#40;'+${boardDto.postSinger}+'&#41;'">가수</p>
-            </a>
-          <div>
-            등록 <span th:text="${boardDto.postDate}">0</span> * 조회수
-            <span th:text="${boardDto.postHits}">0</span>
-          </div>
-          <div class="board-view--listItem-setSplit">
-            <span th:text="'#' + ${boardDto.postGenre}">장르</span>
-            <span th:text="'#' + ${boardDto.postEmote}">감성</span>
-          </div>
-          <!-- board-view--listItem-setSplit -->
-          <div
-            class="listItem-controller02"
-            th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}"
-          >
-            <a
-              href="/board/modify"
-              th:href="@{/board/modify(postNo=${boardDto.postNo})}"
-              class="btn btn-primary"
-              >수정</a
-            >
-            <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
-          </div>
-        </div>
-        <!-- board-view--listItem-name -->
-        <div class="board-view--listItem-controller">
-          <div class="listItem-controller01">
-            <div class="good">
-              <img
-                class="good-img"
-                src="/images/good.svg"
-                alt=""
-                onclick="test();postGood();"
-              />
-              <span th:text="${boardDto.postLike}" class="postLike">0</span>
-            </div>
-            <button class="btnOpen btnShare" id="shareModalBox">
-              <img src="/images/open.svg" alt="" />
-            </button>
-          </div>
-          <div
-          class="listItem-controller02"
-          th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}"
-        >
-          <a
-            href="/board/modify"
-            th:href="@{/board/modify(postNo=${boardDto.postNo})}"
-            class="btn btn-primary"
-            >수정</a
-          >
-          <button id="modalDeleteBtn" class="btn btn-secondary">삭제</button>
-        </div>
-        </div>
-        <!-- board-view--listItem-controller -->
-      </article>
-      <!-- board-view--listItem -->
-      <article class="board-view--textBox">
-        <div class="textBox--title">
-          <a th:href="@{|/member/user/${boardDto.postAuth}|}">
-            <span class="iconSample" stlye="width:45px; height:45px; background:#fff; border-radius:15px;"></span>
-            <span th:text="(${boardDto.postAuth})">글 작성자</span>
-          </a>
-          <a th:href="@{/mainPage/(searchTxt=${boardDto.postAuth})}">
-            <span>작성 글 보기</span>
-            <span>구독</span>
-          </a>
-        </div>
-        <div class="textBox--txt">
-          <span th:text="${boardDto.postCont}">설명</span>
-        </div>
-      </article>
-      <article class="board-view--replyBox">
-        <ul id="reply-container" th:if="${replys} != null">
-          <li th:Each="item:${replys}">
-            <div class="reply--icon">
-              <a th:href="@{|/member/user/${item.replyAuth}|}">
-                <img
-                  th:src="@{/upload/}+${item.replyIcon}"
-                  alt=""
-                  style="width: 30px; height: 30px; border-radius: 5px"
-                />
-                <span th:text="${item.replyAuth}">홍길동</span>
+        <div class="boardView-Video--title">
+          <div class="title">
+            <div class="title-name">
+              <p th:text="${boardDto.postTitle}">곡이름</p>
+              <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
+                <h1 th:text="${boardDto.postSinger}">가수</h1>
               </a>
-            </div>
-            <div class="reply--contents">
-              <span th:text="${item.replyCont}">덧글 내용</span>
-            </div>
-            <div
-              class="reply--btns"
-              th:if="{session.loggedUser.userID = item.replyAuth}"
-            >
-              <span th:text="${item.replyCont}">수정</span>
-              <span th:text="${item.replyCont}">삭제</span>
-            </div>
-          </li>
-        </ul>
-        <div class="board-view--replyBox__input">
-          <input type="text" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }"/>
-          <input type="button" class="btn-primary btn-reply" value="작성"/>
-        </div>
-      </article>
-      <!-- board-view--textBox -->
-    </section>
-    <!-- board-view--page -->
-    <section class="board-view--subPage">
-      <div class="boardView-swiper mySwiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" th:Each="item : ${RecentList}">1
-            <!-- <a href="/board/view" th:href="@{/board/view(postNo=${item.postNo})}">
-              <div class="ItemBox-imgs">
-                <img
-                  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                  alt=""
-                />
-              </div>
-              <div class="ItemBox-content">
-                <p class="ItemBox-postAuth" th:text="${item.postAuth}"></p>
-                <p class="ItemBox-postTitle" th:text="${item.postTitle}"></p>
-                <p
-                  class="ItemBox-postSinger"
-                  th:text="${item.postSinger}"
-                ></p>
-              </div>
-            </a> -->
-          </div>
-        </div>
-      </div>
+            </div><!-- title-name -->
+            <div class="title-Date">
+              등록&nbsp;&nbsp; <span th:text="${boardDto.postDate}">0</span>
+              &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp; <span th:text="${boardDto.postHits}">0</span>
+            </div><!-- title-Date -->
+            <div class="title-Genre">
+              <span th:text="'#' + ${boardDto.postGenre}">장르</span>
+              <span th:text="'#' + ${boardDto.postEmote}">감성</span>
+            </div><!-- title-Genre -->
+            <div class="title-btn" th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}">
+              <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btn btn-primary">수정</a>
+            <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
+            </div><!-- title-btn -->
+          </div><!-- title -->
+          <div class="like">
+            <div class="like-good">
+              <img class="good-img" src="/images/good.svg" onclick="test();postGood();"/>
+              <span th:text="${boardDto.postLike}" class="postLike">0</span>
+            </div><!-- like-good -->
+            <div class="like-btn">
+              <button class="btnOpen btnShare" id="shareModalBox">
+                <img src="/images/open.svg" alt="" />
+              </button>
+            </div><!-- like-btn -->
+          </div><!-- like -->
+        </div><!-- boardView-Video--title -->
+      </div><!-- boardView-Video -->
+    </article><!-- boardView-Area -->
+  </section><!-- boardView -->
 
-      <!-- 삭제 모달창 -->
-      <div id="deleteModal" class="modal-wnd">
-        <div class="modal-wnd-item">
-          <button id="closeDeleteModal">닫기</button>
-          <div class="modal-content">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <h3>정말로 삭제하시겠습니까?</h3>
-            <button id="btnDeleteConfirm">확인</button>
-            <button id="closeDelete">취소</button>
-          </div>
-          <!-- ModalThis-content -->
-        </div>
-        <!-- write-modal--item -->
-      </div>
-
-      <!-- 공유 모달창 -->
-      <div id="shareModal" class="modal-wnd">
-        <div class="modal-wnd-item">
-          <button id="closeShareModal">닫기</button>
-          <div class="modal-content">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <div>
-              <input
-                type="text"
-                class="shareUrl"
-                th:value="'https://youtu.be/' + ${boardDto.postLink}"
-                readonly
-              />
-              <button onclick="copyUrl();">복사</button>
-              <button class="shareTwitter">트위터로 공유</button>
-              <button class="shareFacebook">페이스북으로 공유</button>
-              <button class="shareKakaoTalk">카카오톡으로 공유</button>
-            </div>
-          </div>
-          <!-- ModalThis-content -->
-        </div>
-        <!-- write-modal--item -->
-      </div>
-      <!-- write-modal -->
-    </section>
-    <!-- board-view--subPage -->
     <script>
       function like() {
         $.ajax({

@@ -49,7 +49,7 @@
 }
 .mainContent-Area02 .Area02-item--profile-list ul {
   display: flex;
-  gap: 70px;
+  gap: 50px;
 }
 .mainContent-Area02 .Area02-item--profile-list ul li {
   position: relative;

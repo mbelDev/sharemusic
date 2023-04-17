@@ -15,7 +15,7 @@
           <div class="ranking-box topAndbut">
             <div class="swiper mySwiper">
               <ul class="swiper-wrapper">
-                <li th:each="item, i : ${rankList}" class="swiper-slide">
+                <li class="swiper-slide" th:each="item, i : ${rankList}" >
                   <a href="/board/view" th:href="@{/board/view(postNo=${item.postNo})}">
                     <div class="swiper-title">
                       <img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"/>
