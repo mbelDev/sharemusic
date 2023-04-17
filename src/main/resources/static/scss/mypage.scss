@@ -1,158 +1,111 @@
-h4 {
-  font-weight: bold;
-  color: #fff;
-  margin: 30px 0;
-}
 
-.mypage-Area--section {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  .mypage-Area--control {
-    margin-top: 30px !important;
-    width: 95%;
-    .mypage-Area--control-area01 {
-      border-bottom: 2px solid #555554;
-      padding-bottom: 30px;
-      color: #fff;
-      .control-area01--title {
-      }//.control-area01--title
-      .control-area01--profile {
-        margin: 20px;
+.mainContent {
+  display: block;
+  margin: 4%;
+  &-Area01 {
+    &-title {
+    }//&-title
+    &-item {
+      .Area01-item--profile {
         display: flex;
-        .control-area01--profile-img {
-          margin-top: 50px;
-          width: 20%;
-          display: flex;
-          justify-content: center;
+        &-img {
+          width: 30%;
+          text-align: center;
           img {
             width: 200px;
             height: 200px;
           }
-          .filebox {
-            margin-bottom: 20px;
-            text-align: center;
-            div {
-              margin-bottom: 20px;
-            }
-          }
-          .filebox label {
-            display: inline-block;
-            padding: .5em .75em;
-            color: #fff;
-            font-size: inherit;
-            line-height: normal;
-            vertical-align: middle;
-            background-color: #2e6da4;
-            cursor: pointer;
-            border: 1px solid #ebebeb;
-            border-bottom-color: #e2e2e2;
-            border-radius: .25em;
-          }
-          .filebox.bs3-primary label {
-            color: #fff;
-            background-color: #337ab7;
-            border-color: #2e6da4;
-          }
-          .filebox input[type="file"] {  /* 파일 필드 숨기기 */
+          .fileArea input[type="file"] {
             position: absolute;
-            width: 1px;
-            height: 1px;
+            width: 0;
+            height: 0;
             padding: 0;
-            margin: -1px;
             overflow: hidden;
-            clip:rect(0,0,0,0);
             border: 0;
-          }
-        }//.control-area01--profile-img
-        .control-area01--profile-item {
-          margin-left: 100px;
-          .profile-item--title {
-            font-size: 20px;
-            font-weight: bold;
-          }
-          .control-area01--profile-list {
-            ul {
-              li {
-                margin: 30px 0;
-                span {
-                  display: inline-block;
-                  width: 150px;
-                }
-                p {
-                  display: inline;
-                }
-                input {
-                  width: 600px;
-                  height: 40px;
-                  line-height: 1 !important;
-                }
-                &:nth-child(1) {
-                  display: flex;
-                  align-items: center;
-                  input {
-                    width: 530px;
-                  }
-                  button {
-                    margin-left: 10px;
-                  }
-                }
-                &:nth-child(2) {
-                  display: flex;
-                  align-items: center;
-                  padding-bottom: 50px;
-                  border-bottom: 1px solid #555554;
-                  input {
-                    width: 610px;
-                  }
-                }
-                &:nth-child(3) {
-                  display: flex;
-                  line-height: 3;
-                  padding-bottom: 30px;
-                  div {
-                    margin-right: 100px;
-                    span {
-                      width: 80px;
-                    }
-                    p {
-                      margin-right: 80px;
-                    }
-                  }
-                }
+          }//.fileArea
+        }//&--img
+        &-form {
+          width: 70%;
+          .formArea {
+            margin-bottom: 15px;
+            span {
+              input {
+                margin-left: 10px;
+                width: 400px;
               }
             }
-          }//.control-area01--profile-list
-        }//.control-area01--profile-item
-      }//.control-area01--profile
-    }//.mypage-Area--control-area01
-    .mypage-Area--control-area02 {
-      padding-bottom: 30px;
-      border-bottom: 2px solid #555554;
-      .control-area02--title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        span {
-          margin-right: 50px;
-        }
+            &-sub {
+              display: flex;
+              p {
+                width: 75px;
+              }
+            }
+          }//.formArea
+        }//&--form
+      }//.Area01-item--profile
+    }//&-item 
+  }//&-Area01
+  &-Area02 {
+    height: 300px;
+    &-title {
+      display: flex;
+      align-items: center;
+      button {
+        height: 30px;
       }
-      .control-area02--boxContent {
+    }//&-title
+    .Area02-item--profile {
+      &-list {
         ul {
           display: flex;
-          align-items: center;
-          gap: 30px;
+          gap: 50px;
           li {
-            outline: 1px solid red;
-            width: 350px;
-            height: 250px;
+            position: relative;
+            a {
+              width: 360px;
+              height: 200px;
+              img {
+                width: 360px;
+                height: 200px;
+              }
+              .profile-list {
+                width: 360px;
+                height: 200px;
+                background-color: #000000d7;
+                position: absolute;
+                top: 0; left: 0;
+                opacity: 0;
+                transition: all 0.4s ease;
+                transition-delay: 0.1s;
+                &-txt {
+                  position: absolute;
+                  bottom: 10px; left: 10px;
+                  p {
+                    line-height: 1.3;
+                    margin: 0; padding: 0;
+                    &:nth-child(1) {
+                      font-weight: 200;
+                    }//&:nth-child(1)
+                    &:nth-child(2) {
+                      font-size: 26px;
+                      font-weight: 600;
+                    }//&:nth-child(2)
+                    &:nth-child(3) {
+                      margin-top: 20px;
+                      font-size: 13px;
+                      font-weight: 200;
+                    }//&:nth-child(3)
+                  }
+                }//&-txt
+                &:hover {
+                  opacity: 1;
+                }
+              }//.profile-list
+            }
           }
         }
-      }
-
-    }//.mypage-Area--control-area02
-    .mypage-Area--control-area05 {
-      border-bottom:none;
-    }//.mypage-Area--control-area05
-  }//.mypage-Area--control
-}//.mypage-Area--section
+        
+      }//&-list
+    }//.Area02-item--profile
+  }//&-Area02
+}//.mainConstent

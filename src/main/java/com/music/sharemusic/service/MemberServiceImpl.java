@@ -200,6 +200,7 @@ public class MemberServiceImpl implements MemberService {
     String userID = loggedDto.getUserID();
     MemberDto result = getMemberOne(userID);
     loggedDto.setUserDate(result.getUserDate());
+    loggedDto.setUserNM(result.getUserNM());
     return result;
   }
 

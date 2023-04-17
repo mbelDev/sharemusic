@@ -1,150 +1,100 @@
-@charset "UTF-8";
-h4 {
-  font-weight: bold;
-  color: #fff;
-  margin: 30px 0;
+.mainContent {
+  display: block;
+  margin: 4%;
 }
-
-.mypage-Area--section {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.mypage-Area--section .mypage-Area--control {
-  margin-top: 30px !important;
-  width: 95%;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 {
-  border-bottom: 2px solid #555554;
-  padding-bottom: 30px;
-  color: #fff;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile {
-  margin: 20px;
+.mainContent-Area01-item .Area01-item--profile {
   display: flex;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-img {
-  margin-top: 50px;
-  width: 20%;
-  display: flex;
-  justify-content: center;
+.mainContent-Area01-item .Area01-item--profile-img {
+  width: 30%;
+  text-align: center;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-img img {
+.mainContent-Area01-item .Area01-item--profile-img img {
   width: 200px;
   height: 200px;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-img .filebox {
-  margin-bottom: 20px;
-  text-align: center;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-img .filebox div {
-  margin-bottom: 20px;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-img .filebox label {
-  display: inline-block;
-  padding: 0.5em 0.75em;
-  color: #fff;
-  font-size: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #2e6da4;
-  cursor: pointer;
-  border: 1px solid #ebebeb;
-  border-bottom-color: #e2e2e2;
-  border-radius: 0.25em;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-img .filebox.bs3-primary label {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-img .filebox input[type=file] { /* 파일 필드 숨기기 */
+.mainContent-Area01-item .Area01-item--profile-img .fileArea input[type=file] {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: 0;
+  height: 0;
   padding: 0;
-  margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
   border: 0;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item {
-  margin-left: 100px;
+.mainContent-Area01-item .Area01-item--profile-form {
+  width: 70%;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .profile-item--title {
-  font-size: 20px;
-  font-weight: bold;
+.mainContent-Area01-item .Area01-item--profile-form .formArea {
+  margin-bottom: 15px;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li {
-  margin: 30px 0;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li span {
-  display: inline-block;
-  width: 150px;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li p {
-  display: inline;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li input {
-  width: 600px;
-  height: 40px;
-  line-height: 1 !important;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li:nth-child(1) {
-  display: flex;
-  align-items: center;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li:nth-child(1) input {
-  width: 530px;
-}
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li:nth-child(1) button {
+.mainContent-Area01-item .Area01-item--profile-form .formArea span input {
   margin-left: 10px;
+  width: 400px;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li:nth-child(2) {
+.mainContent-Area01-item .Area01-item--profile-form .formArea-sub {
+  display: flex;
+}
+.mainContent-Area01-item .Area01-item--profile-form .formArea-sub p {
+  width: 75px;
+}
+.mainContent-Area02 {
+  height: 300px;
+}
+.mainContent-Area02-title {
   display: flex;
   align-items: center;
-  padding-bottom: 50px;
-  border-bottom: 1px solid #555554;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li:nth-child(2) input {
-  width: 610px;
+.mainContent-Area02-title button {
+  height: 30px;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li:nth-child(3) {
+.mainContent-Area02 .Area02-item--profile-list ul {
   display: flex;
-  line-height: 3;
-  padding-bottom: 30px;
+  gap: 50px;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li:nth-child(3) div {
-  margin-right: 100px;
+.mainContent-Area02 .Area02-item--profile-list ul li {
+  position: relative;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li:nth-child(3) div span {
-  width: 80px;
+.mainContent-Area02 .Area02-item--profile-list ul li a {
+  width: 360px;
+  height: 200px;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area01 .control-area01--profile .control-area01--profile-item .control-area01--profile-list ul li:nth-child(3) div p {
-  margin-right: 80px;
+.mainContent-Area02 .Area02-item--profile-list ul li a img {
+  width: 360px;
+  height: 200px;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area02 {
-  padding-bottom: 30px;
-  border-bottom: 2px solid #555554;
+.mainContent-Area02 .Area02-item--profile-list ul li a .profile-list {
+  width: 360px;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.8431372549);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: all 0.4s ease;
+  transition-delay: 0.1s;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area02 .control-area02--title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.mainContent-Area02 .Area02-item--profile-list ul li a .profile-list-txt {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area02 .control-area02--title span {
-  margin-right: 50px;
+.mainContent-Area02 .Area02-item--profile-list ul li a .profile-list-txt p {
+  line-height: 1.3;
+  margin: 0;
+  padding: 0;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area02 .control-area02--boxContent ul {
-  display: flex;
-  align-items: center;
-  gap: 30px;
+.mainContent-Area02 .Area02-item--profile-list ul li a .profile-list-txt p:nth-child(1) {
+  font-weight: 200;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area02 .control-area02--boxContent ul li {
-  outline: 1px solid red;
-  width: 350px;
-  height: 250px;
+.mainContent-Area02 .Area02-item--profile-list ul li a .profile-list-txt p:nth-child(2) {
+  font-size: 26px;
+  font-weight: 600;
 }
-.mypage-Area--section .mypage-Area--control .mypage-Area--control-area05 {
-  border-bottom: none;
+.mainContent-Area02 .Area02-item--profile-list ul li a .profile-list-txt p:nth-child(3) {
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 200;
+}
+.mainContent-Area02 .Area02-item--profile-list ul li a .profile-list:hover {
+  opacity: 1;
 }

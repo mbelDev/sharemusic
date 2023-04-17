@@ -18,12 +18,14 @@ main {
 }
 .boardWrite-page .boardWrite-page--form .boardWrite-pag--item {
   margin-bottom: 30px;
+<<<<<<< HEAD
+=======
 }
 
 .modal-wnd {
   width: 100%;
   height: 100%;
-  background-color: rgba(17, 17, 17, 0.9529411765);
+  background-color: rgba(17, 17, 17, 0.8156862745);
   position: fixed;
   top: 0%;
   left: 0%;
@@ -39,9 +41,18 @@ main {
   background-color: #fff;
   border-radius: 13px;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-40%, -50%);
+  top: 20%;
+  left: 15%;
+}
+.modal-wnd-item-contents {
+  display: block;
+  margin: 0px auto;
+  padding: 20px;
+}
+.modal-wnd-item-contents .modal-btn {
+  width: 120x;
+  height: 48px;
+  border-radius: 5px;
 }
 .modal-wnd .modalCategory {
   display: flex;
@@ -74,4 +85,5 @@ main {
   text-align: center;
   padding: auto 0px;
   align-items: center;
+>>>>>>> c9537f3f6c35c0e75bd338c098c57cea71e6c001
 }
