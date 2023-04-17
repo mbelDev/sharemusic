@@ -41,7 +41,7 @@ html {
 }
 #intro-Area .intro-Area--section .intro-Area--article .intro-Area--btn {
   position: absolute;
-  bottom: 15%;
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 99;

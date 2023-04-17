@@ -1,6 +1,6 @@
 
 // 스와이퍼
-  // let swiper = new Swiper(".mySwiper", {
+  // let swiper = new Swiper(".swiper", {
   //   slidesPerView: "auto",
   //   spaceBetween: 50,
   //   loop: true,
@@ -16,15 +16,15 @@
   
     let swiper = new Swiper( ".swiper", {
       autoplay: {
-        delay: 500, //add
+        delay: 3000, //add
         disableOnInteraction: false,
       },
       mousewheel: {
         invert: false,
       },
-      speed: 2000,
+      speed: 3000,
       loop: true,
-      loopAdditionalSlides: 1,
+      loopAdditionalSlides: 4,
       slidesPerView: "auto",
     });
   });

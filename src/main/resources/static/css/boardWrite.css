@@ -18,6 +18,8 @@ main {
 }
 .boardWrite-page .boardWrite-page--form .boardWrite-pag--item {
   margin-bottom: 30px;
+<<<<<<< HEAD
+=======
 }
 
 .modal-wnd {
@@ -83,4 +85,5 @@ main {
   text-align: center;
   padding: auto 0px;
   align-items: center;
+>>>>>>> c9537f3f6c35c0e75bd338c098c57cea71e6c001
 }

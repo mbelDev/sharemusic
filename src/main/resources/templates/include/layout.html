@@ -2,103 +2,95 @@
 <html
   lang="ko"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  xmlns:th="http://www.thymeleaf.org"
->
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Music</title>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
-      rel="stylesheet">
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/mdb.min.css" />
-    <link rel="stylesheet" href="/css/layout.css" />
-    <link rel="stylesheet" href="/css/mainPage.css" />
-    <link rel="stylesheet" href="/css/mypage.css" />
-    <link rel="stylesheet" href="/css/recent.css" />
-    <link rel="stylesheet" href="/css/boardView.css" />
-    <link rel="stylesheet" href="/css/boardModify.css" />
-    <link rel="stylesheet" href="/css/boardWrite.css" />
-    
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
-    />
-    <script src="/js/mainJs/layout.js" defer></script>
-    <script src="/js/mainJs/mainPage.js" defer></script>
-    <script src="/js/board/view.js" defer></script>
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/mdb.min.js"></script>
-    <script src="/js/jquery-3.6.3.min.js"></script>
-    <script src="/js/modal.js"></script>
+  <title>Music</title>
 
-  </head>
+  <link rel="shortcut icon" href="/images/favicon.jpg">
+  <link rel="stylesheet" href="/font/apple/AppleSDGothicNeoH.ttf">
+  <link rel="stylesheet" href="/font/helvetica/HelveticaBlack.ttf">
 
-  <body>
-    <header class="container">
-      <section id="headerLayout-Area">
-        <article class="headerLayout-Area--logo">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/mdb.min.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/mainPage.css" />
+  <link rel="stylesheet" href="/css/mypage.css" />
+  <link rel="stylesheet" href="/css/recent.css" />
+  <link rel="stylesheet" href="/css/boardView.css" />
+  <link rel="stylesheet" href="/css/boardModify.css" />
+  <link rel="stylesheet" href="/css/boardWrite.css" />
+  <link rel="stylesheet" href="/css/modal.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <script src="/js/mainJs/layout.js" defer></script>
+  <script src="/js/mainJs/mainPage.js" defer></script>
+  <script src="/js/board/view.js" defer></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/mdb.min.js"></script>
+  <script src="/js/jquery-3.6.3.min.js"></script>
+  <script src="/js/modal.js"></script>
+
+</head>
+
+<body>
+  <div class="flex-box">
+    <header id="headerLayout-Area" class="">
+      <section class="headerLayout-Area--box">
+        <article class="headerLayout-Area--logo topAndbut">
           <div class="logo left-items">
             <a href="/mainPage"><img src="/images/logo.png" alt="logo" /></a>
           </div>
-        </article>
-        <!-- .headerLayout-Area--logo -->
-        <article class="headerLayout-Area--infoForm">
-          <div class="left-items">
-              <!-- 기본 회원정보 -->
-              <th:block th:unless="${loggedUser == null}">
-                <div>
-                  <img th:if="${loggedUser.userIconReal != null}" th:src="@{/upload/}+${loggedUser.userIconReal}" alt="" style="width: 150px; height: 150px;">
-                  <img th:if="${loggedUser.userIconReal == null}" th:src="@{/images/sampleprofile.jpg}" alt="" style="width: 150px; height: 150px;">
-                </div>
-                <div>
-                  <span th:text="${loggedUser.userNM}">별명</span>
-                </div>
-                <div>
-                  <span th:text="${loggedUser.userID}">아이디</span>
-                </div>
-                <div>
-                  <span th:text="${loggedUser.userDate}">가입일자</span>
-                </div>
-              </th:block>
-          </div>
-        </article><!-- .headerLayout-Area--searchForm -->
-        <article class="headerLayout-Area--joinForm">
+        </article><!-- .headerLayout-Area--logo -->
+        <article class="headerLayout-Area--infoForm topAndbut">
+          <!-- 기본 회원정보 -->
+          <th:block th:unless="${loggedUser == null}">
+            <div class="infoForm-All line">
+              <div class="infoForm-img">
+                <a href="/member/mypage"><img th:if="${loggedUser.userIconReal != null}" th:src="@{/upload/}+${loggedUser.userIconReal}" alt=""></a>
+                <a href=""><img th:if="${loggedUser.userIconReal == null}" th:src="@{/images/sampleprofile.jpg}" alt=""></a>
+              </div><!-- infoForm-img -->
+              <div class="infoForm-userNM">
+                <span th:text="${loggedUser.userNM}">별명</span>
+              </div><!-- infoForm-userNM -->
+              <!-- <div class="infoForm-userID">
+                <span th:text="${loggedUser.userID}">아이디</span>
+              </div> infoForm-userID -->
+              <!-- <div class="infoForm-userDate">
+                <span th:text="${loggedUser.userDate}">가입일자</span>
+              </div> infoForm-userDate -->
+            </div>
+          </th:block>
+        </article><!-- .headerLayout-Area--infoForm -->
+        <article class="headerLayout-Area--joinForm topAndbut">
           <th:block th:if="${loggedUser == null}">
-            <div class="join left-items lien">
-              <a href="/member/login">로그인</a>
-              <a href="/member/join">회원가입</a>
+            <div class="join line">
+              <span><img src="/images/myimg.png" alt=""></span>
+              <a href="/member/login"><span>로그인</span></a>
+              <a href="/member/join"><span>회원가입</span></a>
             </div>
           </th:block>
           <th:block th:unless="${loggedUser == null}">
-            <div class="join left-items lien">
-              <a href="/member/login">마이 페이지</a>
-              <a href="/member/logout">로그아웃</a>
+            <div class="join line">
+              <a href="/member/login"><span>마이페이지</span></a>
+              <a href="/member/logout"><span>로그아웃</span></a>
             </div>
           </th:block>
-        </article>
-        <!-- .headerLayout-Area--joinForm -->
-        <article class="headerLayout-Area--searchForm">
+        </article><!-- .headerLayout-Area--joinForm -->
+        <article class="headerLayout-Area--searchForm topAndbut">
           <div class="search left-items">
             <!-- 검색 기능 -->
-            <form
-              th:action="@{/mainPage/{genre}(genre=${genre}, sort=${param.sort})}"
-            >
+            <form th:action="@{/mainPage/{genre}(genre=${genre}, sort=${param.sort})}">
               <div class="input-group">
                 <div class="form-outline">
                   <input type="hidden" name="sort" th:value="${param.sort}" />
-                  <input
-                    type="search"
-                    id="form1"
-                    class="form-control"
-                    name="searchTxt"
-                    placeholder="Search..."
-                    value=""
-                    th:value="${searchTxt}"
-                  />
+                  <input type="search" id="form1" class="form-control" name="searchTxt" placeholder="Music 검색" value="" th:value="${searchTxt}"/>
                 </div>
                 <button type="submit" class="btn btn-primary">
                   <img src="/images/search.svg" alt="" />
@@ -106,90 +98,78 @@
               </div>
             </form>
           </div>
-        </article>
-        <!-- .headerLayout-Area--searchForm -->
-        <article class="headerLayout-Area--viewContents">
-          <div class="view left-items lien">
+        </article><!-- .headerLayout-Area--searchForm -->
+        <article class="headerLayout-Area--viewContents topAndbut">
+          <div class="view view01 line">
             <ul>
               <!-- <li>
-                <a
-                  th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}"
-                  >락</a
-                >
+                <a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">락
+                </a>
               </li>
               <li>
-                <a
-                  th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}"
-                  >발라드</a
-                >
+                <a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">발라드
+                  </a>
               </li>
               <li>
-                <a
-                  th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}"
-                  >팝</a
-                >
+                <a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝
+                </a>
               </li> -->
-              <li><a href="#">월간 랭킹</a></li>
-              <li><a href="#">주간 랭킹</a></li>
+              <li><a href="#"><img src="/images/navIcon01.png" alt=""><span>월간랭킹</span></a></li>
+              <li><a href="#"><img src="/images/navIcon02.png" alt=""><span>주간랭킹</span></a></li>
             </ul>
           </div>
-        </article>
-        <!-- .headerLayout-Area--viewContents -->
-        <article class="headerLayout-Area--viewContents">
-          <div class="view left-items lien">
+        </article><!-- .headerLayout-Area--viewContents -->
+        <article class="headerLayout-Area--viewContents topAndbut">
+          <div class="view view02">
             <ul>
-              <li><a href="#">전체보기</a></li>
-              <li id="modalGenreBtn">장르별 모아보기</li>
-              <li id="modalEmoteBtn">감성별 모아보기</li>
+              <li><a href="#"><img src="/images/navIcon03.png" alt=""><span>전체보기</span></a></li>
+              <li id="modalGenreBtn"><a href="#"><img src="/images/navIcon04.png" alt=""><span>장르별</span></a></li>
+              <li id="modalEmoteBtn"><a href="#"><img src="/images/navIcon06.png" alt=""><span>감성별</span></a></li>
             </ul>
           </div>
-        </article>
-        <!-- .headerLayout-Area--viewContents -->
-        <article class="headerLayout-Area--viewContents">
-          <div class="view left-items lien">
-            <span>골라보기</span>
+        </article><!-- .headerLayout-Area--viewContents -->
+        <article class="headerLayout-Area--viewContents topAndbut">
+          <div class="view view03 line">
             <ul>
-              <li><a href="#">북마크</a></li>
-              <li><a href="#">좋아요</a></li>
-              <li><a href="#">구독</a></li>
+              <li><a href="#"><img src="/images/navIcon07.png" alt=""><span>북마크</span></a></li>
+              <li><a href="#"><img src="/images/navIcon08.png" alt=""><span>좋아요</span></a></li>
+              <li><a href="#"><img src="/images/navIcon09.png" alt=""><span>구독</span></a></li>
             </ul>
           </div>
-        </article>
-        <!-- .headerLayout-Area--viewContents -->
-      </section>
-      <!-- #headerLayout-Area -->
+        </article><!-- .headerLayout-Area--viewContents -->
+      </section><!-- #headerLayout-Area -->
     </header>
+  
+    <main id="mainPage-Area" class="" layout:fragment="contents">
+    
+    </main>
+  </div>
 
-    <main
-      id="mainPage-Area"
-      class="container"
-      layout:fragment="contents"
-    ></main>
 
-    <footer class="container">
-      <section id="footerLayout-Area"></section>
-      <!-- #footerLayout-Area -->
-    </footer>
-      <!-- 모달창 -->
-      <div id="modalGenre" class="modal-wnd">
-          <div id="closeModalGenre" class="modalContents modalCategory">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <div class="modalCategory__box">
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">락</a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">발라드</a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝</a></span>
-              <span class="modalCategory__box__option" th:onclick="testRespone01('락')">테스트용 락 버튼</span>
-              <span class="modalCategory__box__option" th:onclick="testRespone01('발라드')">테스트용 발라드 버튼</span>
-              <span class="modalCategory__box__option" th:onclick="testRespone01('팝')">테스트용 팝 버튼</span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
-            </div>
+    <!-- 모달창 -->
+    <div id="modalGenre">
+      <div class="modalThis-item">
+        <button id="closeModalGenre">닫기</button>
+        <div class="modalContents">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <div class="modalCategory__box">
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">락</a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">발라드</a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝</a></span>
+            <span class="modalCategory__box__option" th:onclick="testRespone01('락')">테스트용 락 버튼</span>
+            <span class="modalCategory__box__option" th:onclick="testRespone01('발라드')">테스트용 발라드 버튼</span>
+            <span class="modalCategory__box__option" th:onclick="testRespone01('팝')">테스트용 팝 버튼</span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
           </div>
-          <!-- ModalThis-content -->
-      </div>
-      <div id="modalEmote" class="modal-wnd">
-        <div id="closeModalEmote" class="modalContents modalCategory">
+        </div><!-- ModalThis-content -->
+      </div><!-- modal--item -->
+    </div>
+    <div id="modalEmote">
+      <div class="modalThis-item">
+        <button id="closeModalEmote">닫기</button>
+        <div class="modalContents">
           <!-- 모달창 안에 여기 내용 작성 -->
           <div class="modalCategory__box">
             <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">신남</a></span>
@@ -202,16 +182,28 @@
             <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
             <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
           </div>
-        </div>
-        <!-- ModalThis-content -->
-      </div>
-      <!-- modal -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script defer>
-        getModal($("#modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
-        getModal($("#modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));
-    </script>
-  </body>
+        </div><!-- ModalThis-content -->
+      </div><!-- modal--item -->
+    </div><!-- modal -->
+
+    <!-- 로그인, 회원가입 -->
+    <div id="modalLogin">
+      <div class="modalThis-item">
+        <button id="closeModalLogin">닫기</button>
+        <div class="modalContents">
+          <!-- 모달창 안에 여기 내용 작성 -->
+        </div><!-- ModalThis-content -->
+      </div><!-- modal--item -->
+    </div><!-- modal -->
+
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script defer>
+      getModal($("#modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
+      getModal($("#modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));
+      getModal($("#modalLoginBtn"),$("#modalLogin"),$("#closeModalLogin"));
+  </script>
+</body>
 </html>
 
 <!-- 상세페이지 https://www.music-n.com/#section05 -->
