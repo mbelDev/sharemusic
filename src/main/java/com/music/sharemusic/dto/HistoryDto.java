@@ -20,4 +20,5 @@ public class HistoryDto {
   private String readDate;
   private int liked;
   private int bookmark;
+  private String followID;
 }

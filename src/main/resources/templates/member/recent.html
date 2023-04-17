@@ -25,12 +25,6 @@
                           <p th:text="${item.postTitle}">곡 명</p>
                           <p th:text="${item.postSinger}">가수 명</p>
                         </div>
-                        <div>
-                          <input type="button" class="btn-like" style="display:inline-block; width:15px; height:15px; background:#fff" th:data-userID="${loggedUser.userID}" th:data-postNo="${item.postNo}" th:data-liked="${item.liked}">
-                          </input>
-                          <input type="button" class="btn-bookmark" style="display:inline-block; width:15px; height:15px; background:#777" th:data-userID="${loggedUser.userID}" th:data-postNo="${item.postNo}" th:data-bookmark="${item.bookmark}">
-                          </input>
-                        </div>
                       </div>
                       <div class="recent-music--title recent-music--title02">
                         <p th:text="${item.postAuth}">작성자</p>
@@ -41,6 +35,12 @@
                   </div><!-- .recent-listImg--content -->
                 </div><!-- .recent-listImg--box -->
               </a>
+              <div>
+                <input type="button" class="btn-like" style="display:inline-block; width:15px; height:15px; background:#fff" th:data-userID="${loggedUser.userID}" th:data-postNo="${item.postNo}" th:data-liked="${item.liked}">
+                </input>
+                <input type="button" class="btn-bookmark" style="display:inline-block; width:15px; height:15px; background:#777" th:data-userID="${loggedUser.userID}" th:data-postNo="${item.postNo}" th:data-bookmark="${item.bookmark}">
+                </input>
+              </div>
             </li>
             <li th:if="${#lists.isEmpty(historyList)}">
               <div style="display:block; height:200px; width: 600px; border: 1px solid #fff; text-align: center;">
@@ -51,65 +51,10 @@
         </div><!-- .recent-page--list -->
       </article><!-- .recent-page--listBox -->
     </section><!-- .recent-page -->
-  <script>
+  <script src="/js/history/up-to-history.js"></script>
+  <script defer>
     likeEvent();
     bookmarkEvent();
-    followEvent();
-    function likeEvent(){
-        const btnsLike = document.querySelectorAll(".btn-like");
-        btnsLike.forEach((item)=>{
-            item.addEventListener("click",(e)=>{
-                const sendData = {
-                    "postNo":item.dataset.postno,
-                    "userID":item.dataset.userid,
-                    "liked":item.dataset.liked
-                }
-                console.log(sendData);
-                $.ajax({
-                    url:"/member/like",
-                    type:"post",
-                    data:sendData,
-                    success:function(response){
-                        console.log(response.result);
-                        alert("좋아요!");
-                        item.classList.add("");
-                    },
-                    error:function(err){
-                        console.log(err);
-                    }
-                })
-            })
-        })
-      }
-    function bookmarkEvent(){
-        const btnsBookmark = document.querySelectorAll(".btn-bookmark");
-        btnsBookmark.forEach((item)=>{
-            item.addEventListener("click",(e)=>{
-                const sendData = {
-                    "postNo":item.dataset.postno,
-                    "userID":item.dataset.userid,
-                    "bookmark":item.dataset.bookmark
-                }
-                console.log(sendData);
-                $.ajax({
-                    url:"/member/like",
-                    type:"post",
-                    data:sendData,
-                    success:function(response){
-                        console.log(response.result);
-                        alert("북마크 했어요!");
-                        item.classList.add("");
-                    },
-                    error:function(err){
-                        console.log(err);
-                    }
-                })
-            })
-        })
-    }
-
-    
-
   </script>
   </main>
 </html>

@@ -26,9 +26,9 @@ file:
   path: C:/tempStorage/upload/
 
 
-logging:
-    level:
-      '[com.music.sharemusic]':  DEBUG
+# logging:
+#     level:
+#       '[com.music.sharemusic]':  DEBUG
 
 
 

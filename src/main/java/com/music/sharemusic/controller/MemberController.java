@@ -71,9 +71,13 @@ public class MemberController {
     if (loggedUser(session) == null) {
       return "redirect:/member/login";
     }
-    LoggedDto loggedUser = loggedUser(session);
-    MemberDto memberDto = memberService.getMemberLogged(loggedUser);
+    LoggedDto pageUser = new LoggedDto();
+    pageUser.setUserID(userID);
+    MemberDto memberDto = memberService.getMemberLogged(pageUser);
     model.addAttribute("memberDto", memberDto);
+    Map<String, Object> historyList = new HashMap<>();
+    historyList = memberService.getHistoryList(pageUser);
+    model.addAttribute("history", historyList);
     return "/member/mypage";
   }
 
@@ -180,8 +184,13 @@ public class MemberController {
   }
 
   @GetMapping("/login")
-  public String loginPage(HttpSession session) {
+  public String loginPage(HttpServletRequest request, HttpSession session) {
     if (loggedUser(session) == null) {
+      session.setAttribute(
+        "pagePrev",
+        request.getHeader("Referer").split(request.getHeader("host"))[1]
+      );
+      log.info(request.getRequestURI());
       return "/member/login";
     }
     log.info("login success");
@@ -210,23 +219,32 @@ public class MemberController {
     }
     session.setAttribute("loggedUser", loggedUser);
     session.setMaxInactiveInterval(30 * 60);
-    return "redirect:/";
+    if (session.getAttribute("pagePrev") != null) {
+      log.info(session.getAttribute("pagePrev"));
+      return "redirect:" + (String) session.getAttribute("pagePrev");
+    }
+    return "redirect:/mainPage";
   }
 
   @PostMapping("/like")
-  public String setLike(SendDataDto data) {
-    Map<String, Integer> result = new HashMap<>();
+  @ResponseBody
+  public int setLike(SendDataDto data) {
     int update = memberService.updateLike(data);
-    result.put("result", update);
-    log.info("Controller result==={}", result);
-    return "redirect:/member/mypage";
+    return update;
   }
 
   @PostMapping("/bookmark")
-  public String setBookmark(SendDataDto data) {
-    int result = 0;
-    result = memberService.updateBookmark(data);
-    return "redirect:/member/mypage";
+  @ResponseBody
+  public int setBookmark(SendDataDto data) {
+    int result = memberService.updateBookmark(data);
+    return result;
+  }
+
+  @PostMapping("/follow")
+  @ResponseBody
+  public int setfollow(SendDataDto data) {
+    int result = memberService.updateFollow(data);
+    return result;
   }
 
   @GetMapping("/logout")

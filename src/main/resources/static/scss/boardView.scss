@@ -1,6 +1,18 @@
 main {
   overflow-x: hidden;
 }
+.board-view--textBox {
+  border-top: 1px solid #999;
+  padding-top: 50px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  .textBox--txt {
+    margin-top: 10px;
+    font-size: 17px;
+    font-weight: 500;
+  } //.textBox--txt
+} //.board-view--textBox
 .board-view--page {
   margin: 80px 0 0 80px;
   width: 1205px;
@@ -59,7 +71,8 @@ main {
       .listItem-controller02 {
         display: flex;
         align-items: center;
-        margin-top: 50px;
+        margin-top: 10px;
+        position: absolute;
         .btnDelete {
           border: none;
           outline: none;
@@ -70,46 +83,6 @@ main {
       } //.listItem-controller02
     } //.board-view--listItem-controller
   } //.board-view--listItem
-        // .btnOpen {
-        //   transition: all 0.25s ease;
-        //   img {
-        //     &:hover {
-        //       transform: scale(110%);
-        //     }
-        //   }
-        // }
-        // .settings {
-        //   margin-left: 12px;
-        //   img {
-        //     transition: all 0.25s ease;
-        //     &:hover {
-        //       transform: rotate(150deg);
-        //     }
-        //   }
-        // }
-      }//.listItem-controller01
-    }//.board-view--listItem-controller
-    .board-view--listItem-setSplit {
-      margin-bottom: 30px;
-    }
-    .listItem-controller02 {
-      margin: 40px 0;
-      color: #fff !important;
-      font-weight: bold !important;
-    }//.listItem-controller02
-  }//.board-view--listItem
-  .board-view--textBox {
-    border-top: 1px solid #999;
-    padding-top: 50px;
-    font-size: 30px;
-    font-weight: bold;
-    color: #fff;
-    .textBox--txt {
-      margin-top: 10px;
-      font-size: 17px;
-      font-weight: 500;
-    } //.textBox--txt
-  } //.board-view--textBox
 } //.board-view--page
 .board-view--subPage {
   margin: 50px 0;

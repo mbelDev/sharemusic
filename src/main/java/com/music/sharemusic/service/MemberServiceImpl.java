@@ -141,8 +141,8 @@ public class MemberServiceImpl implements MemberService {
   }
 
   public List<BoardDto> getHistoryWritten(LoggedDto loggedUser) {
-    String userID = loggedUser.getUserID();
-    List<BoardDto> result = historyDao.getHistoryWritten(userID);
+    String userNM = loggedUser.getUserNM();
+    List<BoardDto> result = historyDao.getHistoryWritten(userNM);
     return result;
   }
 
@@ -168,13 +168,31 @@ public class MemberServiceImpl implements MemberService {
   }
 
   public int updateLike(SendDataDto data) {
-    int result = historyDao.updateHistoryLike(data);
-    log.info("result==={}", result);
+    int result = historyDao.getLiked(data);
+    //현재 liked 상태를 받아옴
+    data.setLiked(result);
+    historyDao.updateHistoryLike(data);
+    //liked를 업데이트 함
+    result = historyDao.getLiked(data);
+    //업데이트 이후 liked 상태를 받아서 리턴함.
     return result;
   }
 
   public int updateBookmark(SendDataDto data) {
-    int result = historyDao.updateHistoryBookMark(data);
+    //userID postNo bookmark 필요
+    int result = historyDao.updateHistoryBookmark(data);
+    return result;
+  }
+
+  public int updateFollow(SendDataDto data) {
+    //userID followID 필요
+    int result = historyDao.getFollow(data);
+    if (result > 0) {
+      historyDao.unFollow(data);
+    } else {
+      historyDao.putFollow(data);
+    }
+    result = historyDao.getFollow(data);
     return result;
   }
 
@@ -182,6 +200,7 @@ public class MemberServiceImpl implements MemberService {
     String userID = loggedDto.getUserID();
     MemberDto result = getMemberOne(userID);
     loggedDto.setUserDate(result.getUserDate());
+    loggedDto.setUserNM(result.getUserNM());
     return result;
   }
 

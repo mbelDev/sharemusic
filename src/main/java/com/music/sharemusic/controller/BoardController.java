@@ -1,8 +1,11 @@
 package com.music.sharemusic.controller;
 
 import com.music.sharemusic.dto.BoardDto;
+import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.service.BoardService;
+import com.music.sharemusic.service.MemberService;
+import com.music.sharemusic.service.MemberServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +63,7 @@ public class BoardController {
     if (loggedUser(session) != null) {
       LoggedDto loggedUser = loggedUser(session);
       loggedUser.setPostNo(postNo);
+      // HistoryDto historyDto = memberService.getHistoryLiked(loggedUser);
       boardService.updateHits(loggedUser);
       //로그인 정보가 있을 때만 조회수 증가
     }
@@ -107,7 +111,7 @@ public class BoardController {
 
   @PostMapping("/updateLike")
   public ResponseEntity<Object> updateLike(BoardDto boardDto) {
-    int updateLike = 1; /////////////// history 
+    int updateLike = 1; /////////////// history
 
     int result = boardService.updateLike(updateLike, boardDto.getPostNo());
 

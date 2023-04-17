@@ -146,6 +146,7 @@
   </div>
 
 
+<<<<<<< HEAD
     <!-- 모달창 -->
     <div id="modalGenre">
       <div class="modalThis-item">
@@ -182,6 +183,54 @@
       getModal($("#modalLoginBtn"),$("#modalLogin"),$("#closeModalLogin"));
   </script>
 </body>
+=======
+    <footer class="container">
+      <section id="footerLayout-Area"></section>
+      <!-- #footerLayout-Area -->
+    </footer>
+      <!-- 모달창 -->
+      <div id="modalGenre" class="modal-wnd">
+          <div id="closeModalGenre" class="modalContents modalCategory">
+            <!-- 모달창 안에 여기 내용 작성 -->
+            <div class="modalCategory__box">
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">락</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">발라드</a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+              <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            </div>
+          </div>
+          <!-- ModalThis-content -->
+      </div>
+      <div id="modalEmote" class="modal-wnd">
+        <div id="closeModalEmote" class="modalContents modalCategory">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <div class="modalCategory__box">
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">신남</a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">우울</a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">희열</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+            <span class="modalCategory__box__option"><a href="">테스트용 버튼</a></span>
+          </div>
+        </div>
+        <!-- ModalThis-content -->
+      </div>
+      <!-- modal -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script defer>
+        getModal($("#modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
+        getModal($("#modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));
+    </script>
+  </body>
+>>>>>>> c9537f3f6c35c0e75bd338c098c57cea71e6c001
 </html>
 
 <!-- 상세페이지 https://www.music-n.com/#section05 -->
