@@ -5,57 +5,39 @@
   xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{/include/layout.html}"
 >
-  <main id="mainPage-Area" class="container" layout:fragment="contents">
-    <section class="board-view--page">
-      <article class="board-view--img">
-        <iframe
-          src=""
-          th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}+'?&controls=0&autohide=0&rel=0'"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        >
+<main id="mainPage-Area" class="" layout:fragment="contents">
+  <section class="boardView">
+    <article class="boardView-Area">
+      <div class="boardView-Area-title topAndbut">
+        <h1>VIDEO</h1>
+      </div><!-- boardView-Area-title -->
+      <div class="boardView-Video">
+        <iframe th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}+'?&controls=0&autohide=0&rel=0'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
-      </article>
-      <!-- board-view--img -->
-      <article class="board-view--listItem">
-        <div class="board-view--listItem-name">
-            <span th:text="${boardDto.postTitle}">곡</span>
-            <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
-              <span th:text="'&#40;'+${boardDto.postSinger}+'&#41;'">가수</span>
-            </a>
-          <div>
-            등록 <span th:text="${boardDto.postDate}">0</span> * 조회수
-            <span th:text="${boardDto.postHits}">0</span>
-          </div>
-          <div class="board-view--listItem-setSplit">
-            <span th:text="'#' + ${boardDto.postGenre}">장르</span>
-            <span th:text="'#' + ${boardDto.postEmote}">감성</span>
-          </div>
-          <!-- board-view--listItem-setSplit -->
-          <div
-            class="listItem-controller02"
-            th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}"
-          >
-            <a
-              href="/board/modify"
-              th:href="@{/board/modify(postNo=${boardDto.postNo})}"
-              class="btn btn-primary"
-              >수정</a
-            >
+        <div class="boardView-Video--title">
+          <div class="title">
+            <div class="title-name">
+              <p th:text="${boardDto.postTitle}">곡이름</p>
+              <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
+                <h1 th:text="${boardDto.postSinger}">가수</h1>
+              </a>
+            </div><!-- title-name -->
+            <div class="title-Date">
+              등록&nbsp;&nbsp; <span th:text="${boardDto.postDate}">0</span>
+              &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp; <span th:text="${boardDto.postHits}">0</span>
+            </div><!-- title-Date -->
+            <div class="title-Genre">
+              <span th:text="'#' + ${boardDto.postGenre}">장르</span>
+              <span th:text="'#' + ${boardDto.postEmote}">감성</span>
+            </div><!-- title-Genre -->
+            <div class="title-btn" th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}">
+              <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btn btn-primary">수정</a>
             <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
-          </div>
-        </div>
-        <!-- board-view--listItem-name -->
-        <div class="board-view--listItem-controller">
-          <div class="listItem-controller01">
-            <div class="good">
-              <img
-                class="good-img"
-                src="/images/good.svg"
-                alt=""
-                onclick="test();postGood();"
-              />
+            </div><!-- title-btn -->
+          </div><!-- title -->
+          <div class="like">
+            <div class="like-good">
+              <img class="good-img" src="/images/good.svg" onclick="test();postGood();"/>
               <span th:text="${boardDto.postLike}" class="postLike">0</span>
             </div>
             <button class="btnOpen btnShare" id="shareModalBox">
@@ -93,49 +75,35 @@
           <span th:text="${boardDto.postCont}">설명</span>
         </div>
       </article>
+
       <article class="board-view--replyBox">
         <ul id="reply-container" th:if="${replysList} != null">
-          <li th:Each="item:${replysList}" class="reply">
-            <div class="reply-contents" 
-            th:if="${item.replyHidden == 0}
-             or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
-             or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
-              <div class="reply-contents--icon">
-                <a th:href="@{|/member/user/${item.replyAuthID}|}">
-                  <!-- th:src="@{/upload/}+${item.replyIcon}" -->
-                  <img
-                    src="/images/sampleprofile.jpg"
-                    alt=""
-                    style="width: 30px; height: 30px; border-radius: 5px"
-                  />
-                  <span th:text="${item.replyAuthNM}">홍길동</span>
-                </a>
-              </div>
-              <div class="reply-contents--text">
-                <span th:text="${item.replyCont}">덧글 내용</span>
-                <!-- <span th:text="${item}"></span> -->
-              </div>
+          <li th:Each="item:${replysList}">
+            <div class="reply--icon">
+              <a th:href="@{|/member/user/${item.replyAuth}|}">
+                <img
+                  th:src="@{/upload/}+${item.replyIcon}"
+                  alt=""
+                  style="width: 30px; height: 30px; border-radius: 5px"
+                />
+                <span th:text="${item.replyAuth}">홍길동</span>
+              </a>
             </div>
-            <div class="reply-contents reply-hidden"
-             th:if="${item.replyHidden != 0} and (${session.loggedUser == null ? true : session.loggedUser.userID == item.replyAuthID ? false : session.loggedUser.userNM == boardDto.postAuth ? false : true})">
-              <div class="reply-contents--icon"></div>
-              <span class="reply-contents--text" >비공개 덧글입니다.</span>
+            <div class="reply--contents">
+              <span th:text="${item.replyCont}">덧글 내용</span>
             </div>
-            <div class="reply-date" th:text="${item.replyDate}">작성일자</div>
-            <div class="reply-contents--btns">
-              <span id="replyReplyBtn" class="replyReplyBtn" th:data-replyno="${item.replyNo}">답글</span>
-              <th:block th:if="${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false}">
-                
-                <span id="modifyReplyBtn">수정</span>
-                <span id="deleteReplyBtn" th:data-replyno="${item.replyNo}">삭제</span>
-              </th:block>
+            <div
+              class="reply--btns"
+              th:if="{session.loggedUser.userID = item.replyAuth}"
+            >
+              <span th:text="${item.replyCont}">수정</span>
+              <span th:text="${item.replyCont}">삭제</span>
             </div>
           </li>
         </ul>
         <div class="board-view--replyBox__input">
-          <input type="text" class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }"/>
+          <input type="text" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }"/>
           <input type="button" class="btn-primary btn-reply" value="작성"/>
-          <input type="checkbox" class="check-hidden"><span>비밀글로 작성하기</span>
         </div>
       </article>
       <!-- board-view--textBox -->
@@ -204,91 +172,9 @@
         <!-- write-modal--item -->
       </div>
       <!-- write-modal -->
-
-      <!-- 덧글 삭제 모달창 -->
-      <div id="deleteReplyModal" class="modal-wnd">
-        <div class="modal-wnd-item">
-          <div class="modal-content modal-ReplyDelete">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <h3>정말로 삭제하시겠습니까?</h3>
-            <button id="deleteReplyConfirm">확인</button>
-            <button id="closeDeleteReply">취소</button>
-          </div>
-          <!-- ModalThis-content -->
-        </div>
-        <!-- write-modal--item -->
-      </div>
     </section>
     <!-- board-view--subPage -->
-    <script src="/js/board/replys.js"></script>
-    <script defer>
-      addReplyEvent();
-      addDeleteReplyEvent();
-      function addDeleteReplyEvent() {
-        const deleteReplyBtns = document.querySelectorAll("#deleteReplyBtn");
-        deleteReplyBtns.forEach((item)=>{
-          item.addEventListener("click",(e)=>{
-            const target = document.querySelector("#deleteReplyConfirm");
-            const replyNo = e.target.dataset.replyno;
-            target.dataset.replyno = replyNo;
-            $("#deleteReplyModal").addClass("modal-open");
-          })
-        })
-
-      }
-      
-      $("#deleteReplyConfirm").click((e)=>{
-        console.log(e.target.dataset.replyno);
-        $.ajax({
-            url:"/board/reply/delete",
-            type:"POST",
-            data:{
-              replyNo:e.target.dataset.replyno
-            },
-            success:function(reponse){
-              console.log("삭제 완료");
-              
-              $(deleteReplyModal).removeClass("modal-open");
-              
-            },
-            error:function(err){
-              console.log(err);
-              alert("로그인 해 주세요.");
-            }
-        })
-        .done(function( fragment ){
-            $("#reply-container").replaceWith(fragment);
-            alert("삭제되었습니다.");
-            addDeleteReplyEvent();
-        });
-      })
-
-        $(".btn-reply").click(()=>{
-          $.ajax({
-            url: "/board/reply",
-            type:"POST",
-            data:{
-            replyCont:$(".replyCont").val(),
-            replyHidden:$(".check-hidden").is(":checked")==true ? 1 : 0,
-            replyGroup:0,
-            replyLevel:0,
-            replyStep:0
-          },
-          success: function(response){
-            console.log(response);
-            alert("덧글을 작성했습니다!");
-          },
-          error:function(err){
-            console.log(err);
-            alert("로그인 해 주세요.");
-          }
-        })
-        .done(function( fragment ){
-            $("#reply-container").replaceWith(fragment);
-            addDeleteReplyEvent();
-        });
-      })
-    
+    <script>
       function like() {
         $.ajax({
           url: "member/like",
