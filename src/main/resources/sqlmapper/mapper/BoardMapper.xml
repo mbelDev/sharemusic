@@ -8,7 +8,7 @@
 <insert id="putPost" parameterType="BoardDto">
   INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{postAuth}, 
     #{postTitle}, #{postSinger}, #{postCont}, #{postLink},
-    #{postGenre}, #{postEmote},0, 0, 0, SYSDATE)
+    #{postGenre}, #{postEmote}, 0, 0, SYSDATE)
 </insert>
 
 <!-- 한 글 불러오기 -->
@@ -27,9 +27,17 @@
     (LOWER(POSTCONT) LIKE '%' || #{searchTxt} || '%')
     )
   </if>
-  <if test="genre != null">
-    AND
-    POSTGENRE = #{genre}
+  <if test = "genre != null">
+    <choose>
+      <when test = "genre != '{genre}'">
+        AND
+        (POSTGENRE = #{genre})
+      </when>
+      <when test = "emote != null">
+        AND
+        (POSTEMOTE = #{emote})
+      </when>
+      </choose>
   </if>
     ORDER BY ${sort} desc
 </select>

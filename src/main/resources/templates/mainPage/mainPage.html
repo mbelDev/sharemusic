@@ -40,9 +40,10 @@
       <article class="main-constent--listItem listItem--center">
         <div class="listItem-nav">
           <div class="listItem-nav--title">매거진</div>
+          <!-- 정렬 -->
           <div class="update-data">
-            <ul>
-              <!-- 정렬 -->
+            <!-- 메인, 장르별일때 -->
+            <ul th:if="${emote} == null">
               <li>
                 <a
                   href="#"
@@ -65,13 +66,40 @@
                 >
               </li>
             </ul>
+            <ul th:unless="${emote} == null">
+              <!-- 감성별일때 -->
+              <li>
+                <a
+                  href="#"
+                  th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postNo, searchTxt=${param.searchTxt})}"
+                  >최신순</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postHits, searchTxt=${param.searchTxt})}"
+                  >조회순</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postLike, searchTxt=${param.searchTxt})}"
+                  >추천순</a
+                >
+              </li>
+            </ul>
           </div>
         </div>
         <!-- listItem-nav -->
         <div class="getList-ItemBox">
           <ul id="test">
             <li th:each="item : ${postList}">
-              <a href="/board/view" th:href="@{/board/view(postNo=${item.postNo})}">
+              <a
+                href="/board/view"
+                th:href="@{/board/view(postNo=${item.postNo})}"
+              >
                 <div class="ItemBox-imgs">
                   <img
                     th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
@@ -99,48 +127,44 @@
     <!-- main-constent--itmes -->
 
     <script>
-      function testRespone01(genre){
-        
+      function testRespone01(genre) {
         $.ajax({
-            url:"/reload/"+genre,
-            type:"GET",
-            data:{
-              "genre":genre,
-              "searchTxt":"",
-              "sort":"postNo"
-            },
-            async:false,
-            success:function(response){
-                console.log(response);
-                    alert("댓글이 등록되었습니다.");
-            },
-        })
-        .done(function( fragment ){
-            $("#test").replaceWith(fragment);
+          url: "/reload/" + genre,
+          type: "GET",
+          data: {
+            genre: genre,
+            searchTxt: "",
+            sort: "postNo",
+          },
+          async: false,
+          success: function (response) {
+            console.log(response);
+            alert("댓글이 등록되었습니다.");
+          },
+        }).done(function (fragment) {
+          $("#test").replaceWith(fragment);
         });
-    }
+      }
     </script>
     <script>
-      function testRespone02(genre,searchTxt,sort){
-        
+      function testRespone02(genre, searchTxt, sort) {
         $.ajax({
-            url:"/reload/",
-            type:"POST",
-            data:{
-              "genre":genre,
-              "searchTxt":searchTxt,
-              "sort":sort
-            },
-            async:false,
-            success:function(response){
-                console.log(response);
-                    alert("댓글이 등록되었습니다.");
-            },
-        })
-        .done(function( fragment ){
-            $("#test").replaceWith(fragment);
+          url: "/reload/",
+          type: "POST",
+          data: {
+            genre: genre,
+            searchTxt: searchTxt,
+            sort: sort,
+          },
+          async: false,
+          success: function (response) {
+            console.log(response);
+            alert("댓글이 등록되었습니다.");
+          },
+        }).done(function (fragment) {
+          $("#test").replaceWith(fragment);
         });
-    }
+      }
     </script>
   </main>
 </html>
