@@ -19,6 +19,13 @@
                 aria-label=".form-control-lg example"
                 name="postTitle"
               />
+              <p
+                th:if="${#fields.hasErrors('postTitle')}"
+                th:errorclass="errorTxt"
+                th:errors="*{postTitle}"
+              >
+                에러 메세지 출력
+              </p>
             </div>
             <div class="boardWrite-pag--item">
               <span>가수 이름</span>
