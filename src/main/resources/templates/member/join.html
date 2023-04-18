@@ -20,21 +20,23 @@
         <div class="joinForm-Area--logo">
           <a href="/mainPage"><img src="/images/logo.png" alt=""></a>
         </div>
-        <form action="/member/join" method="POST" th:object="${memberDto}" enctype="multipart/form-data">
+        <form th:action="@{/member/join}" method="POST" th:object="${memberDto}" enctype="multipart/form-data">
           <div class="joinForm-Area--userId form-floating">
             <input type="text" class="form-control" id="floatingPassword" placeholder="UserId" th:field="*{userID}">
-            <p th:if="${#fields.hasErrors('userID')}" th:errorclass="errorTxt" th:errors="*{userID}"></p>
             <label for="floatingPassword">UserId</label>
+            <p th:if="${#fields.hasErrors('userID')}" th:errors="*{userID}">test</p>
           </div>
           <!-- joinForm-Area--userId -->
           <div class="joinForm-Area--userPw form-floating">
             <input type="password" class="form-control" id="floatingPassword" placeholder="UserPw" th:field="*{userPW}">
             <label for="floatingPassword">UserPw</label>
+            <p th:if="${#fields.hasErrors('userPW')}" th:errors="*{userPW}">test</p>
           </div>
           <!-- joinForm-Area--userPw -->
           <div class="joinForm-Area--userName form-floating">
             <input type="text" class="form-control" id="floatingPassword" placeholder="UserName" th:field="*{userNM}">
             <label for="floatingPassword">UserName</label>
+            <p th:if="${#fields.hasErrors('userNM')}" th:errors="*{userNM}">test</p>
           </div>
           <!-- joinForm-Area--userName -->
           <div class="joinForm-Area--userFile">

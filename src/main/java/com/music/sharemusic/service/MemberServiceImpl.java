@@ -7,6 +7,7 @@ import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.MemberDto;
+import com.music.sharemusic.dto.MemberInfoDto;
 import com.music.sharemusic.dto.SendDataDto;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -96,6 +97,11 @@ public class MemberServiceImpl implements MemberService {
     }
   }
 
+  public int checkIDtest(String userID) {
+    int result = memberDao.checkID(userID);
+    return result;
+  }
+
   public Map<String, String> checkID(String userID) {
     log.info("check ID === {}", userID);
     int checkID = memberDao.checkID(userID);
@@ -128,12 +134,12 @@ public class MemberServiceImpl implements MemberService {
   }
 
   //활동 및 강삼기록 저장
-  public Map<String, Object> getHistoryList(LoggedDto loggedUser) {
+  public Map<String, Object> getHistoryList(MemberDto memberDto) {
     Map<String, Object> result = new HashMap<>();
-    List<BoardDto> listWritten = getHistoryWritten(loggedUser);
-    List<HistoryDto> listRecent = getHistoryRecent(loggedUser);
-    List<HistoryDto> listLiked = getHistoryLiked(loggedUser);
-    List<HistoryDto> listBookmark = getHistoryBookmark(loggedUser);
+    List<BoardDto> listWritten = getHistoryWritten(memberDto);
+    List<HistoryDto> listRecent = getHistoryRecent(memberDto);
+    List<HistoryDto> listLiked = getHistoryLiked(memberDto);
+    List<HistoryDto> listBookmark = getHistoryBookmark(memberDto);
     result.put("listWritten", listWritten);
     result.put("listRecent", listRecent);
     result.put("listLiked", listLiked);
@@ -141,28 +147,28 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
-  public List<BoardDto> getHistoryWritten(LoggedDto loggedUser) {
-    String userNM = loggedUser.getUserNM();
+  public List<BoardDto> getHistoryWritten(MemberDto memberDto) {
+    String userNM = memberDto.getUserNM();
     List<BoardDto> result = historyDao.getHistoryWritten(userNM);
     return result;
   }
 
-  public List<HistoryDto> getHistoryRecent(LoggedDto loggedUser) {
-    String userID = loggedUser.getUserID();
+  public List<HistoryDto> getHistoryRecent(MemberDto memberDto) {
+    String userID = memberDto.getUserID();
     List<HistoryDto> result = historyDao.getHistoryRecent(userID);
     dependency(result);
     return result;
   }
 
-  public List<HistoryDto> getHistoryLiked(LoggedDto loggedUser) {
-    String userID = loggedUser.getUserID();
+  public List<HistoryDto> getHistoryLiked(MemberDto memberDto) {
+    String userID = memberDto.getUserID();
     List<HistoryDto> result = historyDao.getHistoryLiked(userID);
     dependency(result);
     return result;
   }
 
-  public List<HistoryDto> getHistoryBookmark(LoggedDto loggedUser) {
-    String userID = loggedUser.getUserID();
+  public List<HistoryDto> getHistoryBookmark(MemberDto memberDto) {
+    String userID = memberDto.getUserID();
     List<HistoryDto> result = historyDao.getHistoryBookmark(userID);
     dependency(result);
     return result;
@@ -203,6 +209,29 @@ public class MemberServiceImpl implements MemberService {
     MemberDto result = getMemberOne(userID);
     loggedDto.setUserDate(result.getUserDate());
     loggedDto.setUserNM(result.getUserNM());
+    return result;
+  }
+
+  //userInfo 보는 메소드
+  public MemberInfoDto getMemberInfo(String userID) {
+    MemberInfoDto result = new MemberInfoDto(); //return할 member의 Dto
+    MemberDto userInfo = getMemberOne(userID); //얻어올 member의 정보
+    String userNM = userInfo.getUserNM(); //나중에 작성 글 목록 받아올 때 필요함. 왜냐면 지금은 작성자 이름을 userID가 아니라 userNM으로 쓰고있음.
+    Map<String, Object> historyList = new HashMap<>(); //작성글 목록 / 좋아요 목록 / 북마크 목록 뿌리기
+    // LoggedDto userData = new LoggedDto();
+    // userData.setUserID(userInfo.getUserID());
+    // userData.setUserNM(userInfo.getUserNM());
+    historyList = getHistoryList(userInfo);
+    result.setUserID(userInfo.getUserID());
+    result.setUserNM(userInfo.getUserNM());
+    result.setUserDate(userInfo.getUserDate());
+    result.setUserIconReal(userInfo.getUserIconReal());
+    result.setUserPosts(historyDao.getCountPosts(userNM));
+    //나중에 userID로 바꾸고 BOARD 테이블에도 AuthID 추가 할 것이다 반드시.
+    result.setUserReplys(historyDao.getCountReplys(userID));
+    result.setUserLiked(historyDao.getCountLiked(userID));
+    result.setUserFollower(historyDao.getCountFollower(userID));
+    result.setUserHistoryList(historyList);
     return result;
   }
 

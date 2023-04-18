@@ -27,6 +27,7 @@ function addReplyEvent(){
                 .done(function( fragment ){
                     $("#reply-container").replaceWith(fragment);
                     alert("등록되었습니다.");
+                    addReplyEvent();
                     addDeleteReplyEvent();
                 });
             })

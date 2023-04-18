@@ -1,9 +1,9 @@
 package com.music.sharemusic.dto;
 
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.pl.NIP;
 
 @Data
 @AllArgsConstructor
@@ -17,5 +17,7 @@ public class MemberInfoDto {
   private int userPosts;
   private int userReplys;
   private int userLiked;
+  private int userFollower;
+  private Map<String, Object> userHistoryList;
   private int userPrivate;
 }

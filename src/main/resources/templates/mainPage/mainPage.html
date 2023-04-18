@@ -25,8 +25,10 @@
                         th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
                       />
                       <div class="swiper-title-num">
-                        <!-- <p class="" th:text="${i.count}">랭킹넘버</p> -->
-                        <p class=""><img src="/images/num01.png" alt="" /></p>
+                        <p class="" th:text="${i.count}">랭킹넘버</p>
+                        <p class="" th:if="${i.count == 1}"><img src="/images/num01.png" alt="" /></p>
+                        <p class="" th:if="${i.count == 2}"><img src="/images/num02.png" alt="" /></p>
+                        <p class="" th:if="${i.count == 3}"><img src="/images/num03.png" alt="" /></p>
                       </div>
                       <!-- swiper-title-num -->
                       <div class="swiper-txt">
