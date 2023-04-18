@@ -9,7 +9,11 @@
 
   <title>Music</title>
 
+  <link rel="shortcut icon" href="/images/favicon.jpg">
   <link rel="stylesheet" href="/font/apple/AppleSDGothicNeoH.ttf">
+  <link rel="stylesheet" href="/font/apple/SF-Pro.ttf">
+  <link href="https://webfontworld.github.io/TheJamsil/TheJamsil.css" rel="stylesheet">
+
   <link rel="stylesheet" href="/font/helvetica/HelveticaBlack.ttf">
 
   <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
@@ -112,26 +116,26 @@
                 <a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝
                 </a>
               </li> -->
-              <li><a href="#"><img src="/images/navIcon01.png" alt=""><span>월간랭킹</span></a></li>
-              <li><a href="#"><img src="/images/navIcon02.png" alt=""><span>주간랭킹</span></a></li>
+              <li><div><img src="/images/navIcon01.png" alt=""><span>활동내역</span></div></li>
+              <li><div><img src="/images/navIcon02.png" alt=""><span>정보수정</span></div></li>
             </ul>
           </div>
         </article><!-- .headerLayout-Area--viewContents -->
         <article class="headerLayout-Area--viewContents topAndbut">
           <div class="view view02">
             <ul>
-              <li><a href="#"><img src="/images/navIcon03.png" alt=""><span>전체보기</span></a></li>
-              <li id="modalGenreBtn"><a href="#"><img src="/images/navIcon04.png" alt=""><span>장르별</span></a></li>
-              <li id="modalEmoteBtn"><a href="#"><img src="/images/navIcon06.png" alt=""><span>감성별</span></a></li>
+              <li><div><img src="/images/navIcon03.png" alt=""><span>작성 글</span></div></li>
+              <li id="modalGenreBtn"><div><img src="/images/navIcon04.png" alt=""><span>최근감상</span></div></li>
+              <li id="modalEmoteBtn"><div><img src="/images/navIcon06.png" alt=""><span>즐겨찾기</span></div></li>
+              <li><div><img src="/images/navIcon07.png" alt=""><span>좋아요</span></div></li>
             </ul>
           </div>
         </article><!-- .headerLayout-Area--viewContents -->
         <article class="headerLayout-Area--viewContents topAndbut">
           <div class="view view03 line">
             <ul>
-              <li><a href="#"><img src="/images/navIcon07.png" alt=""><span>북마크</span></a></li>
-              <li><a href="#"><img src="/images/navIcon08.png" alt=""><span>좋아요</span></a></li>
-              <li><a href="#"><img src="/images/navIcon09.png" alt=""><span>구독</span></a></li>
+              <li><div><img src="/images/navIcon08.png" alt=""><span>회원탈퇴</span></div></li>
+              <li><div><img src="/images/navIcon09.png" alt=""><span>이용약관</span></div></li>
             </ul>
           </div>
         </article><!-- .headerLayout-Area--viewContents -->
