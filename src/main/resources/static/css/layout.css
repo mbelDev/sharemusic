@@ -5,9 +5,10 @@ body {
   font-weight: 200;
 }
 
-p {
+p, ul {
   margin: 0;
   left: 0;
+  padding: 0;
   line-height: 1;
 }
 
@@ -15,6 +16,13 @@ p {
   border: 1px solid hsla(0, 0%, 100%, 0.1);
   border-width: 1px 0;
   padding: 15px 0;
+}
+
+.line-one {
+  border: 0;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+  margin: 50px 0;
+  width: 1500px;
 }
 
 .topAndbut {
@@ -34,6 +42,10 @@ h1 {
   font-weight: normal;
   font-style: normal;
 }
+.media855 {
+  display: none;
+}
+
 .flex-box {
   display: flex;
 }
@@ -132,7 +144,7 @@ h1 {
   padding-left: 0;
 }
 .flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--viewContents .view ul li {
-  margin: 7px 0;
+  margin: 15px 0;
 }
 .flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--viewContents .view ul li div {
   display: flex;
@@ -253,6 +265,77 @@ h1 {
 .flex-box #mainPage-Area {
   width: 100%;
   height: 100%;
-  margin-left: 12%;
+  margin-left: 245px;
   background-color: #0e0e0e;
+}
+
+@media screen and (max-width: 855px) {
+  .flex-box {
+    display: block;
+  }
+  .flex-box #headerLayout-Area {
+    width: 100%;
+    height: auto;
+    font-size: 19px;
+  }
+  .flex-box #headerLayout-Area .headerLayout-Area--box {
+    display: none;
+  }
+  .flex-box #headerLayout-Area .media855 {
+    display: block;
+    height: 10vh;
+  }
+  .media855 {
+    padding-top: 28px;
+  }
+  .media855-Area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .media855-Area--img {
+    margin-left: 25px;
+  }
+  .media855-Area--img img {
+    width: 120px;
+  }
+  .media855-Area--search {
+    display: flex;
+  }
+  .media855-Area--search input {
+    width: 200px;
+    padding: 3px 0;
+    background-color: #1a1a1a;
+    color: #fff;
+    transition: all 1s ease;
+    border: 1px solid #1a1a1a;
+  }
+  .media855-Area--search input:focus {
+    outline: 1px solid #ff3672;
+  }
+  .media855-Area--search button {
+    padding: 0 10px;
+    background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
+  }
+  .media855-Area--search form {
+    display: flex;
+  }
+  .media855-Area--search-meun {
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 25px;
+  }
+  .media855-Area--search-meun .meunClick span::before {
+    content: "";
+    display: block;
+    width: 35px;
+    height: 2px;
+    background-color: #fff;
+  }
+  .media855-Area--search-meun .meunClick span:nth-child(1)::before {
+    margin-top: 10px;
+  }
+  .media855-Area--search-meun .meunClick span:nth-child(2)::before {
+    margin: 6px 0;
+  }
 }

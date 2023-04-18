@@ -294,4 +294,15 @@ public class MemberController {
     log.info("now, I got ID === {}", result);
     return result;
   }
+
+  // 월 랭킹
+  @GetMapping("/monthRanking")
+  public String monthRanking() {
+    return "/member/monthRanking";
+  }
+  // 주간 랭킹
+  @GetMapping("/weeklyRanking")
+  public String weeklyRanking() {
+    return "/member/weeklyRanking";
+  }
 }

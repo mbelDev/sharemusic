@@ -43,110 +43,109 @@
                             <p class="" th:text="${item.postAuth}">별명</p>
                           </div>
                         </div>
+                        <!-- swiper-txt -->
                       </div>
-                      <!-- swiper-txt -->
-                    </div>
-                    <!-- swiper-title -->
-                  </a>
+                      <!-- swiper-title -->
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- ranking-box -->
+          </div>
+          <!-- ranking-area -->
+        </article><!-- main-constent--ranking -->
+        <div class="line-one"></div>
+        <article class="main-constent--listItem listItem--center">
+          <div class="listItem-nav">
+            <h1 class="topAndbut">뮤직리스트</h1>
+            <div class="update-data topAndbut">
+              <!-- 정렬 -->
+              <!-- 메인, 장르별일때 -->
+              <ul th:if="${emote} == null">
+                <li>
+                  <a
+                    href="#"
+                    th:href="@{/mainPage/{genre}(genre=${genre}, sort=postNo, searchTxt=${param.searchTxt})}"
+                    >최신순</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    th:href="@{/mainPage/{genre}(genre=${genre}, sort=postHits, searchTxt=${param.searchTxt})}"
+                    >조회순</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    th:href="@{/mainPage/{genre}(genre=${genre}, sort=postLike, searchTxt=${param.searchTxt})}"
+                    >추천순</a
+                  >
+                </li>
+              </ul>
+              <ul th:unless="${emote} == null">
+                <!-- 감성별일때 -->
+                <li>
+                  <a
+                    href="#"
+                    th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postNo, searchTxt=${param.searchTxt})}"
+                    >최신순</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postHits, searchTxt=${param.searchTxt})}"
+                    >조회순</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postLike, searchTxt=${param.searchTxt})}"
+                    >추천순</a
+                  >
                 </li>
               </ul>
             </div>
           </div>
-          <!-- ranking-box -->
-        </div>
-        <!-- ranking-area -->
-      </article>
-      <!-- main-constent--slider -->
-      <article class="main-constent--listItem listItem--center">
-        <div class="listItem-nav">
-          <h1 class="topAndbut">뮤직리스트</h1>
-          <div class="update-data topAndbut">
-            <!-- 정렬 -->
-            <!-- 메인, 장르별일때 -->
-            <ul th:if="${emote} == null">
-              <li>
+          <!-- listItem-nav -->
+          <div class="getList-ItemBox">
+            <ul id="test">
+              <li th:each="item : ${postList}">
                 <a
-                  href="#"
-                  th:href="@{/mainPage/{genre}(genre=${genre}, sort=postNo, searchTxt=${param.searchTxt})}"
-                  >최신순</a
+                  href="/board/view"
+                  th:href="@{/board/view(postNo=${item.postNo})}"
                 >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  th:href="@{/mainPage/{genre}(genre=${genre}, sort=postHits, searchTxt=${param.searchTxt})}"
-                  >조회순</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  th:href="@{/mainPage/{genre}(genre=${genre}, sort=postLike, searchTxt=${param.searchTxt})}"
-                  >추천순</a
-                >
-              </li>
-            </ul>
-            <ul th:unless="${emote} == null">
-              <!-- 감성별일때 -->
-              <li>
-                <a
-                  href="#"
-                  th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postNo, searchTxt=${param.searchTxt})}"
-                  >최신순</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postHits, searchTxt=${param.searchTxt})}"
-                  >조회순</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postLike, searchTxt=${param.searchTxt})}"
-                  >추천순</a
-                >
+                  <div class="ItemBox-imgs">
+                    <img
+                      th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                    />
+                  </div>
+                  <!-- ItemBox-imgs -->
+                  <div class="ItemBox-content">
+                    <p class="ItemBox-postTitle" th:text="${item.postTitle}">
+                      곡이름
+                    </p>
+                    <p class="ItemBox-postSinger" th:text="${item.postSinger}">
+                      가수이름
+                    </p>
+                    <p class="ItemBox-postAuth" th:text="${item.postAuth}">
+                      별명
+                    </p>
+                  </div>
+                  <!-- ItemBox-content -->
+                </a>
               </li>
             </ul>
           </div>
-        </div>
-        <!-- listItem-nav -->
-        <div class="getList-ItemBox">
-          <ul id="test">
-            <li th:each="item : ${postList}">
-              <a
-                href="/board/view"
-                th:href="@{/board/view(postNo=${item.postNo})}"
-              >
-                <div class="ItemBox-imgs">
-                  <img
-                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                  />
-                </div>
-                <!-- ItemBox-imgs -->
-                <div class="ItemBox-content">
-                  <p class="ItemBox-postTitle" th:text="${item.postTitle}">
-                    곡이름
-                  </p>
-                  <p class="ItemBox-postSinger" th:text="${item.postSinger}">
-                    가수이름
-                  </p>
-                  <p class="ItemBox-postAuth" th:text="${item.postAuth}">
-                    별명
-                  </p>
-                </div>
-                <!-- ItemBox-content -->
-              </a>
-            </li>
-          </ul>
-        </div>
-        <!-- getList-ItemBox -->
-      </article>
-      <!-- main-constent--listItem -->
-    </section>
-    <!-- main-constent--itmes -->
+          <!-- getList-ItemBox -->
+        </article><!-- main-constent--listItem -->
+      </div>
+      
+    </section><!-- main-constent--itmes -->
 
     <script>
       function testRespone01(genre) {

@@ -13,7 +13,21 @@
       autoplay: {
         delay: 3000, //add
         disableOnInteraction: false,
-      }
+      },
+      breakpoints: {
+        1446: {
+          slidesPerView: "auto", 
+          // spaceBetween: 40,
+        },
+        1372: {
+          slidesPerView: 2,  
+          spaceBetween: 40,
+        },
+        320: {
+          slidesPerView: 1,  
+          spaceBetween: 10,
+        },
+      },
     });
   });
 

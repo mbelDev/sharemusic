@@ -61,10 +61,18 @@ body {
 ol,
 ul {
   list-style: none !important;
+  margin: 0; padding: 0;
 }
 a {
   color: inherit !important;
   text-decoration: none !important;
+  margin: 0; padding: 0;
+}
+p {
+  margin: 0; padding: 0;
+}
+span {
+  margin: 0; padding: 0;
 }
 blockquote,
 q {

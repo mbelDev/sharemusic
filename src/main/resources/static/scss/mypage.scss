@@ -15,6 +15,11 @@
             width: 200px;
             height: 200px;
           }
+          .fileArea {
+            label {
+              margin-top: 20px;
+            }
+          }
           .fileArea input[type="file"] {
             position: absolute;
             width: 0;
@@ -28,6 +33,8 @@
           width: 70%;
           .formArea {
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
             span {
               input {
                 margin-left: 10px;
@@ -36,11 +43,16 @@
             }
             &-sub {
               display: flex;
+              align-items: center;
               p {
                 width: 75px;
               }
             }
           }//.formArea
+          .formArea-bt {
+            display: block;
+            line-height: 2.3;
+          }
         }//&--form
       }//.Area01-item--profile
     }//&-item 
@@ -51,7 +63,7 @@
       display: flex;
       align-items: center;
       button {
-        height: 30px;
+        margin: 0 0 13px 25px;
       }
     }//&-title
     .Area02-item--profile {
