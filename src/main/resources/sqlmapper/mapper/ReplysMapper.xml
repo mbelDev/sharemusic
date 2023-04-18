@@ -14,20 +14,27 @@
     SELECT NVL(MAX(REPLYSTEP),0)+1 FROM REPLYS WHERE POSTNO = #{postNo}
   </select>
 
+<!-- 덧글의 덧글 -->
+  <!-- 내가 달려는 덧글의 다음LEVEL의 제일 큰 STEP 받아오기 -->
+  <select id="getReplyNextStep" parameterType="ReplysDto" resultType="Integer">
+    SELECT NVL(MAX(REPLYSTEP),0) FROM REPLYS WHERE POSTNO = #{postNo} AND REPLYGROUP = #{replyGroup} AND REPLYLEVEL = #{replyLevel}
+  </select>
+
   <!-- 내가 달려는 덧글의 STEP 받아오기 -->
-  <select id="getReplyStep" parameterType="Integer" resultType="Integer">
-    SELECT REPLYSTEP FROM REPLYS WHERE REPLYNO = #{replyNo}
+  <select id="getReplyStep" parameterType="ReplysDto" resultType="Integer">
+    SELECT REPLYSTEP FROM REPLYS WHERE POSTNO = #{postNo} AND REPLYNO = #{replyGroup}
   </select>
 
   <!-- 내가 달려는 덧글의 LEVEL 받아오기 -->
-  <select id="getReplyLevel" parameterType="Integer" resultType="Integer">
-    SELECT REPLYLEVEL FROM REPLYS WHERE REPLYNO = #{replyNo}
+  <select id="getReplyLevel" parameterType="ReplysDto" resultType="Integer">
+        SELECT REPLYLEVEL FROM REPLYS WHERE POSTNO = #{postNo} AND REPLYNO = #{replyGroup}
   </select>
 
   <!-- 내 뒤로 전부 STEP + 1 -->
   <update id="setReplyStepOnePlus" parameterType="ReplysDto">
-    UPDATE REPLYS SET REPLYSTEP = REPLYSTEP+1 WHERE REPLYSTEP <![CDATA[ > ]]> #{replyStep} AND POSTNO = #{postNo}
+    UPDATE REPLYS SET REPLYSTEP = REPLYSTEP+1 WHERE POSTNO = #{postNo} AND  REPLYSTEP <![CDATA[ > ]]> #{replyStep} AND POSTNO = #{postNo}
   </update>
+<!-- 덧글의 덧글 -->
 
   <insert id="putReply" parameterType="ReplysDto">
     INSERT INTO REPLYS VALUES (#{postNo},REPLYS_SEQ.NEXTVAL,#{replyAuthID},#{replyAuthNM},#{replyCont},#{replyHidden},SYSTIMESTAMP,#{replyGroup},#{replyLevel},#{replyStep})

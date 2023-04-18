@@ -4,6 +4,7 @@ import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.MemberDto;
+import com.music.sharemusic.dto.MemberInfoDto;
 import com.music.sharemusic.dto.SendDataDto;
 import com.music.sharemusic.service.MemberServiceImpl;
 import java.util.HashMap;
@@ -56,9 +57,10 @@ public class MemberController {
     LoggedDto loggedUser = loggedUser(session);
     MemberDto memberDto = memberService.getMemberLogged(loggedUser);
     model.addAttribute("memberDto", memberDto);
-    Map<String, Object> historyList = new HashMap<>();
-    historyList = memberService.getHistoryList(loggedUser);
-    model.addAttribute("history", historyList);
+    MemberInfoDto userInfo = memberService.getMemberInfo(
+      loggedUser.getUserID()
+    );
+    model.addAttribute("userInfo", userInfo);
     return "/member/mypage";
   }
 
@@ -68,16 +70,25 @@ public class MemberController {
     Model model,
     @PathVariable String userID
   ) {
-    if (loggedUser(session) == null) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
       return "redirect:/member/login";
     }
-    LoggedDto pageUser = new LoggedDto();
-    pageUser.setUserID(userID);
-    MemberDto memberDto = memberService.getMemberLogged(pageUser);
-    model.addAttribute("memberDto", memberDto);
-    Map<String, Object> historyList = new HashMap<>();
-    historyList = memberService.getHistoryList(pageUser);
-    model.addAttribute("history", historyList);
+    if (loggedUser.getUserID().equals(userID)) {
+      return "redirect:/member/mypage";
+    }
+
+    MemberInfoDto userInfo = memberService.getMemberInfo(userID);
+    model.addAttribute("userInfo", userInfo);
+    log.info(
+      "here is controller, and this is logged user === {}",
+      loggedUser.getUserID()
+    );
+    log.info(
+      "here is controller, and this is userInfo === {}",
+      userInfo.getUserID()
+    );
+
     return "/member/mypage";
   }
 
@@ -97,13 +108,13 @@ public class MemberController {
     List<HistoryDto> historyList = null;
     switch (category) {
       case "recent":
-        historyList = memberService.getHistoryRecent(loggedUser);
+        historyList = memberService.getHistoryRecent(memberDto);
         break;
       case "bookmark":
-        historyList = memberService.getHistoryBookmark(loggedUser);
+        historyList = memberService.getHistoryBookmark(memberDto);
         break;
       case "liked":
-        historyList = memberService.getHistoryLiked(loggedUser);
+        historyList = memberService.getHistoryLiked(memberDto);
         break;
     }
     log.info("historyList");
@@ -137,7 +148,7 @@ public class MemberController {
       return "redirect:/member/login";
     }
     MemberDto memberDto = memberService.getMemberLogged(loggedUser);
-    List<BoardDto> historyList = memberService.getHistoryWritten(loggedUser);
+    List<BoardDto> historyList = memberService.getHistoryWritten(memberDto);
     model.addAttribute("memberDto", memberDto);
     model.addAttribute("historyList", historyList);
     return "/member/written";
@@ -168,59 +179,77 @@ public class MemberController {
 
   @PostMapping("/join")
   public String join(
-    @Valid @ModelAttribute("memberDto") MemberDto memberDto,
+    @Valid MemberDto memberDto,
     BindingResult bindingResult,
     RedirectAttributes redirectAttributes
   ) {
     log.info("we're going to check all validation!!");
+    //중복검사
+    if (memberService.checkIDtest(memberDto.getUserID()) > 0) {
+      bindingResult.rejectValue(
+        "userID",
+        "duplicated ID",
+        new Object[] { memberDto.getUserID() },
+        "이미 사용중인 ID 입니다."
+      );
+      log.info("what errors? === {}", bindingResult);
+      return "/member/join";
+    }
     if (bindingResult.hasErrors()) {
       log.info("we have some error!!! === {}", bindingResult);
       redirectAttributes.addFlashAttribute("memberDto", memberDto);
-      return "redirect:/member/join";
+      return "/member/join";
     }
+
     memberService.putMember(memberDto);
     log.info("join successful === {}", memberDto);
     return "redirect:/member/login";
   }
 
   @GetMapping("/login")
-  public String loginPage(HttpServletRequest request, HttpSession session) {
+  public String loginPage(
+    HttpServletRequest request,
+    HttpSession session,
+    @ModelAttribute MemberDto memberDto
+  ) {
     if (loggedUser(session) == null) {
-      session.setAttribute(
-        "pagePrev",
-        request.getHeader("Referer").split(request.getHeader("host"))[1]
-      );
-      log.info(request.getRequestURI());
+      if (request.getHeader("Referer") != null) {
+        session.setAttribute(
+          "pagePrev",
+          request.getHeader("Referer").split(request.getHeader("host"))[1]
+        );
+      }
       return "/member/login";
     }
-    log.info("login success");
     return "redirect:/member/mypage";
   }
 
   @PostMapping("/login")
   public String login(
     HttpSession session,
-    @ModelAttribute @Validated MemberDto memberDto,
+    @Validated MemberDto memberDto,
     BindingResult bindingResult,
+    RedirectAttributes redirectAttributes,
     @RequestParam(defaultValue = "/") String redirectURL
   ) {
-    // if (bindingResult.hasErrors()) {
-    //   log.info("what errors? === {}", bindingResult);
-    //   return "/member/login";
-    // }
+    if (bindingResult.hasErrors()) {
+      log.info("what errors? === {}", bindingResult);
+      return "/member/login";
+    }
     LoggedDto loggedUser = memberService.login(memberDto);
     if (loggedUser == null) {
       bindingResult.reject(
         "loginFailed",
         "아이디 또는 비밀번호가 맞지 않습니다."
       );
-      log.info("what errors? === {}", bindingResult);
-      return "redirect:/member/login";
+
+      return "/member/login";
     }
     session.setAttribute("loggedUser", loggedUser);
     session.setMaxInactiveInterval(30 * 60);
     if (session.getAttribute("pagePrev") != null) {
       log.info(session.getAttribute("pagePrev"));
+      redirectAttributes.addFlashAttribute("memberDto", memberDto);
       return "redirect:" + (String) session.getAttribute("pagePrev");
     }
     return "redirect:/mainPage";

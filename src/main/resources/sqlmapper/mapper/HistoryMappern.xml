@@ -86,6 +86,25 @@
     DELETE FROM FOLLOW WHERE USERID = #{userID} AND FOLLOWID = #{followID}
   </insert>
 
+<!-- 각종 수치를 얻는 곳 -->
+
+  <!-- 작성 글 갯수 -->
+  <select id="getCountPosts" parameterType="String" resultType="int">
+    SELECT COUNT(POSTAUTH) FROM BOARD WHERE POSTAUTH = #{userNM}
+  </select>
+  <select id="getCountReplys" parameterType="String" resultType="int">
+    SELECT COUNT(*) FROM REPLYS WHERE REPLYAUTHID = #{userID}
+  </select>
+  <select id="getCountLiked" parameterType="String" resultType="int">
+    SELECT COUNT (LIKED) FROM HISTORY WHERE LIKED = 1 AND USERID = #{userID}
+  </select>
+  <select id="getCountFollower" parameterType="String" resultType="int">
+    SELECT COUNT (FOLLOWID) FROM FOLLOW WHERE FOLLOWID = #{userID}
+  </select>
+
+<!-- 각종 수치를 얻는 곳 -->
+
+
 <!-- userID의 모든 기록 삭제 -->
   <delete id="deleteHistoryAll" parameterType="String">
     DELETE FROM HISTORY WHERE USERID = #{userID}

@@ -86,6 +86,12 @@
       <article class="board-view--replyBox">
         <ul id="reply-container" th:if="${replysList} != null">
           <li th:Each="item:${replysList}" class="reply">
+            <p th:text="${item.replyNo}"></p>
+            <span
+              th:if="${item.replyLevel} > 0"
+              th:each="num : ${#numbers.sequence(0, item.replyLevel-1)}"
+              style="display: block; width: 10px"
+            ></span>
             <div
               class="reply-contents"
               th:if="${item.replyHidden == 0}

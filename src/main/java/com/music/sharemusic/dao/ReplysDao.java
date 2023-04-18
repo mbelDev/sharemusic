@@ -26,9 +26,11 @@ public interface ReplysDao {
   //이하 덧글의 덧글 기능에 관련된 기능들
   public int getReplyStepMax(int postNo);
 
-  public int getReplyStep(int postNo);
+  public int getReplyStep(ReplysDto replysDto);
 
-  public int getReplyLevel(int postNo);
+  public int getReplyNextStep(ReplysDto replysDto);
+
+  public int getReplyLevel(ReplysDto replysDto);
 
   public void setReplyStepOnePlus(ReplysDto replysDto);
 }
