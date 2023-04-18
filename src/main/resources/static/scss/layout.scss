@@ -5,14 +5,20 @@ body {
   color: #fff;
   font-weight: 200;
 }
-p {
-  margin: 0; left: 0;
+p, ul {
+  margin: 0; left: 0; padding: 0;
   line-height: 1;
 }
 .line {
   border: 1px solid hsla(0,0%,100%,.1);
   border-width: 1px 0;
   padding: 15px 0;
+}
+.line-one {
+  border: 0;
+  border-bottom: 1px solid hsla(0,0%,100%,.1);
+  margin: 50px 0;
+  width: 1500px;
 }
 .topAndbut {
   margin: 30px 0 25px 0;
@@ -30,6 +36,10 @@ h1 {
   font-style: normal;
 }
 
+.media855 {
+  display: none;
+}
+
 
 
 .flex-box {
@@ -45,6 +55,7 @@ h1 {
     z-index: 90;
     background-color: #000;
     border-right: 1px solid hsla(0,0%,100%,.1);
+    
     .headerLayout-Area--box {
       padding: 0 24px;
       .headerLayout-Area--logo {
@@ -147,7 +158,7 @@ h1 {
           ul {
             padding-left: 0;
             li {
-              margin: 7px 0;
+              margin: 15px 0;
               div {
                 display: flex;
                 align-items: center;
@@ -319,10 +330,90 @@ h1 {
   #mainPage-Area {
     width: 100%;
     height: 100%;
-    margin-left: 12%;
+    margin-left: 245px;
     background-color: #0e0e0e;
   }//#mainPage-Area
 }//.flex-box
+
+
+
+@media screen and (max-width: 855px){
+  .flex-box {
+    display: block;
+  }
+  .flex-box #headerLayout-Area {
+    width: 100%;
+    height: auto;
+    font-size: 19px;
+  }
+  .flex-box #headerLayout-Area .headerLayout-Area--box {
+    display: none;
+  }
+  .flex-box #headerLayout-Area .media855 {
+    display: block;
+    height: 10vh;
+  }
+
+  .media855 {
+    padding-top: 28px;
+    &-Area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &--img {
+        margin-left: 25px;
+        img {
+          width: 120px;
+        }
+      }//&--img
+      &--search {
+        display: flex;
+        input {
+          width: 200px;
+          padding: 3px 0;
+          background-color: #1a1a1a;
+          color: #fff;
+          transition: all 1s ease;
+          border: 1px solid #1a1a1a;
+          &:focus {
+            outline: 1px solid #ff3672;
+          }
+        }
+        button {
+          padding: 0 10px;
+          background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
+        }
+        form {
+          display: flex;
+          
+        }
+        &-meun {
+          cursor: pointer;
+          margin-left: 10px;
+          margin-right: 25px;
+          .meunClick {
+            span {
+              &::before {
+                content: "";
+                display: block;
+                width: 35px;
+                height: 2px;
+                background-color: #fff;
+                
+              }
+              &:nth-child(1)::before {
+                margin-top: 10px;
+              }
+              &:nth-child(2)::before {
+                margin: 6px 0;
+              }
+            }
+          }//.meunClick
+        }//&-meun
+      }//&-search
+    }//&-Area
+  }//.media855
+}//@media screen and (max-width: 855px)
 
 
 

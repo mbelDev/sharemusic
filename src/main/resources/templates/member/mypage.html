@@ -15,7 +15,7 @@
           <div class="Area01-item--profile-img topAndbut">
             <img th:src="@{/upload/}+${userInfo.userIconReal}">
             <div class="fileArea">
-              <label for="file">이미지선택</label> 
+              <label class="btn btn-primary" for="file">이미지선택</label> 
               <input type="file" id="file">
             </div><!-- fileArea -->
           </div><!-- Area01-item--profile-img -->
@@ -23,13 +23,20 @@
             <div class="formArea">
               <span>닉네임</span>
               <span th:text="${userInfo.userNM}"><input type="text"></span>
-              <span th:if="${loggedUser.userID == userInfo.userID}"><button>수정</button></span>
+              <span th:if="${loggedUser.userID == userInfo.userID}">
+                <!-- <span>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                </span> -->
+                <button class="btn btn-primary">수정</button>
+              </span>
             </div><!-- formArea -->
             <div class="formArea">
               <span>아이디</span>
-              <span th:text="${userInfo.userID}"><input type="text" disabled></span>
+              <!-- <span th:text="${userInfo.userID}">
+                <input class="form-control" type="text" placeholder="" aria-label="Disabled input example" disabled>
+              </span> -->
             </div><!-- formArea -->
-            <div class="formArea">
+            <div class="formArea formArea-bt">
               <div class="formArea-sub">
                 <p>가입일</p>
                 <spna th:text="${userInfo.userDate}">0</spna>
@@ -51,10 +58,11 @@
         </div><!-- Area-item--profile -->
       </div><!-- mainConstent-Area-item -->
     </article><!-- mainConstent-Area01 -->
+    <div class="line-one"></div>
     <article class="mainContent-Area02">
       <div class="mainContent-Area02-title topAndbut">
         <h1>작성 글</h1>
-        <button><a th:href="@{/member/mypage/written}">더 보기</a></button>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
       </div><!-- mainConstent-Area02-title -->
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
@@ -81,7 +89,7 @@
     <article class="mainContent-Area02">
       <div class="mainContent-Area02-title topAndbut">
         <h1>작성 글</h1>
-        <button><a th:href="@{/member/mypage/written}">더 보기</a></button>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
       </div><!-- mainConstent-Area02-title -->
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
@@ -108,7 +116,7 @@
     <article class="mainContent-Area02">
       <div class="mainContent-Area02-title topAndbut">
         <h1>작성 글</h1>
-        <button><a th:href="@{/member/mypage/written}">더 보기</a></button>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
       </div><!-- mainConstent-Area02-title -->
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
@@ -135,7 +143,7 @@
     <article class="mainContent-Area02">
       <div class="mainContent-Area02-title topAndbut">
         <h1>작성 글</h1>
-        <button><a th:href="@{/member/mypage/written}">더 보기</a></button>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
       </div><!-- mainConstent-Area02-title -->
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
