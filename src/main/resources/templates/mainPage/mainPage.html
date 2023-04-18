@@ -8,39 +8,41 @@
   <main id="mainPage-Area" class="" layout:fragment="contents">
     <!-- <span th:text="${postList}"></span> -->
     <section class="main-constent--itmes">
-      <article class="main-constent--ranking">
-        <div class="ranking-area line topAndbut">
-          <!-- 상위 랭킹 -->
-          <h1 class="topAndbut">랭킹</h1>
-          <div class="ranking-box topAndbut">
-            <div class="swiper mySwiper">
-              <ul class="swiper-wrapper">
-                <li class="swiper-slide" th:each="item, i : ${rankList}">
-                  <a
-                    href="/board/view"
-                    th:href="@{/board/view(postNo=${item.postNo})}"
-                  >
-                    <div class="swiper-title">
-                      <img
-                        th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                      />
-                      <div class="swiper-title-num">
-                        <p class="" th:text="${i.count}">랭킹넘버</p>
-                        <p class="" th:if="${i.count == 1}"><img src="/images/num01.png" alt="" /></p>
-                        <p class="" th:if="${i.count == 2}"><img src="/images/num02.png" alt="" /></p>
-                        <p class="" th:if="${i.count == 3}"><img src="/images/num03.png" alt="" /></p>
-                      </div>
-                      <!-- swiper-title-num -->
-                      <div class="swiper-txt">
-                        <div class="swiper-txts">
-                          <div class="swiper-txts--postTitle">
-                            <p class="" th:text="${item.postTitle}">곡이름</p>
-                            <p class="" th:text="${item.postSinger}">
-                              가수이름
-                            </p>
-                          </div>
-                          <div class="swiper-txts--postAuth">
-                            <p class="" th:text="${item.postAuth}">별명</p>
+      <div class="main-constent--itmes-center">
+        <article class="main-constent--ranking">
+          <div class="ranking-area topAndbut">
+            <!-- 상위 랭킹 -->
+            <h1 class="topAndbut">랭킹</h1>
+            <div class="ranking-box topAndbut">
+              <div class="swiper mySwiper">
+                <ul class="swiper-wrapper">
+                  <li class="swiper-slide" th:each="item, i : ${rankList}">
+                    <a
+                      href="/board/view"
+                      th:href="@{/board/view(postNo=${item.postNo})}"
+                    >
+                      <div class="swiper-title">
+                        <img
+                          th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                        />
+                        <div class="swiper-title-num">
+                          <!-- <p class="" th:text="${i.count}">랭킹넘버</p> -->
+                          <p class="" th:if="${i.count == 1}"><img src="/images/num01.png" alt="" /></p>
+                          <p class="" th:if="${i.count == 2}"><img src="/images/num02.png" alt="" /></p>
+                          <p class="" th:if="${i.count == 3}"><img src="/images/num03.png" alt="" /></p>
+                        </div>
+                        <!-- swiper-title-num -->
+                        <div class="swiper-txt">
+                          <div class="swiper-txts">
+                            <div class="swiper-txts--postTitle">
+                              <p class="" th:text="${item.postTitle}">곡이름</p>
+                              <p class="" th:text="${item.postSinger}">
+                                가수이름
+                              </p>
+                            </div>
+                            <div class="swiper-txts--postAuth">
+                              <p class="" th:text="${item.postAuth}">별명</p>
+                            </div>
                           </div>
                         </div>
                         <!-- swiper-txt -->
