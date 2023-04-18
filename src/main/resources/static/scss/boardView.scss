@@ -1,6 +1,6 @@
 .boardView {
   margin: 4%;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid;
   &-Area {
 
   }//&-Area
@@ -62,3 +62,57 @@
     }//&--title
   }//&-Video
 }//.boardView
+// 덧글 CSS 권인호 작성
+.reply{
+  position: relative;
+  display: flex;
+  margin: 5px auto;
+  &-container{
+    width:100%;
+    min-height: 300px;
+    
+  }
+
+  &-contents{
+    display: flex;
+    width: 80%;
+    min-height: 30px;
+    &--icon{
+      width: 180px;
+      display: flex;
+      img{
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+      }
+      span{
+        display: inline-block;
+      }
+    }
+    &--text{
+      width: 70%;
+    }
+    &--btns{
+      position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+    height: 100%;
+    right: 0%;
+    margin-left: 5px;
+      span{
+        background: #fff;
+        border-radius: 5px;
+        margin-left: 2px;
+      }
+    }
+  }
+  &-date{
+    width: 15%;
+    text-align: right;
+  }
+  &-hidden{
+    width: 100%;
+  }
+
+}

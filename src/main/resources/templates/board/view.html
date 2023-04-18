@@ -49,6 +49,8 @@
         </div><!-- boardView-Video--title -->
       </div><!-- boardView-Video -->
     </article><!-- boardView-Area -->
+
+
     <article class="board-view--replyBox">
       <ul id="reply-container" th:if="${replysList} != null">
         <li th:Each="item:${replysList}" class="reply">
@@ -60,16 +62,15 @@
               <a th:href="@{|/member/user/${item.replyAuthID}|}">
                 <!-- th:src="@{/upload/}+${item.replyIcon}" -->
                 <img
-                  src="/images/sampleprofile.jpg"
+                src="/images/sampleprofile.jpg"
                   alt=""
                   style="width: 30px; height: 30px; border-radius: 5px"
                 />
                 <span th:text="${item.replyAuthNM}">홍길동</span>
               </a>
             </div>
-            <div class="reply-contents--text">
+            <div class="reply--contents">
               <span th:text="${item.replyCont}">덧글 내용</span>
-              <!-- <span th:text="${item}"></span> -->
             </div>
           </div>
           <div class="reply-contents reply-hidden"
@@ -222,6 +223,7 @@
           addDeleteReplyEvent();
       });
     })
+
       function like() {
         $.ajax({
           url: "member/like",

@@ -1,6 +1,6 @@
 .boardView {
   margin: 4%;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid;
 }
 .boardView-Video iframe {
   width: 1280px;
@@ -49,4 +49,55 @@
 }
 .boardView-Video--title .like-btn button img {
   width: 25px;
+}
+
+.reply {
+  position: relative;
+  display: flex;
+  margin: 5px auto;
+}
+.reply-container {
+  width: 100%;
+  min-height: 300px;
+}
+.reply-contents {
+  display: flex;
+  width: 80%;
+  min-height: 30px;
+}
+.reply-contents--icon {
+  width: 180px;
+  display: flex;
+}
+.reply-contents--icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+}
+.reply-contents--icon span {
+  display: inline-block;
+}
+.reply-contents--text {
+  width: 70%;
+}
+.reply-contents--btns {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+  height: 100%;
+  right: 0%;
+  margin-left: 5px;
+}
+.reply-contents--btns span {
+  background: #fff;
+  border-radius: 5px;
+  margin-left: 2px;
+}
+.reply-date {
+  width: 15%;
+  text-align: right;
+}
+.reply-hidden {
+  width: 100%;
 }

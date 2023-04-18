@@ -149,7 +149,6 @@
     <script>
       function testRespone01(genre) {
         $.ajax({
-<<<<<<< HEAD
             url:"/reload/"+genre,
             type:"GET",
             data:{
@@ -165,29 +164,12 @@
         })
         .done(function( fragment ){
             $("#test").replaceWith(fragment);
-=======
-          url: "/reload/" + genre,
-          type: "GET",
-          data: {
-            genre: genre,
-            searchTxt: "",
-            sort: "postNo",
-          },
-          async: false,
-          success: function (response) {
-            console.log(response);
-            alert("댓글이 등록되었습니다.");
-          },
-        }).done(function (fragment) {
-          $("#test").replaceWith(fragment);
->>>>>>> d6f1565efe440109cdbbe3eadcb119ee0d470fef
         });
       }
     </script>
     <script>
       function testRespone02(genre, searchTxt, sort) {
         $.ajax({
-<<<<<<< HEAD
             url:"/reload/",
             type:"POST",
             data:{
@@ -202,22 +184,6 @@
         })
         .done(function( fragment ){
             $("#test").replaceWith(fragment);
-=======
-          url: "/reload/",
-          type: "POST",
-          data: {
-            genre: genre,
-            searchTxt: searchTxt,
-            sort: sort,
-          },
-          async: false,
-          success: function (response) {
-            console.log(response);
-            alert("댓글이 등록되었습니다.");
-          },
-        }).done(function (fragment) {
-          $("#test").replaceWith(fragment);
->>>>>>> d6f1565efe440109cdbbe3eadcb119ee0d470fef
         });
       }
     </script>

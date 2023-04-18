@@ -80,6 +80,7 @@ public class BoardController {
     model.addAttribute("boardDto", boardDto);
     List<ReplysDto> replysList = replysService.getReplyAll(postNo);
     model.addAttribute("replysList", replysList);
+    log.info("", replysList);
     return "/board/view";
   }
 
