@@ -140,6 +140,30 @@
           </div>
         </article><!-- .headerLayout-Area--viewContents -->
       </section><!-- #headerLayout-Area -->
+
+      <!-- 모바일 반응형 -->
+      <section class="media855">
+        <article class="media855-Area">
+          <div class="media855-Area--img">
+            <img src="/images/logo.png" alt="">
+          </div><!-- media855-Area--img -->
+          <div class="media855-Area--search">
+            <form  th:if="${emote} == null" th:action="@{/mainPage/{genre}(genre=${genre}, sort=postNo)}">
+              <input type="search" id="form1" class="" name="searchTxt" placeholder="Music 검색" value="" th:value="${searchTxt}">
+              <button type="submit" class="btn btn-primary">
+                <img src="/images/search.svg" alt="" />
+              </button>
+            </form>
+            <div class="media855-Area--search-meun">
+              <div class="meunClick">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div><!-- meunClick -->
+            </div><!-- media855-Area--meun -->
+          </div><!-- media855-Area--search -->
+        </article><!-- media855-Area -->
+      </section><!-- media855 -->
     </header>
   
     <main id="mainPage-Area" class="" layout:fragment="contents">
