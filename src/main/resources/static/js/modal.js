@@ -9,10 +9,11 @@ function getModal(getBtn, getModal, getClose) {
 
   $(ModalBtn).click(() => {
     $(Modal).addClass("modal-open");
+    console.log("modalBtnClicked");
   });
 }
 
-function getModal(getModal, getClose) {
+function getModal02(getModal, getClose) {
   let Modal = getModal; //document.getElementById("Modal***");
   let closeBtn = getClose; //document.getElementById("closeModal***");
 

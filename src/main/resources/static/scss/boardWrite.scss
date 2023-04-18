@@ -9,14 +9,24 @@ main {
   .boardWrite-page--form {
     margin-top: 100px;
     width: 70%;
+    .musicName {
+      display: flex;
+      input {
+        width: 22vw;
+      }
+    } //.musicName
+    input {
+      width: 22vw;
+      display: inline-block;
+    }
     button {
       background-color: #264d8b;
       color: #fff;
     }
-    .boardWrite-page--item {
+    .boardWrite-pag--item {
       margin-bottom: 30px;
-      color: #111;
-      .form-select {
+      #writePostGenre,
+      #writePostEmote {
         cursor: pointer;
       }
     }

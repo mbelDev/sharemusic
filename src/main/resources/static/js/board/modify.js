@@ -1,10 +1,10 @@
 // modal
 function getModalModifyGenre() {
-  getModal($("#modalModifyGenre"), $("#closeModalModifyGenre"));
+  getModal02($("#modalModifyGenre"), $("#closeModalModifyGenre"));
 }
 
 function getModalModifyEmote() {
-  getModal($("#modalModifyEmote"), $("#closeModalModifyEmote"));
+  getModal02($("#modalModifyEmote"), $("#closeModalModifyEmote"));
 }
 
 // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기

@@ -1,0 +1,17 @@
+.weeklyRanking {
+  outline: 1px solid red;
+  padding: 80px;
+  &-Area {
+    ul {
+      display: flex;
+      justify-content: left;
+      gap: 15px;
+      flex-wrap: wrap;
+      li {
+        outline: 1px solid red;
+        width: 480px;
+        height: 30vh;
+      }
+    }
+  }//&-Area
+}//.weeklyRanking

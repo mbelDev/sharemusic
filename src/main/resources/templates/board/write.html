@@ -5,79 +5,84 @@
   xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{/include/layout.html}"
 >
-  <main id="mainPage-Area" class="container" layout:fragment="contents">
+  <main id="mainPage-Area" class="" layout:fragment="contents">
     <section class="boardWrite-page">
       <article class="boardWrite-page--form">
-        <form action="/board/write" method="POST">
-          <div class="boardWrite-page--item form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingPassword"
-              placeholder="곡 이름"
-              name="postTitle"
-            />
-            <label for="floatingPassword">곡 이름</label>
+        <form action="/board/write" method="POST" th:object="${boardDto}">
+          <div class="musicName">
+            <div class="boardWrite-pag--item">
+              <span>곡 이름</span>
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                placeholder="곡 이름을 입력해주세요."
+                aria-label=".form-control-lg example"
+                name="postTitle"
+              />
+            </div>
+            <div class="boardWrite-pag--item">
+              <span>가수 이름</span>
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                placeholder="가수 이름을 입력해주세요."
+                aria-label=".form-control-lg example"
+                name="postSinger"
+              />
+            </div>
           </div>
-          <div class="boardWrite-page--item form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingPassword"
-              placeholder="가수 이름"
-              name="postSinger"
-            />
-            <label for="floatingPassword">가수 이름</label>
-          </div>
-          <div class="boardWrite-page--item form-floating">
-            <textarea
-              class="form-control"
-              placeholder="Leave a comment here"
-              id="floatingTextarea"
-              name="postCont"
-            ></textarea>
-            <label for="floatingTextarea">설명(150자 이내)</label>
-          </div>
-          <div class="boardWrite-page--item form-floating">
-            <textarea
-              class="form-control postLink"
-              placeholder="Leave a comment here"
-              id="floatingTextarea"
-              name="postLink"
-            ></textarea>
-            <label for="floatingTextarea">유튜브 링크</label>
-          </div>
-          <p>장르</p>
+          <!-- musicName -->
+          <span>장르</span>
           <div
-            class="boardWrite-page--item input-group"
+            class="boardWrite-pag--item input-group"
             onclick="getModalWriteGenre()"
           >
             <input
               type="text"
-              class="form-select"
+              class="form-control"
               id="writePostGenre"
               name="postGenre"
-              placeholder="장르를 선택해주세요"
+              placeholder="장르를 선택해주세요."
               readonly
             />
           </div>
-          <p>감성</p>
+          <span>감성</span>
           <div
-            class="boardWrite-page--item input-group"
+            class="boardWrite-pag--item input-group"
             onclick="getModalWriteEmote()"
           >
             <input
               type="text"
-              class="form-select"
-              id="writeEmoteGenre"
+              class="form-control"
+              id="writePostEmote"
               name="postEmote"
-              placeholder="감성을 선택해주세요"
+              placeholder="감성을 선택해주세요."
               readonly
             />
           </div>
+          <div class="boardWrite-pag--item">
+            <span>유튜브 링크</span>
+            <input
+              class="form-control form-control-lg postLink"
+              type="text"
+              placeholder="유튜브 링크를 입력해주세요."
+              aria-label=".form-control-lg example"
+              name="postLink"
+            />
+          </div>
+          <div class="boardWrite-pag--item">
+            <span>내용작성</span>
+            <textarea
+              rows="10"
+              class="form-control"
+              placeholder="설명 내용을 작성해주세요."
+              id="floatingTextarea"
+              name="postCont"
+            ></textarea>
+          </div>
           <div>
             <button type="submit" class="btn btnWriteConfirm">등록</button>
-            <button type="reset" class="btn">취소</button>
+            <button class="btn">취소</button>
           </div>
         </form>
       </article>
