@@ -4,7 +4,9 @@
   font-size: 18px;
   .board-bodify--content {
     margin-top: 100px;
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       width: 800px;
       margin: 20px 0;
     }
@@ -15,13 +17,15 @@
       margin-top: 10px;
       margin-bottom: 10px;
     }
-    .postGenre, .genreEtc, .postEmote, .emoteEtc {
+    .postGenre,
+    .genreEtc,
+    .postEmote {
       margin: auto;
       margin-bottom: 5px;
     }
     .btn-submit {
       margin-top: 30px;
       text-align: right;
-    }//.btn-submit
-  }//.board-bodify--content 
-}//.board-modify--page
+    } //.btn-submit
+  } //.board-bodify--content
+} //.board-modify--page

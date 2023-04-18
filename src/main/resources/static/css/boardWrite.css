@@ -16,6 +16,10 @@ main {
   background-color: #264d8b;
   color: #fff;
 }
-.boardWrite-page .boardWrite-page--form .boardWrite-pag--item {
+.boardWrite-page .boardWrite-page--form .boardWrite-page--item {
   margin-bottom: 30px;
+  color: #111;
+}
+.boardWrite-page .boardWrite-page--form .boardWrite-page--item .form-select {
+  cursor: pointer;
 }

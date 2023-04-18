@@ -6,7 +6,9 @@
 .board-modify--page .board-bodify--content {
   margin-top: 100px;
 }
-.board-modify--page .board-bodify--content input, .board-modify--page .board-bodify--content textarea, .board-modify--page .board-bodify--content select {
+.board-modify--page .board-bodify--content input,
+.board-modify--page .board-bodify--content textarea,
+.board-modify--page .board-bodify--content select {
   width: 800px;
   margin: 20px 0;
 }
@@ -17,7 +19,9 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.board-modify--page .board-bodify--content .postGenre, .board-modify--page .board-bodify--content .genreEtc, .board-modify--page .board-bodify--content .postEmote, .board-modify--page .board-bodify--content .emoteEtc {
+.board-modify--page .board-bodify--content .postGenre,
+.board-modify--page .board-bodify--content .genreEtc,
+.board-modify--page .board-bodify--content .postEmote {
   margin: auto;
   margin-bottom: 5px;
 }

@@ -9,7 +9,7 @@
     <section class="boardWrite-page">
       <article class="boardWrite-page--form">
         <form action="/board/write" method="POST">
-          <div class="boardWrite-pag--item form-floating">
+          <div class="boardWrite-page--item form-floating">
             <input
               type="text"
               class="form-control"
@@ -19,7 +19,7 @@
             />
             <label for="floatingPassword">곡 이름</label>
           </div>
-          <div class="boardWrite-pag--item form-floating">
+          <div class="boardWrite-page--item form-floating">
             <input
               type="text"
               class="form-control"
@@ -29,7 +29,7 @@
             />
             <label for="floatingPassword">가수 이름</label>
           </div>
-          <div class="boardWrite-pag--item form-floating">
+          <div class="boardWrite-page--item form-floating">
             <textarea
               class="form-control"
               placeholder="Leave a comment here"
@@ -38,7 +38,7 @@
             ></textarea>
             <label for="floatingTextarea">설명(150자 이내)</label>
           </div>
-          <div class="boardWrite-pag--item form-floating">
+          <div class="boardWrite-page--item form-floating">
             <textarea
               class="form-control postLink"
               placeholder="Leave a comment here"
@@ -48,25 +48,10 @@
             <label for="floatingTextarea">유튜브 링크</label>
           </div>
           <p>장르</p>
-          <div class="boardWrite-pag--item input-group">
-            <!-- <select
-              class="form-select"
-              id="inputGroupSelect04"
-              aria-label="Example select with button addon"
-              name="postGenre"
-            >
-              <option value="" disabled selected>장르를 선택해주세요</option>
-              <option value="댄스/팝">댄스/팝</option>
-              <option value="포크/어쿠스틱">포크/어쿠스틱</option>
-              <option value="아이돌">아이돌</option>
-              <option value="랩/힙합">랩/힙합</option>
-              <option value="알앤비/소울">알앤비/소울</option>
-              <option value="일렉트로닉">일렉트로닉</option>
-              <option value="락/메탈">락/메탈</option>
-              <option value="재즈">재즈</option>
-              <option value="인디">인디</option>
-              <option value="성인가요">성인가요</option>
-            </select> -->
+          <div
+            class="boardWrite-page--item input-group"
+            onclick="getModalWriteGenre()"
+          >
             <input
               type="text"
               class="form-select"
@@ -75,114 +60,104 @@
               placeholder="장르를 선택해주세요"
               readonly
             />
-            <button
-              id="modalWriteGenreBtn"
-              class="btn btn-outline-secondary btn-primary"
-              type="button"
-            >
-              선택하기
-            </button>
           </div>
           <p>감성</p>
-          <div class="boardWrite-pag--item input-group">
-            <select
+          <div
+            class="boardWrite-page--item input-group"
+            onclick="getModalWriteEmote()"
+          >
+            <input
+              type="text"
               class="form-select"
-              id="inputGroupSelect04"
-              aria-label="Example select with button addon"
+              id="writeEmoteGenre"
               name="postEmote"
-            >
-              <option value="신남">신남</option>
-              <option value="우울">우울</option>
-              <option value="희열">희열</option>
-              <option value="으스스">으스스</option>
-              <option value="etc">기타</option>
-            </select>
-            <button
-              id="modalWriteEmoteBtn"
-              class="btn btn-outline-secondary"
-              type="button"
-            >
-              Button
-            </button>
+              placeholder="감성을 선택해주세요"
+              readonly
+            />
           </div>
           <div>
             <button type="submit" class="btn btnWriteConfirm">등록</button>
-            <button class="btn">취소</button>
+            <button type="reset" class="btn">취소</button>
           </div>
         </form>
       </article>
     </section>
     <!-- boardWrite-page -->
 
-    <!-- 모달창 -->
+    <!-- 장르 모달창 -->
     <div id="modalWriteGenre" class="modal-wnd">
       <div id="closeModalWriteGenre" class="modalContents modalCategory">
         <!-- 모달창 안에 여기 내용 작성 -->
         <div class="modalCategory__box">
-          <span class="modalCategory__box__option" id="writeDance"
-            >댄스/팝</span
-          >
-          <span class="modalCategory__box__option" id="writeFolk"
-            >포크/어쿠스틱</span
-          >
-          <span class="modalCategory__box__option" id="writeIdol">아이돌</span>
-          <span class="modalCategory__box__option" id="writeRap">랩/힙합</span>
-          <span class="modalCategory__box__option" id="writeRB"
-            >알앤비/소울</span
-          >
-          <span class="modalCategory__box__option" id="writeElect"
-            >일렉트로닉</span
-          >
-          <span class="modalCategory__box__option" id="writeRock">락/메탈</span>
-          <span class="modalCategory__box__option" id="writejazz">재즈</span>
-          <span class="modalCategory__box__option" id="writeIndie">인디</span>
-          <span class="modalCategory__box__option" id="writeAdult"
-            >성인가요</span
-          >
+          <div class="modalCategory__box__option" id="writeDance">
+            <span>댄스/팝</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeFolk">
+            <span>포크/어쿠스틱</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeIdol">
+            <span>아이돌</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeRap">
+            <span>랩/힙합</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeRB">
+            <span>알앤비/소울</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeElect">
+            <span>일렉트로닉</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeRock">
+            <span>락/메탈</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeJazz">
+            <span>재즈</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeIndie">
+            <span>인디</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeAdult">
+            <span>성인가요</span>
+          </div>
         </div>
       </div>
       <!-- ModalThis-content -->
     </div>
+    <!-- 감성 모달창 -->
     <div id="modalWriteEmote" class="modal-wnd">
       <div id="closeModalWriteEmote" class="modalContents modalCategory">
         <!-- 모달창 안에 여기 내용 작성 -->
         <div class="modalCategory__box">
-          <span class="modalCategory__box__option"
-            ><a
-              th:href="@{/mainPage/{genre}/{emote}(emote='신남', sort=postNo)}"
-              >신남</a
-            ></span
-          >
-          <span class="modalCategory__box__option"
-            ><a
-              th:href="@{/mainPage/{genre}/{emote}(emote='우울', sort=postNo)}"
-              >우울</a
-            ></span
-          >
-          <span class="modalCategory__box__option"
-            ><a
-              th:href="@{/mainPage/{genre}/{emote}(emote='희열', sort=postNo)}"
-              >희열</a
-            ></span
-          >
-          <span class="modalCategory__box__option"
-            ><a href="">테스트용 버튼</a></span
-          >
-          <span class="modalCategory__box__option"
-            ><a href="">테스트용 버튼</a></span
-          >
-          <span class="modalCategory__box__option"
-            ><a href="">테스트용 버튼</a></span
-          >
-          <span class="modalCategory__box__option"
-            ><a href="">테스트용 버튼</a></span
-          >
-          <span class="modalCategory__box__option"
-            ><a href="">테스트용 버튼</a></span
-          >
-          <span class="modalCategory__box__option"
-            ><a href="">테스트용 버튼</a></span
-          >
+          <div class="modalCategory__box__option" id="writeExcite">
+            <span>신남</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeGloomy">
+            <span>우울</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeEcstasy">
+            <span>희열</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeSpooky">
+            <span>으스스</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeMagni">
+            <span>웅장한</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeCalm">
+            <span>잔잔</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeFlutter">
+            <span>설렘</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeSorrow">
+            <span>애절한</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeDreamy">
+            <span>몽환적</span>
+          </div>
+          <div class="modalCategory__box__option" id="writeWarm">
+            <span>따뜻한</span>
+          </div>
         </div>
       </div>
       <!-- ModalThis-content -->

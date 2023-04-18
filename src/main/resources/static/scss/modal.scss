@@ -1,14 +1,14 @@
-
 // 모달창
 .modal-wnd {
   width: 100%;
   height: 100%;
   background-color: #111111d0;
   position: fixed;
-  top: 0%; left: 0%;
+  top: 0%;
+  left: 0%;
   z-index: 99;
   display: none;
-  &.modal-open{
+  &.modal-open {
     display: block;
   }
   &-item {
@@ -17,25 +17,26 @@
     background-color: #fff;
     border-radius: 13px;
     position: fixed;
-    top: 20%; left: 15%;
-    &-contents{
+    top: 20%;
+    left: 15%;
+    &-contents {
       display: block;
       margin: 0px auto;
       padding: 20px;
-      .modal-btn{
-        width:120x;
+      .modal-btn {
+        width: 120x;
         height: 48px;
         border-radius: 5px;
       }
     }
   }
-  .modalCategory{
+  .modalCategory {
     //권인호 작성
     display: flex;
     align-items: center;
     width: 100%;
     height: 100%;
-    &__box{
+    &__box {
       display: flex;
       flex-wrap: wrap;
       margin: 0px auto;
@@ -43,15 +44,16 @@
       height: 330px;
       background: transparent;
       justify-content: space-between;
-      &__option{
+      &__option {
         display: block;
         text-align: center;
         width: 120px;
         height: 60px;
         margin: 20px;
         background-color: #fff;
+        color: #000;
         border-radius: 13px;
-        a{
+        a {
           display: grid;
           width: 100%;
           height: 100%;
@@ -59,22 +61,34 @@
           padding: auto 0px;
           align-items: center;
         }
+        // write modify 모달
+        span {
+          display: grid;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          padding: auto 0px;
+          align-items: center;
+          cursor: pointer;
+        }
       }
     }
   }
-}//.write-modal
-
+} //.write-modal
 
 // 로그인, 회원가입 모달
 .modalLogin {
   width: 100%;
   height: 100vh;
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   background-color: #000000d0;
   .modalThis-item {
-    width: auto; height: auto;
-    width: 600px; height: 450px;
+    width: auto;
+    height: auto;
+    width: 600px;
+    height: 450px;
     background-color: #fff;
   }
 }

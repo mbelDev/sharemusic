@@ -1,13 +1,11 @@
-getModal(
-  $("#modalModifyGenreBtn"),
-  $("#modalModifyGenre"),
-  $("#closeModalModifyGenre")
-);
-getModal(
-  $("#modalEmoteModifyBtn"),
-  $("#modalModifyEmote"),
-  $("#closeModalModifyEmote")
-);
+// modal
+function getModalModifyGenre() {
+  getModal($("#modalModifyGenre"), $("#closeModalModifyGenre"));
+}
+
+function getModalModifyEmote() {
+  getModal($("#modalModifyEmote"), $("#closeModalModifyEmote"));
+}
 
 // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
 $(".btnModifyConfirm").on("click", function () {
@@ -27,9 +25,9 @@ $(".btnModifyConfirm").on("click", function () {
   return false;
 });
 
-// 장르선택
+// 장르 선택
 $("#modifyDance").on("click", function () {
-  $("#modifyPostGenre").val("댄스/팝");
+  $("#modifyPostGenre").val("신남");
 });
 
 $("#modifyFolk").on("click", function () {
@@ -66,4 +64,45 @@ $("#modifyIndie").on("click", function () {
 
 $("#modifyAdult").on("click", function () {
   $("#modifyPostGenre").val("성인가요");
+});
+
+// 감성 선택
+$("#modifyExcite").on("click", function () {
+  $("#modifyPostEmote").val("신남");
+});
+
+$("#modifyGloomy").on("click", function () {
+  $("#modifyPostEmote").val("우울");
+});
+
+$("#modifyEcstasy").on("click", function () {
+  $("#modifyPostEmote").val("희열");
+});
+
+$("#modifySpooky").on("click", function () {
+  $("#modifyPostEmote").val("으스스");
+});
+
+$("#modifyMagni").on("click", function () {
+  $("#modifyPostEmote").val("웅장한");
+});
+
+$("#modifyCalm").on("click", function () {
+  $("#modifyPostEmote").val("잔잔");
+});
+
+$("#modifyFlutter").on("click", function () {
+  $("#modifyPostEmote").val("설렘");
+});
+
+$("#modifySorrow").on("click", function () {
+  $("#modifyPostEmote").val("애절한");
+});
+
+$("#modifyDreamy").on("click", function () {
+  $("#modifyPostEmote").val("몽환적");
+});
+
+$("#modifyWarm").on("click", function () {
+  $("#modifyPostEmote").val("따뜻한");
 });

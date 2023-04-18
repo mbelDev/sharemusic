@@ -13,10 +13,12 @@ main {
       background-color: #264d8b;
       color: #fff;
     }
-    .boardWrite-pag--item {
+    .boardWrite-page--item {
       margin-bottom: 30px;
+      color: #111;
+      .form-select {
+        cursor: pointer;
+      }
     }
-  }//.boardWrite-page--form
-}//.boardWrite-page
-
-
+  } //.boardWrite-page--form
+} //.boardWrite-page
