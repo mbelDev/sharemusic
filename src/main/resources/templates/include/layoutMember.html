@@ -124,10 +124,10 @@
         <article class="headerLayout-Area--viewContents topAndbut">
           <div class="view view02">
             <ul>
-              <li><div><img src="/images/navIcon03.png" alt=""><span>작성 글</span></div></li>
-              <li id="modalGenreBtn"><div><img src="/images/navIcon04.png" alt=""><span>최근감상</span></div></li>
-              <li id="modalEmoteBtn"><div><img src="/images/navIcon06.png" alt=""><span>즐겨찾기</span></div></li>
-              <li><div><img src="/images/navIcon07.png" alt=""><span>좋아요</span></div></li>
+              <li><div><img src="/images/navIcon03.png" alt=""><a  th:href="@{/member/mypage/written}"><span>작성 글</span></a></div></li>
+              <li id="modalGenreBtn"><div><img src="/images/navIcon04.png" alt=""><a  th:href="@{/member/mypage/list?category=recent}"><span>최근감상</span></a></div></li>
+              <li id="modalEmoteBtn"><div><img src="/images/navIcon06.png" alt=""><a  th:href="@{/member/mypage/list?category=bookmark}"><span>즐겨찾기</span></a></div></li>
+              <li><div><img src="/images/navIcon07.png" alt=""><a th:href="@{/member/mypage/list?category=liked}"><span>좋아요</span></a></div></li>
             </ul>
           </div>
         </article><!-- .headerLayout-Area--viewContents -->
