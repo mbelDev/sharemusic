@@ -12,6 +12,16 @@ main {
   margin-top: 100px;
   width: 70%;
 }
+.boardWrite-page .boardWrite-page--form .musicName {
+  display: flex;
+}
+.boardWrite-page .boardWrite-page--form .musicName input {
+  width: 22vw;
+}
+.boardWrite-page .boardWrite-page--form input {
+  width: 22vw;
+  display: inline-block;
+}
 .boardWrite-page .boardWrite-page--form button {
   background-color: #264d8b;
   color: #fff;

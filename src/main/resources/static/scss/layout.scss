@@ -5,14 +5,20 @@ body {
   color: #fff;
   font-weight: 200;
 }
-p {
-  margin: 0; left: 0;
+p, ul {
+  margin: 0; left: 0; padding: 0;
   line-height: 1;
 }
 .line {
   border: 1px solid hsla(0,0%,100%,.1);
   border-width: 1px 0;
   padding: 15px 0;
+}
+.line-one {
+  border: 0;
+  border-bottom: 1px solid hsla(0,0%,100%,.1);
+  margin: 50px 0;
+  width: 1500px;
 }
 .topAndbut {
   margin: 30px 0 25px 0;
@@ -147,7 +153,7 @@ h1 {
           ul {
             padding-left: 0;
             li {
-              margin: 7px 0;
+              margin: 15px 0;
               div {
                 display: flex;
                 align-items: center;
@@ -319,7 +325,7 @@ h1 {
   #mainPage-Area {
     width: 100%;
     height: 100%;
-    margin-left: 12%;
+    margin-left: 245px;
     background-color: #0e0e0e;
   }//#mainPage-Area
 }//.flex-box

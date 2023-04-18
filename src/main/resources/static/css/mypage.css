@@ -13,6 +13,9 @@
   width: 200px;
   height: 200px;
 }
+.mainContent-Area01-item .Area01-item--profile-img .fileArea label {
+  margin-top: 20px;
+}
 .mainContent-Area01-item .Area01-item--profile-img .fileArea input[type=file] {
   position: absolute;
   width: 0;
@@ -26,6 +29,8 @@
 }
 .mainContent-Area01-item .Area01-item--profile-form .formArea {
   margin-bottom: 15px;
+  display: flex;
+  align-items: center;
 }
 .mainContent-Area01-item .Area01-item--profile-form .formArea span input {
   margin-left: 10px;
@@ -33,9 +38,14 @@
 }
 .mainContent-Area01-item .Area01-item--profile-form .formArea-sub {
   display: flex;
+  align-items: center;
 }
 .mainContent-Area01-item .Area01-item--profile-form .formArea-sub p {
   width: 75px;
+}
+.mainContent-Area01-item .Area01-item--profile-form .formArea-bt {
+  display: block;
+  line-height: 2.3;
 }
 .mainContent-Area02 {
   height: 300px;
@@ -45,7 +55,7 @@
   align-items: center;
 }
 .mainContent-Area02-title button {
-  height: 30px;
+  margin: 0 0 13px 25px;
 }
 .mainContent-Area02 .Area02-item--profile-list ul {
   display: flex;
