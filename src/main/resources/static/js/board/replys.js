@@ -13,7 +13,7 @@ function addReplyEvent(){
                     url:"/board/reply/reply",
                     type:"POST",
                     data:{
-                        replyNo : $("#btn-reply-reply").data("replyno"),
+                        replyGroup : $("#btn-reply-reply").data("replyno"),
                         replyCont : $("#replyCont").val(),
                         replyHidden:$(".check-hidden-reply").is(":checked")==true ? 1 : 0,
                     },

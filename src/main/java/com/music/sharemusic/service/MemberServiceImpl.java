@@ -127,6 +127,7 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
+  //활동 및 강삼기록 저장
   public Map<String, Object> getHistoryList(LoggedDto loggedUser) {
     Map<String, Object> result = new HashMap<>();
     List<BoardDto> listWritten = getHistoryWritten(loggedUser);
@@ -196,6 +197,7 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
+  //로그인 한 유저 정보
   public MemberDto getMemberLogged(LoggedDto loggedDto) {
     String userID = loggedDto.getUserID();
     MemberDto result = getMemberOne(userID);
@@ -204,16 +206,19 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
+  //이거 어디다 쓰는거더라???
   public MemberDto getMemberOne(String userID) {
     MemberDto result = memberDao.getMemberOne(userID);
     return result;
   }
 
+  //관리자가 쓰는 메소드
   public List<MemberDto> getMemberAll() {
     List<MemberDto> result = memberDao.getMemberAll();
     return result;
   }
 
+  //회원정보 수정
   public void updateMember(MemberDto memberDto) {
     memberDao.updateMember(memberDto);
   }

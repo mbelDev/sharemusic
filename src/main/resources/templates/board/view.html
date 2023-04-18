@@ -54,6 +54,8 @@
     <article class="board-view--replyBox">
       <ul id="reply-container" th:if="${replysList} != null">
         <li th:Each="item:${replysList}" class="reply">
+          <p th:text="${item.replyNo}"></p>
+          <span th:if="${item.replyLevel} > 0" th:each="num : ${#numbers.sequence(0, item.replyLevel-1)}" style="display:block; width:10px;"></span>
           <div class="reply-contents" 
           th:if="${item.replyHidden == 0}
            or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
@@ -69,7 +71,8 @@
                 <span th:text="${item.replyAuthNM}">홍길동</span>
               </a>
             </div>
-            <div class="reply--contents">
+            <div class="reply-contents--text">
+              <p th:if="${item.replyGroup!=0}" th:text="${item.replyGroup}+'덧글에게 답변'" style="color:#777;"></p>
               <span th:text="${item.replyCont}">덧글 내용</span>
             </div>
           </div>
@@ -79,13 +82,19 @@
             <span class="reply-contents--text" >비공개 덧글입니다.</span>
           </div>
           <div class="reply-date" th:text="${item.replyDate}">작성일자</div>
-          <div class="reply-contents--btns">
+          <div class="reply-contents--btns"
+          th:if="${item.replyHidden == 0}
+           or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
+           or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
             <span id="replyReplyBtn" class="replyReplyBtn" th:data-replyno="${item.replyNo}">답글</span>
             <th:block th:if="${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false}">
               
               <span id="modifyReplyBtn">수정</span>
               <span id="deleteReplyBtn" th:data-replyno="${item.replyNo}">삭제</span>
             </th:block>
+          </div>
+          <div class="reply-contents--btns"
+          th:if="${item.replyHidden != 0} and (${session.loggedUser == null ? true : session.loggedUser.userID == item.replyAuthID ? false : session.loggedUser.userNM == boardDto.postAuth ? false : true})">
           </div>
         </li>
       </ul>

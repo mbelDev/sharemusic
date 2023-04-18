@@ -36,19 +36,21 @@ public class ReplysServiceImpl implements ReplysService {
 
   //덧글의 덧글 복잡하다.
   public void putReplyReply(LoggedDto replyAuth, ReplysDto replysDto) {
-    int postNo = replyAuth.getPostNo();
-    int replyNo = replysDto.getReplyNo();
-    int step = replysDao.getReplyStep(replyNo) + 1;
-    int level = replysDao.getReplyLevel(replyNo) + 1;
+    //replysDto에는 replyCont와 replyGroup, replyHidden이 담겨온다
+    replysDto.setPostNo(replyAuth.getPostNo());
     replysDto.setReplyAuthID(replyAuth.getUserID());
     replysDto.setReplyAuthNM(replyAuth.getUserNM());
-    replysDto.setPostNo(postNo);
-    replysDto.setReplyGroup(replyNo);
+    int step;
+    int level = replysDao.getReplyLevel(replysDto);
+    replysDto.setReplyLevel(level + 1);
+    step = replysDao.getReplyNextStep(replysDto);
+    if (step == 0) {
+      step = replysDao.getReplyStep(replysDto);
+    }
     replysDto.setReplyStep(step);
-    replysDto.setReplyLevel(level);
-    log.info("this==={}", replysDto);
-    replysDao.putReply(replysDto);
     replysDao.setReplyStepOnePlus(replysDto);
+    replysDto.setReplyStep(step + 1);
+    replysDao.putReply(replysDto);
   }
 
   public void updateReply(ReplysDto replysDto) {

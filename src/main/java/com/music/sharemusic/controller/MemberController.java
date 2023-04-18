@@ -68,9 +68,14 @@ public class MemberController {
     Model model,
     @PathVariable String userID
   ) {
-    if (loggedUser(session) == null) {
-      return "redirect:/member/login";
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return "/member/login";
     }
+    if (loggedUser.getUserID().equals(userID)) {
+      return "redirect:/member/mypage";
+    }
+
     LoggedDto pageUser = new LoggedDto();
     pageUser.setUserID(userID);
     MemberDto memberDto = memberService.getMemberLogged(pageUser);
