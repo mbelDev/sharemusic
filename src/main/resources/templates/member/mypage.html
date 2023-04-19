@@ -14,9 +14,8 @@
         <div class="Area01-item--profile">
           <div class="Area01-item--profile-img topAndbut">
             <img th:src="@{/upload/}+${userInfo.userIconReal}">
-            <div class="fileArea">
-              <label class="btn btn-primary" for="file">이미지선택</label> 
-              <input type="file" id="file">
+            <div class="fileArea" th:if="${session.loggedUser.userID == userInfo.userID}">
+              <label class="btn btn-primary" for="file">프로필 사진 업데이트</label> 
             </div><!-- fileArea -->
           </div><!-- Area01-item--profile-img -->
           <div class="Area01-item--profile-form topAndbut">
@@ -68,7 +67,7 @@
             <div class="swiper mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listWritten}">
-                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
                     <div class="profile-list">
                       <div class="profile-list-txt">
                         <p th:text="${item.postAuth}"></p>
@@ -95,7 +94,7 @@
             <div class="swiper mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listRecent}">
-                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
                     <div class="profile-list">
                       <div class="profile-list-txt">
                         <p th:text="${item.postAuth}"></p>
@@ -122,7 +121,7 @@
             <div class="swiper mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listBookmark}">
-                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
                     <div class="profile-list">
                       <div class="profile-list-txt">
                         <p th:text="${item.postAuth}"></p>
@@ -149,7 +148,7 @@
             <div class="swiper mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listLiked}">
-                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
                     <div class="profile-list">
                       <div class="profile-list-txt">
                         <p th:text="${item.postAuth}"></p>
@@ -167,4 +166,27 @@
     </article><!-- mainContent-Area02 -->
     
   </section><!-- mypage-Area--section -->
+
+
+  <!-- 프로필 사진 업데이트 모달창 -->
+  <div id="deleteReplyModal" class="modal-wnd">
+    <div class="modal-wnd-item">
+      <div class="modal-content modal-profileUpdate">
+        <!-- 모달창 안에 여기 내용 작성 -->
+        <div class="modal-profileUpdate__view">
+          <img th:src="@{/upload/}+${userInfo.userIconReal}">
+          <label class="btn btn-primary" for="file">파일 선택</label>
+          <input type="file" id="file">
+          
+        </div>
+        <div class="modal-profileUpdate__btns">
+          <button id="deleteReplyConfirm">확인</button>
+          <button id="closeDeleteReply">취소</button>
+        </div>
+      </div>
+      <!-- ModalThis-content -->
+    </div>
+    <!-- write-modal--item -->
+  </div>
+
 </main>

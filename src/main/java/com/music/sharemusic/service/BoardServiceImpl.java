@@ -6,12 +6,14 @@ import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
 import java.util.HashMap;
 import java.util.List;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
+@Log4j2
 public class BoardServiceImpl implements BoardService {
 
   @Autowired
@@ -64,7 +66,7 @@ public class BoardServiceImpl implements BoardService {
     HashMap<String, Integer> hashMap = new HashMap<>();
     hashMap.put("postNo", postNo);
     hashMap.put("updateLike", updateLike);
-
+    log.info("Hash Map is THIS!!==={}", hashMap);
     return boardDao.updateLike(hashMap);
   }
 

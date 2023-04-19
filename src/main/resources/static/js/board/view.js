@@ -22,9 +22,6 @@ window.onload = function(){
   
 }
 
-function test(){
-  document.querySelector(".good-img").classList.toggle('liked');
-}
 
 
 

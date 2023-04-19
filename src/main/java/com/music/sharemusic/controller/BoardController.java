@@ -5,6 +5,7 @@ import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.ReplyReplyDto;
 import com.music.sharemusic.dto.ReplysDto;
+import com.music.sharemusic.dto.SendDataDto;
 import com.music.sharemusic.service.BoardService;
 import com.music.sharemusic.service.MemberService;
 import com.music.sharemusic.service.MemberServiceImpl;
@@ -121,18 +122,16 @@ public class BoardController {
   }
 
   @PostMapping("/updateLike")
-  public ResponseEntity<Object> updateLike(BoardDto boardDto) {
-    int updateLike = 1; /////////////// history
-
-    int result = boardService.updateLike(updateLike, boardDto.getPostNo());
+  public ResponseEntity<Object> updateLike(SendDataDto data) {
+    int updateLike = data.getLiked();
+    int postNo = data.getPostNo();
+    int result = boardService.updateLike(updateLike, postNo);
 
     Map<String, Integer> resultMap = new HashMap<>();
     resultMap.put("result", result);
 
     if (result > 0) {
-      int postLike = boardService
-        .getPostOne(boardDto.getPostNo())
-        .getPostLike();
+      int postLike = boardService.getPostOne(postNo).getPostLike();
       resultMap.put("postLike", postLike);
       return ResponseEntity.status(HttpStatus.OK).body(resultMap);
     } else {
@@ -140,7 +139,15 @@ public class BoardController {
     }
   }
 
-  //덧글작성 권인호
+  //좋아요 리로드 #권인호
+  @PostMapping("/getLike")
+  @ResponseBody
+  public int getLike(int postNo) {
+    int result = boardService.getPostOne(postNo).getPostLike();
+    return result;
+  }
+
+  //덧글작성 #권인호
   @PostMapping("/reply")
   public String writeReply(
     ReplysDto replysDto,
@@ -148,7 +155,7 @@ public class BoardController {
     HttpSession session
   ) {
     if (session.getAttribute("loggedUser") == null) {
-      return "redirect:/member/login";
+      return "<script>alert('로그인 해 주세용 여기에 당신 이름 석 자만 적어주세용.');location.href='/member/login';</script>";
     } else {
       LoggedDto replyAuth = (LoggedDto) session.getAttribute("loggedUser");
       int postNo = replyAuth.getPostNo();
@@ -169,7 +176,7 @@ public class BoardController {
     HttpSession session
   ) {
     if (session.getAttribute("loggedUser") == null) {
-      return "redirect:/member/login";
+      return "로그인 정보가 없습니다";
     } else {
       LoggedDto replysAuth = (LoggedDto) session.getAttribute("loggedUser");
       log.info("reply==={}", replysDto);
@@ -192,7 +199,7 @@ public class BoardController {
     HttpSession session
   ) {
     if (session.getAttribute("loggedUser") == null) {
-      return "redirect:/member/login";
+      return "로그인 정보가 없습니다";
     }
     LoggedDto replysAuth = (LoggedDto) session.getAttribute("loggedUser");
     int postNo = replysAuth.getPostNo();

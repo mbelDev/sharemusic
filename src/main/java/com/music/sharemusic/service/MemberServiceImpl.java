@@ -174,20 +174,34 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
+  //좋아요 업데이트 << History, Board >>
   public int updateLike(SendDataDto data) {
     int result = historyDao.getLiked(data);
     //현재 liked 상태를 받아옴
+
     data.setLiked(result);
+    int postNo = data.getPostNo();
+    int liked = data.getLiked();
     historyDao.updateHistoryLike(data);
     //liked를 업데이트 함
+
+    HashMap<String, Integer> hashMap = new HashMap<>();
+    hashMap.put("postNo", postNo);
+    hashMap.put("updateLike", liked == 1 ? -1 : 1);
+    boardDao.updateLike(hashMap);
+    //board에다 like를 업데이트 함
+
     result = historyDao.getLiked(data);
     //업데이트 이후 liked 상태를 받아서 리턴함.
+
     return result;
   }
 
   public int updateBookmark(SendDataDto data) {
     //userID postNo bookmark 필요
-    int result = historyDao.updateHistoryBookmark(data);
+    data.setBookmark(historyDao.getBookmark(data));
+    historyDao.updateHistoryBookmark(data);
+    int result = historyDao.getBookmark(data);
     return result;
   }
 

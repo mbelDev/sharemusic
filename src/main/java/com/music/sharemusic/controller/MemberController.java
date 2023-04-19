@@ -257,21 +257,36 @@ public class MemberController {
 
   @PostMapping("/like")
   @ResponseBody
-  public int setLike(SendDataDto data) {
+  public int setLike(HttpSession session, SendDataDto data) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return -1;
+    }
+    data.setUserID(loggedUser.getUserID());
     int update = memberService.updateLike(data);
     return update;
   }
 
   @PostMapping("/bookmark")
   @ResponseBody
-  public int setBookmark(SendDataDto data) {
+  public int setBookmark(HttpSession session, SendDataDto data) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return -1;
+    }
+    data.setUserID(loggedUser.getUserID());
     int result = memberService.updateBookmark(data);
     return result;
   }
 
   @PostMapping("/follow")
   @ResponseBody
-  public int setfollow(SendDataDto data) {
+  public int setfollow(HttpSession session, SendDataDto data) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return -1;
+    }
+    data.setUserID(loggedUser.getUserID());
     int result = memberService.updateFollow(data);
     return result;
   }

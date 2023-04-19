@@ -7,6 +7,8 @@
 >
 <main id="mainPage-Area" class="" layout:fragment="contents">
   <section class="boardView">
+<!--------------------------------------------------[             본문 표시 창            ]-------------------------------------------------------------------------->
+<!--------------------------------------------------[            boardView-Area          ]-------------------------------------------------------------------------->
     <article class="boardView-Area">
       <div class="boardView-Area-title topAndbut">
         <h1>VIDEO</h1>
@@ -37,7 +39,7 @@
           </div><!-- title -->
           <div class="like">
             <div class="like-good">
-              <img class="good-img" src="/images/good.svg" onclick="test();postGood();"/>
+              <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}" data-liked=""/>          <!--  <<<<<<<<<<<<<<  좋아요 버튼     -->
               <span th:text="${boardDto.postLike}" class="postLike">0</span>
             </div><!-- like-good -->
             <div class="like-btn">
@@ -50,7 +52,8 @@
       </div><!-- boardView-Video -->
     </article><!-- boardView-Area -->
 
-
+<!--------------------------------------------------[           덧글 입 출력 창           ]-------------------------------------------------------------------------->
+<!--------------------------------------------------[        board-view--replyBox        ]-------------------------------------------------------------------------->
     <article class="board-view--replyBox">
       <ul id="reply-container" th:if="${replysList} != null">
         <li th:Each="item:${replysList}" class="reply">
@@ -108,6 +111,11 @@
   </section><!-- boardView -->
   <!-- board-view--subPage -->
 
+
+
+  
+<!--------------------------------------------------[               모달 영역             ]-------------------------------------------------------------------------->
+
   <section> <!-- 모달 섹션 -->>
     <!-- 삭제 모달창 -->
     <div id="deleteModal" class="modal-wnd">
@@ -163,91 +171,18 @@
       <!-- write-modal--item -->
     </div>
   </section>
+
+  
+<!--------------------------------------------------[            자바 스크립트 영역             ]-------------------------------------------------------------------------->
   
   <script src="/js/board/replys.js"></script>
+  <script src="/js/board/view.js"></script>
   <script defer>
-    addReplyEvent();
-    addDeleteReplyEvent();
-    function addDeleteReplyEvent() {
-      const deleteReplyBtns = document.querySelectorAll("#deleteReplyBtn");
-      deleteReplyBtns.forEach((item)=>{
-        item.addEventListener("click",(e)=>{
-          const target = document.querySelector("#deleteReplyConfirm");
-          const replyNo = e.target.dataset.replyno;
-          target.dataset.replyno = replyNo;
-          $("#deleteReplyModal").addClass("modal-open");
-        })
-      })
-
-    }
-    
-    $("#deleteReplyConfirm").click((e)=>{
-      console.log(e.target.dataset.replyno);
-      $.ajax({
-          url:"/board/reply/delete",
-          type:"POST",
-          data:{
-            replyNo:e.target.dataset.replyno
-          },
-          success:function(reponse){
-            console.log("삭제 완료");
-            
-            $(deleteReplyModal).removeClass("modal-open");
-            
-          },
-          error:function(err){
-            console.log(err);
-            alert("로그인 해 주세요.");
-          }
-      })
-      .done(function( fragment ){
-          $("#reply-container").replaceWith(fragment);
-          alert("삭제되었습니다.");
-          addDeleteReplyEvent();
-      });
-    })
-
-      $(".btn-reply").click(()=>{
-        $.ajax({
-          url: "/board/reply",
-          type:"POST",
-          data:{
-          replyCont:$(".replyCont").val(),
-          replyHidden:$(".check-hidden").is(":checked")==true ? 1 : 0,
-          replyGroup:0,
-          replyLevel:0,
-          replyStep:0
-        },
-        success: function(response){
-          console.log(response);
-          alert("덧글을 작성했습니다!");
-        },
-        error:function(err){
-          console.log(err);
-          alert("로그인 해 주세요.");
-        }
-      })
-      .done(function( fragment ){
-          $("#reply-container").replaceWith(fragment);
-          addDeleteReplyEvent();
-      });
-    })
-
-      function like() {
-        $.ajax({
-          url: "member/like",
-          type: "POST",
-          data: {},
-          success: function (response) {
-            console.log(response);
-            if (response.result) {
-            }
-          },
-          error: function (err) {
-            console.log(err);
-          },
-        });
-      }
+    addReplyEvent(); // 덧글 입력 버튼 클래스명 btn-reply 고정
+    addReplyReplyEvent(); // 덧글의 덧글 입력 버튼 클래스명 replyReplyBtn 고정
+    addDeleteReplyEvent(); //덧글 삭제 버튼 아이디 deleteReplyBtn 고정
+    modalReplyDelete(); // 덧글 삭제 확인 모달 확인 버튼 아이디 deleteReplyConfirm 고정
+     
     </script>
     <script>
       getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
@@ -305,6 +240,56 @@
     </script>
     <script th:inline="javascript">
 
+
+
+      //좋아요 History 연동 함수 #권인호 작성
+      function updateLike(item){
+        const postNo = $(item).data('postno');
+        
+        $.ajax({
+          url:"/member/like",
+          type:"POST",
+          data:{
+            postNo: postNo
+          },
+          success:function(response){
+            switch(response){
+              case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용") 
+                break;
+              case 0 : alert("좋았었습니다!!")
+                break;
+              case 1 : alert("좋아요!")
+                break;
+            }
+          },
+          error:function(err){
+            console.log(err);
+            alert("로그인 정보가 업써요. 로그인 해 주셰용. 여기다 당신 이름 석 자만 적어쥬셰용.");
+          }
+        })
+        .done(()=>{
+          reloadData(postNo);
+        })
+      }
+
+      //좋아요 완료 후 숫자 변경 #권인호
+      function reloadData(_postNo){
+        $.ajax({
+          url:"/board/getLike",
+          type:"POST",
+          data:{
+            postNo: _postNo
+          },
+          success:function(response){
+            $(".postLike").text(response);
+          },
+          error:function(err){
+            console.log(err);
+            alert("뭔가 심상치않은 일이 생긴거야.");
+            location.href="redirect:/uri";
+          }
+        })
+      }
 
       /*<![CDATA[*/
       const postNo = [[${boardDto.postNo}]];
