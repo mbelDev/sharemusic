@@ -11,21 +11,26 @@
         <h1 class="topAndbut">회원정보</h1>
       </div><!-- mainConstent-Area-title -->
       <div class="mainContent-Area01-item">
-        <div class="Area01-item--profile">
+        <div class="Area01-item--profile" id="userInfo">
           <div class="Area01-item--profile-img topAndbut">
             <img th:src="@{/upload/}+${userInfo.userIconReal}">
             <div class="fileArea" th:if="${session.loggedUser.userID == userInfo.userID}">
-              <label class="btn btn-primary" for="file">프로필 사진 업데이트</label> 
+              <label class="btn btn-primary" id="profile-Btn" >프로필 사진 업데이트</label> 
             </div><!-- fileArea -->
           </div><!-- Area01-item--profile-img -->
           <div class="Area01-item--profile-form topAndbut">
             <div class="formArea">
               <span>닉네임</span>
-              <span th:text="${userInfo.userNM}"><input type="text"></span>
+              <span id="originalProfile-userNM" th:text="${userInfo.userNM}"></span>
+              <form id="updateProfile-userNM" class="hidden" th:if="${loggedUser.userID == userInfo.userID}">
+                <input type="text" name="userNM" th:placeholder="${loggedUser.userNM}">
+                <label calss="btn btn-primary" id="profile-userNM" onclick="updateUserProfile();">수정 완료</label>
+                <label calss="btn btn-secondary" id="profile-cancel" onclick="closeInputNM();">취소</label>
+              </form>
               <!-- <span>
                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
               </span> -->
-              <span th:if="${loggedUser.userID == userInfo.userID}"><button class="btn btn-primary">수정</button></span>
+              <span th:if="${loggedUser.userID == userInfo.userID}" id="profile-modify"><button class="btn btn-primary" onclick="openInputNM();">수정</button></span>
             </div><!-- formArea -->
             <div class="formArea">
               <span>아이디</span>
@@ -169,19 +174,30 @@
 
 
   <!-- 프로필 사진 업데이트 모달창 -->
-  <div id="deleteReplyModal" class="modal-wnd">
+  <div id="profileUpdateModal" class="modal-wnd">
     <div class="modal-wnd-item">
       <div class="modal-content modal-profileUpdate">
         <!-- 모달창 안에 여기 내용 작성 -->
         <div class="modal-profileUpdate__view">
-          <img th:src="@{/upload/}+${userInfo.userIconReal}">
-          <label class="btn btn-primary" for="file">파일 선택</label>
-          <input type="file" id="file">
+          <p id="previewIcon"><img th:src="@{/upload/}+${userInfo.userIconReal}"></p>
+          
+          <label class="btn btn-primary btn-profile" for="formFileMultiple">파일 선택</label>
+          <form id="updateProfile-uploadFile">
+            <input
+            type="file"
+            class="userIconFile"
+            id="formFileMultiple"
+            style="display:none;"
+            name="userIconFile"
+            onchange="setIcon(event);"
+                    />
+          </form>
+          
           
         </div>
         <div class="modal-profileUpdate__btns">
-          <button id="deleteReplyConfirm">확인</button>
-          <button id="closeDeleteReply">취소</button>
+          <button id="updateProfileConfirm" onclick="updateProfile();">확인</button>
+          <button id="profileUpdateModal-close">취소</button>
         </div>
       </div>
       <!-- ModalThis-content -->
@@ -189,4 +205,57 @@
     <!-- write-modal--item -->
   </div>
 
+  <script src="/js/modal.js"></script>
+  <script>
+    getModal($("#profile-Btn"),$("#profileUpdateModal"),$("#profileUpdateModal-close"));
+
+
+    function setIcon(event) {
+      var reader = new FileReader();
+
+      reader.onload = function (event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        img.setAttribute("style", "width:150px; height:150px;");
+        document.querySelector("#previewIcon").appendChild(img);
+        //appendChild말고 replace방법을 찾아보자.
+      };
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function updateProfile(){
+      const file = $("#updateProfile-uploadFile")[0];
+      const sendData = new FormData(file);
+      $.ajax({
+        url:"/member/update",
+        type:"POST",
+        contentType:false,
+        processData:false,
+        data:sendData,
+        success:function(response){
+          console.log(response);
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+      .done((fragment)=>{
+        $("#profileUpdateModal").removeClass("modal-open");
+        $("#userinfo").replaceWith(fragment);
+
+      })
+    }
+
+    function openInputNM(){
+      $("#updateProfile-userNM").removeClass("hidden");
+      $("#originalProfile-userNM").addClass("hidden");
+      $("#profile-modify").addClass("hidden");
+    }
+    function closeInputNM(){
+      $("#updateProfile-userNM").addClass("hidden");
+      $("#originalProfile-userNM").removeClass("hidden");
+      $("#profile-modify").removeClass("hidden");
+    }
+  </script>
 </main>

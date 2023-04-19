@@ -41,6 +41,7 @@ public class MemberServiceImpl implements MemberService {
   @Value("${file.path}")
   private String uploadFolder;
 
+  //회원가입
   public void putMember(MemberDto memberDto) {
     log.info("=========upload========");
     MultipartFile uploadFile = memberDto.getUserIconFile();
@@ -51,12 +52,8 @@ public class MemberServiceImpl implements MemberService {
       Path imgFilePath = Paths.get(uploadFolder + userIconReal); // C:\tempStorage
       memberDto.setUserIcon(userIconPath);
       memberDto.setUserIconReal(userIconReal);
-      //저장되는 경로
-      try {
-        Files.write(imgFilePath, uploadFile.getBytes());
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+      //파일 저장
+      fileUpload(uploadFile, imgFilePath);
     } else {
       String userIcon = "sampleprofile.jpg";
       String userIconReal = "sampleprofile.jpg";
@@ -72,6 +69,16 @@ public class MemberServiceImpl implements MemberService {
     }
   }
 
+  //파일 업로드
+  public void fileUpload(MultipartFile uploadFile, Path FilePath) {
+    try {
+      Files.write(FilePath, uploadFile.getBytes());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  //오류 검증 Validate
   @Override
   public Map<String, String> validateHandler(Errors errors) {
     Map<String, String> validateResult = new HashMap<>();
@@ -84,6 +91,7 @@ public class MemberServiceImpl implements MemberService {
     return validateResult;
   }
 
+  //뭐 할때 쓰던 메소드더라???
   public void dependency(List<HistoryDto> list) {
     for (HistoryDto item : list) {
       int postNo = item.getPostNo();
@@ -97,6 +105,7 @@ public class MemberServiceImpl implements MemberService {
     }
   }
 
+  //중복 아이디 확인 메소드
   public int checkIDtest(String userID) {
     int result = memberDao.checkID(userID);
     return result;
@@ -116,6 +125,7 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
+  //로그인 메소드
   public LoggedDto login(MemberDto memberDto) {
     LoggedDto result = null;
     String userID = memberDto.getUserID();
@@ -130,6 +140,15 @@ public class MemberServiceImpl implements MemberService {
     }
     log.info("who?==={}", memberDto);
     log.info("login?==={}", result);
+    return result;
+  }
+
+  //로그인 한 유저 정보
+  public MemberDto getMemberLogged(LoggedDto loggedDto) {
+    String userID = loggedDto.getUserID();
+    MemberDto result = getMemberOne(userID);
+    loggedDto.setUserDate(result.getUserDate());
+    loggedDto.setUserNM(result.getUserNM());
     return result;
   }
 
@@ -217,15 +236,6 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
-  //로그인 한 유저 정보
-  public MemberDto getMemberLogged(LoggedDto loggedDto) {
-    String userID = loggedDto.getUserID();
-    MemberDto result = getMemberOne(userID);
-    loggedDto.setUserDate(result.getUserDate());
-    loggedDto.setUserNM(result.getUserNM());
-    return result;
-  }
-
   //userInfo 보는 메소드
   public MemberInfoDto getMemberInfo(String userID) {
     MemberInfoDto result = new MemberInfoDto(); //return할 member의 Dto
@@ -263,6 +273,23 @@ public class MemberServiceImpl implements MemberService {
 
   //회원정보 수정
   public void updateMember(MemberDto memberDto) {
+    MultipartFile uploadFile = memberDto.getUserIconFile();
+    if (uploadFile.getOriginalFilename() != "") {
+      UUID uuid = UUID.randomUUID();
+      String userIconPath = uploadFile.getOriginalFilename();
+      String userIconReal = uuid + "_" + userIconPath;
+      Path imgFilePath = Paths.get(uploadFolder + userIconReal); // C:\tempStorage
+      memberDto.setUserIcon(userIconPath);
+      memberDto.setUserIconReal(userIconReal);
+      //파일 저장
+      fileUpload(uploadFile, imgFilePath);
+    } else {
+      String userIcon = "sampleprofile.jpg";
+      String userIconReal = "sampleprofile.jpg";
+      memberDto.setUserIcon(userIcon);
+      memberDto.setUserIconReal(userIconReal);
+    }
+
     memberDao.updateMember(memberDto);
   }
 
