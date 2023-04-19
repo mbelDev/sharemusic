@@ -55,117 +55,138 @@
           </div><!-- Area-item--profile -->
         </div><!-- mainConstent-Area-item -->
       </article><!-- mainConstent-Area01 -->
-      <div class="line-one"></div>
-      <article class="mainContent-Area02">
-        <div class="mainContent-Area02-title topAndbut">
-          <h1>작성 글</h1>
-          <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
-        </div><!-- mainConstent-Area02-title -->
-        <div class="mainContent-Area02-item">
-          <div class="Area02-item--profile">
-            <div class="Area02-item--profile-list topAndbut">
-              <div class="mySwiper profileMySwiper">
-                <ul class="swiper-wrapper">
-                  <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listWritten}">
-                    <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
-                      <div class="profile-list">
-                        <div class="profile-list-txt">
-                          <p th:text="${item.postAuth}"></p>
-                          <p th:text="${item.postTitle}"></p>
-                          <p th:text="${item.postDate}"></p>
-                        </div>
-                      </div><!-- profile-list -->
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div><!-- Area02-item--profile-img -->
-          </div><!-- Area02-item--profile -->
-        </div><!-- mainConstent-Area02-item -->
-      </article><!-- mainContent-Area02 -->
-      <article class="mainContent-Area02">
-        <div class="mainContent-Area02-title topAndbut">
-          <h1>작성 글</h1>
-          <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
-        </div><!-- mainConstent-Area02-title -->
-        <div class="mainContent-Area02-item">
-          <div class="Area02-item--profile">
-            <div class="Area02-item--profile-list topAndbut">
-              <div class="mySwiper profileMySwiper">
-                <ul class="swiper-wrapper">
-                  <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listRecent}">
-                    <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
-                      <div class="profile-list">
-                        <div class="profile-list-txt">
-                          <p th:text="${item.postAuth}"></p>
-                          <p th:text="${item.postTitle}"></p>
-                          <p th:text="${item.readDate}"></p>
-                        </div>
-                      </div><!-- profile-list -->
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div><!-- Area02-item--profile-img -->
-          </div><!-- Area02-item--profile -->
-        </div><!-- mainConstent-Area02-item -->
-      </article><!-- mainContent-Area02 -->
-      <article class="mainContent-Area02">
-        <div class="mainContent-Area02-title topAndbut">
-          <h1>작성 글</h1>
-          <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
-        </div><!-- mainConstent-Area02-title -->
-        <div class="mainContent-Area02-item">
-          <div class="Area02-item--profile">
-            <div class="Area02-item--profile-list topAndbut">
-              <div class="mySwiper profileMySwiper">
-                <ul class="swiper-wrapper">
-                  <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listBookmark}">
-                    <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
-                      <div class="profile-list">
-                        <div class="profile-list-txt">
-                          <p th:text="${item.postAuth}"></p>
-                          <p th:text="${item.postTitle}"></p>
-                          <p th:text="${item.readDate}"></p>
-                        </div>
-                      </div><!-- profile-list -->
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div><!-- Area02-item--profile-img -->
-          </div><!-- Area02-item--profile -->
-        </div><!-- mainConstent-Area02-item -->
-      </article><!-- mainContent-Area02 -->
-      <article class="mainContent-Area02">
-        <div class="mainContent-Area02-title topAndbut">
-          <h1>작성 글</h1>
-          <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
-        </div><!-- mainConstent-Area02-title -->
-        <div class="mainContent-Area02-item">
-          <div class="Area02-item--profile">
-            <div class="Area02-item--profile-list topAndbut">
-              <div class="mySwiper profileMySwiper">
-                <ul class="swiper-wrapper">
-                  <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listLiked}">
-                    <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
-                      <div class="profile-list">
-                        <div class="profile-list-txt">
-                          <p th:text="${item.postAuth}"></p>
-                          <p th:text="${item.postTitle}"></p>
-                          <p th:text="${item.readDate}"></p>
-                        </div>
-                      </div><!-- profile-list -->
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div><!-- Area02-item--profile-img -->
-          </div><!-- Area02-item--profile -->
-        </div><!-- mainConstent-Area02-item -->
-      </article><!-- mainContent-Area02 -->
-    </div>
-    
+    <div class="line-one"></div>
+    <article class="mainContent-Area02">
+      <div class="mainContent-Area02-title topAndbut">
+        <h1>작성 글</h1>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
+      </div><!-- mainConstent-Area02-title -->
+      <div class="mainContent-Area02-item">
+        <div class="Area02-item--profile">
+          <div class="Area02-item--profile-list topAndbut">
+            <div class="swiper mySwiper profileMySwiper">
+              <ul class="swiper-wrapper">
+                <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listWritten}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                    <div class="profile-list">
+                      <div class="profile-list-txt">
+                        <p th:text="${item.postAuth}"></p>
+                        <p th:text="${item.postTitle}"></p>
+                        <p th:text="${item.postDate}"></p>
+                      </div>
+                    </div><!-- profile-list -->
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- Area02-item--profile-img -->
+        </div><!-- Area02-item--profile -->
+      </div><!-- mainConstent-Area02-item -->
+    </article><!-- mainContent-Area02 -->
+    <article class="mainContent-Area02">
+      <div class="mainContent-Area02-title topAndbut">
+        <h1>최근 감상한 곡</h1>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/list?category=recent}">더 보기</a></button>
+      </div><!-- mainConstent-Area02-title -->
+      <div class="mainContent-Area02-item">
+        <div class="Area02-item--profile">
+          <div class="Area02-item--profile-list topAndbut">
+            <div class="swiper mySwiper profileMySwiper">
+              <ul class="swiper-wrapper">
+                <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listRecent}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                    <div class="profile-list">
+                      <div class="profile-list-txt">
+                        <p th:text="${item.postAuth}"></p>
+                        <p th:text="${item.postTitle}"></p>
+                        <p th:text="${item.readDate}"></p>
+                      </div>
+                    </div><!-- profile-list -->
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- Area02-item--profile-img -->
+        </div><!-- Area02-item--profile -->
+      </div><!-- mainConstent-Area02-item -->
+    </article><!-- mainContent-Area02 -->
+    <article class="mainContent-Area02">
+      <div class="mainContent-Area02-title topAndbut">
+        <h1>북마크 한 곡</h1>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/list?category=bookmark}">더 보기</a></button>
+      </div><!-- mainConstent-Area02-title -->
+      <div class="mainContent-Area02-item">
+        <div class="Area02-item--profile">
+          <div class="Area02-item--profile-list topAndbut">
+            <div class="swiper mySwiper profileMySwiper">
+              <ul class="swiper-wrapper">
+                <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listBookmark}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                    <div class="profile-list">
+                      <div class="profile-list-txt">
+                        <p th:text="${item.postAuth}"></p>
+                        <p th:text="${item.postTitle}"></p>
+                        <p th:text="${item.readDate}"></p>
+                      </div>
+                    </div><!-- profile-list -->
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- Area02-item--profile-img -->
+        </div><!-- Area02-item--profile -->
+      </div><!-- mainConstent-Area02-item -->
+    </article><!-- mainContent-Area02 -->
+    <article class="mainContent-Area02">
+      <div class="mainContent-Area02-title topAndbut">
+        <h1>좋아요를 표시한 곡</h1>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/list?category=liked}">더 보기</a></button>
+      </div><!-- mainConstent-Area02-title -->
+      <div class="mainContent-Area02-item">
+        <div class="Area02-item--profile">
+          <div class="Area02-item--profile-list topAndbut">
+            <div class="swiper mySwiper profileMySwiper">
+              <ul class="swiper-wrapper">
+                <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listLiked}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                    <div class="profile-list">
+                      <div class="profile-list-txt">
+                        <p th:text="${item.postAuth}"></p>
+                        <p th:text="${item.postTitle}"></p>
+                        <p th:text="${item.readDate}"></p>
+                      </div>
+                    </div><!-- profile-list -->
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- Area02-item--profile-img -->
+        </div><!-- Area02-item--profile -->
+      </div><!-- mainConstent-Area02-item -->
+    </article><!-- mainContent-Area02 -->
     
   </section><!-- mypage-Area--section -->
+
+
+  <!-- 프로필 사진 업데이트 모달창 -->
+  <div id="deleteReplyModal" class="modal-wnd">
+    <div class="modal-wnd-item">
+      <div class="modal-content modal-profileUpdate">
+        <!-- 모달창 안에 여기 내용 작성 -->
+        <div class="modal-profileUpdate__view">
+          <img th:src="@{/upload/}+${userInfo.userIconReal}">
+          <label class="btn btn-primary" for="file">파일 선택</label>
+          <input type="file" id="file">
+          
+        </div>
+        <div class="modal-profileUpdate__btns">
+          <button id="deleteReplyConfirm">확인</button>
+          <button id="closeDeleteReply">취소</button>
+        </div>
+      </div>
+      <!-- ModalThis-content -->
+    </div>
+    <!-- write-modal--item -->
+  </div>
+
 </main>

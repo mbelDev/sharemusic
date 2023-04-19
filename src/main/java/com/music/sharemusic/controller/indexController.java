@@ -39,7 +39,9 @@ public class indexController {
     return "/intro";
   }
 
-  @GetMapping(value = { "/mainPage", "mainPage/{genre}", "mainPage/{genre}/{emote}" })
+  @GetMapping(
+    value = { "/mainPage", "mainPage/{genre}", "mainPage/{genre}/{emote}" }
+  )
   //Value Path 입니다. genre를 받아서 해당 장르만 뿌려주세요.
   public String indexGenre(
     HttpSession session,
@@ -59,12 +61,29 @@ public class indexController {
     model.addAttribute("rankList", rankList);
 
     // 게시판 글
-    List<BoardDto> postList = boardService.getPostAll(genre, emote, searchTxt, sort);
+    List<BoardDto> postList = boardService.getPostAll(
+      genre,
+      emote,
+      searchTxt,
+      sort
+    );
     model.addAttribute("postList", postList);
 
     // 검색 기능 searchTxt
     model.addAttribute("searchTxt", searchTxt);
     return "/mainPage/mainPage";
+  }
+
+  // 월 랭킹
+  @GetMapping("/monthRanking")
+  public String monthRanking() {
+    return "/mainPage/monthRanking";
+  }
+
+  // 주간 랭킹
+  @GetMapping("/weeklyRanking")
+  public String weeklyRanking() {
+    return "/mainPage/weeklyRanking";
   }
 
   //테스트용

@@ -257,21 +257,36 @@ public class MemberController {
 
   @PostMapping("/like")
   @ResponseBody
-  public int setLike(SendDataDto data) {
+  public int setLike(HttpSession session, SendDataDto data) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return -1;
+    }
+    data.setUserID(loggedUser.getUserID());
     int update = memberService.updateLike(data);
     return update;
   }
 
   @PostMapping("/bookmark")
   @ResponseBody
-  public int setBookmark(SendDataDto data) {
+  public int setBookmark(HttpSession session, SendDataDto data) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return -1;
+    }
+    data.setUserID(loggedUser.getUserID());
     int result = memberService.updateBookmark(data);
     return result;
   }
 
   @PostMapping("/follow")
   @ResponseBody
-  public int setfollow(SendDataDto data) {
+  public int setfollow(HttpSession session, SendDataDto data) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return -1;
+    }
+    data.setUserID(loggedUser.getUserID());
     int result = memberService.updateFollow(data);
     return result;
   }
@@ -293,16 +308,5 @@ public class MemberController {
     Map<String, String> result = memberService.checkID(userID);
     log.info("now, I got ID === {}", result);
     return result;
-  }
-
-  // 월 랭킹
-  @GetMapping("/monthRanking")
-  public String monthRanking() {
-    return "/member/monthRanking";
-  }
-  // 주간 랭킹
-  @GetMapping("/weeklyRanking")
-  public String weeklyRanking() {
-    return "/member/weeklyRanking";
   }
 }
