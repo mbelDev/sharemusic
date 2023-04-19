@@ -16,8 +16,7 @@ input {
   height: 100%;
   filter: blur(30px);
   -webkit-filter: blur(30px);
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   z-index: -1;
   position: fixed;
   top: 0;

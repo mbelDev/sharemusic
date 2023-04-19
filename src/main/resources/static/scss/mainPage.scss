@@ -1,12 +1,11 @@
 
+.main-constent--itmes-center {
+  padding: 50px;
+}
 .main-constent--itmes {
   color: #fff;
   font-family: 'HelveticaBlack';
   width: 100%;
-  outline: 1px solid red;
-  &-center {
-    padding: 50px;
-  }
   .main-constent--ranking {
     
     .ranking-area {
@@ -187,7 +186,7 @@
     height: 100%;
   }
 }//@media screen and (max-width: 1060px)
-@media screen and (max-width: 850px){
+@media screen and (max-width: 855px){
   .main-constent--itmes .main-constent--listItem .getList-ItemBox ul li a img {
     width: 345px;
     height: auto;
@@ -199,11 +198,24 @@
     background-color: #0e0e0e;
   }
   .main-constent--itmes-center {
-    padding: auto;
-    padding: 100px 50px 50px 50px;
+    padding: auto !important;
+    padding: 120px 0 50px 0 !important;
+  }
+  .topAndbut {
+    margin: 30px 0 25px 10px;
+  }
+  .main-constent--itmes .main-constent--listItem .getList-ItemBox ul {
+    justify-content: center;
+  }
+  .main-constent--itmes .main-constent--listItem .listItem-nav .update-data ul {
+    display: flex;
+    justify-content: center;
   }
   .main-constent--itmes .main-constent--listItem .getList-ItemBox ul li {
     margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 30px;
   }
 }//@media screen and (max-width: 850px)
 @media screen and (max-width: 800px){
@@ -255,3 +267,29 @@
     display: none;
   }
 }//@media screen and (max-width: 600px)
+@media screen and (max-width: 500px){
+  .main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-title-num p img {
+    width: 60px;
+    transform: rotate(-10deg);
+    padding-left: 5px;
+  }
+  .ranking-box.topAndbut {
+    margin: 0 0 0 10px;
+  }
+}//@media screen and (max-width: 500px)
+@media screen and (max-width: 320px){
+  .main-constent--itmes .main-constent--listItem .getList-ItemBox ul li a img {
+    width: 86vw;
+    height: auto;
+  }
+  .main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a {
+    width: 87vw;
+  }
+  .media855-Area--search form {
+    display: none;
+  }
+  .ranking-box.topAndbut {
+    margin: 0 0 0 5px;
+  }
+  
+}//@media screen and (max-width: 320px)

@@ -3,6 +3,7 @@ body {
   font-family: "TheJamsil";
   color: #fff;
   font-weight: 200;
+  overflow-x: hidden;
 }
 
 p, ul {
@@ -145,6 +146,7 @@ h1 {
 }
 .flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--viewContents .view ul li {
   margin: 15px 0;
+  cursor: pointer;
 }
 .flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--viewContents .view ul li div {
   display: flex;
@@ -223,6 +225,19 @@ h1 {
   color: #cc0040;
   font-weight: bold;
 }
+.flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--viewContents .view02 li:nth-child(4) div:hover {
+  background-image: url("/images/navIcon08-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--viewContents .view02 li:nth-child(4) div:hover img {
+  opacity: 0;
+}
+.flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--viewContents .view02 li:nth-child(4) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
 .flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--viewContents .view03 li:nth-child(1) div:hover {
   background-image: url("/images/navIcon07-o.png");
   background-repeat: no-repeat;
@@ -262,6 +277,19 @@ h1 {
   color: #cc0040;
   font-weight: bold;
 }
+.flex-box #headerLayout-Area .headerLayout-Area--box .viewContents03 .view03 ul li:nth-child(2) div:hover {
+  background-image: url("/images/navIcon09-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.flex-box #headerLayout-Area .headerLayout-Area--box .viewContents03 .view03 ul li:nth-child(2) div:hover img {
+  opacity: 0;
+}
+.flex-box #headerLayout-Area .headerLayout-Area--box .viewContents03 .view03 ul li:nth-child(2) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
 .flex-box #mainPage-Area {
   width: 100%;
   height: 100%;
@@ -284,6 +312,9 @@ h1 {
   .flex-box #headerLayout-Area .media855 {
     display: block;
     height: 10vh;
+  }
+  .flex-box #mainPage-Area {
+    margin-left: auto;
   }
   .media855 {
     padding-top: 28px;

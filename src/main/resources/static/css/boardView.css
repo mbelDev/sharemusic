@@ -2,6 +2,11 @@
   margin: 4%;
   border-bottom: 1px solid;
 }
+.boardView-Area {
+  padding-bottom: 30px;
+  margin-bottom: 50px;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+}
 .boardView-Video iframe {
   width: 1280px;
   height: 720px;
@@ -13,17 +18,18 @@
 .boardView-Video--title .title {
   width: 50%;
 }
-.boardView-Video--title .title-name {
-  margin-bottom: 50px;
-}
 .boardView-Video--title .title-name p {
   font-size: 30px;
-  font-weight: 400;
+  font-weight: 300;
 }
 .boardView-Video--title .title-name a h1 {
   margin: 15px 0;
 }
+.boardView-Video--title .title-name h1 {
+  font-size: 35px;
+}
 .boardView-Video--title .title-Date {
+  outline: 1px solid red;
   margin: 10px 0;
 }
 .boardView-Video--title .title-btn {
@@ -62,7 +68,7 @@
 }
 .reply-contents {
   display: flex;
-  width: 80%;
+  flex-grow: 1;
   min-height: 30px;
 }
 .reply-contents--icon {
@@ -78,11 +84,12 @@
   display: inline-block;
 }
 .reply-contents--text {
-  width: 70%;
+  max-width: 900px;
 }
 .reply-contents--btns {
   position: relative;
   display: flex;
+  flex-grow: 0;
   justify-content: space-between;
   width: 100px;
   height: 100%;
@@ -95,6 +102,7 @@
   margin-left: 2px;
 }
 .reply-date {
+  flex-grow: 0;
   width: 15%;
   text-align: right;
 }
