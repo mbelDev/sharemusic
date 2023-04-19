@@ -68,26 +68,27 @@
                 <!-- th:src="@{/upload/}+${item.replyIcon}" -->
                 <img
                 src="/images/sampleprofile.jpg"
-                alt=""
-                style="width: 30px; height: 30px; border-radius: 5px"
-              />
-              <span th:text="${item.replyAuthNM}">홍길동</span>
-            </a>
+                  alt=""
+                  style="width: 30px; height: 30px; border-radius: 5px"
+                />
+                <span th:text="${item.replyAuthNM}">홍길동</span>
+              </a>
+            </div>
+            <div class="reply-contents--text">
+              <p th:if="${item.replyGroup!=0}" th:text="${item.replyGroup}+'덧글에게 답변'" style="color:#777;"></p>
+              <span th:text="${item.replyCont}">덧글 내용</span>
+            </div>
           </div>
-          <div class="reply--contents">
-            <span th:text="${item.replyCont}">덧글 내용</span>
+          <div class="reply-contents reply-hidden"
+           th:if="${item.replyHidden != 0} and (${session.loggedUser == null ? true : session.loggedUser.userID == item.replyAuthID ? false : session.loggedUser.userNM == boardDto.postAuth ? false : true})">
+            <div class="reply-contents--icon"></div>
+            <span class="reply-contents--text" >비공개 덧글입니다.</span>
           </div>
-        </div>
-        <div
-          class="reply-contents reply-hidden"
-          th:if="${item.replyHidden != 0} and (${session.loggedUser == null ? true : session.loggedUser.userID == item.replyAuthID ? false : session.loggedUser.userNM == boardDto.postAuth ? false : true})"
-        >
-          <div class="reply-contents--icon"></div>
-          <span class="reply-contents--text">비공개 덧글입니다.</span>
-        </div>
-        <div class="reply-date" th:text="${item.replyDate}">작성일자</div>
-        <div class="reply-contents--btns">
-
+          <div class="reply-date" th:text="${item.replyDate}">작성일자</div>
+          <div class="reply-contents--btns"
+          th:if="${item.replyHidden == 0}
+           or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
+           or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
             <span id="replyReplyBtn" class="replyReplyBtn" th:data-replyno="${item.replyNo}">답글</span>
             <th:block th:if="${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false}">
               
@@ -125,34 +126,47 @@
           <h3>정말로 삭제하시겠습니까?</h3>
           <button id="btnDeleteConfirm">확인</button>
           <button id="closeDelete">취소</button>
-          </div>
-          <!-- ModalThis-content -->
         </div>
-        <!-- write-modal--item -->
+        <!-- ModalThis-content -->
       </div>
+      <!-- write-modal--item -->
+    </div>
 
-      <!-- 공유 모달창 -->
-      <div id="shareModal" class="modal-wnd">
-        <div class="modal-wnd-item">
-          <button id="closeShareModal">닫기</button>
-          <div class="modal-content">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <div>
-              <input
-                type="text"
-                class="shareUrl"
-                th:value="'https://youtu.be/' + ${boardDto.postLink}"
-                readonly
-              />
-              <button onclick="copyUrl();">복사</button>
-              <button class="shareTwitter">트위터로 공유</button>
-              <button class="shareFacebook">페이스북으로 공유</button>
-              <button class="shareKakaoTalk">카카오톡으로 공유</button>
-            </div>
+    <!-- 공유 모달창 -->
+    <div id="shareModal" class="modal-wnd">
+      <div class="modal-wnd-item">
+        <button id="closeShareModal">닫기</button>
+        <div class="modal-content">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <div>
+            <input
+              type="text"
+              class="shareUrl"
+              th:value="'https://youtu.be/' + ${boardDto.postLink}"
+              readonly
+            />
+            <button onclick="copyUrl();">복사</button>
+            <button class="shareTwitter">트위터로 공유</button>
+            <button class="shareFacebook">페이스북으로 공유</button>
+            <button class="shareKakaoTalk">카카오톡으로 공유</button>
           </div>
-          <!-- ModalThis-content -->
         </div>
-        <!-- write-modal--item -->
+        <!-- ModalThis-content -->
+      </div>
+      <!-- write-modal--item -->
+    </div>
+    <!-- write-modal -->
+
+    <!-- 덧글 삭제 모달창 -->
+    <div id="deleteReplyModal" class="modal-wnd">
+      <div class="modal-wnd-item">
+        <div class="modal-content modal-ReplyDelete">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <h3>정말로 삭제하시겠습니까?</h3>
+          <button id="deleteReplyConfirm">확인</button>
+          <button id="closeDeleteReply">취소</button>
+        </div>
+        <!-- ModalThis-content -->
       </div>
       <!-- write-modal--item -->
     </div>
@@ -171,13 +185,9 @@
      
     </script>
     <script>
-      getModal($("#deleteModalBtn"), $("#deleteModal"), $("#closeDeleteModal"));
-      getModal($("#shareModalBtn"), $("#shareModal"), $("#closeShareModal"));
-      getModal(
-        $("#deleteReplyBtn"),
-        $("#deleteReplyModal"),
-        $("#closeDeleteReply")
-      );
+      getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
+      getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
+      getModal($("#deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
 
       // 복사 버튼 누르면 url 복사
       async function copyUrl() {
@@ -322,6 +332,7 @@
             }
           })
         })
+
       /*]]>*/
     </script>
   </main>
