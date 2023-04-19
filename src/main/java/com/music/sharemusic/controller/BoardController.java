@@ -11,23 +11,29 @@ import com.music.sharemusic.service.MemberService;
 import com.music.sharemusic.service.MemberServiceImpl;
 import com.music.sharemusic.service.ReplysService;
 import com.music.sharemusic.service.ReplysServiceImpl;
+
+import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @SessionAttributes("loggedUser")
@@ -55,7 +61,7 @@ public class BoardController {
   //세션을 만들고 세션과 모델에 LoggedDto loggedUser 를 담아주는 물건
 
   @GetMapping("/write")
-  public String write(HttpSession session) {
+  public String write(HttpSession session, Model model) {
     //로그인 정보를 받아온다
     //loggedUser 내부 정보 userID, userNM, userIcon
     if (loggedUser(session) == null) {
@@ -63,6 +69,7 @@ public class BoardController {
       return "redirect:/member/login";
       //로그인 페이지로 보낸다
     }
+    model.addAttribute("boardDto", new BoardDto());
     return "/board/write";
     //그렇지 않다면 작성페이지로
   }
@@ -99,7 +106,15 @@ public class BoardController {
   }
 
   @PostMapping("/write")
-  public String writeprogress(HttpSession session, BoardDto boardDto) {
+  public String writeprogress(HttpSession session,
+    @Valid @ModelAttribute("boardDto") BoardDto boardDto,
+    BindingResult bindingResult
+    ) {
+
+    if (bindingResult.hasErrors()) {
+      return "/board/write";
+    }
+
     LoggedDto loggedUser = loggedUser(session);
     boardDto.setPostAuth(loggedUser.getUserNM());
     boardService.putPost(boardDto);

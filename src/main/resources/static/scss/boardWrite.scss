@@ -12,12 +12,12 @@ main {
     .musicName {
       display: flex;
       input {
-      width: 22vw;
+        width: 22vw;
       }
-    }//.musicName
+    } //.musicName
     input {
       width: 22vw;
-      display: inline-block;  
+      display: inline-block;
     }
     button {
       background-color: #264d8b;
@@ -25,8 +25,10 @@ main {
     }
     .boardWrite-pag--item {
       margin-bottom: 30px;
+      #writePostGenre,
+      #writePostEmote {
+        cursor: pointer;
+      }
     }
-  }//.boardWrite-page--form
-}//.boardWrite-page
-
-
+  } //.boardWrite-page--form
+} //.boardWrite-page

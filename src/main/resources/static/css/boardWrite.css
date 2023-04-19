@@ -29,3 +29,7 @@ main {
 .boardWrite-page .boardWrite-page--form .boardWrite-pag--item {
   margin-bottom: 30px;
 }
+.boardWrite-page .boardWrite-page--form .boardWrite-pag--item #writePostGenre,
+.boardWrite-page .boardWrite-page--form .boardWrite-pag--item #writePostEmote {
+  cursor: pointer;
+}
