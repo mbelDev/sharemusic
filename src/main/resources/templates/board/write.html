@@ -17,8 +17,9 @@
                 type="text"
                 placeholder="곡 이름을 입력해주세요."
                 aria-label=".form-control-lg example"
-                name="postTitle"
+                th:field="*{postTitle}"
               />
+              <!-- error시 나타나는 메세지 -->
               <p
                 th:if="${#fields.hasErrors('postTitle')}"
                 th:errorclass="errorTxt"
@@ -34,8 +35,16 @@
                 type="text"
                 placeholder="가수 이름을 입력해주세요."
                 aria-label=".form-control-lg example"
-                name="postSinger"
+                th:field="*{postSinger}"
               />
+              <!-- error시 나타나는 메세지 -->
+              <p
+                th:if="${#fields.hasErrors('postSinger')}"
+                th:errorclass="errorTxt"
+                th:errors="*{postSinger}"
+              >
+                에러 메세지 출력
+              </p>
             </div>
           </div>
           <!-- musicName -->
@@ -48,10 +57,18 @@
               type="text"
               class="form-control"
               id="writePostGenre"
-              name="postGenre"
+              th:field="*{postGenre}"
               placeholder="장르를 선택해주세요."
               readonly
             />
+            <!-- error시 나타나는 메세지 -->
+            <p
+              th:if="${#fields.hasErrors('postGenre')}"
+              th:errorclass="errorTxt"
+              th:errors="*{postGenre}"
+            >
+              에러 메세지 출력
+            </p>
           </div>
           <span>감성</span>
           <div
@@ -62,10 +79,18 @@
               type="text"
               class="form-control"
               id="writePostEmote"
-              name="postEmote"
+              th:field="*{postEmote}"
               placeholder="감성을 선택해주세요."
               readonly
             />
+            <!-- error시 나타나는 메세지 -->
+            <p
+              th:if="${#fields.hasErrors('postEmote')}"
+              th:errorclass="errorTxt"
+              th:errors="*{postEmote}"
+            >
+              에러 메세지 출력
+            </p>
           </div>
           <div class="boardWrite-pag--item">
             <span>유튜브 링크</span>
@@ -74,8 +99,21 @@
               type="text"
               placeholder="유튜브 링크를 입력해주세요."
               aria-label=".form-control-lg example"
-              name="postLink"
+              th:field="*{postLink}"
             />
+            <!-- error시 나타나는 메세지 -->
+            <p
+              th:if="${#fields.hasErrors('postLink')}"
+              th:errorclass="errorTxt"
+              th:errors="*{postLink}"
+            >
+              에러 메세지 출력
+            </p>
+            <!-- error시 나타나는 메세지 -->
+            <p th:if="${linkCheck == 'error'} and *{postLink} != ''">
+              링크를 다시 확인해주세요
+            </p>
+            <input type="hidden" value="" class="linkCheck" name="linkCheck" />
           </div>
           <div class="boardWrite-pag--item">
             <span>내용작성</span>
@@ -84,8 +122,16 @@
               class="form-control"
               placeholder="설명 내용을 작성해주세요."
               id="floatingTextarea"
-              name="postCont"
+              th:field="*{postCont}"
             ></textarea>
+            <!-- error시 나타나는 메세지 -->
+            <p
+              th:if="${#fields.hasErrors('postCont')}"
+              th:errorclass="errorTxt"
+              th:errors="*{postCont}"
+            >
+              에러 메세지 출력
+            </p>
           </div>
           <div>
             <button type="submit" class="btn btnWriteConfirm">등록</button>

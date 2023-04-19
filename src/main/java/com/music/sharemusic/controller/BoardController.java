@@ -94,12 +94,25 @@ public class BoardController {
   @GetMapping("/modify")
   public String modify(int postNo, Model model) {
     BoardDto boardDto = boardService.getPostOne(postNo);
+    boardDto.setPostLink("https://youtu.be/" + boardDto.getPostLink());
     model.addAttribute("boardDto", boardDto);
     return "/board/modify";
   }
 
   @PostMapping("/modify")
-  public String modifyprogress(BoardDto boardDto) {
+  public String modifyprogress(@Valid @ModelAttribute("boardDto") BoardDto boardDto,
+    BindingResult bindingResult,
+    RedirectAttributes redirectAttributes,
+    @ModelAttribute("linkCheck") String linkCheck
+  ) {
+
+    if (bindingResult.hasErrors() || linkCheck.equals("error")) {
+      redirectAttributes.addFlashAttribute("linkCheck", linkCheck); 
+      redirectAttributes.addFlashAttribute("boardDto", boardDto);
+      return "/board/modify";
+    }
+
+    boardDto.setPostLink(linkCheck);
     boardService.updatePost(boardDto);
     return "redirect:/board/view?postNo=" + boardDto.getPostNo();
   }
@@ -107,15 +120,20 @@ public class BoardController {
   @PostMapping("/write")
   public String writeprogress(HttpSession session,
     @Valid @ModelAttribute("boardDto") BoardDto boardDto,
-    BindingResult bindingResult
+    BindingResult bindingResult,
+    RedirectAttributes redirectAttributes,
+    @ModelAttribute("linkCheck") String linkCheck
     ) {
 
-    if (bindingResult.hasErrors()) {
+    if (bindingResult.hasErrors() || linkCheck.equals("error")) {
+      redirectAttributes.addFlashAttribute("linkCheck", linkCheck);
+      redirectAttributes.addFlashAttribute("boardDto", boardDto);
       return "/board/write";
     }
 
     LoggedDto loggedUser = loggedUser(session);
     boardDto.setPostAuth(loggedUser.getUserNM());
+    boardDto.setPostLink(linkCheck);
     boardService.putPost(boardDto);
     return "redirect:/mainPage/";
   }
