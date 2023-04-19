@@ -33,14 +33,12 @@ public class BoardServiceImpl implements BoardService {
 
   @Override
   public List<BoardDto> getPostAll(
-    String genre,
-    String emote,
+    String category,
     String searchTxt,
     String sort
   ) {
     HashMap<String, String> hashMap = new HashMap<>();
-    hashMap.put("genre", genre);
-    hashMap.put("emote", emote);
+    hashMap.put("category", category);
     hashMap.put("searchTxt", searchTxt);
     hashMap.put("sort", sort);
 

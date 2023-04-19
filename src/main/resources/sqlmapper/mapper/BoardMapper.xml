@@ -27,17 +27,10 @@
     (LOWER(POSTCONT) LIKE '%' || #{searchTxt} || '%')
     )
   </if>
-  <if test = "genre != null">
-    <choose>
-      <when test = "genre != '{genre}'">
-        AND
-        (POSTGENRE = #{genre})
-      </when>
-      <when test = "emote != null">
-        AND
-        (POSTEMOTE = #{emote})
-      </when>
-      </choose>
+  <if test = "category != null">
+    AND 
+    (POSTGENRE = #{category}) OR
+    (POSTEMOTE = #{category})
   </if>
     ORDER BY ${sort} desc
 </select>

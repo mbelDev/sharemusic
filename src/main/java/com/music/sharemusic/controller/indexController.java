@@ -39,13 +39,41 @@ public class indexController {
     return "/intro";
   }
 
-  @GetMapping(value = { "/mainPage", "mainPage/{genre}", "mainPage/{genre}/{emote}" })
-  //Value Path 입니다. genre를 받아서 해당 장르만 뿌려주세요.
+  // @GetMapping(value = { "/mainPage", "mainPage/{category}"})
+  // public String indexGenre(
+  //   HttpSession session,
+  //   Model model,
+  //   @PathVariable(name = "category", required = false) String category,
+  //   @RequestParam(defaultValue = "") String searchTxt,
+  //   @RequestParam(defaultValue = "postNo") String sort
+  // ) {
+  //   if (loggedUser(session) != null) {
+  //     LoggedDto loggedUser = loggedUser(session);
+  //     model.addAttribute("loggedUser", loggedUser);
+  //   }
+
+  //   // 상위 랭킹
+  //   List<BoardDto> rankList = boardService.getRankPost();
+  //   model.addAttribute("rankList", rankList);
+
+  //   log.info("indexController========" + category);
+
+  //   // 게시판 글
+  //   List<BoardDto> postList = boardService.getPostAll(category, searchTxt, sort);
+  //   model.addAttribute("postList", postList);
+
+  //   log.info("postList" + postList);
+
+  //   // 검색 기능 searchTxt
+  //   model.addAttribute("searchTxt", searchTxt);
+  //   return "/mainPage/mainPage";
+  // }
+  
+  @GetMapping(value = { "/mainPage", "mainPage/{category}" })
   public String indexGenre(
     HttpSession session,
     Model model,
-    @PathVariable(name = "genre", required = false) String genre,
-    @PathVariable(name = "emote", required = false) String emote,
+    @PathVariable(name = "category", required = false) String category,
     @RequestParam(defaultValue = "") String searchTxt,
     @RequestParam(defaultValue = "postNo") String sort
   ) {
@@ -54,40 +82,47 @@ public class indexController {
       model.addAttribute("loggedUser", loggedUser);
     }
 
+    if (category != null) {
+      category = category.replace("&", "/");
+    }
+    log.info("indexController========" + category);
+
     // 상위 랭킹
     List<BoardDto> rankList = boardService.getRankPost();
     model.addAttribute("rankList", rankList);
 
     // 게시판 글
-    List<BoardDto> postList = boardService.getPostAll(genre, emote, searchTxt, sort);
+    List<BoardDto> postList = boardService.getPostAll(category, searchTxt, sort);
     model.addAttribute("postList", postList);
+
+    log.info("postList" + postList);
 
     // 검색 기능 searchTxt
     model.addAttribute("searchTxt", searchTxt);
     return "/mainPage/mainPage";
   }
 
-  //테스트용
-  // @GetMapping(value = { "/reload", "/reload/{genre}" })
-  // public String writtingReply(
-  //   Model model,
-  //   @PathVariable(name = "genre", required = false) String genre,
-  //   @RequestParam(defaultValue = "") String searchTxt,
-  //   @RequestParam(defaultValue = "postNo") String sort
-  // ) {
-  //   log.info(genre);
-  //   log.info(searchTxt);
-  //   log.info(sort);
+  // 테스트용
+  @GetMapping(value = { "/reload", "/reload/{category}"})
+  public String writtingReply(
+    Model model,
+    @PathVariable(name = "category", required = false) String category,
+    @RequestParam(defaultValue = "") String searchTxt,
+    @RequestParam(defaultValue = "postNo") String sort
+  ) {
+    log.info(category);
+    log.info(searchTxt);
+    log.info(sort);
 
-  //   // 게시판 글
-  //   List<BoardDto> postList = boardService.getPostAll(genre, searchTxt, sort);
-  //   model.addAttribute("postList", postList);
+    // 게시판 글
+    List<BoardDto> postList = boardService.getPostAll(category, searchTxt, sort);
+    model.addAttribute("postList", postList);
 
-  //   // 검색 기능 searchTxt
-  //   model.addAttribute("searchTxt", searchTxt);
-  //   String target = "/mainPage/mainPage :: #test";
-  //   return target;
-  // }
+    // 검색 기능 searchTxt
+    model.addAttribute("searchTxt", searchTxt);
+    String target = "/mainPage/mainPage :: #test";
+    return target;
+  }
 
   // //테스트용
   // @PostMapping("/reload")
