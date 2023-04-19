@@ -42,7 +42,7 @@ input {
       top: -10%; left: 50%;
       transform: translateX(-50%);
       img {
-        width: 400px;
+        width: 290px;
       }
     }
 
@@ -54,9 +54,6 @@ input {
         font-weight: bold;
         background-color: #1414148f;
         cursor: pointer;
-      }
-      #file {
-        display: none;
       }
     }//.joinForm-Area--userFile
     .joinForm-Area--btn {
@@ -77,3 +74,72 @@ input {
     }//.joinForm-Area--btn
   }//.joinForm-Area--bg
 }//.joinForm-Area
+
+
+
+@media screen and (max-width: 550px) {
+  .bg--login {
+    padding: 8vw 12vw !important;
+  }
+  .joinForm-Area .joinForm-Area--bg .joinForm-Area--logo img {
+    width: 235px;
+  }
+  .form-floating input {
+    height: auto !important;
+    margin: 0 !important; padding: 0 !important;
+    padding: 13px 0 13px 10px !important;
+    margin: 15px 0 !important;
+  }
+  .joinForm-Area--userId {
+    input {
+      margin-top: 40px !important;
+    }
+  }
+  label {
+    padding: 0 !important;
+    padding: 10px !important;
+    font-size: 14px;
+  }
+  form {
+    width: 60vw;
+  }
+  .joinForm-Area .joinForm-Area--bg .joinForm-Area--btn button {
+    width: 100%;
+  }
+  .joinForm-Area .joinForm-Area--bg {
+    padding: 8vw 12vw !important;
+  }
+  .joinForm-Area .joinForm-Area--bg02 .joinForm-Area--logo img {
+    margin-top: 25px;
+  }
+}//@media screen and (max-width: 550px)
+
+@media screen and (max-width: 500px) {
+  .bg--login {
+    padding: 8vw 13vw !important;
+  }
+  .joinForm-Area .joinForm-Area--bg .joinForm-Area--logo img {
+    width: 230px;
+  }
+}//@media screen and (max-width: 500px)
+
+@media screen and (max-width: 320px) {
+  .bg--login {
+    padding: 8vw 13vw !important;
+  }
+  .joinForm-Area .joinForm-Area--bg .joinForm-Area--logo img {
+    width: 180px;
+  }
+  input {
+    height: auto !important;
+    margin: 0 !important; padding: 0 !important;
+    padding: 3px 10px !important;
+    margin: 15px 0 !important;
+    font-size: 12px;
+    width: 100%;
+  }
+  button {
+    font-size: 12px !important;
+    height: 40px !important;
+  }
+}//@media screen and (max-width: 320px)
