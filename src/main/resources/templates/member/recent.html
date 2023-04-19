@@ -35,7 +35,7 @@
                   </div><!-- .recent-listImg--content -->
                 </div><!-- .recent-listImg--box -->
               </a>
-              <div>
+              <div class="btns">
                 <input type="button" class="btn-like" style="display:inline-block; width:15px; height:15px; background:#fff" th:data-userID="${loggedUser.userID}" th:data-postNo="${item.postNo}" th:data-liked="${item.liked}">
                 </input>
                 <input type="button" class="btn-bookmark" style="display:inline-block; width:15px; height:15px; background:#777" th:data-userID="${loggedUser.userID}" th:data-postNo="${item.postNo}" th:data-bookmark="${item.bookmark}">

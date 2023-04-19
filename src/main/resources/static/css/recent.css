@@ -13,6 +13,19 @@
   margin: 30px 0;
   width: 100%;
 }
+.recent-page .recent-page--listBox .recent-page--list ul li.cancel {
+  position: relative;
+}
+.recent-page .recent-page--listBox .recent-page--list ul li.cancel:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+}
 .recent-page .recent-page--listBox .recent-page--list ul li a {
   display: inline-block;
   width: 1000px;
@@ -67,4 +80,7 @@
 .recent-page .recent-page--listBox .recent-page--list ul li a .recent-listImg--box .recent-listImg--content .recent-music--title-All .recent-music--title02 p {
   font-size: 14px;
   font-weight: 300;
+}
+.recent-page .recent-page--listBox .recent-page--list ul li .btns {
+  z-index: 1;
 }

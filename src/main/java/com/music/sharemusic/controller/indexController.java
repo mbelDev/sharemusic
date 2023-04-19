@@ -39,37 +39,8 @@ public class indexController {
     return "/intro";
   }
 
-  // @GetMapping(value = { "/mainPage", "mainPage/{category}"})
-  // public String indexGenre(
-  //   HttpSession session,
-  //   Model model,
-  //   @PathVariable(name = "category", required = false) String category,
-  //   @RequestParam(defaultValue = "") String searchTxt,
-  //   @RequestParam(defaultValue = "postNo") String sort
-  // ) {
-  //   if (loggedUser(session) != null) {
-  //     LoggedDto loggedUser = loggedUser(session);
-  //     model.addAttribute("loggedUser", loggedUser);
-  //   }
-
-  //   // 상위 랭킹
-  //   List<BoardDto> rankList = boardService.getRankPost();
-  //   model.addAttribute("rankList", rankList);
-
-  //   log.info("indexController========" + category);
-
-  //   // 게시판 글
-  //   List<BoardDto> postList = boardService.getPostAll(category, searchTxt, sort);
-  //   model.addAttribute("postList", postList);
-
-  //   log.info("postList" + postList);
-
-  //   // 검색 기능 searchTxt
-  //   model.addAttribute("searchTxt", searchTxt);
-  //   return "/mainPage/mainPage";
-  // }
-  
   @GetMapping(value = { "/mainPage", "mainPage/{category}" })
+  //Value Path 입니다. genre를 받아서 해당 장르만 뿌려주세요.
   public String indexGenre(
     HttpSession session,
     Model model,
@@ -85,7 +56,6 @@ public class indexController {
     if (category != null) {
       category = category.replace("&", "/");
     }
-    log.info("indexController========" + category);
 
     // 상위 랭킹
     List<BoardDto> rankList = boardService.getRankPost();
@@ -95,11 +65,21 @@ public class indexController {
     List<BoardDto> postList = boardService.getPostAll(category, searchTxt, sort);
     model.addAttribute("postList", postList);
 
-    log.info("postList" + postList);
-
     // 검색 기능 searchTxt
     model.addAttribute("searchTxt", searchTxt);
     return "/mainPage/mainPage";
+  }
+
+  // 월 랭킹
+  @GetMapping("/monthRanking")
+  public String monthRanking() {
+    return "/mainPage/monthRanking";
+  }
+
+  // 주간 랭킹
+  @GetMapping("/weeklyRanking")
+  public String weeklyRanking() {
+    return "/mainPage/weeklyRanking";
   }
 
   // 테스트용

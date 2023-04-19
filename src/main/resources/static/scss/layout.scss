@@ -4,6 +4,7 @@ body {
   font-family: 'TheJamsil';
   color: #fff;
   font-weight: 200;
+  overflow-x: hidden;
 }
 p, ul {
   margin: 0; left: 0; padding: 0;
@@ -159,6 +160,7 @@ h1 {
             padding-left: 0;
             li {
               margin: 15px 0;
+              cursor: pointer;
               div {
                 display: flex;
                 align-items: center;
@@ -265,6 +267,23 @@ h1 {
                 }
               }
             }
+            &:nth-child(4) {
+              div {
+                &:hover {
+                  background-image: url("/images/navIcon08-o.png");
+                  background-repeat: no-repeat;
+                  background-position: left;
+                  background-size: 22px;
+                  img {
+                    opacity: 0;
+                  }
+                  span {
+                    color: #cc0040;
+                    font-weight: bold;
+                  }
+                }
+              }
+            }
           }
         }//.view02
         .view03 {
@@ -323,6 +342,33 @@ h1 {
           }
         }//.view03
       }//.headerLayout-Area--viewContents
+      .viewContents03 {
+        .view03 {
+          ul {
+            li {
+              &:nth-child(2) {
+                div {
+                  &:hover {
+                    background-image: url("/images/navIcon09-o.png");
+                    background-repeat: no-repeat;
+                    background-position: left;
+                    background-size: 22px;
+                    img {
+                      opacity: 0;
+                    }
+                    span {
+                      color: #cc0040;
+                      font-weight: bold;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          
+        }
+        
+      }
     }//.headerLayout-Area--box
   }//#headerLayout-Area
   
@@ -352,6 +398,9 @@ h1 {
   .flex-box #headerLayout-Area .media855 {
     display: block;
     height: 10vh;
+  }
+  .flex-box #mainPage-Area {
+    margin-left: auto;
   }
 
   .media855 {

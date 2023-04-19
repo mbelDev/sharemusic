@@ -2,7 +2,9 @@
   margin: 4%;
   border-bottom: 1px solid;
   &-Area {
-
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
   }//&-Area
   &-Video {
     iframe {
@@ -17,16 +19,19 @@
         &-name {
           p {
             font-size: 30px;
-            font-weight: 400;
+            font-weight: 300;
           }
           a {
             h1 {
               margin: 15px 0;
             }
           }
-          margin-bottom: 50px;
+          h1 {
+            font-size: 35px;
+          }
         }//&-name
         &-Date {
+          outline: 1px solid red;
           margin: 10px 0;
         }//&-Date
         &-Genre {

@@ -1,7 +1,7 @@
 .modal-wnd {
   width: 100%;
   height: 100%;
-  background-color: rgba(17, 17, 17, 0.8156862745);
+  background-color: rgba(0, 0, 0, 0.9529411765);
   position: fixed;
   top: 0%;
   left: 0%;
@@ -35,42 +35,21 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 .modal-wnd .modalCategory__box {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0px auto;
-  width: 680px;
-  height: 330px;
-  background: transparent;
-  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  width: 56.5vw;
 }
 .modal-wnd .modalCategory__box__option {
-  display: block;
-  text-align: center;
-  width: 120px;
-  height: 60px;
-  margin: 20px;
-  background-color: #fff;
-  color: #000;
-  border-radius: 13px;
+  margin: 0.3vw;
 }
-.modal-wnd .modalCategory__box__option a {
-  display: grid;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding: auto 0px;
-  align-items: center;
-}
-.modal-wnd .modalCategory__box__option span {
-  display: grid;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding: auto 0px;
-  align-items: center;
-  cursor: pointer;
+.modal-wnd .modalCategory__box__option a img {
+  width: 13vw;
+  margin: 10px 0;
 }
 
 .modalLogin {

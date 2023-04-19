@@ -33,6 +33,9 @@ public interface HistoryDao {
   //좋아요 누른적 있는지 단 하나 확인
   public int getLiked(SendDataDto data);
 
+  //북마크 누른적 있는지 단 하나 확인
+  public int getBookmark(SendDataDto data);
+
   // view로 들어갈 때, History에 있으면 postHits++ 없으면 History의 readDate 최신화 History자체가 없으면 생성.
   // HistodyDao Select 후 없으면 input후 BoardDao에서 UpdateHits 호출 있으면 UpdateHistory호출
   public void updateHistoryDate(LoggedDto loggdeUser);

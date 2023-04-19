@@ -16,7 +16,7 @@
     </div>
 
     <main class="joinForm-Area">
-      <div class="joinForm-Area--bg">
+      <div class="joinForm-Area--bg joinForm-Area--bg02">
         <div class="joinForm-Area--logo">
           <a href="/mainPage"><img src="/images/logo.png" alt=""></a>
         </div>
@@ -40,8 +40,6 @@
           </div>
           <!-- joinForm-Area--userName -->
           <div class="joinForm-Area--userFile">
-            <label for="file"><span class="btn-uploadFile">파일</span></label>
-            <p class="previewIcon" style="width: 150px; height: 150px"></p>
             <input
               type="file"
               class="userIconFile"
@@ -49,6 +47,8 @@
               id="formFileMultiple"
               onchange="setIcon(event);"
             />
+            <p class="previewIcon"></p>
+            
           </div>
           <!-- joinForm-Area--userFile -->
           <div class="joinForm-Area--btn">
@@ -117,19 +117,21 @@
       return false;
     });
 
+    // 이미지
     function setIcon(event) {
-      var reader = new FileReader();
+      let reader = new FileReader();
 
       reader.onload = function (event) {
-        var img = document.createElement("img");
+        let img = document.createElement("img");
         img.setAttribute("src", event.target.result);
         console.log(event.target.result);
-        img.setAttribute("style", "width:150px; height:150px;");
+        img.setAttribute("style", "width:100%; height:100%;");
         document.querySelector(".previewIcon").appendChild(img);
         //appendChild말고 replace방법을 찾아보자.
       };
 
       reader.readAsDataURL(event.target.files[0]);
     }
+
   </script>
 </html>

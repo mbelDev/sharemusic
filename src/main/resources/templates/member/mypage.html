@@ -6,56 +6,55 @@
   layout:decorate="~{/include/layoutMember.html}">
 <main id="mainPage-Area" class="mypage-Area" layout:fragment="contents">
   <section class="mainContent">
-    <article class="mainContent-Area01">
-      <div class="mainContent-Area01-title">
-        <h1 class="topAndbut">회원정보</h1>
-      </div><!-- mainConstent-Area-title -->
-      <div class="mainContent-Area01-item">
-        <div class="Area01-item--profile">
-          <div class="Area01-item--profile-img topAndbut">
-            <img th:src="@{/upload/}+${userInfo.userIconReal}">
-            <div class="fileArea">
-              <label class="btn btn-primary" for="file">이미지선택</label> 
-              <input type="file" id="file">
-            </div><!-- fileArea -->
-          </div><!-- Area01-item--profile-img -->
-          <div class="Area01-item--profile-form topAndbut">
-            <div class="formArea">
-              <span>닉네임</span>
-              <span th:text="${userInfo.userNM}"><input type="text"></span>
-              <!-- <span>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-              </span> -->
-              <span th:if="${loggedUser.userID == userInfo.userID}"><button class="btn btn-primary">수정</button></span>
-            </div><!-- formArea -->
-            <div class="formArea">
-              <span>아이디</span>
-              <span th:text="${userInfo.userID}"><input type="text" disabled>
-                <input class="form-control" type="text" placeholder="" aria-label="Disabled input example" disabled>
-              </span>
-            </div><!-- formArea -->
-            <div class="formArea formArea-bt">
-              <div class="formArea-sub">
-                <p>가입일</p>
-                <spna th:text="${userInfo.userDate}">0</spna>
-              </div>
-              <div class="formArea-sub">
-                <p>작성 글</p>
-                <spna th:text="${userInfo.userPosts}">0</spna>
-              </div>
-              <div class="formArea-sub">
-                <p>작성덧글</p>
-                <spna th:text="${userInfo.userReplys}">0</spna>
-              </div>
-              <div class="formArea-sub">
-                <p>받은추천</p>
-                <spna th:text="${userInfo.userLiked}">0</spna>
-              </div>
-            </div><!-- formArea -->
-          </div><!-- Area01-item--profile-form -->
-        </div><!-- Area-item--profile -->
-      </div><!-- mainConstent-Area-item -->
-    </article><!-- mainConstent-Area01 -->
+    <div class="main-constent--itmes-center">
+      <article class="mainContent-Area01">
+        <div class="mainContent-Area01-title">
+          <h1 class="topAndbut">회원정보</h1>
+        </div><!-- mainConstent-Area-title -->
+        <div class="mainContent-Area01-item">
+          <div class="Area01-item--profile">
+            <div class="Area01-item--profile-img topAndbut">
+              <img th:src="@{/upload/}+${userInfo.userIconReal}">
+              <div class="fileArea">
+                <label class="btn btn-primary" for="file">이미지선택</label> 
+                <input type="file" id="file">
+              </div><!-- fileArea -->
+            </div><!-- Area01-item--profile-img -->
+            <div class="Area01-item--profile-form topAndbut">
+              <div class="formArea">
+                <span>닉네임</span>
+                <span th:text="${userInfo.userNM}"></span>
+                <!-- <span>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                </span> -->
+                <span th:if="${loggedUser.userID == userInfo.userID}"><button class="btn btn-primary">수정</button></span>
+              </div><!-- formArea -->
+              <div class="formArea">
+                <span>아이디</span>
+                <span th:text="${userInfo.userID}"></span>
+              </div><!-- formArea -->
+              <div class="formArea formArea-bt">
+                <div class="formArea-sub">
+                  <p>가입일</p>
+                  <spna th:text="${userInfo.userDate}">0</spna>
+                </div>
+                <div class="formArea-sub">
+                  <p>작성 글</p>
+                  <spna th:text="${userInfo.userPosts}">0</spna>
+                </div>
+                <div class="formArea-sub">
+                  <p>작성덧글</p>
+                  <spna th:text="${userInfo.userReplys}">0</spna>
+                </div>
+                <div class="formArea-sub">
+                  <p>받은추천</p>
+                  <spna th:text="${userInfo.userLiked}">0</spna>
+                </div>
+              </div><!-- formArea -->
+            </div><!-- Area01-item--profile-form -->
+          </div><!-- Area-item--profile -->
+        </div><!-- mainConstent-Area-item -->
+      </article><!-- mainConstent-Area01 -->
     <div class="line-one"></div>
     <article class="mainContent-Area02">
       <div class="mainContent-Area02-title topAndbut">
@@ -68,7 +67,7 @@
             <div class="swiper mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listWritten}">
-                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
                     <div class="profile-list">
                       <div class="profile-list-txt">
                         <p th:text="${item.postAuth}"></p>
@@ -86,8 +85,8 @@
     </article><!-- mainContent-Area02 -->
     <article class="mainContent-Area02">
       <div class="mainContent-Area02-title topAndbut">
-        <h1>작성 글</h1>
-        <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
+        <h1>최근 감상한 곡</h1>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/list?category=recent}">더 보기</a></button>
       </div><!-- mainConstent-Area02-title -->
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
@@ -95,7 +94,7 @@
             <div class="swiper mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listRecent}">
-                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
                     <div class="profile-list">
                       <div class="profile-list-txt">
                         <p th:text="${item.postAuth}"></p>
@@ -113,8 +112,8 @@
     </article><!-- mainContent-Area02 -->
     <article class="mainContent-Area02">
       <div class="mainContent-Area02-title topAndbut">
-        <h1>작성 글</h1>
-        <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
+        <h1>북마크 한 곡</h1>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/list?category=bookmark}">더 보기</a></button>
       </div><!-- mainConstent-Area02-title -->
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
@@ -122,7 +121,7 @@
             <div class="swiper mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listBookmark}">
-                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
                     <div class="profile-list">
                       <div class="profile-list-txt">
                         <p th:text="${item.postAuth}"></p>
@@ -140,8 +139,8 @@
     </article><!-- mainContent-Area02 -->
     <article class="mainContent-Area02">
       <div class="mainContent-Area02-title topAndbut">
-        <h1>작성 글</h1>
-        <button class="btn btn-primary"><a th:href="@{/member/mypage/written}">더 보기</a></button>
+        <h1>좋아요를 표시한 곡</h1>
+        <button class="btn btn-primary"><a th:href="@{/member/mypage/list?category=liked}">더 보기</a></button>
       </div><!-- mainConstent-Area02-title -->
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
@@ -149,7 +148,7 @@
             <div class="swiper mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listLiked}">
-                  <a href=""><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
                     <div class="profile-list">
                       <div class="profile-list-txt">
                         <p th:text="${item.postAuth}"></p>
@@ -167,4 +166,27 @@
     </article><!-- mainContent-Area02 -->
     
   </section><!-- mypage-Area--section -->
+
+
+  <!-- 프로필 사진 업데이트 모달창 -->
+  <div id="deleteReplyModal" class="modal-wnd">
+    <div class="modal-wnd-item">
+      <div class="modal-content modal-profileUpdate">
+        <!-- 모달창 안에 여기 내용 작성 -->
+        <div class="modal-profileUpdate__view">
+          <img th:src="@{/upload/}+${userInfo.userIconReal}">
+          <label class="btn btn-primary" for="file">파일 선택</label>
+          <input type="file" id="file">
+          
+        </div>
+        <div class="modal-profileUpdate__btns">
+          <button id="deleteReplyConfirm">확인</button>
+          <button id="closeDeleteReply">취소</button>
+        </div>
+      </div>
+      <!-- ModalThis-content -->
+    </div>
+    <!-- write-modal--item -->
+  </div>
+
 </main>

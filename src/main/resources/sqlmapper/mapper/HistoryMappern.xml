@@ -34,6 +34,11 @@
     SELECT h.*, b.POSTDATE  FROM HISTORY h, BOARD b WHERE h.USERID = #{userID} AND h.BOOKMARK = 1 AND h.POSTNO = b.POSTNO ORDER BY b.POSTDATE DESC
   </select>
 
+<!-- 북마크 여부 -->
+  <select id="getBookmark" parameterType="SendDataDto" resultType="Integer">
+    SELECT BOOKMARK FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}
+  </select>
+
 <!-- 읽었는지 안 읽었는지 파악하는 용도로 사용중 -->
   <select id="getHistory" parameterType="LoggedDto" resultType="Integer"> 
     SELECT COUNT(*) FROM HISTORY WHERE USERID = #{userID} AND POSTNO = #{postNo}

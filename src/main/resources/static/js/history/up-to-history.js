@@ -3,26 +3,27 @@ function likeEvent(){
     btnsLike.forEach((item)=>{
         item.addEventListener("click",(e)=>{
             const sendData = {
-                "postNo":item.dataset.postno,
-                "userID":item.dataset.userid
+                "postNo":item.dataset.postno
                 //좋아요는 기록 조작의 우려가 있어서 서버에서 좋아요 여부 처리
             }
-            console.log(sendData);
             $.ajax({
                 url:"/member/like",
                 type:"post",
                 data:sendData,
                 success:function(response){
-                    if(response){
-                      alert("좋아요!");
-                      item.classList.add("liked");
-                      item.parentElement.parentElement.classList.remove("delete");
-                    }else{
-                      alert("좋았었어요!");
-                      item.classList.remove("liked");
-                      item.parentElement.parentElement.classList.add("delete");
-                      console.log(item.parentElement.parentElement);
-                    }
+                    switch(response){
+                        case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용") 
+                        location.href="/member/login"
+                          break;
+                        case 0 : alert("좋았었습니다!!")
+                        $(item).parent().parent('li').addClass('cancel');
+                        $(item).addClass('cancel')
+                          break;
+                        case 1 : alert("좋아요!")
+                        $(item).parent().parent('li').removeClass('cancel');
+                        $(item).removeClass('cancel')
+                          break;
+                      }
                 },
                 error:function(err){
                     console.log(err);
@@ -37,24 +38,26 @@ function bookmarkEvent(){
         item.addEventListener("click",(e)=>{
             const sendData = {
                 "postNo":item.dataset.postno,
-                "userID":item.dataset.userid,
-                "bookmark":item.dataset.bookmark
+                // "bookmark":item.dataset.bookmark
             }
-            console.log(sendData);
             $.ajax({
                 url:"/member/bookmark",
                 type:"post",
                 data:sendData,
                 success:function(response){
-                    if(response){
-                        alert("북마크 했어요!");
-                        item.dataset.bookmark = '1'
-                        item.classList.add("bookmarked");
-                    }else{
-                        alert("북마크 했었어요!");
-                        item.dataset.bookmark = '0'
-                        item.classList.remove("bookmarked");
-                    }
+                    console.log(response);
+                    switch(response){
+                        case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용") 
+                        location.href="/member/login"
+                          break;
+                        case 0 : alert("북마크 했었어요!!")
+                        $(item).addClass('cancel')
+                          break;
+                        case 1 : alert("북마크 했습니다!")
+                        $(item).removeClass('cancel')
+                          break;
+                      }
+
                 },
                 error:function(err){
                     console.log(err);
@@ -69,7 +72,6 @@ function followEvent(){
         item.addEventListener("click",(e)=>{
             const sendData = {
                 "followID":item.dataset.followID,
-                "userID":item.dataset.userid
             }
             console.log(sendData);
             $.ajax({
