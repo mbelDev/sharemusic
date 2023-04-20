@@ -134,7 +134,7 @@
         <article class="headerLayout-Area--viewContents viewContents03 topAndbut">
           <div class="view view03 line">
             <ul>
-              <li><div><img src="/images/navIcon07.png" alt=""><span>회원탈퇴</span></div></li>
+              <li><div><img src="/images/navIcon07.png" alt=""><span id="withdraw-btn">회원탈퇴</span></div></li>
               <li><div><img src="/images/navIcon09.png" alt=""><span>이용약관</span></div></li>
             </ul>
           </div>
@@ -169,66 +169,66 @@
     <main id="mainPage-Area" class="" layout:fragment="contents">
     
     </main>
+
+    <section><!-----------------------------------[     모달 섹션     ]----------------------------------->
+          
+    <!-- 너 진짜 탈퇴할거야? 모달창 -->
+    <div id="withdrawModal" class="modal-wnd">
+      <div class="modal-wnd-item modal-withdraw">
+        <div class="modal-content">
+          <span>정말로 회원 탈퇴를 진행하시겠습니까?</span>
+          <span>이 행동은 되돌릴 수 없습니다. 탈퇴하신 ID는 더 이상 이용하실 수 없으며 새로운 계정을 만드실 때에도 사용하실 수 없습니다.</span>
+          <span>위 모든 사항을 이해하시고<em> 정말로 탈퇴를 원하신다면</em> 확인을 위하여 본인의 계정과 비밀번호를 한번 더 입력해 주십시오.</span>
+          <div class="modal-btns">
+            <span></span>
+            <input type="text" name="userID" id="userID" placeholder="유저 아이디">
+            <input type="password" name="userPW" id="userPW" placeholder="유저 패스워드">
+            <button onclick="withdraw()">회원 탈퇴</button>
+            <button id="withdrawModal-close">되돌아가기</button>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    </section>
+
+
   </div>
 
 
-  <!-- 
-      <article class="headerLayout-Area--infoForm">
-        <div class="left-items">
-            <!-- 기본 회원정보 
-            <div>
-              <img th:if="${loggedUser.userIconReal != null}" th:src="@{/upload/}+${loggedUser.userIconReal}" alt="" style="width: 150px; height: 150px;">
-              <img th:if="${loggedUser.userIconReal == null}" th:src="@{/images/sampleprofile.jpg}" alt="" style="width: 150px; height: 150px;">
-            </div>
-            <div>
-              <span th:text="${loggedUser.userNM}">별명</span>
-            </div>
-            <div>
-              <span th:text="${loggedUser.userID}">아이디</span>
-            </div>
-            <div>
-              <span th:text="${loggedUser.userDate}">가입일자</span>
-            </div>
-        </div>
-      </article><!-- .headerLayout-Area--searchForm --
-
-      </article><!-- .headerLayout-Area--logo 
-      <article class="headerLayout-Area--joinForm">
-          <div class="join left-items lien">
-            <a href="/member/mypage">활동내역</a>
-          </div>
-      </article>
-      <article class="headerLayout-Area--viewContents">
-        <div class="view left-items lien">
-          <ul>
-            <li><a href="/member/mypage/written">작성 글 목록</a></li>
-            <li><a href="/member/mypage/list?category=recent">최근 감상 기록</a></li>
-            <li><a href="/member/mypage/list?category=bookmark">즐겨찾기 목록</a></li>
-            <li><a href="/member/mypage/list?category=liked">좋아요를 표시한 곡</a></li>
-          </ul>
-        </div>
-      </article><!-- .headerLayout-Area--viewContents --
-      <article class="headerLayout-Area--viewContents">
-        <div class="view left-items lien">
-          <ul>
-            <li><a href="#">회원 탈퇴</a></li>
-            <li><a href="#">이용 약관</a></li>
-          </ul>
-        </div>
-      </article><!-- .headerLayout-Area--viewContents --
-    </section><!-- #headerLayout-Area --
-  </header>
-
-  <main id="mainPage-Area" class="container" layout:fragment="contents">
-    
-  </main>
-
-  <footer class="container">
-    <section id="footerLayout-Area">
-
-    </section><!-- #footerLayout-Area --
-  </footer> -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script>
+    getModal($("#withdraw-btn"),$("#withdrawModal"),$("#withdrawModal-close"));
+
+    function withdraw(){
+      $.ajax({
+        url:"/member/withdraw",
+        type:"POST",
+        data:{
+          "userID" : $("#userID").val(),
+          "userPW" : $("#userPW").val()
+        },
+        success:function(response){
+          console.log(response);
+          switch(response){
+            case -1:
+              alert("회원 정보가 일치하지 않습니다.");
+              break;
+            case 0:
+              break;
+            case 1 :
+              alert("감히 이 개쩌는 서비스를 탈퇴하다니 지옥에서 다시 만나자.");
+              location.href="/memeber/logout";
+              break;
+          }
+          
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+    }
+  </script>
 </body>
 </html>
 

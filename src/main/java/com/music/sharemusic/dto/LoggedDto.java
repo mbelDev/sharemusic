@@ -12,7 +12,7 @@ public class LoggedDto {
   private String userID;
   private String userNM;
   private String userIconReal;
-  private String userPrincipal;
+  private int userPrincipal;
   private String userDate;
   private int postNo;
 }

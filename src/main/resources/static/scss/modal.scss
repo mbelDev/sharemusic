@@ -68,8 +68,12 @@
 
 //프로필 사진 업데이트 모달 #권인호 작성
 .modal-profileUpdate{
-  width: 20%;
-  left: 40%;
+  display: block;
+  width: 400px;
+  height: 60%;
+  margin: 10% auto;
+  background: #fff;
+  border-radius: 13px;
   &__icon{
     display: block;
     margin: 10px auto;
@@ -102,5 +106,22 @@
     width: 600px;
     height: 450px;
     background-color: #fff;
+  }
+}
+
+//회원 탈퇴모달 #권인호
+.modal-withdraw{
+  .modal{
+    &-content{
+    color:#333;
+    em{
+      color:#700;
+    }
+    padding: 2%;
+    text-align: center;
+  }
+  &-btns{
+    margin: 3%;
+  }
   }
 }

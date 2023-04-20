@@ -53,8 +53,12 @@
 }
 
 .modal-profileUpdate {
-  width: 20%;
-  left: 40%;
+  display: block;
+  width: 400px;
+  height: 60%;
+  margin: 10% auto;
+  background: #fff;
+  border-radius: 13px;
 }
 .modal-profileUpdate__icon {
   display: block;
@@ -87,4 +91,16 @@
   width: 600px;
   height: 450px;
   background-color: #fff;
+}
+
+.modal-withdraw .modal-content {
+  color: #333;
+  padding: 2%;
+  text-align: center;
+}
+.modal-withdraw .modal-content em {
+  color: #700;
+}
+.modal-withdraw .modal-btns {
+  margin: 3%;
 }

@@ -93,3 +93,87 @@ function followEvent(){
         })
     })
 }
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // //
+//                        마이 페이지에서 사용하는 JS들                            //
+// // // // // // // // // // // // // // // // // // // // // // // // // // // //
+
+function setIcon(event) {
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+      $("#testProfile").attr("src",event.target.result);
+
+      //appendChild말고 replace방법을 찾아보자.
+      //이것이 그 방법이다.
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+  }
+  function setBaseIcon(){
+    console.log("aa");
+    $("#testProfile").attr("th:src" , "@{/upload/}+${userInfo.userIconReal}");
+  }
+
+  function removeIcon(){
+    let file= $("input[type=file]");
+    file.val(""); 
+      var img = $("#testProfile")
+      img.attr("src","/images/sampleprofile.jpg");
+  }
+
+  function updateUserNM(){
+    console.log($("#userNM").val()+" "+$("#userIcon").val());
+    $.ajax({
+      url:"/member/update",
+      type:"POST",
+      data:{
+        "userIcon" : $("#userIcon").val(),
+        "userNM" : $("#userNM").val()
+      },
+      success:function(response){
+        alert("회원 정보를 수정했습니다.");
+        location.href="/member/mypage";
+      },
+      error:function(err){
+        console.log(err);
+      }
+    })
+  }
+
+  function updateProfile(){
+    const file = $("#updateProfile-uploadFile")[0];
+    const sendData = new FormData(file);
+    $.ajax({
+      url:"/member/update",
+      type:"POST",
+      contentType:false,
+      processData:false,
+      data:sendData,
+      success:function(response){
+        console.log(response);
+        if(response == 1){
+          alert("프로필 사진을 업데이트 했습니다.");
+          location.href="/member/mypage";
+        }else{
+          alert("문제가 발생하였습니다.");
+        }
+      },
+      error:function(err){
+        console.log(err);
+      }
+    })
+
+  }
+
+  function openInputNM(){
+    $("#updateProfile-userNM").removeClass("hidden");
+    $("#originalProfile-userNM").addClass("hidden");
+    $("#profile-modify").addClass("hidden");
+  }
+  function closeInputNM(){
+    $("#updateProfile-userNM").addClass("hidden");
+    $("#originalProfile-userNM").removeClass("hidden");
+    $("#profile-modify").removeClass("hidden");
+  }

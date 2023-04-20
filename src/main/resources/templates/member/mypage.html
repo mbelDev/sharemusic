@@ -5,7 +5,7 @@
   xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{/include/layoutMember.html}">
 <main id="mainPage-Area" class="mypage-Area" layout:fragment="contents">
-  <section class="mainContent">
+  <section class="mainContent"> <!-----------------------[   정보 섹션   ]----------------------------------->
     <article class="mainContent-Area01">
       <div class="mainContent-Area01-title">
         <h1 class="topAndbut">회원정보</h1>
@@ -25,10 +25,10 @@
             <div class="formArea">
               <span>닉네임</span>
               <span id="originalProfile-userNM" th:text="${userInfo.userNM}"></span>
-              <form action="/member/update" method="POST" id="updateProfile-userNM" class="hidden" th:if="${loggedUser.userID == userInfo.userID}">
-                <input type="text" name="userNM" th:placeholder="${loggedUser.userNM}">
-                <input type="hidden" name="userIcon" th:value="default">
-                <button class="btn btn-primary" id="profile-userNM">수정 완료</button>
+              <form id="updateProfile-userNM" class="hidden" th:if="${loggedUser.userID == userInfo.userID}">
+                <input type="text" name="userNM" id="userNM" th:placeholder="${loggedUser.userNM}">
+                <input type="hidden" name="userIcon" id="userIcon" th:value="default">
+                <button class="btn btn-primary" id="profile-userNM" onclick="updateUserNM();">수정 완료</button>
                 <label class="btn btn-secondary" id="profile-cancel" onclick="closeInputNM();">취소</label>
               </form>
               <!-- <span>
@@ -65,6 +65,8 @@
       </div><!-- mainConstent-Area-item -->
     </article><!-- mainConstent-Area01 -->
     <div class="line-one"></div>
+
+
     <article class="mainContent-Area02">
       <div class="mainContent-Area02-title topAndbut">
         <h1>작성 글</h1>
@@ -178,121 +180,45 @@
   </section><!-- mypage-Area--section -->
 
 
-  <!-- 프로필 사진 업데이트 모달창 -->
-  <div id="profileUpdateModal" class="modal-wnd">
-    <div class="modal-wnd-item modal-profileUpdate">
-      <div class="modal-content">
-        <!-- 모달창 안에 여기 내용 작성 -->
-        <div class="modal-profileUpdate__icon">
-          <p id="previewIcon"><img th:src="@{/upload/}+${userInfo.userIconReal}" id="testProfile"></p>
-          
-          <label class="btn btn-primary btn-profile" for="formFileMultiple">파일 선택</label>
-          <label class="btn btn-secondary btn-profile" id="fileRemove" onclick="removeIcon();">파일 제거</label>
-          <form id="updateProfile-uploadFile">
-            <input
-            type="file"
-            class="userIconFile"
-            id="formFileMultiple"
-            style="display:none;"
-            name="userIconFile"
-            onchange="setIcon(event);"
-                    />
-          </form>
-          
-          
-        </div>
-        <div class="modal-profileUpdate__btns">
-          <button id="updateProfileConfirm" onclick="updateProfile();">확인</button>
-          <button id="profileUpdateModal-close" onclick="removeIcon();">취소</button>
+  <section><!-----------------------[   모달 섹션   ]----------------------------------->
+
+
+    <!-- 프로필 사진 업데이트 모달창 -->
+    <div id="profileUpdateModal" class="modal-wnd">
+      <div class="modal-profileUpdate">
+        <div class="modal-content">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <div class="modal-profileUpdate__icon">
+            <p id="previewIcon"><img th:src="@{/upload/}+${userInfo.userIconReal}" id="testProfile"></p>
+    
+            <label class="btn btn-primary btn-profile" for="formFileMultiple">파일 선택</label>
+            <label class="btn btn-secondary btn-profile" id="fileRemove" onclick="removeIcon();">파일 제거</label>
+            <form id="updateProfile-uploadFile">
+              <input
+              type="file"
+              class="userIconFile"
+              id="formFileMultiple"
+              style="display:none;"
+              name="userIconFile"
+              onchange="setIcon(event);"
+                      />
+            </form>
+          </div>
+          <div class="modal-profileUpdate__btns">
+            <button id="updateProfileConfirm" onclick="updateProfile();">확인</button>
+            <button id="profileUpdateModal-close">취소</button>
+          </div>
         </div>
       </div>
-      <!-- ModalThis-content -->
     </div>
-    <!-- write-modal--item -->
-  </div>
+
+  </section><!-----------------------[   모달 섹션   ]----------------------------------->
 
   <script src="/js/modal.js"></script>
   <script src="/js/history/up-to-history.js"></script>
   <script>
     getModal($("#profile-Btn"),$("#profileUpdateModal"),$("#profileUpdateModal-close"));
     followEvent();
-
-    function setIcon(event) {
-      var reader = new FileReader();
-
-      reader.onload = function (event) {
-        $("#testProfile").attr("src",event.target.result);
-
-        //appendChild말고 replace방법을 찾아보자.
-        //이것이 그 방법이다.
-      };
-
-      reader.readAsDataURL(event.target.files[0]);
-    }
-    function setBaseIcon(){
-      console.log("aa");
-      $("#testProfile").attr("th:src" , "@{/upload/}+${userInfo.userIconReal}");
-    }
-
-    function removeIcon(){
-      let file= $("input[type=file]");
-      file.val(""); 
-        var img = $("#testProfile")
-        img.attr("src","/images/sampleprofile.jpg");
-    }
-
-    // function updateUserNM(){
-    //   $.ajax({
-    //     url:"/member/update",
-    //     type:"POST",
-    //     data:{
-    //       userIcon : 'default',
-    //       userNM : 
-    //     },
-    //     success:function(response){
-    //       alert("회원 정보를 수정했습니다.");
-    //       location.href="/member/mypage";
-    //     },
-    //     error:function(err){
-    //       console.log(err);
-    //     }
-    //   })
-    // }
-
-    function updateProfile(){
-      const file = $("#updateProfile-uploadFile")[0];
-      const sendData = new FormData(file);
-      $.ajax({
-        url:"/member/update",
-        type:"POST",
-        contentType:false,
-        processData:false,
-        data:sendData,
-        success:function(response){
-          console.log(response);
-          if(response == 1){
-            alert("프로필 사진을 업데이트 했습니다.");
-            location.href="/member/mypage";
-          }else{
-            alert("문제가 발생하였습니다.");
-          }
-        },
-        error:function(err){
-          console.log(err);
-        }
-      })
- 
-    }
-
-    function openInputNM(){
-      $("#updateProfile-userNM").removeClass("hidden");
-      $("#originalProfile-userNM").addClass("hidden");
-      $("#profile-modify").addClass("hidden");
-    }
-    function closeInputNM(){
-      $("#updateProfile-userNM").addClass("hidden");
-      $("#originalProfile-userNM").removeClass("hidden");
-      $("#profile-modify").removeClass("hidden");
-    }
+   
   </script>
 </main>

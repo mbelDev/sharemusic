@@ -136,7 +136,7 @@ public class MemberServiceImpl implements MemberService {
       result.setUserID(memberDto.getUserID());
       result.setUserNM(memberDto.getUserNM());
       result.setUserIconReal(memberDto.getUserIconReal());
-      result.setUserPrincipal("member");
+      result.setUserPrincipal(memberDto.getUserPrincipal());
     }
     log.info("who?==={}", memberDto);
     log.info("login?==={}", result);
@@ -298,7 +298,9 @@ public class MemberServiceImpl implements MemberService {
     memberDao.updateMember(memberDto);
   }
 
-  public void deleteMember(MemberDto memberDto) {
+  //회원 탈퇴
+  public void withdraw(MemberDto memberDto) {
+    memberDao.withdraw(memberDto);
     memberDao.deleteMember(memberDto);
   }
 }
