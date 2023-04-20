@@ -55,6 +55,18 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
+  public List<BoardDto> getMonthRankPost() {
+    List<BoardDto> result = boardDao.getMonthRankPost();
+    return result;
+  }
+
+  @Override
+  public List<BoardDto> getWeeklyRankPost() {
+    List<BoardDto> result = boardDao.getWeeklyRankPost();
+    return result;
+  }
+
+  @Override
   public void updatePost(BoardDto boardDto) {
     boardDao.updatePost(boardDto);
   }

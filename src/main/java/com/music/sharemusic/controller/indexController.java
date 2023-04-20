@@ -72,13 +72,17 @@ public class indexController {
 
   // 월 랭킹
   @GetMapping("/monthRanking")
-  public String monthRanking() {
+  public String monthRanking(Model model) {
+    List<BoardDto> monthRankList = boardService.getMonthRankPost();
+    model.addAttribute("monthRankList", monthRankList);
     return "/mainPage/monthRanking";
   }
 
   // 주간 랭킹
   @GetMapping("/weeklyRanking")
-  public String weeklyRanking() {
+  public String weeklyRanking(Model model) {
+    List<BoardDto> weeklyRankList = boardService.getWeeklyRankPost();
+    model.addAttribute("weeklyRankList", weeklyRankList);
     return "/mainPage/weeklyRanking";
   }
 

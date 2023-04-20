@@ -42,6 +42,30 @@
   ) WHERE ROWNUM <![CDATA[<=]]> 5
 </select>
 
+<!-- 월간 랭킹 글 불러오기  -->
+<select id="getMonthRankPost" resultType="BoardDto">
+SELECT * FROM (
+    SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
+  )
+  WHERE 
+  ROWNUM <![CDATA[<=]]> 5 AND
+  TO_CHAR(POSTDATE, 'YYYYMM') = (
+  SELECT TO_CHAR(ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -1), 'YYYYMM') FROM DUAL)
+</select>
+
+<!-- 주간 랭킹 글 불러오기 -->
+<select id="getWeeklyRankPost" resultType="BoardDto">
+SELECT * FROM (
+    SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
+  ) 
+  WHERE 
+  ROWNUM <![CDATA[<=]]> 5 AND (
+  TO_CHAR(POSTDATE, 'YYYYMMDD') BETWEEN 
+    (SELECT TO_CHAR(TRUNC(SYSDATE, 'iw') - 7, 'YYYYMMDD') FROM DUAL) AND
+    (SELECT TO_CHAR(TRUNC(SYSDATE, 'iw') - 1, 'YYYYMMDD') FROM DUAL)
+  )
+</select>
+
 <!-- 글 내용 수정하기 -->
 <update id="updatePost" parameterType="BoardDto">
   UPDATE BOARD SET POSTTITLE = #{postTitle}, POSTSINGER = #{postSinger},

@@ -25,6 +25,14 @@ public interface BoardDao {
 
   // 랭킹 글들 불러오기
 
+  public List<BoardDto> getMonthRankPost();
+
+  // 월간 랭킹 글들 불러오기
+
+  public List<BoardDto> getWeeklyRankPost();
+
+  // 주간 랭킹 글들 불러오기
+
   public void updatePost(BoardDto boardDto);
 
   //modify 에서 요청. 글 내용 수정하기
