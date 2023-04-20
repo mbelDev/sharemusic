@@ -8,32 +8,113 @@ main {
   display: flex;
   justify-content: center;
 }
-.boardWrite-page .boardWrite-page--form {
+
+.boardWrite-page--form {
   margin-top: 100px;
 }
-.boardWrite-page .boardWrite-page--form form {
+.boardWrite-page--form form {
   width: 800px;
 }
-.boardWrite-page .boardWrite-page--form .musicName {
+.boardWrite-page--form .musicName {
   display: flex;
   align-items: center;
 }
-.boardWrite-page .boardWrite-page--form .musicName-left {
+.boardWrite-page--form .musicName-left {
   margin-right: 30px;
 }
-.boardWrite-page .boardWrite-page--form .musicName-left input {
+.boardWrite-page--form .musicName-left input {
   width: 600px;
 }
-.boardWrite-page .boardWrite-page--form .musicName-right {
+.boardWrite-page--form .musicName-right {
   width: 180px;
 }
-.boardWrite-page .boardWrite-page--form input {
+.boardWrite-page--form input {
   display: inline-block;
 }
-.boardWrite-page .boardWrite-page--form .boardWrite-pag--item {
+.boardWrite-page--form .boardWrite-pag--item {
   margin-bottom: 30px;
 }
-.boardWrite-page .boardWrite-page--form .boardWrite-pag--item #writePostGenre,
-.boardWrite-page .boardWrite-page--form .boardWrite-pag--item #writePostEmote {
+.boardWrite-page--form .boardWrite-pag--item p {
+  margin-bottom: 10px;
+}
+.boardWrite-page--form .boardWrite-pag--item #writePostGenre,
+.boardWrite-page--form .boardWrite-pag--item #writePostEmote {
   cursor: pointer;
+}
+.boardWrite-page--form .musicName-right p {
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1140px) {
+  .boardWrite-page--form .musicName-left input {
+    width: 55vw;
+  }
+  .postLink {
+    width: 70.5vw;
+  }
+  #floatingTextarea {
+    width: 70.5vw;
+  }
+  .modal-wnd .modalCategory__box {
+    width: 63vw !important;
+  }
+  .modal-wnd .modalCategory__box__option a img {
+    width: 15vw !important;
+  }
+}
+@media screen and (max-width: 855px) {
+  .boardWrite-page--form .musicName-left input {
+    width: 55vw;
+  }
+  .postLink {
+    width: 79.5vw;
+  }
+  #floatingTextarea {
+    width: 79.5vw;
+  }
+  .boardWrite-page--form {
+    margin-top: 170px;
+    margin-left: 15vw;
+  }
+  .modal-wnd .modalCategory__box {
+    width: 76vw !important;
+    left: 50% !important;
+  }
+  .modal-wnd .modalCategory__box__option a img {
+    width: 18vw !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .boardWrite-page--form .musicName-left input {
+    width: 55vw;
+  }
+  .postLink {
+    width: 79.5vw;
+  }
+  #floatingTextarea {
+    width: 79.5vw;
+  }
+  .boardWrite-page--form {
+    margin-top: 170px;
+    margin-left: 80vw;
+  }
+  #writePostGenre, #writePostEmote {
+    width: 23vw;
+  }
+  .btns {
+    margin-left: 20vw;
+  }
+  .btns button {
+    width: 20vw;
+  }
+  .modal-wnd .modalCategory__box {
+    width: 85vw !important;
+    left: 50% !important;
+  }
+  .modal-wnd .modalCategory__box__option a img {
+    width: 20vw !important;
+  }
+  .boardWrite-page--form .musicName-left {
+    margin-right: 10px;
+  }
 }

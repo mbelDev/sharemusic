@@ -5,147 +5,83 @@
   xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{/include/layout.html}"
 >
-  <main id="mainPage-Area" class="container" layout:fragment="contents">
+  <main id="mainPage-Area" class="" layout:fragment="contents">
     <section class="board-modify--page">
-      <article class="board-bodify--content">
-        <form action="/board/modify" method="POST" th:object="${boardDto}">
-          <div class="boardModify-bg boardModify-music--title form-floating">
+
+      <article class="boardWrite-page--form">
+        <form action="/board/write" method="POST" th:object="${boardDto}">
+          <div class="musicName">
+            <div class="musicName-left">
+              <div class="boardWrite-pag--item">
+                <p>곡 이름</p>
+                <input
+                  class="form-control form-control-lg"
+                  type="text"
+                  placeholder="곡 이름을 입력해주세요."
+                  aria-label=".form-control-lg example"
+                  name="postTitle"
+                  th:value="${boardDto.postTitle}"
+                />
+                <p
+                  th:if="${#fields.hasErrors('postTitle')}"
+                  th:errorclass="errorTxt"
+                  th:errors="*{postTitle}"
+                >
+                  에러 메세지 출력
+                </p>
+              </div>
+              <div class="boardWrite-pag--item">
+                <p>가수 이름</p>
+                <input
+                  class="form-control form-control-lg"
+                  type="text"
+                  placeholder="가수 이름을 입력해주세요."
+                  aria-label=".form-control-lg example"
+                  name="postSinger"
+                  th:value="${boardDto.postSinger}"
+                />
+              </div>
+            </div>
+            <div class="musicName-right">
+              <p>장르</p>
+              <div class="boardWrite-pag--item" onclick="getModalModifyGenre()">
+                <input class="form-control form-control-lg"
+                type="text" id="writePostGenre" name="postGenre" th:value="${boardDto.postGenre}" placeholder="장르를 선택해주세요." readonly/>
+              </div>
+              <p>감성</p>
+              <div class="boardWrite-pag--item" onclick="getModalModifyEmote()">
+                <input class="form-control form-control-lg"
+                type="text" id="writePostEmote" name="postEmote" th:value="${boardDto.postEmote}" placeholder="감성을 선택해주세요." readonly/>
+              </div>
+            </div>
+          </div><!-- musicName -->
+          <div class="boardWrite-pag--item">
+            <p>유튜브 링크</p>
             <input
+              class="form-control form-control-lg postLink"
               type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="곡 이름을 입력해주세요."
-              th:field="*{postTitle}"
+              placeholder="유튜브 링크를 입력해주세요."
+              aria-label=".form-control-lg example"
+              name="postLink"
+              th:value="'https://youtu.be/' + ${boardDto.postLink}"
             />
-            <!-- error시 나타나는 메세지 -->
-            <p
-              th:if="${#fields.hasErrors('postTitle')}"
-              th:errorclass="errorTxt"
-              th:errors="*{postTitle}"
-            >
-              에러 메세지 출력
-            </p>
-            <label for="floatingInput">곡 이름</label>
           </div>
-          <!-- boardModify-music--title -->
-          <div class="boardModify-bg boardModify-music--name form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="가수 이름을 입력해주세요."
-              th:field="*{postSinger}"
-            />
-            <!-- error시 나타나는 메세지 -->
-            <p
-              th:if="${#fields.hasErrors('postSinger')}"
-              th:errorclass="errorTxt"
-              th:errors="*{postSinger}"
-            >
-              에러 메세지 출력
-            </p>
-            <label for="floatingInput">가수 이름</label>
-          </div>
-          <!-- boardModify-music--name -->
-          <div class="boardModify-bg boardModify-music--txt form-floating">
+          <div class="boardWrite-pag--item">
+            <p>내용작성</p>
             <textarea
+              rows="10"
               class="form-control"
               placeholder="설명 내용을 작성해주세요."
-              id="floatingTextarea2"
-              style="height: 100px"
-              th:field="*{postCont}"
+              id="floatingTextarea"
+              name="postCont"
+              th:value="${boardDto.postCont}"
+              th:text="${boardDto.postCont}"
             ></textarea>
-            <!-- error시 나타나는 메세지 -->
-            <p
-              th:if="${#fields.hasErrors('postCont')}"
-              th:errorclass="errorTxt"
-              th:errors="*{postCont}"
-            >
-              에러 메세지 출력
-            </p>
-            <label for="floatingTextarea2">내용 입력</label>
           </div>
-          <!-- boardModify-music--txt -->
-          <div class="boardModify-bg boardModify-music--video form-floating">
-            <input
-              type="text"
-              class="postLink form-control"
-              id="floatingInput"
-              placeholder="유튜브 링크를 입력해주세요."
-              th:field="*{postLink}"
-            />
-            <!-- error시 나타나는 메세지 -->
-            <p
-              th:if="${#fields.hasErrors('postLink')}"
-              th:errorclass="errorTxt"
-              th:errors="*{postLink}"
-            >
-              에러 메세지 출력
-            </p>
-            <!-- error시 나타나는 메세지 -->
-            <p th:if="${linkCheck == 'error'} and *{postLink} != ''">
-              링크를 다시 확인해주세요
-            </p>
-            <input type="hidden" value="" class="linkCheck" name="linkCheck" />
-            <label for="floatingInput">유튜브 링크</label>
-          </div>
-          <!-- boardModify-music--video -->
-          <p>장르</p>
-          <div
-            class="boardModify-bg boardModify-music--Genre input-group"
-            onclick="getModalModifyGenre()"
-          >
-            <input
-              type="text"
-              class="form-select"
-              id="modifyPostGenre"
-              name="postGenre"
-              th:field="*{postGenre}"
-              placeholder="장르를 선택해주세요."
-            />
-            <!-- error시 나타나는 메세지 -->
-            <p
-              th:if="${#fields.hasErrors('postGenre')}"
-              th:errorclass="errorTxt"
-              th:errors="*{postGenre}"
-            >
-              에러 메세지 출력
-            </p>
-          </div>
-          <!-- boardModify-music--Genre -->
-          <p>감성</p>
-          <div
-            class="boardModify-bg boardModify-music--Emote"
-            onclick="getModalModifyEmote()"
-          >
-            <input
-              type="text"
-              class="form-select"
-              id="modifyPostEmote"
-              th:field="*{postEmote}"
-              placeholder="감성을 선택해주세요."
-            />
-            <!-- error시 나타나는 메세지 -->
-            <p
-              th:if="${#fields.hasErrors('postEmote')}"
-              th:errorclass="errorTxt"
-              th:errors="*{postEmote}"
-            >
-              에러 메세지 출력
-            </p>
-          </div>
-          <!-- boardModify-music--Emote -->
-          <div class="btn-submit">
-            <!-- 로그인 한 유저의 이름 보내기 -->
-            <!-- <input type="hidden" name="postAuth" value="${session.userNm}"> -->
+          <div class="btns">
             <input type="hidden" name="postNo" th:value="${param.postNo}" />
-            <button class="btn btn-primary btnModifyConfirm">수정완료</button>
-            <a
-              th:href="@{/board/view(postNo=${boardDto.postNo})}"
-              type="reset"
-              class="btn btn-secondary"
-              >취소</a
-            >
+            <button type="submit" class="btn btn-primary">등록</button>
+            <button th:href="@{/board/view(postNo=${boardDto.postNo})}" type="reset" class="btn btn-secondary">취소</button>
           </div>
         </form>
       </article>
@@ -158,36 +94,36 @@
       <div id="closeModalModifyGenre" class="modalContents modalCategory">
         <!-- 모달창 안에 여기 내용 작성 -->
         <div class="modalCategory__box">
-          <div class="modalCategory__box__option" id="modifyDance">
-            <span>댄스/팝</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyFolk">
-            <span>포크/어쿠스틱</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyIdol">
-            <span>아이돌</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyRap">
-            <span>랩/힙합</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyRB">
-            <span>알앤비/소울</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyElect">
-            <span>일렉트로닉</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyRock">
-            <span>락/메탈</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyJazz">
-            <span>재즈</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyIndie">
-            <span>인디</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyAdult">
-            <span>성인가요</span>
-          </div>
+          <span class="modalCategory__box__option" id="modifyDance">
+            <a><img src="/images/music01.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyFolk">
+            <a><img src="/images/music02.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyIdol">
+            <a><img src="/images/music03.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyRap">
+            <a><img src="/images/music04.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyRB">
+            <a><img src="/images/music05.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyElect">
+            <a><img src="/images/music06.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyRock">
+            <a><img src="/images/music07.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyJazz">
+            <a><img src="/images/music08.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyIndie">
+            <a><img src="/images/music09.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyAdult">
+            <a><img src="/images/music10.png" alt=""></a>
+          </span>
         </div>
       </div>
       <!-- ModalThis-content -->
@@ -198,36 +134,36 @@
       <div id="closeModalModifyEmote" class="modalContents modalCategory">
         <!-- 모달창 안에 여기 내용 작성 -->
         <div class="modalCategory__box">
-          <div class="modalCategory__box__option" id="modifyExcite">
-            <span>신남</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyGloomy">
-            <span>우울</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyEcstasy">
-            <span>희열</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifySpooky">
-            <span>으스스</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyMagni">
-            <span>웅장한</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyCalm">
-            <span>잔잔</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyFlutter">
-            <span>설렘</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifySorrow">
-            <span>애절한</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyDreamy">
-            <span>몽환적</span>
-          </div>
-          <div class="modalCategory__box__option" id="modifyWarm">
-            <span>따뜻한</span>
-          </div>
+          <span class="modalCategory__box__option" id="modifyExcite">
+            <a><img src="/images/mood01.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyGloomy">
+            <a><img src="/images/mood02.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyEcstasy">
+            <a><img src="/images/mood03.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifySpooky">
+            <a><img src="/images/mood04.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyMagni">
+            <a><img src="/images/mood05.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyCalm">
+            <a><img src="/images/mood06.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyFlutter">
+            <a><img src="/images/mood07.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifySorrow">
+            <a><img src="/images/mood08.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyDreamy">
+            <a><img src="/images/mood09.png" alt=""></a>
+          </span>
+          <span class="modalCategory__box__option" id="modifyWarm">
+            <a><img src="/images/mood10.png" alt=""></a>
+          </span>
         </div>
       </div>
       <!-- ModalThis-content -->
