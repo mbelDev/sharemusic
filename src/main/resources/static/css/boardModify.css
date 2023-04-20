@@ -2,6 +2,8 @@
   display: flex;
   justify-content: center;
   font-size: 18px;
+  width: 100%;
+  height: 100vh;
 }
 .board-modify--page .board-bodify--content {
   margin-top: 100px;
@@ -9,7 +11,6 @@
 .board-modify--page .board-bodify--content input,
 .board-modify--page .board-bodify--content textarea,
 .board-modify--page .board-bodify--content select {
-  width: 800px;
   margin: 20px 0;
 }
 .board-modify--page .board-bodify--content span {
@@ -28,4 +29,26 @@
 .board-modify--page .board-bodify--content .btn-submit {
   margin-top: 30px;
   text-align: right;
+}
+.board-modify--page .board-bodify--content form .boardModify-bg--Form {
+  display: flex;
+  align-items: center;
+}
+.board-modify--page .board-bodify--content form .boardModify-bg--Form-name {
+  margin-right: 20px;
+}
+.board-modify--page .board-bodify--content form .boardModify-bg--Form-name input {
+  width: 30vw !important;
+}
+.board-modify--page .board-bodify--content form .boardModify-bg--Form-music input {
+  width: 8vw !important;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.board-modify--page .board-bodify--content form .boardModify-bg--Form-music input:hover {
+  background-color: #386bc0;
+  outline: #386bc0;
+  border: 1px solid #386bc0;
+  color: #fff;
 }

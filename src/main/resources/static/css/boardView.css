@@ -1,3 +1,7 @@
+.reply-date-md500, .board-view--replyBox__input-M {
+  display: none;
+}
+
 .boardView {
   margin: 4%;
   border-bottom: 1px solid;
@@ -29,7 +33,6 @@
   font-size: 35px;
 }
 .boardView-Video--title .title-Date {
-  outline: 1px solid red;
   margin: 10px 0;
 }
 .boardView-Video--title .title-btn {
@@ -57,55 +60,311 @@
   width: 25px;
 }
 
-.reply {
+.board-view--replyBox .reply {
   position: relative;
   display: flex;
   margin: 5px auto;
 }
-.reply-container {
+.board-view--replyBox .reply-container {
   width: 100%;
   min-height: 300px;
 }
-.reply-contents {
+.board-view--replyBox .reply-contents {
   display: flex;
   flex-grow: 1;
   min-height: 30px;
+  width: 100%;
 }
-.reply-contents--icon {
-  width: 180px;
+.board-view--replyBox .reply-contents--icon {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  position: relative;
 }
-.reply-contents--icon img {
+.board-view--replyBox .reply-contents--icon a {
+  width: 8%;
+}
+.board-view--replyBox .reply-contents--icon img {
   width: 30px;
   height: 30px;
   border-radius: 5px;
 }
-.reply-contents--icon span {
+.board-view--replyBox .reply-contents--icon span {
   display: inline-block;
 }
-.reply-contents--text {
-  max-width: 900px;
+.board-view--replyBox .reply-contents--icon .menuBtn {
+  position: absolute;
+  top: 0;
+  right: 30px;
+  font-size: 30px;
+  cursor: pointer;
 }
-.reply-contents--btns {
+.board-view--replyBox .reply-contents--icon .reply-contents--text {
+  width: 80%;
+  padding: 10px 0 10px 35px;
+}
+.board-view--replyBox .reply-contents--icon .reply-contents--box {
+  display: flex;
+}
+.board-view--replyBox .reply-contents--btns {
   position: relative;
   display: flex;
   flex-grow: 0;
-  justify-content: space-between;
-  width: 100px;
-  height: 100%;
-  right: 0%;
-  margin-left: 5px;
-}
-.reply-contents--btns span {
-  background: #fff;
-  border-radius: 5px;
-  margin-left: 2px;
-}
-.reply-date {
-  flex-grow: 0;
-  width: 15%;
-  text-align: right;
-}
-.reply-hidden {
+  justify-content: left;
   width: 100%;
+  height: 100%;
+}
+.board-view--replyBox .reply-contents--btns span {
+  display: grid;
+  place-items: center;
+  padding: 0 20px;
+  font-size: 12px;
+  opacity: 0.65;
+  cursor: pointer;
+}
+.board-view--replyBox .reply-date {
+  width: 180px !important;
+  font-size: 12px;
+  opacity: 0.65;
+  padding: 10px 0 10px 35px;
+}
+.board-view--replyBox .reply-hidden {
+  width: 100%;
+}
+.board-view--replyBox .board-view--replyBox__input {
+  position: relative;
+}
+.board-view--replyBox .board-view--replyBox__input textarea {
+  width: 100%;
+  resize: none;
+}
+.board-view--replyBox .board-view--replyBox__input input:nth-child(4) {
+  position: absolute;
+  bottom: 10%;
+  right: 3%;
+  z-index: 10;
+}
+
+@media screen and (max-width: 1640px) {
+  .boardView-Video iframe {
+    width: 78vw;
+    height: 45vw;
+  }
+  .boardView-Video--title .title {
+    width: 50vw;
+  }
+  .board-view--replyBox {
+    width: 78vw;
+  }
+  .boardView-Video--title .like {
+    width: 45vw;
+    margin-left: 45vw;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .boardView-Video iframe {
+    width: 75vw;
+    height: 43vw;
+  }
+  .boardView-Video--title .title {
+    width: 50vw;
+  }
+  .board-view--replyBox {
+    width: 78vw;
+  }
+  .board-view--replyBox {
+    width: 75vw;
+  }
+  .boardView-Video--title .like {
+    width: 45vw;
+    margin-left: 35vw;
+  }
+  .reply-date {
+    width: 15vw;
+  }
+}
+@media screen and (max-width: 1230px) {
+  .boardView-Video iframe {
+    width: 72vw;
+    height: 41vw;
+  }
+  .board-view--replyBox {
+    width: 73vw;
+  }
+  .boardView-Video--title .like {
+    width: 45vw;
+    margin-left: 25vw;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .boardView-Video iframe {
+    width: 69vw;
+    height: 40vw;
+  }
+  .board-view--replyBox {
+    width: 68vw;
+  }
+  .boardView-Video--title .like {
+    width: 45vw;
+    margin-left: 18vw;
+  }
+}
+@media screen and (max-width: 960px) {
+  .boardView-Video iframe {
+    width: 65vw;
+    height: 37vw;
+  }
+  .board-view--replyBox {
+    width: 65vw;
+    font-size: 13px;
+  }
+  .boardView-Video--title .like {
+    width: 45vw;
+    margin-left: 5vw;
+  }
+  .board-view--replyBox .reply-contents--icon a {
+    width: 20%;
+  }
+  .board-view--replyBox .reply-date {
+    width: 200px !important;
+  }
+}
+@media screen and (max-width: 855px) {
+  .boardView-Area-title {
+    padding-top: 130px;
+  }
+  .boardView-Video iframe {
+    width: 90vw;
+    height: 52vw;
+  }
+  .board-view--replyBox {
+    width: 88vw;
+    font-size: 13px;
+  }
+  .boardView-Video--title .like {
+    width: 18vw;
+    margin-left: 5vw;
+  }
+  .reply-date {
+    width: 20vw;
+  }
+}
+@media screen and (max-width: 500px) {
+  .boardView-Video--title .title-name p {
+    font-size: 23px;
+  }
+  .boardView-Video--title .title-name h1 {
+    font-size: 28px;
+  }
+  .boardView-Video--title .title-Date, .boardView-Video--title .title-Genre {
+    font-size: 12px;
+  }
+  .boardView-Video--title .title-Date {
+    margin: 20px 0 0 0;
+  }
+  .boardView-Video--title .title-btn {
+    margin: 5px 0 0 0;
+  }
+  .boardView-Video--title .like-good img {
+    width: 25px;
+  }
+  .boardView-Video--title .like-btn button img {
+    width: 23px;
+    margin-bottom: 5px;
+  }
+  .boardView-Video--title .like-btn {
+    margin-left: 15px;
+  }
+  .postLike {
+    font-size: 12px;
+  }
+  .board-view--replyBox {
+    width: 88vw;
+    font-size: 13px;
+  }
+  .boardView-Video--title .like {
+    width: 25vw;
+    margin-left: 5vw;
+  }
+  .reply-date {
+    display: none;
+  }
+  .reply-date-md500 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .reply-date-md500 .reply-date {
+    display: block;
+    width: 50vw !important;
+    text-align: left;
+    padding: 5px 0 0 35px;
+    opacity: 0.65;
+  }
+  .reply-date-md500 .reply-contents--btns {
+    display: block;
+    padding-top: 5px;
+  }
+  .reply-date-md500 .reply-contents--btns span {
+    background: none;
+    border-radius: auto;
+    margin-left: auto;
+  }
+  .reply-date-md500 .reply-contents--btns .replyReplyBtn {
+    padding: 5px 10px;
+  }
+  .reply-contents--icon {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .reply-contents--icon a {
+    width: 20%;
+  }
+  .reply-contents--icon .menuBtn {
+    display: block;
+    margin-right: 10px;
+    padding: 10px 10px;
+    transform: translateY(-10px);
+    cursor: pointer;
+    right: 0;
+  }
+  .reply-contents--btns {
+    display: none;
+  }
+  .reply-contents {
+    display: flex;
+    flex-direction: column;
+  }
+  .reply-contents--text {
+    padding: 10px 0 10px 35px;
+  }
+  .board-view--replyBox__input {
+    display: none;
+  }
+  .board-view--replyBox__input-M {
+    display: block;
+  }
+  .board-view--replyBox__input-M .replyCont {
+    cursor: pointer;
+    width: 100%;
+  }
+  .board-view--replyBox__input-M .replyCont:focus {
+    outline: none;
+  }
+  .reply-contents--btns span {
+    display: block;
+    text-align: left;
+  }
+  .replyReplyBtn {
+    display: none !important;
+  }
+  .replyReplyBtn.replyReplyBtn-M {
+    display: block !important;
+    width: 100px;
+    margin: 0 !important;
+  }
+  .board-view--replyBox .reply-contents--icon a {
+    width: 20%;
+  }
 }

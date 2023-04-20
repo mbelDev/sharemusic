@@ -64,7 +64,7 @@
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
           <div class="Area02-item--profile-list topAndbut">
-            <div class="swiper mySwiper profileMySwiper">
+            <div class="mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listWritten}">
                   <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
@@ -91,7 +91,7 @@
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
           <div class="Area02-item--profile-list topAndbut">
-            <div class="swiper mySwiper profileMySwiper">
+            <div class="mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listRecent}">
                   <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
@@ -118,7 +118,7 @@
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
           <div class="Area02-item--profile-list topAndbut">
-            <div class="swiper mySwiper profileMySwiper">
+            <div class="mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listBookmark}">
                   <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
@@ -145,7 +145,7 @@
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
           <div class="Area02-item--profile-list topAndbut">
-            <div class="swiper mySwiper profileMySwiper">
+            <div class="mySwiper profileMySwiper">
               <ul class="swiper-wrapper">
                 <li class="swiper-slide" th:each="item : ${userInfo.userHistoryList.listLiked}">
                   <a th:href="@{/board/view(postNo=${item.postNo})}"><img th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}">
