@@ -119,13 +119,13 @@
   place-items: center;
   padding: 0 20px;
   font-size: 12px;
-  opacity: 0.65;
+  opacity: 0.5;
   cursor: pointer;
 }
 .board-view--replyBox .reply-date {
   width: 180px !important;
   font-size: 12px;
-  opacity: 0.65;
+  opacity: 0.5;
   padding: 10px 0 10px 35px;
 }
 .board-view--replyBox .reply-hidden {
@@ -292,14 +292,13 @@
   .reply-date-md500 {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
   }
   .reply-date-md500 .reply-date {
     display: block;
     width: 50vw !important;
     text-align: left;
     padding: 5px 0 0 35px;
-    opacity: 0.65;
+    opacity: 0.5;
   }
   .reply-date-md500 .reply-contents--btns {
     display: block;
@@ -327,7 +326,7 @@
     padding: 10px 10px;
     transform: translateY(-10px);
     cursor: pointer;
-    right: 0;
+    right: 0 !important;
   }
   .reply-contents--btns {
     display: none;
@@ -366,5 +365,8 @@
   }
   .board-view--replyBox .reply-contents--icon a {
     width: 20%;
+  }
+  .board-view--replyBox .reply-contents--icon span {
+    font-weight: bold;
   }
 }

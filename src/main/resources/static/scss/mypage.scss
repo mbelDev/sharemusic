@@ -1,6 +1,7 @@
 
 .mainContent {
   display: block;
+  padding: 50px;
   &-Area01 {
     &-title {
     }//&-title
@@ -62,6 +63,7 @@
   }//&-Area01
   &-Area02 {
     height: 300px;
+    margin-bottom: 100px;
     &-title {
       display: flex;
       align-items: center;
@@ -123,6 +125,10 @@
       }//&-list
     }//.Area02-item--profile
   }//&-Area02
+  
+  .hidden{
+    display:none;
+  }
 }//.mainConstent
 
 
@@ -220,7 +226,7 @@
     // margin-left: 4%;
   }
   .mainContent-Area01-item .Area01-item--profile-form .formArea span button {
-    padding: 10px 15px;
+    padding: 10px 20px;
   }
   .mainContent-Area01-item .Area01-item--profile-form .formArea span:nth-child(2) {
     padding: 6px 0 6px 10px;
@@ -241,4 +247,8 @@
   .mainContent-Area01-item .Area01-item--profile-form .formArea-sub p {
     text-align: left;
   }
+  .mainContent {
+    display: block;
+    padding: 30px 0;
+}
 }//@media screen and (max-width: 500px)

@@ -27,9 +27,15 @@
                         />
                         <div class="swiper-title-num">
                           <!-- <p class="" th:text="${i.count}">랭킹넘버</p> -->
-                          <p class="" th:if="${i.count == 1}"><img src="/images/num01.png" alt="" /></p>
-                          <p class="" th:if="${i.count == 2}"><img src="/images/num02.png" alt="" /></p>
-                          <p class="" th:if="${i.count == 3}"><img src="/images/num03.png" alt="" /></p>
+                          <p class="" th:if="${i.count == 1}">
+                            <img src="/images/num01.png" alt="" />
+                          </p>
+                          <p class="" th:if="${i.count == 2}">
+                            <img src="/images/num02.png" alt="" />
+                          </p>
+                          <p class="" th:if="${i.count == 3}">
+                            <img src="/images/num03.png" alt="" />
+                          </p>
                         </div>
                         <!-- swiper-title-num -->
                         <div class="swiper-txt">
@@ -56,57 +62,33 @@
             <!-- ranking-box -->
           </div>
           <!-- ranking-area -->
-        </article><!-- main-constent--ranking -->
+        </article>
+        <!-- main-constent--ranking -->
         <div class="line-one"></div>
         <article class="main-constent--listItem listItem--center">
           <div class="listItem-nav">
             <h1 class="topAndbut">뮤직리스트</h1>
             <div class="update-data topAndbut">
               <!-- 정렬 -->
-              <!-- 메인, 장르별일때 -->
-              <ul th:if="${emote} == null">
+              <ul>
                 <li>
                   <a
                     href="#"
-                    th:href="@{/mainPage/{genre}(genre=${genre}, sort=postNo, searchTxt=${param.searchTxt})}"
+                    th:href="@{/mainPage/{category}(category=${category}, sort=postNo, searchTxt=${param.searchTxt})}"
                     >최신순</a
                   >
                 </li>
                 <li>
                   <a
                     href="#"
-                    th:href="@{/mainPage/{genre}(genre=${genre}, sort=postHits, searchTxt=${param.searchTxt})}"
+                    th:href="@{/mainPage/{category}(category=${category}, sort=postHits, searchTxt=${param.searchTxt})}"
                     >조회순</a
                   >
                 </li>
                 <li>
                   <a
                     href="#"
-                    th:href="@{/mainPage/{genre}(genre=${genre}, sort=postLike, searchTxt=${param.searchTxt})}"
-                    >추천순</a
-                  >
-                </li>
-              </ul>
-              <ul th:unless="${emote} == null">
-                <!-- 감성별일때 -->
-                <li>
-                  <a
-                    href="#"
-                    th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postNo, searchTxt=${param.searchTxt})}"
-                    >최신순</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postHits, searchTxt=${param.searchTxt})}"
-                    >조회순</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    th:href="@{/mainPage/{genre}/{emote}(emote=${emote}, sort=postLike, searchTxt=${param.searchTxt})}"
+                    th:href="@{/mainPage/{category}(category=${category}, sort=postLike, searchTxt=${param.searchTxt})}"
                     >추천순</a
                   >
                 </li>
@@ -144,49 +126,47 @@
             </ul>
           </div>
           <!-- getList-ItemBox -->
-        </article><!-- main-constent--listItem -->
+        </article>
+        <!-- main-constent--listItem -->
       </div>
-      
-    </section><!-- main-constent--itmes -->
+    </section>
+    <!-- main-constent--itmes -->
 
     <script>
       function testRespone01(genre) {
         $.ajax({
-            url:"/reload/"+genre,
-            type:"GET",
-            data:{
-              "genre":genre,
-              "searchTxt":"",
-              "sort":"postNo"
-            },
-            async:false,
-            success:function(response){
-                console.log(response);
-                
-            },
-        })
-        .done(function( fragment ){
-            $("#test").replaceWith(fragment);
+          url: "/reload/" + genre,
+          type: "GET",
+          data: {
+            genre: genre,
+            searchTxt: "",
+            sort: "postNo",
+          },
+          async: false,
+          success: function (response) {
+            console.log(response);
+          },
+        }).done(function (fragment) {
+          $("#test").replaceWith(fragment);
         });
       }
     </script>
     <script>
-      function testRespone02(genre, searchTxt, sort) {
+      function testRespone02(category, searchTxt, sort) {
         $.ajax({
-            url:"/reload/",
-            type:"POST",
-            data:{
-              "genre":genre,
-              "searchTxt":searchTxt,
-              "sort":sort
-            },
-            async:false,
-            success:function(response){
-                console.log(response);
-            },
-        })
-        .done(function( fragment ){
-            $("#test").replaceWith(fragment);
+          url: "/reload/",
+          type: "POST",
+          data: {
+            category: category,
+            searchTxt: searchTxt,
+            sort: sort,
+          },
+          async: false,
+          success: function (response) {
+            console.log(response);
+          },
+        }).done(function (fragment) {
+          $("#test").replaceWith(fragment);
         });
       }
     </script>

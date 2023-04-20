@@ -1,12 +1,3 @@
-// modal
-function getModalWriteGenre() {
-  getModal02($("#modalWriteGenre"), $("#closeModalWriteGenre"));
-}
-
-function getModalWriteEmote() {
-  getModal02($("#modalWriteEmote"), $("#closeModalWriteEmote"));
-}
-
 // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
 $(".btnWriteConfirm").on("click", function () {
   const url = $(".postLink").val();
@@ -16,16 +7,24 @@ $(".btnWriteConfirm").on("click", function () {
 
   if (match) {
     const getId = match[1];
-    $(".postLink").val(match[1]);
-    return true;
+    $(".linkCheck").val(match[1]);
   } else {
-    // 유튜브 링크를 다시 확인하라고 경고 창
-    alert("다시 확인해주세요.");
+    $(".linkCheck").val("error");
   }
-  return false;
+
+  return true;
 });
 
-// 장르 선택
+// modal 생성, 종료
+function getModalWriteGenre() {
+  getModal02($("#modalWriteGenre"), $("#closeModalWriteGenre"));
+}
+
+function getModalWriteEmote() {
+  getModal02($("#modalWriteEmote"), $("#closeModalWriteEmote"));
+}
+
+// modal 장르 선택
 $("#writeDance").on("click", function () {
   $("#writePostGenre").val("댄스/팝");
 });
@@ -66,7 +65,7 @@ $("#writeAdult").on("click", function () {
   $("#writePostGenre").val("성인가요");
 });
 
-// 감성 선택
+// modal 감성 선택
 $("#writeExcite").on("click", function () {
   $("#writePostEmote").val("신남");
 });

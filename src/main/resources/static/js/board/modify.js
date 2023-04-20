@@ -1,12 +1,3 @@
-// modal
-function getModalModifyGenre() {
-  getModal02($("#modalModifyGenre"), $("#closeModalModifyGenre"));
-}
-
-function getModalModifyEmote() {
-  getModal02($("#modalModifyEmote"), $("#closeModalModifyEmote"));
-}
-
 // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
 $(".btnModifyConfirm").on("click", function () {
   const url = $(".postLink").val();
@@ -16,16 +7,24 @@ $(".btnModifyConfirm").on("click", function () {
 
   if (match) {
     const getId = match[1];
-    $(".postLink").val(match[1]);
+    $(".linkCheck").val(match[1]);
     return true;
   } else {
-    // 유튜브 링크를 다시 확인하라고 경고 창
-    alert("다시 확인해주세요.");
+    $(".linkCheck").val("error");
   }
-  return false;
+  return true;
 });
 
-// 장르 선택
+// modal 생성, 종료
+function getModalModifyGenre() {
+  getModal02($("#modalModifyGenre"), $("#closeModalModifyGenre"));
+}
+
+function getModalModifyEmote() {
+  getModal02($("#modalModifyEmote"), $("#closeModalModifyEmote"));
+}
+
+// modal 장르 선택
 $("#modifyDance").on("click", function () {
   $("#modifyPostGenre").val("신남");
 });
@@ -66,7 +65,7 @@ $("#modifyAdult").on("click", function () {
   $("#modifyPostGenre").val("성인가요");
 });
 
-// 감성 선택
+// modal 감성 선택
 $("#modifyExcite").on("click", function () {
   $("#modifyPostEmote").val("신남");
 });
