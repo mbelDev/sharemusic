@@ -31,7 +31,19 @@
 
   <update id="updateMember" parameterType="MemberDto">
     UPDATE MEMBER SET 
-    (USERPW, USERNM, USERICON, USERICONREAL) = (#{userPW},#{userNM},#{userIcon},#{userIconReal})
+     <if test="userNM != null">
+      USERNM = #{userNM},
+     </if>
+     <if test="userPW != null">
+      USERPW = #{userPW},
+     </if>
+     <if test="userIcon != null">
+      USERICON = #{userIcon},
+     </if>
+     <if test="userIconReal != null">
+      USERICONREAL = #{userIconReal},
+     </if>
+    USERID = #{userID} WHERE USERID = #{userID}
   </update>
 
   <delete id="deleteMember" parameterType="MemberDto">

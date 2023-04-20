@@ -97,3 +97,16 @@
     }//.recent-page--list
   }//.recent-page--listBox
 }//.recent-page
+
+
+.category{
+  &-title{
+    margin: 30px 10px;
+  }
+  &-no-contents{
+    display:block ;
+    color:#fff; 
+    font-style: bold;
+    margin-top: 90px;
+  }
+}

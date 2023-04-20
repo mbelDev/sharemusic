@@ -154,18 +154,6 @@ public class MemberController {
     return "/member/written";
   }
 
-  @GetMapping("/view")
-  public String memberInfo(HttpSession session, Model model) {
-    if (session != null && session.getAttribute("loggedUser") != null) {
-      LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
-      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
-      model.addAttribute("memberDto", memberDto);
-      return "/member/view";
-    }
-
-    return "redirect:/member/login";
-  }
-
   @GetMapping("/join")
   public String joinPage(
     HttpSession session,
@@ -253,6 +241,21 @@ public class MemberController {
       return "redirect:" + (String) session.getAttribute("pagePrev");
     }
     return "redirect:/mainPage";
+  }
+
+  @PostMapping("/update")
+  @ResponseBody
+  public int updateMember(HttpSession session, MemberDto memberDto) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return -1;
+    }
+    memberDto.setUserID(loggedUser.getUserID());
+    memberService.updateMember(memberDto);
+    loggedUser.setUserIconReal(memberDto.getUserIconReal());
+    loggedUser.setUserNM(memberDto.getUserNM());
+    // session.setAttribute("loggedUser", loggedUser);
+    return 1;
   }
 
   @PostMapping("/like")

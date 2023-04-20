@@ -84,3 +84,13 @@
 .recent-page .recent-page--listBox .recent-page--list ul li .btns {
   z-index: 1;
 }
+
+.category-title {
+  margin: 30px 10px;
+}
+.category-no-contents {
+  display: block;
+  color: #fff;
+  font-style: bold;
+  margin-top: 90px;
+}

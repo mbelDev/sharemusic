@@ -111,6 +111,9 @@
 .mainContent-Area02 .Area02-item--profile-list ul li a .profile-list:hover {
   opacity: 1;
 }
+.mainContent .hidden {
+  display: none;
+}
 
 @media screen and (max-width: 1825px) {
   .mainContent-Area02 .Area02-item--profile-list ul {

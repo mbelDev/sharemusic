@@ -77,9 +77,9 @@
   </update>
 
 <!-- 팔로우 확인 -->
-  <insert id="getFollow" parameterType="SendDataDto">
-    SELECT FOLLOWID FROM FOLLOW WHERE USERID = #{userID} AND FOLLOWID = #{followID}
-  </insert>
+  <select id="getFollow" parameterType="SendDataDto" resultType="Integer">
+    SELECT COUNT(FOLLOWID) FROM FOLLOW WHERE USERID = #{userID} AND FOLLOWID = #{followID}
+  </select>
 
 <!-- 팔로우 등록 -->
   <insert id="putFollow" parameterType="SendDataDto">
@@ -87,9 +87,9 @@
   </insert>
 
 <!-- 팔로우 취소 -->
-  <insert id="unFollow" parameterType="SendDataDto">
+  <delete id="unFollow" parameterType="SendDataDto">
     DELETE FROM FOLLOW WHERE USERID = #{userID} AND FOLLOWID = #{followID}
-  </insert>
+  </delete>
 
 <!-- 각종 수치를 얻는 곳 -->
 

@@ -8,7 +8,11 @@
     <section class="recent-page">
       <article class="recent-page--listBox">
         <div class="recent-page--list">
-          <h4>최근 감상 기록</h4>
+          <h2 class="category-title" th:if="${#strings.equals(param.category,'recent')}" >최근 감상 기록</h2>
+          <h2 class="category-title" th:if="${#strings.equals(param.category,'follow')}" >팔로우 목록</h2>
+          <h2 class="category-title" th:if="${#strings.equals(param.category,'bookmark')}" >북마크 목록</h2>
+          <h2 class="category-title" th:if="${#strings.equals(param.category,'liked')}" >좋아요를 누른 기록</h2>
+
           <ul>
             <input class="val-userID" type="hidden" th:value="${loggedUser.userID}">
             <li th:each="item:${historyList}">
@@ -44,7 +48,10 @@
             </li>
             <li th:if="${#lists.isEmpty(historyList)}">
               <div style="display:block; height:200px; width: 600px; border: 1px solid #fff; text-align: center;">
-                  <span style="display:block ;color:#fff; font-style: bold; margin-top: 90px;"> 아직 열람하신 곡이 한 곡도 없어요!! </span>
+                <span class="category-no-content" th:if="${#strings.equals(param.category,'recent')}" >최근 열람하신 곡이 한 곡도 없어요!!</span>
+                <span class="category-no-content" th:if="${#strings.equals(param.category,'follow')}" >아직 아무도 팔로우 하고 있지 않아요!!</span>
+                <span class="category-no-content" th:if="${#strings.equals(param.category,'bookmark')}" >아직 북마크 하신 곡이 한 곡도 없어요!!</span>
+                <span class="category-no-content" th:if="${#strings.equals(param.category,'liked')}" >아직 좋아요를 누르신 곡이 한 곡도 없어요!!</span>
               </div>
           </li>
           </ul>

@@ -6,55 +6,64 @@
   layout:decorate="~{/include/layoutMember.html}">
 <main id="mainPage-Area" class="mypage-Area" layout:fragment="contents">
   <section class="mainContent">
-    <div class="main-constent--itmes-center">
-      <article class="mainContent-Area01">
-        <div class="mainContent-Area01-title">
-          <h1 class="topAndbut">회원정보</h1>
-        </div><!-- mainConstent-Area-title -->
-        <div class="mainContent-Area01-item">
-          <div class="Area01-item--profile">
-            <div class="Area01-item--profile-img topAndbut">
-              <img th:src="@{/upload/}+${userInfo.userIconReal}">
-              <div class="fileArea">
-                <label class="btn btn-primary" for="file">이미지선택</label> 
-                <input type="file" id="file">
-              </div><!-- fileArea -->
-            </div><!-- Area01-item--profile-img -->
-            <div class="Area01-item--profile-form topAndbut">
-              <div class="formArea">
-                <span>닉네임</span>
-                <span th:text="${userInfo.userNM}"></span>
-                <!-- <span>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-                </span> -->
-                <span th:if="${loggedUser.userID == userInfo.userID}"><button class="btn btn-primary">수정</button></span>
-              </div><!-- formArea -->
-              <div class="formArea">
-                <span>아이디</span>
-                <span th:text="${userInfo.userID}"></span>
-              </div><!-- formArea -->
-              <div class="formArea formArea-bt">
-                <div class="formArea-sub">
-                  <p>가입일</p>
-                  <spna th:text="${userInfo.userDate}">0</spna>
-                </div>
-                <div class="formArea-sub">
-                  <p>작성 글</p>
-                  <spna th:text="${userInfo.userPosts}">0</spna>
-                </div>
-                <div class="formArea-sub">
-                  <p>작성덧글</p>
-                  <spna th:text="${userInfo.userReplys}">0</spna>
-                </div>
-                <div class="formArea-sub">
-                  <p>받은추천</p>
-                  <spna th:text="${userInfo.userLiked}">0</spna>
-                </div>
-              </div><!-- formArea -->
-            </div><!-- Area01-item--profile-form -->
-          </div><!-- Area-item--profile -->
-        </div><!-- mainConstent-Area-item -->
-      </article><!-- mainConstent-Area01 -->
+    <article class="mainContent-Area01">
+      <div class="mainContent-Area01-title">
+        <h1 class="topAndbut">회원정보</h1>
+      </div><!-- mainConstent-Area-title -->
+      <div class="mainContent-Area01-item">
+        <div class="Area01-item--profile"> 
+          <div class="Area01-item--profile-img topAndbut">
+            <img th:src="@{/upload/}+${userInfo.userIconReal}" id="updateProfile-img">
+            <div class="fileArea" th:if="${session.loggedUser.userID == userInfo.userID}">
+              <label class="btn btn-primary" id="profile-Btn" onclick="setBaseIcon();">프로필 사진 업데이트</label> 
+            </div><!-- fileArea -->
+            <div class="fileArea" th:unless="${session.loggedUser.userID == userInfo.userID}">
+              <label class="btn btn-primary btn-follow" th:data-followID="${userInfo.userID}">이 유저 팔로우하기</label> 
+            </div><!-- fileArea -->
+          </div><!-- Area01-item--profile-img -->
+          <div class="Area01-item--profile-form topAndbut">
+            <div class="formArea">
+              <span>닉네임</span>
+              <span id="originalProfile-userNM" th:text="${userInfo.userNM}"></span>
+              <form action="/member/update" method="POST" id="updateProfile-userNM" class="hidden" th:if="${loggedUser.userID == userInfo.userID}">
+                <input type="text" name="userNM" th:placeholder="${loggedUser.userNM}">
+                <input type="hidden" name="userIcon" th:value="default">
+                <button class="btn btn-primary" id="profile-userNM">수정 완료</button>
+                <label class="btn btn-secondary" id="profile-cancel" onclick="closeInputNM();">취소</label>
+              </form>
+              <!-- <span>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              </span> -->
+              <span th:if="${loggedUser.userID == userInfo.userID}" id="profile-modify"><button class="btn btn-primary" onclick="openInputNM();">수정</button></span>
+            </div><!-- formArea -->
+            <div class="formArea">
+              <span>아이디</span>
+              <span th:text="${userInfo.userID}"><input type="text" disabled>
+                <input class="form-control" type="text" placeholder="" aria-label="Disabled input example" disabled>
+              </span>
+            </div><!-- formArea -->
+            <div class="formArea formArea-bt">
+              <div class="formArea-sub">
+                <p>가입일</p>
+                <spna th:text="${userInfo.userDate}">0</spna>
+              </div>
+              <div class="formArea-sub">
+                <p>작성 글</p>
+                <spna th:text="${userInfo.userPosts}">0</spna>
+              </div>
+              <div class="formArea-sub">
+                <p>작성덧글</p>
+                <spna th:text="${userInfo.userReplys}">0</spna>
+              </div>
+              <div class="formArea-sub">
+                <p>받은추천</p>
+                <spna th:text="${userInfo.userLiked}">0</spna>
+              </div>
+            </div><!-- formArea -->
+          </div><!-- Area01-item--profile-form -->
+        </div><!-- Area-item--profile -->
+      </div><!-- mainConstent-Area-item -->
+    </article><!-- mainConstent-Area01 -->
     <div class="line-one"></div>
     <article class="mainContent-Area02">
       <div class="mainContent-Area02-title topAndbut">
@@ -87,6 +96,7 @@
       <div class="mainContent-Area02-title topAndbut">
         <h1>최근 감상한 곡</h1>
         <button class="btn btn-primary"><a th:href="@{/member/mypage/list?category=recent}">더 보기</a></button>
+        <button class="btn btn-secondary" th:if="${session.loggedUser.userID == userInfo.userID}">전체 기록 삭제</button>
       </div><!-- mainConstent-Area02-title -->
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
@@ -169,19 +179,31 @@
 
 
   <!-- 프로필 사진 업데이트 모달창 -->
-  <div id="deleteReplyModal" class="modal-wnd">
-    <div class="modal-wnd-item">
-      <div class="modal-content modal-profileUpdate">
+  <div id="profileUpdateModal" class="modal-wnd">
+    <div class="modal-wnd-item modal-profileUpdate">
+      <div class="modal-content">
         <!-- 모달창 안에 여기 내용 작성 -->
-        <div class="modal-profileUpdate__view">
-          <img th:src="@{/upload/}+${userInfo.userIconReal}">
-          <label class="btn btn-primary" for="file">파일 선택</label>
-          <input type="file" id="file">
+        <div class="modal-profileUpdate__icon">
+          <p id="previewIcon"><img th:src="@{/upload/}+${userInfo.userIconReal}" id="testProfile"></p>
+          
+          <label class="btn btn-primary btn-profile" for="formFileMultiple">파일 선택</label>
+          <label class="btn btn-secondary btn-profile" id="fileRemove" onclick="removeIcon();">파일 제거</label>
+          <form id="updateProfile-uploadFile">
+            <input
+            type="file"
+            class="userIconFile"
+            id="formFileMultiple"
+            style="display:none;"
+            name="userIconFile"
+            onchange="setIcon(event);"
+                    />
+          </form>
+          
           
         </div>
         <div class="modal-profileUpdate__btns">
-          <button id="deleteReplyConfirm">확인</button>
-          <button id="closeDeleteReply">취소</button>
+          <button id="updateProfileConfirm" onclick="updateProfile();">확인</button>
+          <button id="profileUpdateModal-close" onclick="removeIcon();">취소</button>
         </div>
       </div>
       <!-- ModalThis-content -->
@@ -189,4 +211,88 @@
     <!-- write-modal--item -->
   </div>
 
+  <script src="/js/modal.js"></script>
+  <script src="/js/history/up-to-history.js"></script>
+  <script>
+    getModal($("#profile-Btn"),$("#profileUpdateModal"),$("#profileUpdateModal-close"));
+    followEvent();
+
+    function setIcon(event) {
+      var reader = new FileReader();
+
+      reader.onload = function (event) {
+        $("#testProfile").attr("src",event.target.result);
+
+        //appendChild말고 replace방법을 찾아보자.
+        //이것이 그 방법이다.
+      };
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    function setBaseIcon(){
+      console.log("aa");
+      $("#testProfile").attr("th:src" , "@{/upload/}+${userInfo.userIconReal}");
+    }
+
+    function removeIcon(){
+      let file= $("input[type=file]");
+      file.val(""); 
+        var img = $("#testProfile")
+        img.attr("src","/images/sampleprofile.jpg");
+    }
+
+    // function updateUserNM(){
+    //   $.ajax({
+    //     url:"/member/update",
+    //     type:"POST",
+    //     data:{
+    //       userIcon : 'default',
+    //       userNM : 
+    //     },
+    //     success:function(response){
+    //       alert("회원 정보를 수정했습니다.");
+    //       location.href="/member/mypage";
+    //     },
+    //     error:function(err){
+    //       console.log(err);
+    //     }
+    //   })
+    // }
+
+    function updateProfile(){
+      const file = $("#updateProfile-uploadFile")[0];
+      const sendData = new FormData(file);
+      $.ajax({
+        url:"/member/update",
+        type:"POST",
+        contentType:false,
+        processData:false,
+        data:sendData,
+        success:function(response){
+          console.log(response);
+          if(response == 1){
+            alert("프로필 사진을 업데이트 했습니다.");
+            location.href="/member/mypage";
+          }else{
+            alert("문제가 발생하였습니다.");
+          }
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+ 
+    }
+
+    function openInputNM(){
+      $("#updateProfile-userNM").removeClass("hidden");
+      $("#originalProfile-userNM").addClass("hidden");
+      $("#profile-modify").addClass("hidden");
+    }
+    function closeInputNM(){
+      $("#updateProfile-userNM").addClass("hidden");
+      $("#originalProfile-userNM").removeClass("hidden");
+      $("#profile-modify").removeClass("hidden");
+    }
+  </script>
 </main>
