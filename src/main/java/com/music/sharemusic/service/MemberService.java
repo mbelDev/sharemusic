@@ -24,5 +24,5 @@ public interface MemberService {
 
   public void updateMember(MemberDto memberDto);
 
-  public void deleteMember(MemberDto memberDto);
+  public void withdraw(MemberDto memberDto);
 }

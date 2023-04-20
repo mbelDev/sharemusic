@@ -2,12 +2,14 @@
   display: flex;
   justify-content: center;
   font-size: 18px;
+  width: 100%;
+  height: 100vh;
   .board-bodify--content {
     margin-top: 100px;
     input,
     textarea,
     select {
-      width: 800px;
+      // width: 800px;
       margin: 20px 0;
     }
     span {
@@ -27,5 +29,42 @@
       margin-top: 30px;
       text-align: right;
     } //.btn-submit
+    form {
+      .boardModify-bg--Form {
+        display: flex;
+        align-items: center;
+        &-name {
+          margin-right: 20px;
+          input {
+            width: 30vw !important;
+          }
+        } 
+        &-music {
+          input {
+            width: 8vw !important;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            &:hover {
+              background-color: #386bc0;
+              outline: #386bc0;
+              border: 1px solid #386bc0;
+              color: #fff;
+            }
+          }
+        }
+        .boardModify-music--video {
+          input {
+            // width: 20vw !important;
+          }
+        }
+      }//.boardModify-bg--Form 
+      .boardModify-bg {
+        input {
+          // width: 15vw;
+        }
+
+      }
+    }//form
   } //.board-bodify--content
 } //.board-modify--page

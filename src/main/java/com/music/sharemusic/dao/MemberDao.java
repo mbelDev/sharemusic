@@ -18,5 +18,7 @@ public interface MemberDao {
 
   public void updateMember(MemberDto memberDto);
 
+  public void withdraw(MemberDto memberDto);
+
   public void deleteMember(MemberDto memberDto);
 }

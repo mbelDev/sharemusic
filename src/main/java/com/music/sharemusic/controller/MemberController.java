@@ -77,19 +77,25 @@ public class MemberController {
     if (loggedUser.getUserID().equals(userID)) {
       return "redirect:/member/mypage";
     }
+    if (memberService.getMemberOne(userID) == null) {
+      return "redirect:/member/alert";
+    }
+    if (memberService.getMemberOne(userID).getUserPrincipal() == -1) {
+      return "redirect:/member/alert";
+    }
 
     MemberInfoDto userInfo = memberService.getMemberInfo(userID);
     model.addAttribute("userInfo", userInfo);
-    log.info(
-      "here is controller, and this is logged user === {}",
-      loggedUser.getUserID()
-    );
-    log.info(
-      "here is controller, and this is userInfo === {}",
-      userInfo.getUserID()
-    );
+    log.info(loggedUser.getUserID());
+    log.info(userInfo.getUserID());
 
     return "/member/mypage";
+  }
+
+  @GetMapping("/alert")
+  @ResponseBody
+  public String alert() {
+    return "<script>alert('탈퇴하였거나 존재하지 않는 회원입니다.'); history.back();</script>";
   }
 
   @GetMapping("/mypage/list")
@@ -152,18 +158,6 @@ public class MemberController {
     model.addAttribute("memberDto", memberDto);
     model.addAttribute("historyList", historyList);
     return "/member/written";
-  }
-
-  @GetMapping("/view")
-  public String memberInfo(HttpSession session, Model model) {
-    if (session != null && session.getAttribute("loggedUser") != null) {
-      LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
-      MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
-      model.addAttribute("memberDto", memberDto);
-      return "/member/view";
-    }
-
-    return "redirect:/member/login";
   }
 
   @GetMapping("/join")
@@ -245,6 +239,11 @@ public class MemberController {
 
       return "/member/login";
     }
+    MemberDto loggedData = memberService.getMemberOne(memberDto.getUserID());
+    if (loggedData.getUserPrincipal() == -1) {
+      bindingResult.reject("loginFailed", "존재하지 않거나 탈퇴한 회원입니다.");
+      return "/member/login";
+    }
     session.setAttribute("loggedUser", loggedUser);
     session.setMaxInactiveInterval(30 * 60);
     if (session.getAttribute("pagePrev") != null) {
@@ -253,6 +252,23 @@ public class MemberController {
       return "redirect:" + (String) session.getAttribute("pagePrev");
     }
     return "redirect:/mainPage";
+  }
+
+  @PostMapping("/update")
+  @ResponseBody
+  public int updateMember(HttpSession session, MemberDto memberDto) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return -1;
+    }
+    String userID = loggedUser.getUserID();
+    memberDto.setUserID(userID);
+    memberService.updateMember(memberDto);
+    memberDto = memberService.getMemberOne(userID);
+    loggedUser.setUserIconReal(memberDto.getUserIconReal());
+    loggedUser.setUserNM(memberDto.getUserNM());
+    // session.setAttribute("loggedUser", loggedUser);
+    return 1;
   }
 
   @PostMapping("/like")
@@ -299,6 +315,30 @@ public class MemberController {
     }
 
     return "redirect:/mainPage";
+  }
+
+  //회원 탈퇴
+  @PostMapping("/withdraw")
+  @ResponseBody
+  public int withdraw(HttpSession session, MemberDto memberDto) {
+    LoggedDto loggedUser = loggedUser(session);
+    String userID = loggedUser.getUserID();
+    if (loggedUser == null) {
+      return -1;
+    }
+    MemberDto checkDto = memberService.getMemberOne(userID);
+    if (
+      !checkDto.getUserID().equals(userID) ||
+      !checkDto.getUserPW().equals(memberDto.getUserPW())
+    ) {
+      log.info("here==>>{}", memberDto);
+      log.info("gere==>>{}", checkDto);
+      return -1;
+    }
+    //로그인 정보가 없거나 현재 로그인 한 정보가 일치하지 않으면 되돌려보냄
+
+    memberService.withdraw(memberDto);
+    return 1;
   }
 
   @PostMapping("/checkID")

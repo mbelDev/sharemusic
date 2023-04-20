@@ -7,7 +7,7 @@
   
     let swiper = new Swiper( ".swiper", {
       speed: 3000,
-      loop: true,
+      loop: false,
       slidesPerView: "auto",
       spaceBetween: 10,
       autoplay: {

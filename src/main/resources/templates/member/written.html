@@ -7,25 +7,27 @@
   <main id="mainPage-Area" class="container" layout:fragment="contents">
     <section class="main-constent--itmes">
         <div style="display: flex; align-content: center; flex-direction: column;">
-            <span th:text="${memberDto}"></span>
-            <span th:text="${historyList}"></span>
 
                 <div style="display: flex; justify-content: center;">
                     <!-- 작성 글 목록 -->
                     <!--   BOARD에서 POSTAUTH = USERID인 것들 불러오기 -->
                     <ul>
+                        <li>
+                            <span>테스트1</span>
+                            <span>테스트2</span>
+                        </li>
                         <li th:each="item:${historyList}">
                             <a th:href="@{/board/view(postNo=${item.postNo})}">
                                 <img  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
                                 alt="" style="display:inline-block; width:246px; height: 138px;">
                             </a>
-                                <span th:text="${item.postAuth}">작성자</span>
                                 <span th:text="${item.postTitle}">곡 명</span>
                                 <span th:text="${item.postSinger}">가수 명</span>
-                                <span th:text="${item.postDate}">시청일자</span>
-                                <span th:text="${item.postLike}">시청일자</span>
-                                <span class="btn-like" style="display:inline-block; width:15px; height:15px; background:#fff"></span>
-                                <span class="btn-like" style="display:inline-block; width:15px; height:15px; background:#fff"></span>
+                                <span th:text="${item.postHits}">조회수</span>
+                                <span th:text="${item.postLike}">좋아요</span>
+                                <span th:text="${item.postDate}">작성일</span>
+                                <span class="btn-modify" style="display:inline-block; width:15px; height:15px; background:#fff" ></span>
+                                <span class="btn-delete postDeleteModal-btn" style="display:inline-block; width:15px; height:15px; background:#fff" ></span>
                         </li>
                         
                         <li th:if="${#lists.isEmpty(historyList)}">
@@ -42,10 +44,66 @@
                 </div>
             </div>
     </section><!-- main-constent--itmes -->
-  </main>
-  <script>
-    like($(".btn-like"),$(".btn-like").val());
-    bookmark($(".btn-bookmark"),$(".btn-bookmark").val());
+
+
+    <section><!-- 모달 섹션 -->
+
+        <!-- 삭제확인 모달창 -->
+        <div id="postDeleteModal" class="modal-wnd">
+            <div class="modal-wnd-item modal-postDelete">
+            <div class="modal-content">
+                <div class="modal-postDelete__context">
+                    <img id="postDeleteThum">
+                    <span id="postDeleteTitle"></span>
+                    <span id="postDeleteSinger"></span>
+                    <span id="postDeleteDate"></span>
+                </div>
+                <div class="modal-postDelete__btns">
+                <button id="updateProfileConfirm" onclick="updateProfile();">확인</button>
+                <button id="postDeleteModal-close" onclick="removeIcon();">취소</button>
+                </div>
+            </div>
+            </div>
+        </div>
+                    
+    </section>
+  <script src="/js/modal.js"></script>
+  <script defer>
+     getModal($(".postDeleteModal-btn"),$("#postDeleteModal"),$("#postDeleteModal-close"))
+
+    function getPost(_postNo){
+        $.ajax({
+            url:"/board/getPost",
+            type:"POST",
+            data:{"postNo": _postNo},
+            success:function(response){
+                console.log(resoponse);
+            //     $("#postDeleteimg")
+            // $("#postDeleteTitle").text("${response.postTitle}")
+            },
+            error:function(err){
+                console.log(err);
+            }
+        })
+
+    }
+
+    function deletePost(_postNo){
+        $.ajax({
+            url:"board/delete",
+            type:"POST",
+            data:{
+                postNo:_postNo
+            },
+            success:function(response){
+                console.log(resoponse);
+            },
+            error:function(err){
+                console.log(err);
+            }
+        })
+    }
 
   </script>
+  </main>
 </html>

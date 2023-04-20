@@ -1,3 +1,7 @@
+.reply-date-md500, .board-view--replyBox__input-M {
+  display: none;
+}
+
 .boardView {
   margin: 4%;
   border-bottom: 1px solid;
@@ -31,7 +35,6 @@
           }
         }//&-name
         &-Date {
-          outline: 1px solid red;
           margin: 10px 0;
         }//&-Date
         &-Genre {
@@ -69,58 +72,351 @@
 }//.boardView
 
 // 덧글 CSS 권인호 작성
-.reply{
-  position: relative;
-  display: flex;
-  margin: 5px auto;
-  &-container{
-    width:100%;
-    min-height: 300px;
-    
-  }
-
-  &-contents{
+.board-view--replyBox {
+  .reply{
+    position: relative;
     display: flex;
-    flex-grow: 1;
-    min-height: 30px;
-    &--icon{
-      width: 180px;
+    margin: 5px auto;
+    &-container{
+      width:100%;
+      min-height: 300px;
+      
+    }
+  
+    &-contents{
       display: flex;
-      img{
-        width: 30px;
-        height: 30px;
-        border-radius: 5px;
+      flex-grow: 1;
+      min-height: 30px;
+      width: 100%;
+      &--icon {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        a {
+          width: 8%;
+        }
+        img{
+          width: 30px;
+          height: 30px;
+          border-radius: 5px;
+        }
+        span{
+          display: inline-block;
+        }
+        .menuBtn {
+          position: absolute;
+          top: 0; right: 30px;
+          font-size: 30px;
+          cursor: pointer;
+        }
+        .reply-contents--text{
+          width: 80%;
+          padding: 10px 0 10px 35px;
+        }
+        .reply-contents--box {
+          display: flex;
+        }
       }
-      span{
-        display: inline-block;
+      &--btns{
+        position: relative;
+        display: flex;
+        flex-grow: 0;
+        justify-content: left;
+        width: 100%;
+        height: 100%;
+        span{
+          display: grid;
+          place-items: center;
+          padding: 0 20px;
+          font-size: 12px;
+          opacity: .5;
+          cursor: pointer;
+        }
       }
     }
-    &--text{
-      max-width: 900px;
+    &-date{
+      // flex-grow: 0;
+      width: 180px !important;
+      font-size: 12px;
+      opacity: .5;
+      padding: 10px 0 10px 35px;
     }
-    &--btns{
-      position: relative;
-      display: flex;
-      flex-grow: 0;
-      justify-content: space-between;
-      width: 100px;
-      height: 100%;
-      right: 0%;
-      margin-left: 5px;
-      span{
-        background: #fff;
-        border-radius: 5px;
-        margin-left: 2px;
+    &-hidden{
+      width: 100%;
+    }
+  }
+  .board-view--replyBox__input {
+    position: relative;
+    textarea {
+      width: 100%;
+      resize: none;
+    }
+    input {
+      &:nth-child(4) {
+        position: absolute;
+        bottom: 10%; right: 3%;
+        z-index: 10;
       }
     }
   }
-  &-date{
-    flex-grow: 0;
-    width: 15%;
-    text-align: right;
+}
+
+
+
+
+@media screen and (max-width: 1640px) {
+  .boardView-Video iframe {
+    width: 78vw;
+    height: 45vw;
   }
-  &-hidden{
-    width: 100%;
+  .boardView-Video--title .title {
+    width: 50vw;
+  }
+  .board-view--replyBox {
+    width: 78vw;
+  }
+  .boardView-Video--title .like {
+    width: 45vw;
+    margin-left: 45vw;
+  }
+}//@media screen and (max-width: 1640px)
+@media screen and (max-width: 1400px) {
+  .boardView-Video iframe {
+    width: 75vw;
+    height: 43vw;
+  }
+  .boardView-Video--title .title {
+    width: 50vw;
+  }
+  .board-view--replyBox {
+    width: 78vw;
+  }
+  // .boardView-Video--title .title {
+  //   width: 50vw;
+  // }
+  .board-view--replyBox {
+    width: 75vw;
+  }
+  .boardView-Video--title .like {
+    width: 45vw;
+    margin-left: 35vw;
+  }
+  .reply-date {
+    width: 15vw;
+  }
+}//@media screen and (max-width: 1400px)
+@media screen and (max-width: 1230px) {
+  .boardView-Video iframe {
+    width: 72vw;
+    height: 41vw;
   }
 
-}
+  // .boardView-Video--title .title {
+  //   width: 50vw;
+  // }
+  .board-view--replyBox {
+    width: 73vw;
+  }
+  .boardView-Video--title .like {
+    width: 45vw;
+    margin-left: 25vw;
+  }
+  // .reply-date {
+  //   width: 15vw;
+  // }
+}//@media screen and (max-width: 1230px)
+@media screen and (max-width: 1080px) {
+  .boardView-Video iframe {
+    width: 69vw;
+    height: 40vw;
+  }
+
+  // .boardView-Video--title .title {
+  //   width: 50vw;
+  // }
+  .board-view--replyBox {
+    width: 68vw;
+  }
+  .boardView-Video--title .like {
+    width: 45vw;
+    margin-left: 18vw;
+  }
+  // .reply-date {
+  //   width: 15vw;
+  // }
+}//@media screen and (max-width: 1080px)
+@media screen and (max-width: 960px) {
+  .boardView-Video iframe {
+    width: 65vw;
+    height: 37vw;
+  }
+  // .boardView-Video--title .title {
+  //   width: 50vw;
+  // }
+  .board-view--replyBox {
+    width: 65vw;
+    font-size: 13px;
+  }
+  .boardView-Video--title .like {
+    width: 45vw;
+    margin-left: 5vw;
+  }
+  // .reply-date {
+  //   width: 15vw;
+  // }
+  .board-view--replyBox .reply-contents--icon a {
+    width: 20%;
+  }
+  .board-view--replyBox .reply-date {
+    width: 200px !important;
+  }
+}//@media screen and (max-width: 960px)
+@media screen and (max-width: 855px) {
+  .boardView-Area-title {
+    padding-top: 130px;
+  }
+  .boardView-Video iframe {
+    width: 90vw;
+    height: 52vw;
+  }
+  // .boardView-Video--title .title {
+  //   width: 50vw;
+  // }
+  .board-view--replyBox {
+    width: 88vw;
+    font-size: 13px;
+  }
+  .boardView-Video--title .like {
+    width: 18vw;
+    margin-left: 5vw;
+  }
+  .reply-date {
+    width: 20vw;
+  }
+}//@media screen and (max-width: 855px)
+@media screen and (max-width: 500px) {
+  .boardView-Video--title .title-name p {
+    font-size: 23px;
+  }
+  .boardView-Video--title .title-name h1 {
+    font-size: 28px;
+  }
+  .boardView-Video--title .title-Date, .boardView-Video--title .title-Genre {
+    font-size: 12px;
+  }
+  .boardView-Video--title .title-Date {
+    margin: 20px 0 0 0;
+  }
+  .boardView-Video--title .title-btn {
+    margin: 5px 0 0 0;
+  }
+  .boardView-Video--title .like-good img {
+    width: 25px;
+  }
+  .boardView-Video--title .like-btn button img {
+    width: 23px;
+    margin-bottom: 5px;
+  }
+  .boardView-Video--title .like-btn {
+    margin-left: 15px;
+  }
+  .postLike {
+    font-size: 12px;
+  }
+  // .boardView-Video--title .title {
+  //   width: 50vw;
+  // }
+  .board-view--replyBox {
+    width: 88vw;
+    font-size: 13px;
+  }
+  .boardView-Video--title .like {
+    width: 25vw;
+    margin-left: 5vw;
+  }
+  .reply-date {
+    display: none;
+  }
+  .reply-date-md500 {
+    display: flex;
+    align-items: center;
+    // margin-bottom: 10px;
+    .reply-date {
+      display: block;
+      width: 50vw !important;
+      text-align: left;
+      padding: 5px 0 0 35px;
+      opacity: .5;
+    }
+    .reply-contents--btns {
+      display: block;
+      padding-top: 5px;
+      span {
+        background: none;
+        border-radius: auto;
+        margin-left: auto;
+      }
+      .replyReplyBtn {
+        padding: 5px 10px;
+      }
+    }
+  }
+  .reply-contents--icon {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    a {
+      width: 20%;
+    }
+    .menuBtn {
+      display: block;
+      margin-right: 10px;
+      padding: 10px 10px;
+      transform: translateY(-10px);
+      cursor: pointer;
+      right: 0 !important;
+    }
+  }
+  .reply-contents--btns {
+    display: none;
+  }
+  .reply-contents {
+    display: flex;
+    flex-direction: column;
+  }
+  .reply-contents--text {
+    padding: 10px 0 10px 35px;
+  }
+  .board-view--replyBox__input {
+    display: none;
+  }
+  .board-view--replyBox__input-M {
+    display: block;
+    .replyCont {
+      cursor: pointer;
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .reply-contents--btns span {
+    display: block;
+    text-align: left;
+  }
+  .replyReplyBtn {
+    display: none !important;
+  }
+  .replyReplyBtn.replyReplyBtn-M {
+    display: block !important;
+    width: 100px;
+    margin: 0 !important;
+  }
+  .board-view--replyBox .reply-contents--icon a {
+    width: 20%;
+  }
+  .board-view--replyBox .reply-contents--icon span {
+    font-weight: bold;
+  }
+}//@media screen and (max-width: 500px)

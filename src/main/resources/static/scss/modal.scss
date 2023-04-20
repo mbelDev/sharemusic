@@ -31,7 +31,7 @@
     }
   }
   .modalCategory {
-    //권인호 작성
+    //카테고리 모달 #권인호 작성
     display: flex;
     align-items: center;
     width: 100%;
@@ -65,6 +65,33 @@
   }
 } //.write-modal
 
+
+//프로필 사진 업데이트 모달 #권인호 작성
+.modal-profileUpdate{
+  display: block;
+  width: 400px;
+  height: 60%;
+  margin: 10% auto;
+  background: #fff;
+  border-radius: 13px;
+  &__icon{
+    display: block;
+    margin: 10px auto;
+    #testProfile{
+      width: 300px;
+      height: 300px;
+    }
+    label{
+      display: block;
+      margin: 5px auto;
+    }
+  }
+  &__btns{
+    display: block;
+    margin: 15px auto;
+  }
+}
+
 // 로그인, 회원가입 모달
 .modalLogin {
   width: 100%;
@@ -79,5 +106,22 @@
     width: 600px;
     height: 450px;
     background-color: #fff;
+  }
+}
+
+//회원 탈퇴모달 #권인호
+.modal-withdraw{
+  .modal{
+    &-content{
+    color:#333;
+    em{
+      color:#700;
+    }
+    padding: 2%;
+    text-align: center;
+  }
+  &-btns{
+    margin: 3%;
+  }
   }
 }

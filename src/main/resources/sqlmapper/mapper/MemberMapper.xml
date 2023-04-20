@@ -31,10 +31,26 @@
 
   <update id="updateMember" parameterType="MemberDto">
     UPDATE MEMBER SET 
-    (USERPW, USERNM, USERICON, USERICONREAL) = (#{userPW},#{userNM},#{userIcon},#{userIconReal})
+     <if test="userNM != null">
+      USERNM = #{userNM},
+     </if>
+     <if test="userPW != null">
+      USERPW = #{userPW},
+     </if>
+     <if test="userIcon != null">
+      USERICON = #{userIcon},
+     </if>
+     <if test="userIconReal != null">
+      USERICONREAL = #{userIconReal},
+     </if>
+    USERID = #{userID} WHERE USERID = #{userID}
   </update>
 
-  <delete id="deleteMember" parameterType="MemberDto">
-    DELETE FROM MEMBER WHERE USERID = #{userID}
-  </delete>
+  <insert id="withdraw" parameterType="MemberDto">
+    INSERT INTO MEMBER_WITHDRAW (USERID, USERNM, USERDATE, WITHDATE) (SELECT USERID, USERNM, USERDATE, SYSTIMESTAMP FROM MEMBER WHERE USERID = #{userID})
+  </insert>
+  <update id="deleteMember" parameterType="MemberDto">
+     UPDATE MEMBER SET USERNM = NULL, USERDATE = NULL, USERPRINCIPAL = -1 WHERE USERID = #{userID}
+  </update>
+
 </mapper>
