@@ -11,7 +11,6 @@ import com.music.sharemusic.service.MemberService;
 import com.music.sharemusic.service.MemberServiceImpl;
 import com.music.sharemusic.service.ReplysService;
 import com.music.sharemusic.service.ReplysServiceImpl;
-
 import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +18,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -106,11 +104,11 @@ public class BoardController {
   }
 
   @PostMapping("/write")
-  public String writeprogress(HttpSession session,
+  public String writeprogress(
+    HttpSession session,
     @Valid @ModelAttribute("boardDto") BoardDto boardDto,
     BindingResult bindingResult
-    ) {
-
+  ) {
     if (bindingResult.hasErrors()) {
       return "/board/write";
     }
@@ -154,6 +152,16 @@ public class BoardController {
     }
   }
 
+  //삭제 확인용 게시글 정보 열람 #권인호
+  @PostMapping("/getPost")
+  @ResponseBody
+  public BoardDto getPostConfirm(BoardDto boardDto) {
+    log.info("postData = {}", boardDto);
+    int postNo = boardDto.getPostNo();
+    BoardDto result = boardService.getPostOne(postNo);
+    return result;
+  }
+
   //좋아요 리로드 #권인호
   @PostMapping("/getLike")
   @ResponseBody
@@ -183,7 +191,7 @@ public class BoardController {
     }
   }
 
-  //덧글의 덧글작성 권인호
+  //덧글의 덧글작성 #권인호
   @PostMapping("/reply/reply")
   public String writeReplyReply(
     ReplysDto replysDto,

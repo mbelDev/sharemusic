@@ -244,15 +244,18 @@ public class MemberController {
   }
 
   @PostMapping("/update")
-  public String updateMember(HttpSession session, MemberDto memberDto) {
+  @ResponseBody
+  public int updateMember(HttpSession session, MemberDto memberDto) {
     LoggedDto loggedUser = loggedUser(session);
     if (loggedUser == null) {
-      return "-1";
+      return -1;
     }
-    log.info("here is data === {}", memberDto);
     memberDto.setUserID(loggedUser.getUserID());
     memberService.updateMember(memberDto);
-    return "/member/mypage :: #userinfo";
+    loggedUser.setUserIconReal(memberDto.getUserIconReal());
+    loggedUser.setUserNM(memberDto.getUserNM());
+    // session.setAttribute("loggedUser", loggedUser);
+    return 1;
   }
 
   @PostMapping("/like")

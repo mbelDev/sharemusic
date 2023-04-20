@@ -31,7 +31,7 @@
     }
   }
   .modalCategory {
-    //권인호 작성
+    //카테고리 모달 #권인호 작성
     display: flex;
     align-items: center;
     width: 100%;
@@ -75,6 +75,29 @@
     }
   }
 } //.write-modal
+
+
+//프로필 사진 업데이트 모달 #권인호 작성
+.modal-profileUpdate{
+  width: 20%;
+  left: 40%;
+  &__icon{
+    display: block;
+    margin: 10px auto;
+    #testProfile{
+      width: 300px;
+      height: 300px;
+    }
+    label{
+      display: block;
+      margin: 5px auto;
+    }
+  }
+  &__btns{
+    display: block;
+    margin: 15px auto;
+  }
+}
 
 // 로그인, 회원가입 모달
 .modalLogin {

@@ -6,6 +6,7 @@ import lombok.Data;
 public class SendDataDto {
 
   private String userID;
+  private String followID;
   private int postNo;
   private int replyNo;
   private int replyHidden;

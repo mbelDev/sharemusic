@@ -16,11 +16,11 @@ function likeEvent(){
                         location.href="/member/login"
                           break;
                         case 0 : alert("좋았었습니다!!")
-                        $(item).parent().parent('li').addClass('cancel');
+                        // $(item).parent().parent('li').addClass('cancel');
                         $(item).addClass('cancel')
                           break;
                         case 1 : alert("좋아요!")
-                        $(item).parent().parent('li').removeClass('cancel');
+                        // $(item).parent().parent('li').removeClass('cancel');
                         $(item).removeClass('cancel')
                           break;
                       }
@@ -38,7 +38,6 @@ function bookmarkEvent(){
         item.addEventListener("click",(e)=>{
             const sendData = {
                 "postNo":item.dataset.postno,
-                // "bookmark":item.dataset.bookmark
             }
             $.ajax({
                 url:"/member/bookmark",
@@ -71,7 +70,7 @@ function followEvent(){
     btnsBookmark.forEach((item)=>{
         item.addEventListener("click",(e)=>{
             const sendData = {
-                "followID":item.dataset.followID,
+                "followID":item.dataset.followid,
             }
             console.log(sendData);
             $.ajax({
@@ -81,14 +80,10 @@ function followEvent(){
                 success:function(response){
                     if(response){
                         alert("팔로우 했어요!");
-                        item.dataset.followed = '1'
                         item.classList.add("followd");
-                        item.parentElement.parentElement.classList.remove("delete");
                     }else{
                         alert("팔로우 했었어요!");
-                        item.dataset.followed = '0'
                         item.classList.remove("followed");
-                        item.parentElement.parentElement.classList.add("delete");
                     }
                 },
                 error:function(err){

@@ -108,3 +108,6 @@
 .mainContent-Area02 .Area02-item--profile-list ul li a .profile-list:hover {
   opacity: 1;
 }
+.mainContent .hidden {
+  display: none;
+}

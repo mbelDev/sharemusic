@@ -226,7 +226,9 @@ public class MemberServiceImpl implements MemberService {
 
   public int updateFollow(SendDataDto data) {
     //userID followID 필요
+    log.info("followData === {} ", data);
     int result = historyDao.getFollow(data);
+    log.info("get result === {} ", result);
     if (result > 0) {
       historyDao.unFollow(data);
     } else {
@@ -273,21 +275,24 @@ public class MemberServiceImpl implements MemberService {
 
   //회원정보 수정
   public void updateMember(MemberDto memberDto) {
-    MultipartFile uploadFile = memberDto.getUserIconFile();
-    if (uploadFile.getOriginalFilename() != "") {
-      UUID uuid = UUID.randomUUID();
-      String userIconPath = uploadFile.getOriginalFilename();
-      String userIconReal = uuid + "_" + userIconPath;
-      Path imgFilePath = Paths.get(uploadFolder + userIconReal); // C:\tempStorage
-      memberDto.setUserIcon(userIconPath);
-      memberDto.setUserIconReal(userIconReal);
-      //파일 저장
-      fileUpload(uploadFile, imgFilePath);
-    } else {
-      String userIcon = "sampleprofile.jpg";
-      String userIconReal = "sampleprofile.jpg";
-      memberDto.setUserIcon(userIcon);
-      memberDto.setUserIconReal(userIconReal);
+    log.info("what data?==={}", memberDto);
+    if (memberDto.getUserIconFile() != null) {
+      MultipartFile uploadFile = memberDto.getUserIconFile();
+      if (uploadFile.getOriginalFilename() != "") {
+        UUID uuid = UUID.randomUUID();
+        String userIconPath = uploadFile.getOriginalFilename();
+        String userIconReal = uuid + "_" + userIconPath;
+        Path imgFilePath = Paths.get(uploadFolder + userIconReal); // C:\tempStorage
+        memberDto.setUserIcon(userIconPath);
+        memberDto.setUserIconReal(userIconReal);
+        //파일 저장
+        fileUpload(uploadFile, imgFilePath);
+      } else {
+        String userIcon = "sampleprofile.jpg";
+        String userIconReal = "sampleprofile.jpg";
+        memberDto.setUserIcon(userIcon);
+        memberDto.setUserIconReal(userIconReal);
+      }
     }
 
     memberDao.updateMember(memberDto);
