@@ -123,10 +123,10 @@
         <article class="headerLayout-Area--viewContents topAndbut">
           <div class="view view01 line">
             <ul>
-              <li><a href="/monthRanking">
+              <li><a href="/monthRanking" onclick="monthRanking()">
                 <div><img src="/images/navIcon01.png" alt=""><span>월간랭킹</span></div>
               </a></li>
-              <li><a href="/weeklyRanking">
+              <li><a href="/weeklyRanking" onclick="weeklyRanking()">
                 <div><img src="/images/navIcon02.png" alt=""><span>주간랭킹</span></div>
               </a></li>
             </ul>
@@ -251,6 +251,43 @@
       getModal($("#modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));
       getModal($("#modalLoginBtn"),$("#modalLogin"),$("#closeModalLogin"));
       getModal($(".meunClick"),$("#modalMobile"),$("#closeModalMobile"));
+  </script>
+  <script th:inline="javascript">
+    function monthRanking() {
+      if (sessionStorage.getItem("moveMonth") != null) {
+        sessionStorage.clear();
+      }
+    }
+
+    function weeklyRanking() {
+      if (sessionStorage.getItem("moveWeekly") != null) {
+        sessionStorage.clear();
+      }
+    }
+
+    window.onpageshow = function(e) {
+      const pathName = window.location.pathname;
+      const sessionMonth = sessionStorage.getItem("moveMonth");
+      const sessionWeekly = sessionStorage.getItem("moveWeekly");
+
+      if (event.persisted || 
+      (window.performance && window.performance.navigation.type == 1) || 
+      (window.performance && window.performance.navigation.type == 2)) {
+        if (pathName == "/monthRanking" && sessionMonth != null) {
+          showMonthRank(sessionMonth);
+        } 
+        
+        if (pathName == "/weeklyRanking" && sessionWeekly != null) {
+          showWeeklyRank(sessionWeekly);
+        }
+
+        else {
+          sessionStorage.clear();
+        }
+
+      }
+      
+    }
   </script>
 </body>
 </html>

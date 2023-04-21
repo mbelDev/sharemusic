@@ -12,21 +12,73 @@
       </div>
       <!-- weeklyRanking-page -->
       <article class="weeklyRanking-Area">
-        <ul>
-          <li th:each="item : ${weeklyRankList}">
-            <a th:href="@{/board/view(postNo=${item.postNo})}">
-              <img
-                th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-              />
-              <p class="" th:text="${item.postTitle}">곡이름</p>
-              <p class="" th:text="${item.postSinger}">가수이름</p>
-              <p class="" th:text="${item.postAuth}">별명</p>
-            </a>
-          </li>
-        </ul>
+        <div id="monthDate">
+          <span class="prevWeekly" onclick="prevWeekly()"><==</span>
+          <span class="startDay">시작 날짜</span>
+          <span>~</span>
+          <span class="lastDay">끝 날짜</span>
+          <span class="nextWeekly" onclick="nextWeekly()">==></span>
+        </div>
+        <div id="weeklyRankList">
+          <ul>
+            <li th:each="item : ${weeklyRankList}">
+              <a th:href="@{/board/view(postNo=${item.postNo})}">
+                <img
+                  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                />
+                <p class="" th:text="${item.postTitle}">곡이름</p>
+                <p class="" th:text="${item.postSinger}">가수이름</p>
+                <p class="" th:text="${item.postAuth}">별명</p>
+              </a>
+            </li>
+          </ul>
+        </div>
       </article>
       <!-- weeklyRanking-Area -->
     </section>
     <!-- weeklyRanking -->
+
+    <script>
+      let moveWeekly;
+
+      if (sessionStorage.getItem("moveWeekly") != null) {
+        moveWeekly = sessionStorage.getItem("moveWeekly");
+      } else {
+        moveWeekly = 0;
+      }
+
+      if (moveWeekly == 0) {
+        $(".nextWeekly").hide();
+      }
+
+      function prevWeekly() {
+        moveWeekly--;
+        $(".nextWeekly").show();
+        showWeeklyRank(moveWeekly);
+      }
+
+      function nextWeekly() {
+        if (moveWeekly == -1) {
+          $(".nextWeekly").hide();
+        }
+        moveWeekly++;
+        showWeeklyRank(moveWeekly);
+      }
+
+      function showWeeklyRank(moveWeekly) {
+        console.log("showWeeklyRank", moveWeekly);
+        $.ajax({
+          url: "/reload/weeklyRanking",
+          type: "POST",
+          data: {
+            moveWeekly: moveWeekly,
+          },
+          async: false,
+        }).done(function (fragment) {
+          sessionStorage.setItem("moveWeekly", moveWeekly);
+          $("#weeklyRankList").replaceWith(fragment);
+        });
+      }
+    </script>
   </main>
 </html>

@@ -35,3 +35,8 @@
   width: 489.3px;
   height: 30vh;
 }
+
+.prevMonth,
+.nextMonth {
+  cursor: pointer;
+}

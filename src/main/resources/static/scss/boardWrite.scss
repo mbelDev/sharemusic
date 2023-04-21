@@ -6,7 +6,6 @@ main {
   height: 100vh;
   display: flex;
   justify-content: center;
-  
 } //.boardWrite-page
 
 .boardWrite-page--form {
@@ -23,16 +22,15 @@ main {
         width: 600px;
       }
       margin-right: 30px;
-    }//&-left
+    } //&-left
     &-right {
       width: 180px;
-    }//&-right
+    } //&-right
   } //.musicName
   input {
     display: inline-block;
   }
-  
-  
+
   .boardWrite-pag--item {
     margin-bottom: 30px;
     p {
@@ -42,6 +40,10 @@ main {
     #writePostEmote {
       cursor: pointer;
     }
+    .errorTxt {
+      padding-top: 8px;
+      margin-bottom: -10px;
+    }
   }
   .musicName-right {
     p {
@@ -49,7 +51,6 @@ main {
     }
   }
 } //.boardWrite-page--form
-
 
 @media screen and (max-width: 1140px) {
   .boardWrite-page--form .musicName-left input {
@@ -67,7 +68,7 @@ main {
   .modal-wnd .modalCategory__box__option a img {
     width: 15vw !important;
   }
-}//@media screen and (max-width: 1140px)
+} //@media screen and (max-width: 1140px)
 @media screen and (max-width: 855px) {
   .boardWrite-page--form .musicName-left input {
     width: 55vw;
@@ -89,7 +90,7 @@ main {
   .modal-wnd .modalCategory__box__option a img {
     width: 18vw !important;
   }
-}//@media screen and (max-width: 855px)
+} //@media screen and (max-width: 855px)
 @media screen and (max-width: 500px) {
   .boardWrite-page--form .musicName-left input {
     width: 55vw;
@@ -104,7 +105,8 @@ main {
     margin-top: 170px;
     margin-left: 80vw;
   }
-  #writePostGenre, #writePostEmote {
+  #writePostGenre,
+  #writePostEmote {
     width: 23vw;
   }
   .btns {
@@ -123,6 +125,4 @@ main {
   .boardWrite-page--form .musicName-left {
     margin-right: 10px;
   }
-}//@media screen and (max-width: 500px)
-
-
+} //@media screen and (max-width: 500px)
