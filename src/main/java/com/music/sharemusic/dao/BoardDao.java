@@ -29,7 +29,7 @@ public interface BoardDao {
 
   // 월간 랭킹 글들 불러오기
 
-  public List<BoardDto> getWeeklyRankPost();
+  public List<BoardDto> getWeeklyRankPost(int moveWeekly);
 
   // 주간 랭킹 글들 불러오기
 

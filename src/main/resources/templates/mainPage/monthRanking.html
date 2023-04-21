@@ -10,27 +10,32 @@
       <div class="monthRanking-page topAndbut">
         <h2>월간랭킹</h2>
 
-        <!-- 날짜이동버튼 -->
-        <div>
-          <span class="prevMonth" onclick="prevMonth()"><==</span>
-          <span class="curMonth">날짜</span>
-          <span class="nextMonth" onclick="nextMonth()">==></span>
-        </div>
-
-        <!-- List 데이터 -->
-        <div id="monthRankList">
-          <ul>
-            <li th:each="item : ${monthRankList}">
-              <a th:href="@{/board/view(postNo=${item.postNo})}">
-                <img
-                  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                />
-                <p class="" th:text="${item.postTitle}">곡이름</p>
-                <p class="" th:text="${item.postSinger}">가수이름</p>
-                <p class="" th:text="${item.postAuth}">별명</p>
-              </a>
-            </li>
-          </ul>
+        <div class="month">
+          <!-- 날짜이동버튼 -->
+          <div id="monthDate">
+            <span class="prevMonth" onclick="prevMonth()"><==</span>
+            <span class="startDay" th:text="${monthDate[STARTDAY]}"
+              >시작 날짜</span
+            >
+            <span>~</span>
+            <span th:text="${monthDate[LASTDAY]}">끝 날짜</span>
+            <span class="nextMonth" onclick="nextMonth()">==></span>
+          </div>
+          <!-- List 데이터 -->
+          <div id="monthRankList">
+            <ul>
+              <li th:each="item : ${monthRankList}">
+                <a th:href="@{/board/view(postNo=${item.postNo})}">
+                  <img
+                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                  />
+                  <p class="" th:text="${item.postTitle}">곡이름</p>
+                  <p class="" th:text="${item.postSinger}">가수이름</p>
+                  <p class="" th:text="${item.postAuth}">별명</p>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -64,10 +69,9 @@
     </section>
     <!-- monthRanking -->
 
-    <script>
+    <script th:inline="javascript">
       let moveMonth;
       let date = new Date();
-      $(".curMonth").text(date);
 
       if (sessionStorage.getItem("moveMonth") != null) {
         moveMonth = sessionStorage.getItem("moveMonth");
@@ -103,8 +107,8 @@
           },
           async: false,
         }).done(function (fragment) {
-          $("#monthRankList").replaceWith(fragment);
           sessionStorage.setItem("moveMonth", moveMonth);
+          $("#monthRankList").replaceWith(fragment);
         });
       }
     </script>

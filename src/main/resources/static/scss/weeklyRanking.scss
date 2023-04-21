@@ -13,5 +13,10 @@
         height: 30vh;
       }
     }
-  }//&-Area
-}//.weeklyRanking
+  } //&-Area
+} //.weeklyRanking
+
+.prevWeekly,
+.nextWeekly {
+  cursor: pointer;
+}

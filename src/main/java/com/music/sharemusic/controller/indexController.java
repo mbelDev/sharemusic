@@ -3,6 +3,8 @@ package com.music.sharemusic.controller;
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.service.BoardService;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -75,13 +77,20 @@ public class indexController {
   public String monthRanking(Model model) {
     List<BoardDto> monthRankList = boardService.getMonthRankPost(0);
     model.addAttribute("monthRankList", monthRankList);
+
+    Map<String, String> monthDate = boardService.getMonthRankDate(0);
+    model.addAttribute("monthDate", monthDate);
     return "/mainPage/monthRanking";
   }
+  
   // 월 랭킹 월 이동
   @PostMapping("/reload/monthRanking")
   public String reloadMonthRanking(Model model, int moveMonth) {
     List<BoardDto> monthRankList = boardService.getMonthRankPost(moveMonth);
     model.addAttribute("monthRankList", monthRankList);
+
+    // Map<String, String> monthDate = boardService.getMonthRankDate(moveMonth);
+    // model.addAttribute("monthDate", monthDate);
     
     String target = "/mainPage/monthRanking :: #monthRankList";
     return target;
@@ -90,9 +99,18 @@ public class indexController {
   // 주간 랭킹
   @GetMapping("/weeklyRanking")
   public String weeklyRanking(Model model) {
-    List<BoardDto> weeklyRankList = boardService.getWeeklyRankPost();
+    List<BoardDto> weeklyRankList = boardService.getWeeklyRankPost(0);
     model.addAttribute("weeklyRankList", weeklyRankList);
     return "/mainPage/weeklyRanking";
+  }
+
+  @PostMapping("/reload/weeklyRanking")
+  public String reloadWeeklyRanking(Model model, int moveWeekly) {
+    List<BoardDto> weeklyRankList = boardService.getWeeklyRankPost(moveWeekly);
+    model.addAttribute("weeklyRankList", weeklyRankList);
+    
+    String target = "/mainPage/weeklyRanking :: #weeklyRankList";
+    return target;
   }
 
   // 테스트용

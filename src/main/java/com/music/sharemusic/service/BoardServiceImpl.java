@@ -1,9 +1,11 @@
 package com.music.sharemusic.service;
 
 import com.music.sharemusic.dao.BoardDao;
+import com.music.sharemusic.dao.DateDao;
 import com.music.sharemusic.dao.HistoryDao;
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +23,9 @@ public class BoardServiceImpl implements BoardService {
 
   @Autowired
   HistoryDao historyDao;
+
+  @Autowired
+  DateDao dateDao;
 
   @Override
   public void putPost(BoardDto boardDto) {
@@ -57,13 +62,18 @@ public class BoardServiceImpl implements BoardService {
   @Override
   public List<BoardDto> getMonthRankPost(int moveMonth) {
     List<BoardDto> result = boardDao.getMonthRankPost(moveMonth);
-    log.info("-------", result, ",", moveMonth);
     return result;
   }
 
   @Override
-  public List<BoardDto> getWeeklyRankPost() {
-    List<BoardDto> result = boardDao.getWeeklyRankPost();
+  public Map<String, String> getMonthRankDate(int moveMonth) {
+    Map<String, String> result = dateDao.getMonthRankDate(moveMonth);
+    return result;
+  }
+
+  @Override
+  public List<BoardDto> getWeeklyRankPost(int moveWeekly) {
+    List<BoardDto> result = boardDao.getWeeklyRankPost(moveWeekly);
     return result;
   }
 
