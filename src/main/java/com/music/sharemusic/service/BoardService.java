@@ -22,7 +22,7 @@ public interface BoardService {
 
   // 랭킹 글들 불러오기
 
-  public List<BoardDto> getMonthRankPost();
+  public List<BoardDto> getMonthRankPost(int moveMonth);
 
   // 월간 랭킹 글들 불러오기
 

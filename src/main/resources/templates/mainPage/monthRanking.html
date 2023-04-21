@@ -9,7 +9,29 @@
     <section class="monthRanking">
       <div class="monthRanking-page topAndbut">
         <h2>월간랭킹</h2>
+        <div>
+          <span class="prevMonth" onclick="prevMonth()"><--</span>
+          <span>날짜</span>
+          <span class="nextMonth" onclick="nextMonth()">--></span>
+        </div>
+
+        <!-- List 데이터 -->
+        <div id="monthRankList">
+          <ul>
+            <li th:each="item : ${monthRankList}">
+              <a th:href="@{/board/view(postNo=${item.postNo})}">
+                <img
+                  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                />
+                <p class="" th:text="${item.postTitle}">곡이름</p>
+                <p class="" th:text="${item.postSinger}">가수이름</p>
+                <p class="" th:text="${item.postAuth}">별명</p>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
+
       <!-- monthRanking-page -->
       <article class="monthRanking-Area monthRanking-Area01">
         <div class="monthRanking-Area--no">
@@ -40,20 +62,37 @@
     </section>
     <!-- monthRanking -->
 
-    <!-- 데이터 -->
-    <div>
-      <ul>
-        <li th:each="item : ${monthRankList}">
-          <a th:href="@{/board/view(postNo=${item.postNo})}">
-            <img
-              th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-            />
-            <p class="" th:text="${item.postTitle}">곡이름</p>
-            <p class="" th:text="${item.postSinger}">가수이름</p>
-            <p class="" th:text="${item.postAuth}">별명</p>
-          </a>
-        </li>
-      </ul>
-    </div>
+    <script>
+      let moveMonth = 0;
+      $(".nextMonth").hide();
+
+      function prevMonth() {
+        moveMonth--;
+        $(".nextMonth").show();
+        showMonthRank(moveMonth);
+      }
+
+      function nextMonth() {
+        if (moveMonth == -1) {
+          $(".nextMonth").hide();
+        }
+        moveMonth++;
+        showMonthRank(moveMonth);
+      }
+
+      function showMonthRank(moveMonth) {
+        console.log("showMonthRank");
+        $.ajax({
+          url: "/reload/monthRanking",
+          type: "POST",
+          data: {
+            moveMonth: moveMonth,
+          },
+          async: false,
+        }).done(function (fragment) {
+          $("#monthRankList").replaceWith(fragment);
+        });
+      }
+    </script>
   </main>
 </html>

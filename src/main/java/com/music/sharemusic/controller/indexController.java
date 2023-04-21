@@ -73,9 +73,18 @@ public class indexController {
   // 월 랭킹
   @GetMapping("/monthRanking")
   public String monthRanking(Model model) {
-    List<BoardDto> monthRankList = boardService.getMonthRankPost();
+    List<BoardDto> monthRankList = boardService.getMonthRankPost(0);
     model.addAttribute("monthRankList", monthRankList);
     return "/mainPage/monthRanking";
+  }
+  // 월 랭킹 월 이동
+  @PostMapping("/reload/monthRanking")
+  public String reloadMonthRanking(Model model, int moveMonth) {
+    List<BoardDto> monthRankList = boardService.getMonthRankPost(moveMonth);
+    model.addAttribute("monthRankList", monthRankList);
+    
+    String target = "/mainPage/monthRanking :: #monthRankList";
+    return target;
   }
 
   // 주간 랭킹

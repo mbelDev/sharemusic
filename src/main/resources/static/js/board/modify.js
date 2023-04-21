@@ -1,5 +1,5 @@
 // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
-$(".btnModifyConfirm").on("click", function () {
+$("#btnModifyConfirm").on("click", function () {
   const url = $(".postLink").val();
   const regExp =
     "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";

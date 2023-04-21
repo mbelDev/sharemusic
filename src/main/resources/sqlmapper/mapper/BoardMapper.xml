@@ -43,14 +43,14 @@
 </select>
 
 <!-- 월간 랭킹 글 불러오기  -->
-<select id="getMonthRankPost" resultType="BoardDto">
+<select id="getMonthRankPost" parameterType="Integer" resultType="BoardDto">
 SELECT * FROM (
     SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
   )
   WHERE 
   ROWNUM <![CDATA[<=]]> 5 AND
   TO_CHAR(POSTDATE, 'YYYYMM') = (
-  SELECT TO_CHAR(ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -1), 'YYYYMM') FROM DUAL)
+  SELECT TO_CHAR(ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -1 + #{moveMonth}), 'YYYYMM') FROM DUAL)
 </select>
 
 <!-- 주간 랭킹 글 불러오기 -->
