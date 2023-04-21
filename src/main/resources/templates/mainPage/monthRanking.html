@@ -9,10 +9,12 @@
     <section class="monthRanking">
       <div class="monthRanking-page topAndbut">
         <h2>월간랭킹</h2>
+
+        <!-- 날짜이동버튼 -->
         <div>
-          <span class="prevMonth" onclick="prevMonth()"><--</span>
-          <span>날짜</span>
-          <span class="nextMonth" onclick="nextMonth()">--></span>
+          <span class="prevMonth" onclick="prevMonth()"><==</span>
+          <span class="curMonth">날짜</span>
+          <span class="nextMonth" onclick="nextMonth()">==></span>
         </div>
 
         <!-- List 데이터 -->
@@ -63,8 +65,19 @@
     <!-- monthRanking -->
 
     <script>
-      let moveMonth = 0;
-      $(".nextMonth").hide();
+      let moveMonth;
+      let date = new Date();
+      $(".curMonth").text(date);
+
+      if (sessionStorage.getItem("moveMonth") != null) {
+        moveMonth = sessionStorage.getItem("moveMonth");
+      } else {
+        moveMonth = 0;
+      }
+
+      if (moveMonth == 0) {
+        $(".nextMonth").hide();
+      }
 
       function prevMonth() {
         moveMonth--;
@@ -81,7 +94,7 @@
       }
 
       function showMonthRank(moveMonth) {
-        console.log("showMonthRank");
+        console.log("showMonthRank", moveMonth);
         $.ajax({
           url: "/reload/monthRanking",
           type: "POST",
@@ -91,6 +104,7 @@
           async: false,
         }).done(function (fragment) {
           $("#monthRankList").replaceWith(fragment);
+          sessionStorage.setItem("moveMonth", moveMonth);
         });
       }
     </script>
