@@ -43,26 +43,26 @@
 </select>
 
 <!-- 월간 랭킹 글 불러오기  -->
-<select id="getMonthRankPost" parameterType="Integer" resultType="BoardDto">
-  SELECT * FROM (
-      SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
-    )
-    WHERE 
-    ROWNUM <![CDATA[<=]]> 5 AND
-    TO_CHAR(POSTDATE, 'YYYYMM') = (
-    SELECT TO_CHAR(ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -1 + #{moveMonth}), 'YYYYMM') FROM DUAL)
+<select id="getMonthRankPost" resultType="BoardDto">
+SELECT * FROM (
+    SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
+  )
+  WHERE 
+  ROWNUM <![CDATA[<=]]> 5 AND
+  TO_CHAR(POSTDATE, 'YYYYMM') = (
+  SELECT TO_CHAR(ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -1), 'YYYYMM') FROM DUAL)
 </select>
 
 <!-- 주간 랭킹 글 불러오기 -->
-<select id="getWeeklyRankPost" parameterType="Integer" resultType="BoardDto">
-  SELECT * FROM (
+<select id="getWeeklyRankPost" resultType="BoardDto">
+SELECT * FROM (
     SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
   ) 
   WHERE 
   ROWNUM <![CDATA[<=]]> 5 AND (
   TO_CHAR(POSTDATE, 'YYYYMMDD') BETWEEN 
-    (SELECT TO_CHAR(TRUNC(SYSDATE, 'iw') - 7 + (7 * #{moveWeekly}), 'YYYYMMDD') FROM DUAL) AND
-    (SELECT TO_CHAR(TRUNC(SYSDATE, 'iw') - 1 + (7 * #{moveWeekly}), 'YYYYMMDD') FROM DUAL)
+    (SELECT TO_CHAR(TRUNC(SYSDATE, 'iw') - 7, 'YYYYMMDD') FROM DUAL) AND
+    (SELECT TO_CHAR(TRUNC(SYSDATE, 'iw') - 1, 'YYYYMMDD') FROM DUAL)
   )
 </select>
 

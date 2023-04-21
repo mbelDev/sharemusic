@@ -41,10 +41,6 @@ main {
 .boardWrite-page--form .boardWrite-pag--item #writePostEmote {
   cursor: pointer;
 }
-.boardWrite-page--form .boardWrite-pag--item .errorTxt {
-  padding-top: 8px;
-  margin-bottom: -10px;
-}
 .boardWrite-page--form .musicName-right p {
   margin-bottom: 10px;
 }
@@ -102,8 +98,7 @@ main {
     margin-top: 170px;
     margin-left: 80vw;
   }
-  #writePostGenre,
-  #writePostEmote {
+  #writePostGenre, #writePostEmote {
     width: 23vw;
   }
   .btns {

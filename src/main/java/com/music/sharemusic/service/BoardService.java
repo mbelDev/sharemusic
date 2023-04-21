@@ -2,8 +2,6 @@ package com.music.sharemusic.service;
 
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
-
-import java.util.Map;
 import java.util.List;
 
 public interface BoardService {
@@ -24,15 +22,11 @@ public interface BoardService {
 
   // 랭킹 글들 불러오기
 
-  public List<BoardDto> getMonthRankPost(int moveMonth);
+  public List<BoardDto> getMonthRankPost();
 
   // 월간 랭킹 글들 불러오기
 
-  public Map<String, String> getMonthRankDate(int moveMonth);
-
-  // 월간 랭킹 날짜
-
-  public List<BoardDto> getWeeklyRankPost(int moveWeekly);
+  public List<BoardDto> getWeeklyRankPost();
 
   //  주간 랭킹 글들 불러오기
 
@@ -50,4 +44,5 @@ public interface BoardService {
 
   public int deletePost(BoardDto boardDto);
   //view 에서 요청. 글 삭제하기
+
 }

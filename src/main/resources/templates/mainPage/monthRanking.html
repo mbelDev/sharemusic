@@ -9,36 +9,7 @@
     <section class="monthRanking">
       <div class="monthRanking-page topAndbut">
         <h2>월간랭킹</h2>
-
-        <div class="month">
-          <!-- 날짜이동버튼 -->
-          <div id="monthDate">
-            <span class="prevMonth" onclick="prevMonth()"><==</span>
-            <span class="startDay" th:text="${monthDate[STARTDAY]}"
-              >시작 날짜</span
-            >
-            <span>~</span>
-            <span th:text="${monthDate[LASTDAY]}">끝 날짜</span>
-            <span class="nextMonth" onclick="nextMonth()">==></span>
-          </div>
-          <!-- List 데이터 -->
-          <div id="monthRankList">
-            <ul>
-              <li th:each="item : ${monthRankList}">
-                <a th:href="@{/board/view(postNo=${item.postNo})}">
-                  <img
-                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                  />
-                  <p class="" th:text="${item.postTitle}">곡이름</p>
-                  <p class="" th:text="${item.postSinger}">가수이름</p>
-                  <p class="" th:text="${item.postAuth}">별명</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
-
       <!-- monthRanking-page -->
       <article class="monthRanking-Area monthRanking-Area01">
         <div class="monthRanking-Area--no">
@@ -69,48 +40,20 @@
     </section>
     <!-- monthRanking -->
 
-    <script th:inline="javascript">
-      let moveMonth;
-      let date = new Date();
-
-      if (sessionStorage.getItem("moveMonth") != null) {
-        moveMonth = sessionStorage.getItem("moveMonth");
-      } else {
-        moveMonth = 0;
-      }
-
-      if (moveMonth == 0) {
-        $(".nextMonth").hide();
-      }
-
-      function prevMonth() {
-        moveMonth--;
-        $(".nextMonth").show();
-        showMonthRank(moveMonth);
-      }
-
-      function nextMonth() {
-        if (moveMonth == -1) {
-          $(".nextMonth").hide();
-        }
-        moveMonth++;
-        showMonthRank(moveMonth);
-      }
-
-      function showMonthRank(moveMonth) {
-        console.log("showMonthRank", moveMonth);
-        $.ajax({
-          url: "/reload/monthRanking",
-          type: "POST",
-          data: {
-            moveMonth: moveMonth,
-          },
-          async: false,
-        }).done(function (fragment) {
-          sessionStorage.setItem("moveMonth", moveMonth);
-          $("#monthRankList").replaceWith(fragment);
-        });
-      }
-    </script>
+    <!-- 데이터 -->
+    <div>
+      <ul>
+        <li th:each="item : ${monthRankList}">
+          <a th:href="@{/board/view(postNo=${item.postNo})}">
+            <img
+              th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+            />
+            <p class="" th:text="${item.postTitle}">곡이름</p>
+            <p class="" th:text="${item.postSinger}">가수이름</p>
+            <p class="" th:text="${item.postAuth}">별명</p>
+          </a>
+        </li>
+      </ul>
+    </div>
   </main>
 </html>

@@ -18,10 +18,9 @@
                   type="text"
                   placeholder="곡 이름을 입력해주세요."
                   aria-label=".form-control-lg example"
-                  th:field="*{postTitle}"
+                  name="postTitle"
                 />
                 <p
-                  class="errorTxt"
                   th:if="${#fields.hasErrors('postTitle')}"
                   th:errorclass="errorTxt"
                   th:errors="*{postTitle}"
@@ -36,60 +35,23 @@
                   type="text"
                   placeholder="가수 이름을 입력해주세요."
                   aria-label=".form-control-lg example"
-                  th:field="*{postSinger}"
+                  name="postSinger"
                 />
-                <p
-                  class="errorTxt"
-                  th:if="${#fields.hasErrors('postSinger')}"
-                  th:errorclass="errorTxt"
-                  th:errors="*{postSinger}"
-                >
-                  에러 메세지 출력
-                </p>
               </div>
             </div>
             <div class="musicName-right">
               <p>장르</p>
               <div class="boardWrite-pag--item" onclick="getModalWriteGenre()">
-                <input
-                  class="form-control form-control-lg"
-                  type="text"
-                  id="writePostGenre"
-                  th:field="*{postGenre}"
-                  placeholder="장르를 선택"
-                  readonly
-                />
-                <p
-                  class="errorTxt"
-                  th:if="${#fields.hasErrors('postGenre')}"
-                  th:errorclass="errorTxt"
-                  th:errors="*{postGenre}"
-                >
-                  에러 메세지 출력
-                </p>
+                <input class="form-control form-control-lg"
+                type="text" id="writePostGenre" name="postGenre" placeholder="장르를 선택" readonly/>
               </div>
               <p>감성</p>
               <div class="boardWrite-pag--item" onclick="getModalWriteEmote()">
-                <input
-                  class="form-control form-control-lg"
-                  type="text"
-                  id="writePostEmote"
-                  th:field="*{postEmote}"
-                  placeholder="감성을 선택"
-                  readonly
-                />
-                <p
-                  class="errorTxt"
-                  th:if="${#fields.hasErrors('postEmote')}"
-                  th:errorclass="errorTxt"
-                  th:errors="*{postEmote}"
-                >
-                  에러 메세지 출력
-                </p>
+                <input class="form-control form-control-lg"
+                type="text" id="writePostEmote" name="postEmote" placeholder="감성을 선택" readonly/>
               </div>
             </div>
-          </div>
-          <!-- musicName -->
+          </div><!-- musicName -->
           <div class="boardWrite-pag--item">
             <p>유튜브 링크</p>
             <input
@@ -98,23 +60,7 @@
               placeholder="유튜브 링크를 입력해주세요."
               aria-label=".form-control-lg example"
               name="postLink"
-              th:field="*{postLink}"
             />
-            <p
-              class="errorTxt"
-              th:if="${#fields.hasErrors('postLink')}"
-              th:errorclass="errorTxt"
-              th:errors="*{postLink}"
-            >
-              에러 메세지 출력
-            </p>
-            <p
-              class="errorTxt"
-              th:if="${linkCheck == 'error'} and *{postLink} != ''"
-            >
-              링크를 다시 확인해주세요
-            </p>
-            <input type="hidden" value="" class="linkCheck" name="linkCheck" />
           </div>
           <div class="boardWrite-pag--item">
             <p>내용작성</p>
@@ -123,21 +69,11 @@
               class="form-control"
               placeholder="설명 내용을 작성해주세요."
               id="floatingTextarea"
-              th:field="*{postCont}"
+              name="postCont"
             ></textarea>
-            <p
-              class="errorTxt"
-              th:if="${#fields.hasErrors('postCont')}"
-              th:errorclass="errorTxt"
-              th:errors="*{postCont}"
-            >
-              에러 메세지 출력
-            </p>
           </div>
           <div class="btns">
-            <button type="submit" class="btn btn-primary" id="btnWriteConfirm">
-              등록
-            </button>
+            <button type="submit" class="btn btn-primary">등록</button>
             <button class="btn btn-secondary">취소</button>
           </div>
         </form>
@@ -151,34 +87,34 @@
         <!-- 모달창 안에 여기 내용 작성 -->
         <div class="modalCategory__box">
           <span class="modalCategory__box__option" id="writeDance">
-            <a><img src="/images/music01.png" alt="" /></a>
+            <a><img src="/images/music01.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeFolk">
-            <a><img src="/images/music02.png" alt="" /></a>
+            <a><img src="/images/music02.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeIdol">
-            <a><img src="/images/music03.png" alt="" /></a>
+            <a><img src="/images/music03.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeRap">
-            <a><img src="/images/music04.png" alt="" /></a>
+            <a><img src="/images/music04.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeRB">
-            <a><img src="/images/music05.png" alt="" /></a>
+            <a><img src="/images/music05.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeElect">
-            <a><img src="/images/music06.png" alt="" /></a>
+            <a><img src="/images/music06.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeRock">
-            <a><img src="/images/music07.png" alt="" /></a>
+            <a><img src="/images/music07.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeJazz">
-            <a><img src="/images/music08.png" alt="" /></a>
+            <a><img src="/images/music08.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeIndie">
-            <a><img src="/images/music09.png" alt="" /></a>
+            <a><img src="/images/music09.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeAdult">
-            <a><img src="/images/music10.png" alt="" /></a>
+            <a><img src="/images/music10.png" alt=""></a>
           </span>
         </div>
       </div>
@@ -190,34 +126,34 @@
         <!-- 모달창 안에 여기 내용 작성 -->
         <div class="modalCategory__box">
           <span class="modalCategory__box__option" id="writeExcite">
-            <a><img src="/images/mood01.png" alt="" /></a>
+            <a><img src="/images/mood01.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeGloomy">
-            <a><img src="/images/mood02.png" alt="" /></a>
+            <a><img src="/images/mood02.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeEcstasy">
-            <a><img src="/images/mood03.png" alt="" /></a>
+            <a><img src="/images/mood03.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeSpooky">
-            <a><img src="/images/mood04.png" alt="" /></a>
+            <a><img src="/images/mood04.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeMagni">
-            <a><img src="/images/mood05.png" alt="" /></a>
+            <a><img src="/images/mood05.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeCalm">
-            <a><img src="/images/mood06.png" alt="" /></a>
+            <a><img src="/images/mood06.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeFlutter">
-            <a><img src="/images/mood07.png" alt="" /></a>
+            <a><img src="/images/mood07.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeSorrow">
-            <a><img src="/images/mood08.png" alt="" /></a>
+            <a><img src="/images/mood08.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeDreamy">
-            <a><img src="/images/mood09.png" alt="" /></a>
+            <a><img src="/images/mood09.png" alt=""></a>
           </span>
           <span class="modalCategory__box__option" id="writeWarm">
-            <a><img src="/images/mood10.png" alt="" /></a>
+            <a><img src="/images/mood10.png" alt=""></a>
           </span>
         </div>
       </div>
