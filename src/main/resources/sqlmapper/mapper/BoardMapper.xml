@@ -28,9 +28,10 @@
     )
   </if>
   <if test = "category != null">
-    AND 
+    AND (
     (POSTGENRE = #{category}) OR
     (POSTEMOTE = #{category})
+    )
   </if>
     ORDER BY ${sort} desc
 </select>
