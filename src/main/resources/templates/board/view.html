@@ -5,7 +5,7 @@
   xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{/include/layout.html}"
 >
-<main id="mainPage-Area" class="" layout:fragment="contents">
+<main id="mainPage-Area" class="mainPageView-Area" layout:fragment="contents">
   <section class="boardView">
 <!--------------------------------------------------[             본문 표시 창            ]-------------------------------------------------------------------------->
 <!--------------------------------------------------[            boardView-Area          ]-------------------------------------------------------------------------->
@@ -113,11 +113,13 @@
         </li>
       </ul>
       <div class="board-view--replyBox__input">
-        <input type="checkbox" class="check-hidden">
-        <span>비밀글로 작성하기</span>
-        <textarea class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }" rows="10" >
+        <div>
+          <input type="checkbox" class="check-hidden">
+          <span>비밀글로 작성하기</span>
+        </div>
+        <textarea class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }" >
         </textarea>
-        <input type="button" class="btn-primary btn-reply" value="작성"/>
+        <input type="button" class="btn btn-primary btn-reply" value="작성"/>
       </div>
       <div class="board-view--replyBox__input board-view--replyBox__input-M">
         <input type="button" class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }"/>
@@ -134,20 +136,25 @@
   
 <!--------------------------------------------------[               모달 영역             ]-------------------------------------------------------------------------->
 
+
+
+
   <section> <!-- 모달 섹션 -->>
     <!-- 삭제 모달창 -->
-    <div id="deleteModal" class="modal-wnd">
-      <div class="modal-wnd-item">
-        <button id="closeDeleteModal">닫기</button>
-        <div class="modal-content">
-          <!-- 모달창 안에 여기 내용 작성 -->
-          <h3>정말로 삭제하시겠습니까?</h3>
-          <button id="btnDeleteConfirm">확인</button>
-          <button id="closeDelete">취소</button>
+    <div id="deleteModal" class="modal-wnd deleteMo">
+      <div id="closeDeleteModal"></div>
+      <div class="modal-content">
+        <div class="modal-content--title">
+          <p>게시글을 삭제합니다.</p>
         </div>
-        <!-- ModalThis-content -->
+        <div class="modal-content--txt">
+          <p>확인을 누르면 게시글이 완전히 삭제됩니다.</p>
+        </div>
+        <div class="modal-content--btn">
+          <button id="btnDeleteConfirm" class="btn btn-primary">확인</button>
+          <button id="closeDelete" class="btn btn-secondary">취소</button>
+        </div>
       </div>
-      <!-- write-modal--item -->
     </div>
 
     <!-- 공유 모달창 -->

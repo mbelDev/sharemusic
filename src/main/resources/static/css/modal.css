@@ -104,3 +104,609 @@
 .modal-withdraw .modal-btns {
   margin: 3%;
 }
+
+.modal-mo .modal-wnd-item {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 50px 280px;
+}
+.modal-mo .modal-wnd-item .closeModalMobile-btn {
+  display: flex;
+  justify-content: right;
+}
+.modal-mo .modal-wnd-item .closeModalMobile-btn .x-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 5%;
+  right: 10%;
+  width: 50px;
+  height: 50px;
+}
+.modal-mo .modal-wnd-item .closeModalMobile-btn .x-btn::before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 45%;
+  right: 20%;
+}
+.modal-mo .modal-wnd-item .closeModalMobile-btn .x-btn::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 45%;
+  right: 20%;
+}
+.modal-mo .modal-wnd-item .mo-logged {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--infoForm {
+  display: flex;
+  justify-content: center;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--infoForm .infoForm-All {
+  display: flex;
+  align-items: center;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--infoForm .infoForm-All .infoForm-img {
+  margin-right: 10px;
+  outline: 1px solid red;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--infoForm .infoForm-All .infoForm-img img {
+  width: 50px;
+  height: 50px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--infoForm .infoForm-All .infoForm-userNM {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  cursor: pointer;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--infoForm .infoForm-All .infoForm-userNM .ic-settings {
+  margin-top: 6px;
+  margin-left: 5px;
+  font-size: 15px;
+}
+.modal-mo .modal-wnd-item .comment-txt {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+.modal-mo .modal-wnd-item .comment-txt button {
+  font-size: 16px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--joinForm {
+  display: flex;
+  justify-content: center;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--joinForm .join {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--joinForm .join span img {
+  width: 30px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--joinForm .join a {
+  margin-left: 10px;
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--joinForm .join a span:hover {
+  color: #ff3672;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--searchForm {
+  display: flex;
+  justify-content: center;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--searchForm .input-group button {
+  background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
+  padding: 0 14px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--searchForm .input-group .form-outline #form1 {
+  background-color: #1a1a1a;
+  color: #fff;
+  transition: all 1s ease;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--searchForm .input-group .form-outline #form1:focus {
+  outline: 1px solid #ff3672;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents {
+  display: flex;
+  justify-content: center;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view {
+  font-size: 26px;
+  display: flex;
+  justify-content: center;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view ul {
+  padding-left: 0;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view ul li {
+  margin: 15px 0;
+  cursor: pointer;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view ul li div {
+  display: flex;
+  align-items: center;
+  transition: all 0.7s ease;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view ul li div img {
+  margin-right: 7px;
+  width: 20px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view ul li div span {
+  transition: all 0.25s ease;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .line {
+  width: 100%;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(1) div:hover {
+  background-image: url("/images/navIcon01-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(1) div:hover img {
+  opacity: 0;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(1) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(2) div:hover {
+  background-image: url("/images/navIcon02-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(2) div:hover img {
+  opacity: 0;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(2) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(1) div:hover {
+  background-image: url("/images/navIcon03-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(1) div:hover img {
+  opacity: 0;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(1) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(2) div:hover {
+  background-image: url("/images/navIcon04-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(2) div:hover img {
+  opacity: 0;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(2) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(3) div:hover {
+  background-image: url("/images/navIcon06-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(3) div:hover img {
+  opacity: 0;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(3) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(4) div:hover {
+  background-image: url("/images/navIcon08-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(4) div:hover img {
+  opacity: 0;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(4) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 ul {
+  margin-right: 20px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(1) div:hover {
+  background-image: url("/images/navIcon07-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(1) div:hover img {
+  opacity: 0;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(1) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(2) div:hover {
+  background-image: url("/images/navIcon08-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(2) div:hover img {
+  opacity: 0;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(2) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(3) div:hover {
+  background-image: url("/images/navIcon09-o.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 22px;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(3) div:hover img {
+  opacity: 0;
+}
+.modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(3) div:hover span {
+  color: #cc0040;
+  font-weight: bold;
+}
+
+.deleteMo {
+  width: 100%;
+  height: 100vh;
+}
+.deleteMo #closeDeleteModal {
+  width: 100%;
+  height: 100vh;
+}
+.deleteMo .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 80;
+  width: 500px;
+  height: 200px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 8px;
+}
+.deleteMo .modal-content--title {
+  padding: 20px 15px;
+}
+.deleteMo .modal-content--title p {
+  font-size: 20px;
+  font-weight: 700;
+}
+.deleteMo .modal-content--txt {
+  padding: 30px 0;
+  border-top: 1px solid rgba(117, 117, 117, 0.3764705882);
+  border-bottom: 1px solid rgba(117, 117, 117, 0.3764705882);
+}
+.deleteMo .modal-content--txt p {
+  padding: 0 15px;
+  font-weight: 400;
+}
+.deleteMo .modal-content--btn {
+  padding: 13px 15px;
+  text-align: right;
+}
+
+@media screen and (max-width: 855px) {
+  .modal-mo {
+    z-index: 90;
+  }
+  .modal-mo .modal-wnd-item {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background-color: #000000;
+    top: 0;
+    left: 0;
+    padding: 50px 30vw;
+  }
+  .modal-mo .modal-wnd-item .closeModalMobile-btn {
+    display: flex;
+    justify-content: right;
+  }
+  .modal-mo .modal-wnd-item .closeModalMobile-btn .x-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    width: 50px;
+    height: 50px;
+  }
+  .modal-mo .modal-wnd-item .closeModalMobile-btn .x-btn::before {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 45%;
+    right: 20%;
+  }
+  .modal-mo .modal-wnd-item .closeModalMobile-btn .x-btn::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 45%;
+    right: 20%;
+  }
+  .modal-mo .modal-wnd-item .mo-logged {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--infoForm {
+    display: flex;
+    justify-content: center;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--infoForm .infoForm-All {
+    display: flex;
+    align-items: center;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--infoForm .infoForm-All .infoForm-img {
+    margin-right: 10px;
+    outline: 1px solid red;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--infoForm .infoForm-All .infoForm-img img {
+    width: 50px;
+    height: 50px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--infoForm .infoForm-All .infoForm-userNM {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--infoForm .infoForm-All .infoForm-userNM .ic-settings {
+    margin-top: 6px;
+    margin-left: 5px;
+    font-size: 15px;
+  }
+  .modal-mo .modal-wnd-item .comment-txt {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+  }
+  .modal-mo .modal-wnd-item .comment-txt button {
+    font-size: 16px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--joinForm {
+    display: flex;
+    justify-content: center;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--joinForm .join {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--joinForm .join span img {
+    width: 30px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--joinForm .join a {
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--joinForm .join a span:hover {
+    color: #ff3672;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--searchForm {
+    display: flex;
+    justify-content: center;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--searchForm .input-group button {
+    background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
+    padding: 0 14px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--searchForm .input-group .form-outline #form1 {
+    background-color: #1a1a1a;
+    color: #fff;
+    transition: all 1s ease;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--searchForm .input-group .form-outline #form1:focus {
+    outline: 1px solid #ff3672;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents {
+    display: flex;
+    justify-content: center;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view {
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view ul {
+    padding-left: 0;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view ul li {
+    margin: 15px 0;
+    cursor: pointer;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view ul li div {
+    display: flex;
+    align-items: center;
+    transition: all 0.7s ease;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view ul li div img {
+    margin-right: 7px;
+    width: 20px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view ul li div span {
+    transition: all 0.25s ease;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .line {
+    width: 100%;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(1) div:hover {
+    background-image: url("/images/navIcon01-o.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 22px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(1) div:hover img {
+    opacity: 0;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(1) div:hover span {
+    color: #cc0040;
+    font-weight: bold;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(2) div:hover {
+    background-image: url("/images/navIcon02-o.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 22px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(2) div:hover img {
+    opacity: 0;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view01 li:nth-child(2) div:hover span {
+    color: #cc0040;
+    font-weight: bold;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(1) div:hover {
+    background-image: url("/images/navIcon03-o.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 22px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(1) div:hover img {
+    opacity: 0;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(1) div:hover span {
+    color: #cc0040;
+    font-weight: bold;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(2) div:hover {
+    background-image: url("/images/navIcon04-o.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 22px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(2) div:hover img {
+    opacity: 0;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(2) div:hover span {
+    color: #cc0040;
+    font-weight: bold;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(3) div:hover {
+    background-image: url("/images/navIcon06-o.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 22px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(3) div:hover img {
+    opacity: 0;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(3) div:hover span {
+    color: #cc0040;
+    font-weight: bold;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(4) div:hover {
+    background-image: url("/images/navIcon08-o.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 22px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(4) div:hover img {
+    opacity: 0;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view02 li:nth-child(4) div:hover span {
+    color: #cc0040;
+    font-weight: bold;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 ul {
+    margin-right: 20px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(1) div:hover {
+    background-image: url("/images/navIcon07-o.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 22px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(1) div:hover img {
+    opacity: 0;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(1) div:hover span {
+    color: #cc0040;
+    font-weight: bold;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(2) div:hover {
+    background-image: url("/images/navIcon08-o.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 22px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(2) div:hover img {
+    opacity: 0;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(2) div:hover span {
+    color: #cc0040;
+    font-weight: bold;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(3) div:hover {
+    background-image: url("/images/navIcon09-o.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 22px;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(3) div:hover img {
+    opacity: 0;
+  }
+  .modal-mo .modal-wnd-item .headerLayout-Area--viewContents .view03 li:nth-child(3) div:hover span {
+    color: #cc0040;
+    font-weight: bold;
+  }
+  #modalGenre {
+    z-index: 99;
+  }
+  #modalEmote {
+    z-index: 99;
+  }
+}
+@media screen and (max-width: 500px) {
+  .modal-mo .modal-wnd-item {
+    padding: 50px 20vw;
+  }
+}
