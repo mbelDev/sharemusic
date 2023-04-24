@@ -100,10 +100,13 @@
 }
 .board-view--replyBox .reply-contents--icon .menuBtn {
   position: absolute;
+  color: #777;
   top: 0;
-  right: 2%;
-  font-size: 30px;
+  right: 0;
   cursor: pointer;
+}
+.board-view--replyBox .reply-contents--icon .menuBtn-delete {
+  margin-left: 5px;
 }
 .board-view--replyBox .reply-contents--icon .reply-contents--text {
   width: 80%;
@@ -111,6 +114,13 @@
 }
 .board-view--replyBox .reply-contents--icon .reply-contents--box {
   display: flex;
+}
+.board-view--replyBox .reply-contents--icon .replyLockedIcon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 5px;
+  margin-left: 5px;
 }
 .board-view--replyBox .reply-contents--btns {
   position: relative;
@@ -137,22 +147,31 @@
 .board-view--replyBox .reply-hidden {
   width: 100%;
 }
-.board-view--replyBox .board-view--replyBox__input {
+.board-view--replyBox .board-view--replyBox-input {
   position: relative;
-  margin-top: 30px;
+  margin-bottom: 5%;
 }
-.board-view--replyBox .board-view--replyBox__input textarea {
-  width: 100%;
+.board-view--replyBox .board-view--replyBox-subCont {
+  display: flex;
+}
+.board-view--replyBox .board-view--replyBox-subCont .replyCont {
+  flex: 1;
   resize: none;
   background-color: #f0f0f0;
 }
-.board-view--replyBox .board-view--replyBox__input input:nth-child(3) {
+.board-view--replyBox .board-view--replyBox-subCont input:nth-child(4) {
   position: absolute;
   bottom: 15%;
   right: 1%;
   z-index: 10;
   width: 100px;
   height: 50px;
+}
+.board-view--replyBox .replyIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 @media screen and (max-width: 1640px) {

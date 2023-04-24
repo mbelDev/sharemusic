@@ -35,6 +35,11 @@
     ORDER BY ${sort} desc
 </select>
 
+<!-- 팔로우 중인 글 불러오기 #권인호 -->
+<select id="getPostFollow" parameterType="HashMap" resultType="BoardDto">
+  SELECT * FROM BOARD WHERE POSTAUTHID IN (SELECT FOLLOWID FROM FOLLOW WHERE USERID = #{userID}) ORDER BY POSTAUTHID, POSTDATE
+</select>
+
 <!-- 랭킹 글 불러오기 -->
 <select id="getRankPost" resultType="BoardDto">
   SELECT * FROM (

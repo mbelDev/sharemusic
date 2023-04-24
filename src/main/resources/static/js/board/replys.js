@@ -1,97 +1,138 @@
 //덧글 입력 처리 함수
-function addReplyEvent(){
-    $(".btn-reply").click(()=>{
-        $.ajax({
-          url: "/board/reply",
-          type:"POST",
-          data:{
-          replyCont:$(".replyCont").val(),
-          replyHidden:$(".check-hidden").is(":checked")==true ? 1 : 0,
-          replyGroup:0,
-          replyLevel:0,
-          replyStep:0
+function addReplyEvent(item){
+    //item = 작성 버튼
+    const content = $(item).siblings('.replyCont').val();
+    const hidden = $(item).closest('.board-view--replyBox-input').find('.check-hidden').is(":checked")==true ? 1 : 0 ; 
+    //작성 버튼을 기준으로 형제 element에서 덧글 내용과 비밀글 체크를 받아온다
+    $.ajax({
+        url: "/board/reply",
+        type:"POST",
+        data:{
+        replyCont : content,
+        replyHidden : hidden,
+        replyGroup : 0,
+        replyLevel : 0,
+        replyStep : 0
+    },
+    success: function(response){
+        console.log(response);
+        alert("덧글을 작성했습니다!");
+        $(".replyCont").val('');
+    },
+    error:function(err){
+        console.log(err);
+        alert("로그인 정보가 없습니다 로그인 해 주세요.");
+        location.href='/member/login';
+    }
+    })
+    .done(function( fragment ){
+        $("#reply-container").replaceWith(fragment);
+        addDeleteReplyEvent();
+    });
+}
+
+// 덧글의 덧글 입력 처리 함수
+function addReplyReplyEvent(item){
+    const replyno = $(item).data("replyno");
+    //작성 버튼의 data-set 에서 덧글 번호를 가져온다
+    const content = $(item).siblings('.replyCont').val();
+    const hidden = $(item).closest('.board-view--replyBox-input').find('.check-hidden').is(":checked")==true ? 1 : 0 ; 
+    $.ajax({
+        url:"/board/reply/reply",
+        type:"POST",
+        data:{
+            replyGroup : replyno,
+            replyCont : content,
+            replyHidden : hidden,
         },
-        success: function(response){
-          console.log(response);
-          alert("덧글을 작성했습니다!");
+        success:function(response){
+            console.log(response);
         },
         error:function(err){
-          console.log(err);
-          alert("로그인 정보가 없습니다 로그인 해 주세요.");
-          location.href='/member/login';
+            console.log(err);
+            alert("로그인 정보가 없습니다. 로그인 해 주세요.");
+            location.href='/member/login';
         }
-      })
-      .done(function( fragment ){
-          $("#reply-container").replaceWith(fragment);
-          addReplyReplyEvent();
-          addDeleteReplyEvent();
-      });
     })
+    .done(function( fragment ){
+        $("#reply-container").replaceWith(fragment);
+        alert("등록되었습니다.");
+        $(content).val('');
+    });
+}
+
+//덧글의 수정처리 이벤트
+function modifyReplyEvent(item){
+    const replyno = $(item).data("replyno");
+    //작성 버튼의 data-set 에서 덧글 번호를 가져온다
+    const content = $(item).siblings('.replyCont').val();
+    const hidden = $(item).siblings('.check-hidden').is(":checked")==true ? 1 : 0 ; 
+    $.ajax({
+        url:"/board/reply/modify",
+        type:"POST",
+        data:{
+            replyNo : replyno,
+            replyCont : content,
+            replyHidden : hidden,
+        },
+        success:function(response){
+            console.log(response);
+        },
+        error:function(err){
+            console.log(err);
+            alert("로그인 정보가 없습니다. 로그인 해 주세요.");
+            location.href='/member/login';
+        }
+    })
+    .done(function( fragment ){
+        $("#reply-container").replaceWith(fragment);
+        alert("성공적으로 수정되었습니다.");
+    });
 }
 
 //덧글의 덧글을 달기위해 입력창을 생성하는 함수
-function addReplyReplyEvent(){
-    const replyBtns = $(".replyReplyBtn")
-    replyBtns.each((index,item)=>{
-        console.log(index);
-        $(item).click((e)=>{
-            $('div.replyReply').remove();
-            $(e.target).parent().parent('li').after("<div class='board-view--replyBox__input replyReply'> <input type='text' class='replyCont' id='replyCont'/> <input type='button' class='btn-primary btn-reply' id='btn-reply-reply' value='작성'/> <input type='checkbox' class='check-hidden-reply'><span id='closeReply'></span><span>비밀글로 작성하기</span> </div>");
-            $("#btn-reply-reply").data("replyno",$(e.target).data("replyno"));
-            console.log($("#btn-reply-reply").data("replyno"));
+function openReplyReplyEvent(item){
+    $('div.replyReply').remove();
+    const test = $(".board-view--replyBox-input").clone();
+    const replyno = $(item).data("replyno");
+    console.log(replyno);
+    $(test).addClass("replyReply");
+    $(test).find('.btn-reply').data("replyno",replyno);
+    $(test).find('.btn-reply').attr("onclick","addReplyReplyEvent(this)");
 
-            $("#btn-reply-reply").click(()=>{
-                $.ajax({
-                    url:"/board/reply/reply",
-                    type:"POST",
-                    data:{
-                        replyGroup : $("#btn-reply-reply").data("replyno"),
-                        replyCont : $("#replyCont").val(),
-                        replyHidden:$(".check-hidden-reply").is(":checked")==true ? 1 : 0,
-                    },
-                    success:function(response){
-                        console.log(response);
-                    },
-                    error:function(err){
-                        console.log(err);
-                        alert("로그인 정보가 없습니다. 로그인 해 주세요.");
-                        location.href='/member/login';
-                    }
-                })
-                .done(function( fragment ){
-                    $("#reply-container").replaceWith(fragment);
-                    alert("등록되었습니다.");
-                    addReplyEvent();
-                    addDeleteReplyEvent();
-                });
-            })
-        })
-    })
+    $(item).closest('li.reply').after(test);
+}
+
+//덧글 수정을 위해 수정 입력창을 생성하는 함수
+function openModifyReplyEvent(item){
+    $('div.replyReply').remove();
+    const test = $(".board-view--replyBox-input").clone();
+    const replyno = $(item).data("replyno");
+    console.log(replyno);
+    $(test).addClass("replyReply");
+    $(test).find('.btn-reply').data("replyno",replyno);
+    $(test).find('.btn-reply').attr("onclick","modifyReplyEvent(this)");
+
+    $(item).closest('li.reply').after(test);
 }
 
 //덧글 삭제 확인 모달을 띄우는 이벤트
-function addDeleteReplyEvent() {
-    const deleteReplyBtns = document.querySelectorAll("#deleteReplyBtn");
-    deleteReplyBtns.forEach((item)=>{
-      item.addEventListener("click",(e)=>{
-        const target = document.querySelector("#deleteReplyConfirm");
-        const replyNo = e.target.dataset.replyno;
-        target.dataset.replyno = replyNo;
-        $("#deleteReplyModal").addClass("modal-open");
-      })
-    })
-
+function openDeleteReplyEvent(item) {
+    const target = document.querySelector("#deleteReplyConfirm");
+    const replyNo = $(item).closest('.reply').data("replyno");
+    target.dataset.replyno = replyNo;
+    console.log(replyNo);
+    $("#deleteReplyModal").addClass("modal-open");
   }
 
 //덧글 삭제 모달에서 확인 누르면 발생하는 이벤트
-function modalReplyDelete(){
-    $("#deleteReplyConfirm").click((e)=>{
-    console.log(e.target.dataset.replyno);
+function modalReplyDelete(item){
+    const replyno = item.dataset.replyno;
     $.ajax({
         url:"/board/reply/delete",
         type:"POST",
         data:{
-            replyNo:e.target.dataset.replyno
+            replyNo : replyno
         },
         success:function(reponse){
             console.log("삭제 완료");
@@ -109,9 +150,5 @@ function modalReplyDelete(){
     .done(function( fragment ){
         $("#reply-container").replaceWith(fragment);
         alert("삭제되었습니다.");
-        addReplyReplyEvent();
-        addDeleteReplyEvent();
     });
-    })
-
 }

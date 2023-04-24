@@ -9,6 +9,11 @@
     SELECT * FROM REPLYS WHERE POSTNO = #{postNo} ORDER BY REPLYSTEP
   </select>
 
+  <!-- 덧글 하나 받아오기 -->
+  <select id="getReply" parameterType="Integer" resultType="ReplysDto">
+    SELECT * FROM REPLYS WHERE REPLYNO = #{replyNo} 
+  </select>
+
   <!-- 새 덧글 달 때 STEP 받아오기 -->
   <select id="getReplyStepMax" parameterType="Integer" resultType="Integer">
     SELECT NVL(MAX(REPLYSTEP),0)+1 FROM REPLYS WHERE POSTNO = #{postNo}
@@ -42,8 +47,12 @@
 
   <update id="updateReply" parameterType="ReplysDto">
     UPDATE REPLYS SET
-    REPLYCONT = #{replyCont},
+    <if test="replyCont != null">
+      REPLYCONT = #{replyCont},
+    </if>
+    REPLYHIDDEN = #{replyHidden},
     REPLYDATE = SYSTIMESTAMP
+    WHERE REPLYNO = #{replyNo} AND REPLYAUTHID = #{replyAuthID}
   </update>
 
   <delete id="deleteReply" parameterType="ReplysDto">

@@ -1,27 +1,25 @@
 package com.music.sharemusic.dao;
 
-import com.music.sharemusic.dto.MemberDto;
 import com.music.sharemusic.dto.ReplysDto;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ReplysDao {
+  // postNo에 해당하는 덧글 모두 불러오기
   public List<ReplysDto> getReplyAll(int postNo);
 
-  // postNo에 해당하는 덧글 모두 불러오기
-
-  public void putReply(ReplysDto replyDto);
+  // replyNo에 해당하는 덧글 하나 불러오기
+  public ReplysDto getReply(int replyNo);
 
   //덧글 삽입
-
-  public void updateReply(ReplysDto replysDto);
+  public void putReply(ReplysDto replyDto);
 
   // 덧글 수정하기
-
-  public void deleteReply(ReplysDto replysDto);
+  public void updateReply(ReplysDto replysDto);
 
   // 덧글 지우기. MemberDto는 작성자 본인인지 확인하기위해 Session에서 받아올 것.
+  public void deleteReply(ReplysDto replysDto);
 
   //이하 덧글의 덧글 기능에 관련된 기능들
   public int getReplyStepMax(int postNo);
