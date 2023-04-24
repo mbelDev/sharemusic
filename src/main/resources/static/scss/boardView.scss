@@ -106,9 +106,16 @@
         }
         .menuBtn {
           position: absolute;
-          top: 0; right: 30px;
-          font-size: 30px;
+          color: #777;
+          top: 0;
+          right: 0;
           cursor: pointer;
+          &-delete{
+            margin-left: 5px;
+          }
+          &-modify{
+            // right: 25px;
+          }
         }
         .reply-contents--text{
           width: 80%;
@@ -116,6 +123,13 @@
         }
         .reply-contents--box {
           display: flex;
+        }
+        .replyLockedIcon{
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          top: 5px;
+          margin-left: 5px;
         }
       }
       &--btns{
@@ -146,22 +160,33 @@
       width: 100%;
     }
   }
-  .board-view--replyBox__input {
-    position: relative;
-    textarea {
-      width: 100%;
-      resize: none;
+  .board-view--replyBox{
+    &-input {
+      position: relative;
+      margin-bottom: 5%;
     }
-    input {
-      &:nth-child(4) {
-        position: absolute;
-        bottom: 10%; right: 3%;
-        z-index: 10;
+    &-subCont{
+      display: flex;
+      .replyCont {
+        flex:1;
+        resize: none;
+      }
+      input {
+        &:nth-child(4) {
+          position: absolute;
+          bottom: 10%; right: 3%;
+          z-index: 10;
+        }
       }
     }
   }
+  .replyIcon{
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
 }
-
 
 
 

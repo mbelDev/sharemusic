@@ -30,8 +30,8 @@
       }
     }
   }
+  //카테고리 모달 #권인호 작성
   .modalCategory {
-    //카테고리 모달 #권인호 작성
     display: flex;
     align-items: center;
     width: 100%;
@@ -109,7 +109,7 @@
   }
 }
 
-//회원 탈퇴모달 #권인호
+//회원 탈퇴 모달 #권인호
 .modal-withdraw{
   .modal{
     &-content{
@@ -123,5 +123,53 @@
   &-btns{
     margin: 3%;
   }
+  }
+}
+
+//이용약관 모달 #권인호
+.modal-siteTerms{
+  .modal{
+    &-content{
+      position: relative;
+      display: block;
+      height: 100%;
+      padding: 5%;
+      text-align: center;
+      .terms{
+        &-title{
+          color: #333;
+        }
+        &-content{
+          color: #333;
+          overflow-y: scroll;
+          height: 80%;
+          display: block;
+          text-align: left;
+        }
+      }
+    }
+  }
+  #siteTermsClose{
+    margin-top: 2.5%;
+  }
+}
+
+//덧글 삭제 모달 #권인호
+#deleteReplyModal{
+  .modal-ReplyDelete{
+    left: 30%;
+    top: 40%;
+    width: 40%;
+    height: 20%;
+    color: #111;
+    .modal{
+      &-content{
+        position: relative;
+        display: block;
+        height: 100%;
+        padding: 5%;
+        text-align: center;
+      }
+    }
   }
 }

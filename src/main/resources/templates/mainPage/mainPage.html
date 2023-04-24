@@ -170,5 +170,26 @@
         });
       }
     </script>
+
+    <!--  좋아요/북마크/팔로우 AJAX 컨트롤  #권인호  -->
+    <script>
+      function testRespone02(category, searchTxt, sort) {
+        $.ajax({
+          url: "/reload/",
+          type: "POST",
+          data: {
+            category: category,
+            searchTxt: searchTxt,
+            sort: sort,
+          },
+          async: false,
+          success: function (response) {
+            console.log(response);
+          },
+        }).done(function (fragment) {
+          $("#test").replaceWith(fragment);
+        });
+      }
+    </script>
   </main>
 </html>

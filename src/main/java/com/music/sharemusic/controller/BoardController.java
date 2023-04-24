@@ -133,6 +133,7 @@ public class BoardController {
     LoggedDto loggedUser = loggedUser(session);
     boardDto.setPostAuth(loggedUser.getUserNM());
     boardDto.setPostLink(linkCheck);
+    log.info("test===={}", boardDto);
     boardService.putPost(boardDto);
     return "redirect:/mainPage/";
   }
@@ -235,6 +236,29 @@ public class BoardController {
   //덧글삭제 권인호
   @PostMapping("/reply/delete")
   public String deleteReply(
+    ReplysDto replysDto,
+    Model model,
+    HttpSession session
+  ) {
+    if (session.getAttribute("loggedUser") == null) {
+      return "로그인 정보가 없습니다";
+    }
+    LoggedDto replysAuth = (LoggedDto) session.getAttribute("loggedUser");
+    int postNo = replysAuth.getPostNo();
+    replysDto.setPostNo(postNo);
+    replysDto.setReplyAuthID(replysAuth.getUserID());
+    replysDto.setReplyHidden(2);
+    replysService.updateReply(replysDto);
+    List<ReplysDto> replysList = replysService.getReplyAll(postNo);
+    model.addAttribute("replysList", replysList);
+    BoardDto boardDto = boardService.getPostOne(postNo);
+    model.addAttribute("boardDto", boardDto);
+    return "/board/view :: #reply-container";
+  }
+
+  //물리적 덧글 완전 삭제 권인호
+  @PostMapping("/reply/delete/complete")
+  public String deleteReplyComplete(
     ReplysDto replysDto,
     Model model,
     HttpSession session
