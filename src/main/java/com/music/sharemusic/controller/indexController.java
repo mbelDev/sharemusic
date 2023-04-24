@@ -88,9 +88,6 @@ public class indexController {
   public String reloadMonthRanking(Model model, int moveMonth) {
     List<BoardDto> monthRankList = boardService.getMonthRankPost(moveMonth);
     model.addAttribute("monthRankList", monthRankList);
-
-    // Map<String, String> monthDate = boardService.getMonthRankDate(moveMonth);
-    // model.addAttribute("monthDate", monthDate);
     
     String target = "/mainPage/monthRanking :: #monthRankList";
     return target;
@@ -101,6 +98,9 @@ public class indexController {
   public String weeklyRanking(Model model) {
     List<BoardDto> weeklyRankList = boardService.getWeeklyRankPost(0);
     model.addAttribute("weeklyRankList", weeklyRankList);
+
+    Map<String, String> weeklyDate = boardService.getWeeklyRankDate(0);
+    model.addAttribute("weeklyDate", weeklyDate);
     return "/mainPage/weeklyRanking";
   }
 
@@ -110,6 +110,27 @@ public class indexController {
     model.addAttribute("weeklyRankList", weeklyRankList);
     
     String target = "/mainPage/weeklyRanking :: #weeklyRankList";
+    return target;
+  }
+
+  // 월간, 주간 날짜
+  @PostMapping("/reload/moveDate")
+  public String moveDate(Model model, String dateType, int moveDate) {
+    String target;
+
+    if (dateType.equals("month")) {
+      Map<String, String> monthDate = boardService.getMonthRankDate(moveDate);
+      model.addAttribute("monthDate", monthDate);
+      
+      target = "/mainPage/monthRanking :: #monthDate";
+    } 
+    else {
+      Map<String, String> weeklyDate = boardService.getWeeklyRankDate(moveDate);
+      model.addAttribute("weeklyDate", weeklyDate);
+
+      target = "/mainPage/weeklyRanking :: #weeklyDate";
+    }
+
     return target;
   }
 

@@ -78,6 +78,12 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
+  public Map<String, String> getWeeklyRankDate(int moveWeekly) {
+    Map<String, String> result = dateDao.getWeeklyRankDate(moveWeekly);
+    return result;
+  }
+
+  @Override
   public void updatePost(BoardDto boardDto) {
     boardDao.updatePost(boardDto);
   }

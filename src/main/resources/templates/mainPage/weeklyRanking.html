@@ -12,11 +12,13 @@
       </div>
       <!-- weeklyRanking-page -->
       <article class="weeklyRanking-Area">
-        <div id="monthDate">
+        <div id="weekly">
           <span class="prevWeekly" onclick="prevWeekly()"><==</span>
-          <span class="startDay">시작 날짜</span>
-          <span>~</span>
-          <span class="lastDay">끝 날짜</span>
+          <div id="weeklyDate">
+            <span th:text="${weeklyDate[STARTDATE]}">시작 날짜</span>
+            <span>~</span>
+            <span th:text="${weeklyDate[LASTDATE]}">끝 날짜</span>
+          </div>
           <span class="nextWeekly" onclick="nextWeekly()">==></span>
         </div>
         <div id="weeklyRankList">
@@ -40,6 +42,10 @@
 
     <script>
       let moveWeekly;
+
+      if (window.performance && window.performance.navigation.type == 1) {
+        sessionStorage.clear();
+      }
 
       if (sessionStorage.getItem("moveWeekly") != null) {
         moveWeekly = sessionStorage.getItem("moveWeekly");
@@ -74,6 +80,19 @@
             moveWeekly: moveWeekly,
           },
           async: false,
+          success(response) {
+            $.ajax({
+              url: "/reload/moveDate",
+              type: "POST",
+              data: {
+                dateType: "seekly",
+                moveDate: moveWeekly,
+              },
+              async: false,
+            }).done(function (fragment) {
+              $("#weeklyDate").replaceWith(fragment);
+            });
+          },
         }).done(function (fragment) {
           sessionStorage.setItem("moveWeekly", moveWeekly);
           $("#weeklyRankList").replaceWith(fragment);

@@ -15,6 +15,7 @@
     width: 70%;
     height: 60%;
     background-color: #fff;
+    color: #111;
     border-radius: 13px;
     position: fixed;
     top: 20%;
@@ -39,7 +40,8 @@
     position: relative;
     &__box {
       position: absolute;
-      top: 50%; left: 52%;
+      top: 50%;
+      left: 52%;
       transform: translate(-50%, -50%);
       width: 56.5vw;
       &__option {
@@ -65,28 +67,27 @@
   }
 } //.write-modal
 
-
 //프로필 사진 업데이트 모달 #권인호 작성
-.modal-profileUpdate{
+.modal-profileUpdate {
   display: block;
   width: 400px;
   height: 60%;
   margin: 10% auto;
   background: #fff;
   border-radius: 13px;
-  &__icon{
+  &__icon {
     display: block;
     margin: 10px auto;
-    #testProfile{
+    #testProfile {
       width: 300px;
       height: 300px;
     }
-    label{
+    label {
       display: block;
       margin: 5px auto;
     }
   }
-  &__btns{
+  &__btns {
     display: block;
     margin: 15px auto;
   }
@@ -110,18 +111,18 @@
 }
 
 //회원 탈퇴모달 #권인호
-.modal-withdraw{
-  .modal{
-    &-content{
-    color:#333;
-    em{
-      color:#700;
+.modal-withdraw {
+  .modal {
+    &-content {
+      color: #333;
+      em {
+        color: #700;
+      }
+      padding: 2%;
+      text-align: center;
     }
-    padding: 2%;
-    text-align: center;
-  }
-  &-btns{
-    margin: 3%;
-  }
+    &-btns {
+      margin: 3%;
+    }
   }
 }

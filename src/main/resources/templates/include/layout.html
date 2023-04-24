@@ -270,26 +270,17 @@
       const sessionMonth = sessionStorage.getItem("moveMonth");
       const sessionWeekly = sessionStorage.getItem("moveWeekly");
 
-      if (event.persisted || 
-      (window.performance && window.performance.navigation.type == 1) || 
-      (window.performance && window.performance.navigation.type == 2)) {
+      if ((window.performance && window.performance.navigation.type == 2)) {
         if (pathName == "/monthRanking" && sessionMonth != null) {
           showMonthRank(sessionMonth);
         } 
-        
-        if (pathName == "/weeklyRanking" && sessionWeekly != null) {
+        else if (pathName == "/weeklyRanking" && sessionWeekly != null) {
           showWeeklyRank(sessionWeekly);
         }
-
-        else {
-          sessionStorage.clear();
-        }
-
       }
-      
     }
   </script>
 </body>
 </html>
 
-<!-- 상세페이지 https://www.music-n.com/#section05 -->
+<!-- 상세페이지 https://www.muSsic-n.com/#section05 -->

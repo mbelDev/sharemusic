@@ -36,6 +36,10 @@ public interface BoardService {
 
   //  주간 랭킹 글들 불러오기
 
+  public Map<String, String> getWeeklyRankDate(int moveWeekly);
+
+  // 주간 랭킹 날짜
+
   public void updatePost(BoardDto boardDto);
 
   //modify 에서 요청. 글 내용 수정하기
