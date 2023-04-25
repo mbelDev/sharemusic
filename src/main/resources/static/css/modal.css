@@ -51,6 +51,7 @@
 .modal-wnd .modalCategory__box__option a img {
   width: 13vw;
   margin: 10px 0;
+  cursor: pointer;
 }
 
 .modal-profileUpdate {

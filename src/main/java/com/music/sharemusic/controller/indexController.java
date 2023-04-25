@@ -55,10 +55,6 @@ public class indexController {
       model.addAttribute("loggedUser", loggedUser);
     }
 
-    if (category != null) {
-      category = category.replace("&", "/");
-    }
-
     // 상위 랭킹
     List<BoardDto> rankList = boardService.getRankPost();
     model.addAttribute("rankList", rankList);

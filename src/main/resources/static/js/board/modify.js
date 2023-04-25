@@ -25,83 +25,83 @@ function getModalModifyEmote() {
 }
 
 // modal 장르 선택
-$("#modifyDance").on("click", function () {
-  $("#modifyPostGenre").val("신남");
+$("#modifyKPop").on("click", function () {
+  $("#modifyPostGenre").val("요즘 K-Pop");
 });
 
-$("#modifyFolk").on("click", function () {
-  $("#modifyPostGenre").val("포크/어쿠스틱");
+$("#modifyGIdol").on("click", function () {
+  $("#modifyPostGenre").val("여자 아이돌");
 });
 
-$("#modifyIdol").on("click", function () {
-  $("#modifyPostGenre").val("아이돌");
+$("#modifyBIdol").on("click", function () {
+  $("#modifyPostGenre").val("남자 아이돌");
 });
 
-$("#modifyRap").on("click", function () {
-  $("#modifyPostGenre").val("랩/힙합");
+$("#modifyBallad").on("click", function () {
+  $("#modifyPostGenre").val("슬픈 발라드");
 });
 
 $("#modifyRB").on("click", function () {
-  $("#modifyPostGenre").val("알앤비/소울");
+  $("#modifyPostGenre").val("편안한 알앤비");
 });
 
-$("#modifyElect").on("click", function () {
-  $("#modifyPostGenre").val("일렉트로닉");
+$("#modifyHipHop").on("click", function () {
+  $("#modifyPostGenre").val("요즘 국힙");
 });
 
 $("#modifyRock").on("click", function () {
-  $("#modifyPostGenre").val("락/메탈");
+  $("#modifyPostGenre").val("요즘 락");
 });
 
-$("#modifyJazz").on("click", function () {
-  $("#modifyPostGenre").val("재즈");
+$("#modifyEdm").on("click", function () {
+  $("#modifyPostGenre").val("EDM");
 });
 
-$("#modifyIndie").on("click", function () {
-  $("#modifyPostGenre").val("인디");
+$("#modifyDrama").on("click", function () {
+  $("#modifyPostGenre").val("드라마 OST");
 });
 
-$("#modifyAdult").on("click", function () {
-  $("#modifyPostGenre").val("성인가요");
+$("#modifyMovie").on("click", function () {
+  $("#modifyPostGenre").val("영화 OST");
 });
 
 // modal 감성 선택
+$("#modifyFav").on("click", function () {
+  $("#modifyPostEmote").val("지금인기");
+});
+
+$("#modifyHit").on("click", function () {
+  $("#modifyPostEmote").val("힙터질때");
+});
+
 $("#modifyExcite").on("click", function () {
-  $("#modifyPostEmote").val("신남");
+  $("#modifyPostEmote").val("신났을때");
 });
 
 $("#modifyGloomy").on("click", function () {
-  $("#modifyPostEmote").val("우울");
+  $("#modifyPostEmote").val("우울할때");
 });
 
-$("#modifyEcstasy").on("click", function () {
-  $("#modifyPostEmote").val("희열");
+$("#modifyLove").on("click", function () {
+  $("#modifyPostEmote").val("사랑할때");
 });
 
-$("#modifySpooky").on("click", function () {
-  $("#modifyPostEmote").val("으스스");
+$("#modifyOut").on("click", function () {
+  $("#modifyPostEmote").val("멍때릴때");
 });
 
-$("#modifyMagni").on("click", function () {
-  $("#modifyPostEmote").val("웅장한");
+$("#modifySports").on("click", function () {
+  $("#modifyPostEmote").val("운동할때");
 });
 
-$("#modifyCalm").on("click", function () {
-  $("#modifyPostEmote").val("잔잔");
+$("#modifyRelax").on("click", function () {
+  $("#modifyPostEmote").val("휴식할때");
 });
 
-$("#modifyFlutter").on("click", function () {
-  $("#modifyPostEmote").val("설렘");
+$("#modifyParty").on("click", function () {
+  $("#modifyPostEmote").val("파티할때");
 });
 
-$("#modifySorrow").on("click", function () {
-  $("#modifyPostEmote").val("애절한");
-});
-
-$("#modifyDreamy").on("click", function () {
-  $("#modifyPostEmote").val("몽환적");
-});
-
-$("#modifyWarm").on("click", function () {
-  $("#modifyPostEmote").val("따뜻한");
+$("#modifyLonely").on("click", function () {
+  $("#modifyPostEmote").val("외로울때");
 });
