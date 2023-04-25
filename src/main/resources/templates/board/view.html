@@ -29,6 +29,9 @@
               등록&nbsp;&nbsp; <span th:text="${boardDto.postDate}">0</span>
               &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp; <span th:text="${boardDto.postHits}">0</span>
             </div><!-- title-Date -->
+            <div class="title-Content">
+              <h3 th:text="${boardDto.postCont}">본문</h3>
+            </div>
             <div class="title-Genre">
               <span th:text="'#' + ${boardDto.postGenre}">장르</span>
               <span th:text="'#' + ${boardDto.postEmote}">감성</span>
@@ -223,28 +226,33 @@
       </div>
     </div>
 
-    <div id="shareModal" class="modal-wnd">
+    <div id="shareModal" class="modal-wnd shareMo">
       <div class="modal-content">
-        <button id="closeShareModal">닫기</button>
         <div class="modal-content--title">
-          <!-- 모달창 안에 여기 내용 작성 -->
-          <div>
+          <p>공유</p>
+        </div>
+        <div class="modal-content--txt">
+          <div class="modal-content--txt--icon">
+            <ul>
+              <li><button class="btn"><img src="/images/kakotalkIcon.png" alt="카카오톡" class="shareKakaoTalk"></button></li>
+              <li><button class="btn"><img src="/images/twitterIcon.png" alt="트위터" class="shareTwitter"></button></li>
+              <li><button class="btn"><img src="/images/facebookIcon.svg" alt="페이스북" class="shareFacebook"></button></li>
+            </ul>
+          </div>
+          <div class="modal-content--txt--url">
             <input
               type="text"
               class="shareUrl"
               th:value="'https://youtu.be/' + ${boardDto.postLink}"
               readonly
             />
-            <button onclick="copyUrl();">복사</button>
-            <button class="shareTwitter">트위터로 공유</button>
-            <button class="shareFacebook">페이스북으로 공유</button>
-            <button class="shareKakaoTalk">카카오톡으로 공유</button>
+            <button class="btn btn-dark" onclick="copyUrl();">복사</button>
           </div>
         </div>
-        <!-- ModalThis-content -->
+        <div class="modal-content--btn">
+          <button id="closeShareModal" class="btn btn-primary">닫기</button>
+        </div>
       </div>
-      <!-- ModalThis-content -->
-      <!-- write-modal--item -->
     </div>
 
     <!-- 덧글 삭제 모달창 -->
