@@ -167,8 +167,8 @@ public class MemberServiceImpl implements MemberService {
   }
 
   public List<BoardDto> getHistoryWritten(MemberDto memberDto) {
-    String userNM = memberDto.getUserNM();
-    List<BoardDto> result = historyDao.getHistoryWritten(userNM);
+    String userID = memberDto.getUserID();
+    List<BoardDto> result = historyDao.getHistoryWritten(userID);
     return result;
   }
 

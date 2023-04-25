@@ -40,7 +40,7 @@
           </div><!-- title -->
           <div class="like">
             <div class="like-good">
-              <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}" data-liked=""/>          <!--  <<<<<<<<<<<<<<  좋아요 버튼     -->
+              <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}"/>          <!--  <<<<<<<<<<<<<<  좋아요 버튼     -->
               <span th:text="${boardDto.postLike}" class="postLike">0</span>
             </div><!-- like-good -->
             <div class="like-btn">
@@ -75,6 +75,11 @@
                     alt=""
                     class="replyIcon"
                   />
+                  <!-- <img
+                  th:src="@{item.replyAuthIcon}"
+                  alt=""
+                  class="replyIcon"
+                  /> -->
                   <span th:text="${item.replyAuthNM}">홍길동</span>
                   <img
                   th:if="${item.replyHidden == 1}"
@@ -89,14 +94,14 @@
                   session.loggedUser != null and
                   session.loggedUser.userID == item.replyAuthID}">
                   <div class="menuBtn">
-                    <span class="menuBtn-modify modifyReplyBtn" id="modifyReplyBtn">수정</span>
+                    <span class="menuBtn-modify modifyReplyBtn" id="modifyReplyBtn" th:onclick="openModifyReplyEvent(this)">수정</span>
                     <span class="menuBtn-delete deleteReplyBtn" id="deleteReplyBtn" th:onclick="openDeleteReplyEvent(this)">삭제</span>
                   </div>
                 </th:block>
                 <!--  덧글 내용  -->
                 <div class="reply-contents--text">
                   <p th:if="${item.replyGroup!=0}" th:text="${item.replyGroupTarget}+'님에게 답변'" style="color:#777;"></p>
-                  <p th:text="${item.replyCont}">덧글 내용</p>
+                  <p class="context" th:text="${item.replyCont}">덧글 내용</p>
                 </div>
                 <div class="reply-contents--box">
                   <div class="reply-date" th:text="${item.replyDate}">작성일자</div>
@@ -145,8 +150,8 @@
            th:if="${item.replyHidden == 2}">
             <div class="reply-contents--icon">
               <a>
-                <span class="replyIcon">
-                <span th:text="${item.replyNo}">홍길동</span>
+                <img src="/images/sampleprofile.jpg" class="replyIcon"/>
+                <span th:text="${item.replyNo}+'번 덧글'">홍길동</span>
 
               </a>
               <div class="reply-contents--text">
@@ -408,50 +413,6 @@
           }
         })
       }
-
-      /*<![CDATA[*/
-      const postNo = [[${boardDto.postNo}]];
-      const postLike = $(".postLike").text();
-
-        // 추천 수 누를 때 이벤트
-        function postGood() {
-          console.log("btnPostLikeClicked");
-          const sendData = {
-            postNo: postNo
-          }
-
-          $.ajax({
-            url: "/board/updateLike",
-            type: "POST",
-            data: sendData,
-            success: function(response) {
-              if (response.result != null) {
-                $(".postLike").text(response.postLike);
-              }
-            },
-            error: function(err) {
-              console.log(err);
-            }
-          })
-        }
-
-        $("#btnDeleteConfirm").on("click", function() {
-          console.log("btnDeleteClicked");
-          $.ajax({
-            url: "/board/delete",
-            type: "POST",
-            data: {"postNo": postNo},
-            success: function(response) {
-              if (response.msg == "ok") {
-                 location.href="/mainPage/";
-              } else {
-                location.reload();
-              }
-            }
-          })
-        })
-
-      /*]]>*/
     </script>
   </main>
 </html>

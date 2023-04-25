@@ -3,6 +3,7 @@
 }
 
 .boardView {
+  max-width: 1280px;
   margin: 4%;
   border-bottom: 1px solid;
 }
@@ -106,6 +107,9 @@
   width: 80%;
   padding: 10px 0 10px 35px;
 }
+.board-view--replyBox .reply-contents--icon .reply-contents--text.hidden {
+  display: none;
+}
 .board-view--replyBox .reply-contents--icon .reply-contents--box {
   display: flex;
 }
@@ -144,6 +148,9 @@
 .board-view--replyBox .board-view--replyBox-input {
   position: relative;
   margin-bottom: 5%;
+}
+.board-view--replyBox .board-view--replyBox-input.modifyReply {
+  margin-bottom: 0px;
 }
 .board-view--replyBox .board-view--replyBox-subCont {
   display: flex;

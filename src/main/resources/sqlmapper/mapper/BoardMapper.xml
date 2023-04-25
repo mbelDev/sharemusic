@@ -36,8 +36,21 @@
 </select>
 
 <!-- 팔로우 중인 글 불러오기 #권인호 -->
-<select id="getPostFollow" parameterType="HashMap" resultType="BoardDto">
-  SELECT * FROM BOARD WHERE POSTAUTHID IN (SELECT FOLLOWID FROM FOLLOW WHERE USERID = #{userID}) ORDER BY POSTAUTHID, POSTDATE
+<select id="getFollowList" parameterType="HashMap" resultType="BoardDto">
+  SELECT * FROM BOARD WHERE POSTAUTHID IN (SELECT FOLLOWID FROM FOLLOW WHERE USERID = #{userID}) ORDER BY ${sort} desc
+</select>
+
+<!-- 마이리스트 불러오기 #권인호 -->
+<select id="getMyList" parameterType="HashMap" resultType="BoardDto">
+  SELECT * FROM BOARD WHERE POSTNO IN (SELECT POSTNO FROM HISTORY WHERE USERID = #{userID}
+  <if test="category.equals('liked')">
+   AND LIKED = 1 
+  </if>
+  <if test="category.equals('bookmark')">
+   AND BOOKMARK = 1 
+  </if>
+  )
+  ORDER BY ${sort} desc
 </select>
 
 <!-- 랭킹 글 불러오기 -->

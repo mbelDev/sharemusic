@@ -22,4 +22,5 @@ public class ReplysDto {
   private int replyLevel;
   private int replyStep;
   private String replyGroupTarget;
+  private String replyAuthIcon;
 }

@@ -64,9 +64,8 @@ function addReplyReplyEvent(item){
 //덧글의 수정처리 이벤트
 function modifyReplyEvent(item){
     const replyno = $(item).data("replyno");
-    //작성 버튼의 data-set 에서 덧글 번호를 가져온다
     const content = $(item).siblings('.replyCont').val();
-    const hidden = $(item).siblings('.check-hidden').is(":checked")==true ? 1 : 0 ; 
+    const hidden = $(item).closest('.board-view--replyBox-input').find('.check-hidden').is(":checked")==true ? 1 : 0 ; 
     $.ajax({
         url:"/board/reply/modify",
         type:"POST",
@@ -95,7 +94,6 @@ function openReplyReplyEvent(item){
     $('div.replyReply').remove();
     const test = $(".board-view--replyBox-input").clone();
     const replyno = $(item).data("replyno");
-    console.log(replyno);
     $(test).addClass("replyReply");
     $(test).find('.btn-reply').data("replyno",replyno);
     $(test).find('.btn-reply').attr("onclick","addReplyReplyEvent(this)");
@@ -105,15 +103,19 @@ function openReplyReplyEvent(item){
 
 //덧글 수정을 위해 수정 입력창을 생성하는 함수
 function openModifyReplyEvent(item){
-    $('div.replyReply').remove();
-    const test = $(".board-view--replyBox-input").clone();
-    const replyno = $(item).data("replyno");
-    console.log(replyno);
-    $(test).addClass("replyReply");
-    $(test).find('.btn-reply').data("replyno",replyno);
-    $(test).find('.btn-reply').attr("onclick","modifyReplyEvent(this)");
-
-    $(item).closest('li.reply').after(test);
+    $('div.modifyReply').remove();
+    $('.reply-contents--text.hidden').removeClass('hidden');
+    const root = $(item).closest('div.reply-contents');
+    const originTxt = root.find('.context').text();
+    const modifyInput = $(".board-view--replyBox-input").clone();
+    const replyno = $(item).closest('li.reply').data("replyno");
+    root.find('.reply-contents--text').addClass("hidden");
+    $(modifyInput).find('.replyCont').val(originTxt);
+    $(modifyInput).addClass("modifyReply");
+    $(modifyInput).find('.btn-reply').data("replyno",replyno);
+    $(modifyInput).find('.btn-reply').attr("onclick","modifyReplyEvent(this)");
+    
+    root.find('.reply-contents--box').before(modifyInput);
 }
 
 //덧글 삭제 확인 모달을 띄우는 이벤트

@@ -5,9 +5,9 @@ import com.music.sharemusic.dao.DateDao;
 import com.music.sharemusic.dao.HistoryDao;
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
-import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,8 +111,17 @@ public class BoardServiceImpl implements BoardService {
     int result = boardDao.deletePost(boardDto);
     return result;
   }
-  ///권인호 2023.04.14
-  // public int getLiked(LoggedDto loggedUser){
-  //   historyDao.get
-  // }
+
+  //권인호 2023.04.25
+  @Override
+  public List<BoardDto> getFollowList(Map<String, String> data) {
+    List<BoardDto> result = boardDao.getFollowList(data);
+    return result;
+  }
+
+  @Override
+  public List<BoardDto> getMyList(Map<String, String> data) {
+    List<BoardDto> result = boardDao.getMyList(data);
+    return result;
+  }
 }

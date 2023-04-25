@@ -129,24 +129,6 @@ public class MemberController {
     return "/member/recent";
   }
 
-  // @GetMapping("/mypage/recent")
-  // public String mypageCategories(HttpServletRequest request, Model model) {
-  //   HttpSession session = request.getSession(false);
-  //   if (session != null && session.getAttribute("loggedUser") != null) {
-  //     LoggedDto loggedInfo = (LoggedDto) session.getAttribute("loggedUser");
-  //     MemberDto memberDto = memberService.getMemberLogged(loggedInfo);
-  //     model.addAttribute("memberDto", memberDto);
-  //     List<HistoryDto> historyRecent = memberService.getHistoryRecent(
-  //       loggedInfo
-  //     );
-  //     model.addAttribute("historyRecent", historyRecent);
-
-  //     return "/member/recent";
-  //   }
-
-  //   return "redirect:/member/login";
-  // }
-
   @GetMapping("/mypage/written")
   public String myPost(HttpSession session, Model model) {
     LoggedDto loggedUser = loggedUser(session);

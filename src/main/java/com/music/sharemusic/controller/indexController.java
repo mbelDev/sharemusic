@@ -3,7 +3,6 @@ package com.music.sharemusic.controller;
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.service.BoardService;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,12 +63,54 @@ public class indexController {
     model.addAttribute("rankList", rankList);
 
     // 게시판 글
-    List<BoardDto> postList = boardService.getPostAll(category, searchTxt, sort);
+    List<BoardDto> postList = boardService.getPostAll(
+      category,
+      searchTxt,
+      sort
+    );
     model.addAttribute("postList", postList);
 
     // 검색 기능 searchTxt
     model.addAttribute("searchTxt", searchTxt);
     return "/mainPage/mainPage";
+  }
+
+  @GetMapping(value = { "/mainPage/mylist/{category}" })
+  public String myList(
+    HttpSession session,
+    Model model,
+    @PathVariable(name = "category", required = false) String category,
+    @RequestParam(defaultValue = "postNo") String sort
+  ) {
+    String userID = null;
+    if (loggedUser(session) != null) {
+      LoggedDto loggedUser = loggedUser(session);
+      userID = loggedUser.getUserID();
+      model.addAttribute("loggedUser", loggedUser);
+    } else {
+      return "redirect:/member/login";
+    }
+    Map<String, String> data = new HashMap<>();
+    List<BoardDto> postList = null;
+    data.put("userID", userID);
+    data.put("sort", sort);
+    log.info("test==={}", data);
+    switch (category) {
+      case "follow":
+        postList = boardService.getFollowList(data);
+        break;
+      case "liked":
+      case "bookmark":
+        data.put("category", category);
+        postList = boardService.getMyList(data);
+        break;
+      default:
+        return "redirect:/mainPage";
+    }
+    log.info("test==={}", data);
+    log.info("list === {}", postList);
+    model.addAttribute("postList", postList);
+    return "/mainPage/mylist";
   }
 
   // 월 랭킹
@@ -82,7 +123,7 @@ public class indexController {
     model.addAttribute("monthDate", monthDate);
     return "/mainPage/monthRanking";
   }
-  
+
   // 월 랭킹 월 이동
   @PostMapping("/reload/monthRanking")
   public String reloadMonthRanking(Model model, int moveMonth) {
@@ -91,7 +132,7 @@ public class indexController {
 
     // Map<String, String> monthDate = boardService.getMonthRankDate(moveMonth);
     // model.addAttribute("monthDate", monthDate);
-    
+
     String target = "/mainPage/monthRanking :: #monthRankList";
     return target;
   }
@@ -108,13 +149,13 @@ public class indexController {
   public String reloadWeeklyRanking(Model model, int moveWeekly) {
     List<BoardDto> weeklyRankList = boardService.getWeeklyRankPost(moveWeekly);
     model.addAttribute("weeklyRankList", weeklyRankList);
-    
+
     String target = "/mainPage/weeklyRanking :: #weeklyRankList";
     return target;
   }
 
   // 테스트용
-  @GetMapping(value = { "/reload", "/reload/{category}"})
+  @GetMapping(value = { "/reload", "/reload/{category}" })
   public String writtingReply(
     Model model,
     @PathVariable(name = "category", required = false) String category,
@@ -126,7 +167,11 @@ public class indexController {
     log.info(sort);
 
     // 게시판 글
-    List<BoardDto> postList = boardService.getPostAll(category, searchTxt, sort);
+    List<BoardDto> postList = boardService.getPostAll(
+      category,
+      searchTxt,
+      sort
+    );
     model.addAttribute("postList", postList);
 
     // 검색 기능 searchTxt
