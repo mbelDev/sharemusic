@@ -13,7 +13,7 @@
   --button-star-new-opacity: 0;
   --button-star-new-y: 16px;
   -webkit-appearance: none;
-     -moz-appearance: none;
+    -moz-appearance: none;
           appearance: none;
   border: none;
   cursor: pointer;
@@ -110,7 +110,7 @@
 
 
 
-.active {
+.like.active {
   background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
   border-radius: 100px;
 }
