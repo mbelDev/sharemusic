@@ -130,8 +130,7 @@ h1 {
   color: #ff3672;
 }
 .flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--searchForm .input-group button {
-  background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
-  padding: 0 14px;
+  padding: 0 20px;
 }
 .flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--searchForm .input-group .form-outline #form1 {
   background-color: #1a1a1a;
@@ -295,6 +294,64 @@ h1 {
   height: 100%;
   margin-left: 245px;
   background-color: #0e0e0e;
+}
+
+.btnHover {
+  cursor: hand;
+  text-align: center;
+  text-transform: capitalize;
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden !important;
+  transition: all 0.3s ease-in-out;
+  z-index: 10;
+}
+
+.btnHover:hover {
+  color: #fff !important;
+}
+
+.btnHover::before {
+  content: "";
+  width: 0%;
+  height: 100%;
+  display: block;
+  background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
+  position: absolute;
+  transform: skewX(-20deg);
+  left: -10%;
+  opacity: 1;
+  top: 0;
+  z-index: -12;
+  transition: all 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+  box-shadow: 2px 0px 14px rgba(0, 0, 0, 0.6);
+}
+
+.btnHover::after {
+  content: "";
+  width: 0%;
+  height: 100%;
+  display: block;
+  background: #80ffd3;
+  position: absolute;
+  transform: skewX(-20deg);
+  left: -10%;
+  opacity: 0;
+  top: 0;
+  z-index: -15;
+  transition: all 0.4s cubic-bezier(0.2, 0.95, 0.57, 0.99);
+  box-shadow: 2px 0px 14px rgba(0, 0, 0, 0.6);
+}
+
+.btnHover:hover::before, .btnHover:hover::before {
+  opacity: 1;
+  width: 116%;
+}
+
+.btnHover:hover::after, .btnHover:hover::after {
+  opacity: 1;
+  width: 120%;
 }
 
 @media screen and (max-width: 855px) {

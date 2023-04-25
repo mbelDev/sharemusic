@@ -6,6 +6,7 @@
   layout:decorate="~{/include/layout.html}"
 >
 <main id="mainPage-Area" class="mainPageView-Area" layout:fragment="contents">
+  
   <script src="/js/board/replys.js"></script>
   <section class="boardView">
 <!--------------------------------------------------[             본문 표시 창            ]-------------------------------------------------------------------------->
@@ -21,7 +22,7 @@
           <div class="title">
             <div class="title-name">
               <p th:text="${boardDto.postTitle}">곡이름</p>
-              <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
+              <a class="btnHover" th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
                 <h1 th:text="${boardDto.postSinger}">가수</h1>
               </a>
             </div><!-- title-name -->
@@ -34,15 +35,22 @@
               <span th:text="'#' + ${boardDto.postEmote}">감성</span>
             </div><!-- title-Genre -->
             <div class="title-btn" th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}">
-              <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btn btn-primary">수정</a>
+              <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btnHover btn btn-primary">수정</a>
             <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
             </div><!-- title-btn -->
           </div><!-- title -->
           <div class="like">
-            <div class="like-good">
-              <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}" data-liked=""/>          <!--  <<<<<<<<<<<<<<  좋아요 버튼     -->
-              <span th:text="${boardDto.postLike}" class="postLike">0</span>
-            </div><!-- like-good -->
+            <button class="like button-star">
+              <canvas></canvas>
+              <div class="label">
+                <span class="default">좋아요<span class="success"></span></span>
+              </div>
+              <div class="number">
+                <span class="current">0</span>
+                <span class="new">1</span>
+                <div class="add">+1</div>
+              </div>
+            </button>
             <div class="like-btn">
               <button class="btnOpen btnShare" id="shareModalBox">
                 <img src="/images/open.svg" alt="" />
@@ -218,7 +226,7 @@
           <p>확인을 누르면 게시글이 완전히 삭제됩니다.</p>
         </div>
         <div class="modal-content--btn">
-          <button id="btnDeleteConfirm" class="btn btn-primary">확인</button>
+          <button id="btnDeleteConfirm" class="btnHover btn btn-primary">확인</button>
           <button id="closeDelete" class="btn btn-secondary">취소</button>
         </div>
       </div>
