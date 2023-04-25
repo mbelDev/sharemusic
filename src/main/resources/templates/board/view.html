@@ -5,292 +5,286 @@
   xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{/include/layout.html}"
 >
-  <main id="mainPage-Area" class="" layout:fragment="contents">
-    <section class="boardView">
-      <!--------------------------------------------------[             본문 표시 창            ]-------------------------------------------------------------------------->
-      <!--------------------------------------------------[            boardView-Area          ]-------------------------------------------------------------------------->
-      <article class="boardView-Area">
-        <div class="boardView-Area-title topAndbut">
-          <h1>VIDEO</h1>
-        </div>
-        <!-- boardView-Area-title -->
-        <div class="boardView-Video">
-          <iframe
-            th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}+'?&controls=0&autohide=0&rel=0'"
-            frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          >
-          </iframe>
-          <div class="boardView-Video--title">
-            <div class="title">
-              <div class="title-name">
-                <p th:text="${boardDto.postTitle}">곡이름</p>
-                <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
-                  <h1 th:text="${boardDto.postSinger}">가수</h1>
-                </a>
-              </div>
-              <!-- title-name -->
-              <div class="title-Date">
-                등록&nbsp;&nbsp;
-                <span th:text="${boardDto.postDate}">0</span>
-                &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp;
-                <span th:text="${boardDto.postHits}">0</span>
-              </div>
-              <!-- title-Date -->
-              <div class="title-Genre">
-                <span th:text="'#' + ${boardDto.postGenre}">장르</span>
-                <span th:text="'#' + ${boardDto.postEmote}">감성</span>
-              </div>
-              <!-- title-Genre -->
-              <div
-                class="title-btn"
-                th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}"
-              >
-                <a
-                  href="/board/modify"
-                  th:href="@{/board/modify(postNo=${boardDto.postNo})}"
-                  class="btn btn-primary"
-                  >수정</a
-                >
-                <button id="deleteModalBox" class="btn btn-secondary">
-                  삭제
-                </button>
-              </div>
-              <!-- title-btn -->
-            </div>
-            <!-- title -->
-            <div class="like">
-              <div class="like-good">
-                <img
-                  class="good-img"
-                  src="/images/good.svg"
-                  onclick="updateLike('.good-img');"
-                  th:data-postno="${boardDto.postNo}"
-                  data-liked=""
-                />
-                <!--  <<<<<<<<<<<<<<  좋아요 버튼     -->
-                <span th:text="${boardDto.postLike}" class="postLike">0</span>
-              </div>
-              <!-- like-good -->
-              <div class="like-btn">
-                <button class="btnOpen btnShare" id="shareModalBox">
-                  <img src="/images/open.svg" alt="" />
-                </button>
-              </div>
-              <!-- like-btn -->
-            </div>
-            <!-- like -->
-          </div>
-          <!-- boardView-Video--title -->
-        </div>
-        <!-- boardView-Video -->
-      </article>
-      <!-- boardView-Area -->
+<main id="mainPage-Area" class="mainPageView-Area" layout:fragment="contents">
+  <script src="/js/board/replys.js"></script>
+  <section class="boardView">
+<!--------------------------------------------------[             본문 표시 창            ]-------------------------------------------------------------------------->
+<!--------------------------------------------------[            boardView-Area          ]-------------------------------------------------------------------------->
+    <article class="boardView-Area">
+      <div class="boardView-Area-title topAndbut">
+        <h1>VIDEO</h1>
+      </div><!-- boardView-Area-title -->
+      <div class="boardView-Video">
+        <iframe th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}+'?&controls=0&autohide=0&rel=0'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+        <div class="boardView-Video--title">
+          <div class="title">
+            <div class="title-name">
+              <p th:text="${boardDto.postTitle}">곡이름</p>
+              <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
+                <h1 th:text="${boardDto.postSinger}">가수</h1>
+              </a>
+            </div><!-- title-name -->
+            <div class="title-Date">
+              등록&nbsp;&nbsp; <span th:text="${boardDto.postDate}">0</span>
+              &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp; <span th:text="${boardDto.postHits}">0</span>
+            </div><!-- title-Date -->
+            <div class="title-Genre">
+              <span th:text="'#' + ${boardDto.postGenre}">장르</span>
+              <span th:text="'#' + ${boardDto.postEmote}">감성</span>
+            </div><!-- title-Genre -->
+            <div class="title-btn" th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}">
+              <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btn btn-primary">수정</a>
+            <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
+            </div><!-- title-btn -->
+          </div><!-- title -->
+          <div class="like">
+            <div class="like-good">
+              <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}" data-liked=""/>          <!--  <<<<<<<<<<<<<<  좋아요 버튼     -->
+              <span th:text="${boardDto.postLike}" class="postLike">0</span>
+            </div><!-- like-good -->
+            <div class="like-btn">
+              <button class="btnOpen btnShare" id="shareModalBox">
+                <img src="/images/open.svg" alt="" />
+              </button>
+            </div><!-- like-btn -->
+          </div><!-- like -->
+        </div><!-- boardView-Video--title -->
+      </div><!-- boardView-Video -->
+    </article><!-- boardView-Area -->
 
-      <!--------------------------------------------------[           덧글 입 출력 창           ]-------------------------------------------------------------------------->
-      <!--------------------------------------------------[        board-view--replyBox        ]-------------------------------------------------------------------------->
-      <article class="board-view--replyBox">
-        <ul id="reply-container" th:if="${replysList} != null">
-          <li th:Each="item:${replysList}" class="reply">
-            <!-- <p th:text="${item.replyNo}"></p> -->
-            <span
-              th:if="${item.replyLevel} > 0"
-              th:each="num : ${#numbers.sequence(0, item.replyLevel-1)}"
-              style="display: block; width: 10px"
-            ></span>
-            <div
-              class="reply-contents"
-              th:if="${item.replyHidden == 0}
-           or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
-           or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})"
-            >
+<!--------------------------------------------------[           덧글 입 출력 창           ]-------------------------------------------------------------------------->
+<!--------------------------------------------------[        board-view--replyBox        ]-------------------------------------------------------------------------->
+    <article class="board-view--replyBox">
+      <!--  덧글 출력 구역  -->
+      <ul id="reply-container" th:if="${replysList} != null">
+        <li th:Each="item:${replysList}" class="reply" th:data-replyno="${item.replyNo}">
+          <!-- <p th:text="${item.replyNo}"></p> -->
+          <span th:if="${item.replyLevel} > 0" th:each="num : ${#numbers.sequence(0, item.replyLevel-1)}" style="display:block; width:10px;"></span>
+
+          <th:block th:if="${item.replyHidden != 2}">
+            <div class="reply-contents"
+            th:if="${item.replyHidden == 0}
+             or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
+             or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
               <div class="reply-contents--icon">
                 <a th:href="@{|/member/user/${item.replyAuthID}|}">
                   <!-- th:src="@{/upload/}+${item.replyIcon}" -->
                   <img
-                    src="/images/sampleprofile.jpg"
+                  src="/images/sampleprofile.jpg"
                     alt=""
-                    style="width: 30px; height: 30px; border-radius: 5px"
+                    class="replyIcon"
                   />
                   <span th:text="${item.replyAuthNM}">홍길동</span>
+                  <img
+                  th:if="${item.replyHidden == 1}"
+                  src="/images/hidden_icon.png"
+                    alt=""
+                    class="replyLockedIcon"
+                  />
                 </a>
-                <span class="menuBtn">...</span>
+                <!--  덧글 수정/삭제 모달버튼  -->
+                <th:block th:if="${
+                  item.replyHidden != 2 and
+                  session.loggedUser != null and
+                  session.loggedUser.userID == item.replyAuthID}">
+                  <div class="menuBtn">
+                    <span class="menuBtn-modify modifyReplyBtn" id="modifyReplyBtn">수정</span>
+                    <span class="menuBtn-delete deleteReplyBtn" id="deleteReplyBtn" th:onclick="openDeleteReplyEvent(this)">삭제</span>
+                  </div>
+                </th:block>
+                <!--  덧글 내용  -->
                 <div class="reply-contents--text">
-                  <p
-                    th:if="${item.replyGroup!=0}"
-                    th:text="${item.replyGroup}+'덧글에게 답변'"
-                    style="color: #777"
-                  ></p>
+                  <p th:if="${item.replyGroup!=0}" th:text="${item.replyGroupTarget}+'님에게 답변'" style="color:#777;"></p>
                   <p th:text="${item.replyCont}">덧글 내용</p>
                 </div>
                 <div class="reply-contents--box">
-                  <div class="reply-date" th:text="${item.replyDate}">
-                    작성일자
-                  </div>
-                  <div
-                    class="reply-contents--btns"
-                    th:if="${item.replyHidden == 0}
-                or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
-                or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})"
-                  >
-                    <span
-                      id="replyReplyBtn"
-                      class="replyReplyBtn"
-                      th:data-replyno="${item.replyNo}"
-                      >답글쓰기</span
-                    >
-                    <th:block
-                      th:if="${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false}"
-                    >
+                  <div class="reply-date" th:text="${item.replyDate}">작성일자</div>
+                  <div class="reply-contents--btns"
+                  th:if="${item.replyHidden == 0}
+                  or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
+                  or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
+                    <span id="replyReplyBtn" class="replyReplyBtn" th:data-replyno="${item.replyNo}" th:onclick="openReplyReplyEvent(this)">답글쓰기</span>
+                    <th:block th:if="${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false}">
                     </th:block>
                   </div>
                 </div>
               </div>
-
+            
               <!-- 모바일 -->
               <div class="reply-date-md500">
-                <div class="reply-date" th:text="${item.replyDate}">
-                  작성일자
-                </div>
-                <div
-                  class="reply-contents--btns"
-                  th:if="${item.replyHidden == 0}
-              or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
-              or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})"
-                >
-                  <span
-                    id="replyReplyBtn"
-                    class="replyReplyBtn replyReplyBtn-M"
-                    th:data-replyno="${item.replyNo}"
-                    >답글쓰기</span
-                  >
-                  <th:block
-                    th:if="${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false}"
-                  >
+                <div class="reply-date" th:text="${item.replyDate}">작성일자</div>
+                <div class="reply-contents--btns"
+                th:if="${item.replyHidden == 0}
+                or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
+                or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
+                  <span id="replyReplyBtn" class="replyReplyBtn replyReplyBtn-M" th:data-replyno="${item.replyNo}" th:onclick="openReplyReplyEvent(this)">답글쓰기</span>
+                  <th:block th:if="${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false}">
                   </th:block>
                 </div>
               </div>
             </div>
-            <div
-              class="reply-contents reply-hidden"
-              th:if="${item.replyHidden != 0} and (${session.loggedUser == null ? true : session.loggedUser.userID == item.replyAuthID ? false : session.loggedUser.userNM == boardDto.postAuth ? false : true})"
-            >
-              <div class="reply-contents--icon"></div>
-              <span class="reply-contents--text">비공개 덧글입니다.</span>
+            <div class="reply-contents reply-hidden"
+             th:if="${item.replyHidden == 1} and (${session.loggedUser == null ? true : session.loggedUser.userID == item.replyAuthID ? false : session.loggedUser.userNM == boardDto.postAuth ? false : true})">
+              <div class="reply-contents--icon">
+                <a>
+                  <img
+                  src="/images/hidden_icon.png"
+                    alt=""
+                    class="replyIcon"
+                  />
+                </a>
+                <div class="reply-contents--text">
+                  <p th:if="${item.replyGroup!=0}" th:text="${item.replyGroupTarget}+'님에게 답변'" style="color:#777;"></p>
+                  <p>비공개 덧글입니다.</p>
+                </div>
+              </div>
+          </th:block>
+            
+          <div class="reply-contents reply-hidden"
+           th:if="${item.replyHidden == 2}">
+            <div class="reply-contents--icon">
+              <a>
+                <span class="replyIcon">
+                <span th:text="${item.replyNo}">홍길동</span>
+
+              </a>
+              <div class="reply-contents--text">
+                <p th:if="${item.replyGroup!=0}" th:text="${item.replyGroupTarget}+'님에게 답변'" style="color:#777;"></p>
+                <p>삭제된 덧글입니다.</p>
+              </div>
             </div>
-          </li>
-        </ul>
-        <div class="board-view--replyBox__input">
-          <input type="checkbox" class="check-hidden" />
-          <span>비밀글로 작성하기</span>
-          <textarea
-            class="replyCont"
-            name="replyCont"
-            th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }"
-            rows="10"
-          >
-          </textarea>
-          <input type="button" class="btn-primary btn-reply" value="작성" />
-        </div>
-        <div class="board-view--replyBox__input board-view--replyBox__input-M">
-          <input
-            type="button"
-            class="replyCont"
-            name="replyCont"
-            th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }"
-          />
-          <!-- <input type="button" class="btn-primary btn-reply" value="작성"/> -->
-          <!-- <input type="checkbox" class="check-hidden"><span>비밀글로 작성하기</span> -->
-        </div>
-      </article>
-      <!-- board-view--textBox -->
-    </section>
-    <!-- boardView -->
-    <!-- board-view--subPage -->
-
-    <!--------------------------------------------------[               모달 영역             ]-------------------------------------------------------------------------->
-
-    <section>
-      <!-- 모달 섹션 -->>
-      <!-- 삭제 모달창 -->
-      <div id="deleteModal" class="modal-wnd">
-        <div class="modal-wnd-item">
-          <div class="modal-content">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <h3>정말로 삭제하시겠습니까?</h3>
-            <button id="btnDeleteConfirm">확인</button>
-            <button id="closeDeleteModal">취소</button>
+            
           </div>
-          <!-- ModalThis-content -->
-        </div>
-        <!-- write-modal--item -->
-      </div>
+        </li>
+      </ul>
 
-      <!-- 공유 모달창 -->
-      <div id="shareModal" class="modal-wnd">
-        <div class="modal-wnd-item">
-          <button id="closeShareModal">닫기</button>
-          <div class="modal-content">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <div>
-              <input
-                type="text"
-                class="shareUrl"
-                th:value="'https://youtu.be/' + ${boardDto.postLink}"
-                readonly
-              />
-              <button onclick="copyUrl();">복사</button>
-              <button class="shareTwitter">트위터로 공유</button>
-              <button class="shareFacebook">페이스북으로 공유</button>
-              <button class="shareKakaoTalk">카카오톡으로 공유</button>
+      <!--  덧글 입력 구역  -->
+      <div class="board-view--replyBox-input">
+        <th:block th:if="${session.loggedUser != null}">
+          <div class="board-view--replyBox-subTitle">
+            <input type="checkbox" class="check-hidden">
+            <span>비밀글로 작성하기</span>
+          </div>
+          <div class="board-view--replyBox-subCont">
+            <img class="replyIcon" th:src="@{/upload/}+${loggedUser.userIconReal}" alt="">
+            <textarea class="replyCont" name="replyCont" rows="2" >
+            </textarea>
+            <input type="button" class="btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"/>
+          </div>
+        </th:block>
+        <th:block th:if="${session.loggedUser == null}">
+          <div class="board-view--replyBox-subTitle">
+            <input type="checkbox" class="check-hidden">
+            <span>비밀글로 작성하기</span>
+          </div>
+          <a th:href="@{/member/login}">
+            <div class="board-view--replyBox-subCont">
+              <img class="replyIcon" th:src="@{/images/sampleprofile.jpg}" alt="">
+              <textarea class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }" rows="2" >
+              </textarea>
+              <input type="button" class="btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"/>
             </div>
+          </a>
+        </th:block>
+      </div>
+      <div class="board-view--replyBox__input board-view--replyBox__input-M">
+        <input type="button" class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }"/>
+        <!-- <input type="button" class="btn-primary btn-reply" value="작성"/> -->
+        <!-- <input type="checkbox" class="check-hidden"><span>비밀글로 작성하기</span> -->
+      </div>
+    </article>
+    <!-- board-view--textBox -->
+  </section><!-- boardView -->
+  <!-- board-view--subPage -->
+
+
+
+  
+<!--------------------------------------------------[               모달 영역             ]-------------------------------------------------------------------------->
+
+
+
+
+  <section> <!-- 모달 섹션 -->
+    <!-- 삭제 모달창 -->
+    <div id="deleteModal" class="modal-wnd deleteMo">
+      <div class="modal-content">
+        <div class="modal-content--title">
+          <p>게시글을 삭제합니다.</p>
+        </div>
+        <div class="modal-content--txt">
+          <p>확인을 누르면 게시글이 완전히 삭제됩니다.</p>
+        </div>
+        <div class="modal-content--btn">
+          <button id="btnDeleteConfirm" class="btn btn-primary">확인</button>
+          <button id="closeDelete" class="btn btn-secondary closeDeleteModal">취소</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="shareModal" class="modal-wnd">
+      <div class="modal-content">
+        <button id="closeShareModal">닫기</button>
+        <div class="modal-content--title">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <div>
+            <input
+              type="text"
+              class="shareUrl"
+              th:value="'https://youtu.be/' + ${boardDto.postLink}"
+              readonly
+            />
+            <button onclick="copyUrl();">복사</button>
+            <button class="shareTwitter">트위터로 공유</button>
+            <button class="shareFacebook">페이스북으로 공유</button>
+            <button class="shareKakaoTalk">카카오톡으로 공유</button>
           </div>
-          <!-- ModalThis-content -->
+        </div>
+        <!-- ModalThis-content -->
+      </div>
+      <!-- ModalThis-content -->
+      <!-- write-modal--item -->
+    </div>
+
+    <!-- 덧글 삭제 모달창 -->
+    <div id="deleteReplyModal" class="modal-wnd">
+      <div class="modal-wnd-item">
+        <div class="modal-content modal-ReplyDelete">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <h3>정말로 삭제하시겠습니까?</h3>
+          <button id="deleteReplyConfirm">확인</button>
+          <button id="closeDeleteReply">취소</button>
+        </div>
+        <!-- ModalThis-content -->
+      </div>
+      <!-- write-modal--item -->
+    </div>
+
+    <!-- 덧글 삭제 모달창 -->
+    <div id="deleteReplyModal" class="modal-wnd">
+      <div class="modal-wnd-item modal-ReplyDelete">
+        <div class="modal-content ">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <h3>정말로 삭제하시겠습니까?</h3>
+          <button class="btn btn-primary" id="deleteReplyConfirm" th:onclick="modalReplyDelete(this)">확인</button>
+          <button class="btn btn-secondary" id="closeDeleteReply">취소</button>
         </div>
         <!-- write-modal--item -->
       </div>
-      <!-- write-modal -->
 
-      <!-- 덧글 삭제 모달창 -->
-      <div id="deleteReplyModal" class="modal-wnd">
-        <div class="modal-wnd-item">
-          <div class="modal-content modal-ReplyDelete">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <h3>정말로 삭제하시겠습니까?</h3>
-            <button id="deleteReplyConfirm">확인</button>
-            <button id="closeDeleteReply">취소</button>
-          </div>
-          <!-- ModalThis-content -->
-        </div>
-        <!-- write-modal--item -->
-      </div>
 
-      <!-- 모바일 덧글 삭제 모달창 -->
-      <div id="deleteReplyModal-M" class="modal-wnd">
-        <div class="modal-wnd-item">
-          <div class="modal-content modal-ReplyDelete">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <h3></h3>
-            <button id="">수정</button>
-            <button id="">삭제</button>
-            <button id="closeDeleteReply">확인</button>
-          </div>
-          <!-- ModalThis-content -->
-        </div>
-        <!-- write-modal--item -->
-      </div>
+    <!---------- 기술적 문제로 잠시 보류 ---------->
 
-      <!-- 덧글 모달창 -->
-      <div id="comReplyModal-M" class="modal-wnd">
-        <div class="modal-wnd-item">
-          <div class="modal-content modal-ReplyDelete">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <h3 style="color: black">덧글 쓰기</h3>
-
-            <button id="closeDeleteReply">확인</button>
-          </div>
-          <!-- ModalThis-content -->
+    <!-- 모바일 덧글 삭제 모달창 -->
+    <div id="deleteReplyModal-M" class="modal-wnd">
+      <div class="modal-wnd-item">
+        <div class="modal-content modal-ReplyDelete">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <h3></h3>
+          <button class="modal-ReplyDelete-btn btn-modify btn modifyReplyBtn" id="">수정</button>
+          <button class="modal-ReplyDelete-btn btn-delete btn deleteReplyBtn" id="closeDeleteReply">삭제</button>
+          <button class="modal-ReplyDelete-btn btn-return btn" id="closeDeleteReply">확인</button>
         </div>
         <!-- write-modal--item -->
       </div>
@@ -298,32 +292,35 @@
 
     <!--------------------------------------------------[            자바 스크립트 영역             ]-------------------------------------------------------------------------->
 
-    <script src="/js/board/replys.js"></script>
-    <script src="/js/board/view.js"></script>
-    <script defer>
-      addReplyEvent(); // 덧글 입력 버튼 클래스명 btn-reply 고정
-      addReplyReplyEvent(); // 덧글의 덧글 입력 버튼 클래스명 replyReplyBtn 고정
-      addDeleteReplyEvent(); //덧글 삭제 버튼 아이디 deleteReplyBtn 고정
-      modalReplyDelete(); // 덧글 삭제 확인 모달 확인 버튼 아이디 deleteReplyConfirm 고정
-    </script>
+    <!-- 덧글 모달창 -->
+    <div id="comReplyModal-M" class="modal-wnd">
+      <div class="modal-wnd-item">
+        <div class="modal-content modal-ReplyDelete">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <h3 style="color: black;">덧글 쓰기</h3>
+          
+          <button id="closeDeleteReply">확인</button>
+        </div>
+        <!-- ModalThis-content -->
+      </div>
+      <!-- write-modal--item -->
+    </div>
+
+    <!---------- 기술적 문제로 잠시 보류 ---------->
+
+  </section>
+
+  
+<!--------------------------------------------------[            자바 스크립트 영역             ]-------------------------------------------------------------------------->
+  
+  
+  <script src="/js/board/view.js"></script>
     <script>
-      getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
+      getModal($("#deleteModalBox"), $("#deleteModal"), $(".closeDeleteModal"));
       getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
-      getModal(
-        $("#deleteReplyBtn"),
-        $("#deleteReplyModal"),
-        $("#closeDeleteReply")
-      );
-      getModal(
-        $(".menuBtn"),
-        $("#deleteReplyModal-M"),
-        $("#deleteReplyModal-M  #closeDeleteReply")
-      );
-      getModal(
-        $(".board-view--replyBox__input-M"),
-        $("#comReplyModal-M"),
-        $("#comReplyModal-M  #closeDeleteReply")
-      );
+      getModal($(".deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
+      // getModal($(".menuBtn"), $("#deleteReplyModal-M"), $("#deleteReplyModal-M  #closeDeleteReply"));
+      // getModal($(".board-view--replyBox__input-M"), $("#comReplyModal-M"), $("#comReplyModal-M  #closeDeleteReply"));
 
       // 복사 버튼 누르면 url 복사
       async function copyUrl() {

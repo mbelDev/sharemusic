@@ -1,5 +1,6 @@
 package com.music.sharemusic.service;
 
+import com.music.sharemusic.dao.MemberDao;
 import com.music.sharemusic.dao.ReplysDao;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.ReplysDto;
@@ -15,9 +16,21 @@ public class ReplysServiceImpl implements ReplysService {
   @Autowired
   ReplysDao replysDao;
 
+  @Autowired
+  MemberDao memberDao;
+
   //덧글 받아오기
   public List<ReplysDto> getReplyAll(int postNo) {
     List<ReplysDto> result = replysDao.getReplyAll(postNo);
+    for (ReplysDto item : result) {
+      int replyNo = item.getReplyGroup();
+      if (replyNo == 0) {
+        continue;
+      }
+      ReplysDto target = replysDao.getReply(replyNo);
+      String targetNM = target.getReplyAuthNM();
+      item.setReplyGroupTarget(targetNM);
+    }
     return result;
   }
 

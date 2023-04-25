@@ -10,61 +10,35 @@
       <div class="monthRanking-page topAndbut">
         <h2>월간랭킹</h2>
         <!-- 날짜이동버튼 -->
-        <div id="month">
+        <div class="month">
           <span class="prevMonth" onclick="prevMonth()"><==</span>
           <div id="monthDate">
             <span th:text="${monthDate[STARTDATE]}">시작 날짜</span>
             <span>~</span>
             <span th:text="${monthDate[LASTDATE]}">끝 날짜</span>
           </div>
-          <span class="nextMonth" onclick="nextMonth()">==></span>
-        </div>
-        <!-- List 데이터 -->
-        <div id="monthRankList">
-          <ul>
-            <li th:each="item : ${monthRankList}">
-              <a th:href="@{/board/view(postNo=${item.postNo})}">
-                <img
-                  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                />
-                <p class="" th:text="${item.postTitle}">곡이름</p>
-                <p class="" th:text="${item.postSinger}">가수이름</p>
-                <p class="" th:text="${item.postAuth}">별명</p>
-              </a>
-            </li>
-          </ul>
+            <span class="nextMonth" onclick="nextMonth()">==></span>
+          <!-- List 데이터 -->
+          <div id="monthRankList">
+            <ul>
+              <li th:each="item : ${monthRankList}">
+                <a th:href="@{/board/view(postNo=${item.postNo})}">
+                  <img
+                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                  />
+                  <div class="postTitle">
+                    <div class="postTxt">
+                      <p class="" th:text="${item.postTitle}">곡이름</p>
+                      <p class="" th:text="${item.postSinger}">가수이름</p>
+                      <p class="" th:text="${item.postAuth}">별명</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-
-      <!-- monthRanking-page -->
-      <article class="monthRanking-Area monthRanking-Area01">
-        <div class="monthRanking-Area--no">
-          <p></p>
-        </div>
-        <!-- monthRanking-Area--no -->
-      </article>
-      <!-- monthRanking-Area -->
-      <article class="monthRanking-Area monthRanking-Area02">
-        <div class="monthRanking-Area--no">
-          <ul>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
-        <!-- monthRanking-Area--no -->
-      </article>
-      <!-- monthRanking-Area -->
-      <article class="monthRanking-Area monthRanking-Area03">
-        <div class="monthRanking-Area--no">
-          <ul>
-            <li></li>
-          </ul>
-        </div>
-        <!-- monthRanking-Area--no -->
-      </article>
-      <!-- monthRanking-Area -->
-    </section>
-    <!-- monthRanking -->
 
     <script th:inline="javascript">
       let moveMonth;

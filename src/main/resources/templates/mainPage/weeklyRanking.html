@@ -28,9 +28,13 @@
                 <img
                   th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
                 />
-                <p class="" th:text="${item.postTitle}">곡이름</p>
-                <p class="" th:text="${item.postSinger}">가수이름</p>
-                <p class="" th:text="${item.postAuth}">별명</p>
+                <div class="postTitle">
+                  <div class="postTxt">
+                    <p class="" th:text="${item.postTitle}">곡이름</p>
+                    <p class="" th:text="${item.postSinger}">가수이름</p>
+                    <p class="" th:text="${item.postAuth}">별명</p>
+                  </div>
+                </div>
               </a>
             </li>
           </ul>
@@ -40,6 +44,8 @@
     </section>
     <!-- weeklyRanking -->
 
+    
+      
     <script>
       let moveWeekly;
 
@@ -98,6 +104,7 @@
           $("#weeklyRankList").replaceWith(fragment);
         });
       }
+
     </script>
   </main>
 </html>

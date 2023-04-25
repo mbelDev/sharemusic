@@ -8,7 +8,7 @@
 <insert id="putPost" parameterType="BoardDto">
   INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{postAuth}, 
     #{postTitle}, #{postSinger}, #{postCont}, #{postLink},
-    #{postGenre}, #{postEmote}, 0, 0, SYSDATE)
+    #{postGenre}, #{postEmote}, 0, 0, SYSDATE, #{postAuthID})
 </insert>
 
 <!-- 한 글 불러오기 -->
@@ -34,6 +34,11 @@
     )
   </if>
     ORDER BY ${sort} desc
+</select>
+
+<!-- 팔로우 중인 글 불러오기 #권인호 -->
+<select id="getPostFollow" parameterType="HashMap" resultType="BoardDto">
+  SELECT * FROM BOARD WHERE POSTAUTHID IN (SELECT FOLLOWID FROM FOLLOW WHERE USERID = #{userID}) ORDER BY POSTAUTHID, POSTDATE
 </select>
 
 <!-- 랭킹 글 불러오기 -->

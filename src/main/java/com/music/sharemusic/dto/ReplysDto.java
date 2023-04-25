@@ -21,4 +21,5 @@ public class ReplysDto {
   private int replyGroup;
   private int replyLevel;
   private int replyStep;
+  private String replyGroupTarget;
 }
