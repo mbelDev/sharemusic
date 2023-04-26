@@ -19,31 +19,48 @@
             <span>~</span>
             <span th:text="${monthDate[LASTDATE]}">끝 날짜</span>
           </div>
-            <span class="material-icons nextMonth" onclick="nextMonth()">
-              east
-            </span>
-        </div>  
+          <span class="material-icons nextMonth" onclick="nextMonth()">
+            east
+          </span>
+        </div>
         <!-- List 데이터 -->
         <div id="monthRankList">
           <ul>
             <li th:each="item : ${monthRankList}">
-              <a th:href="@{/board/view(postNo=${item.postNo})}">
-                <img
-                  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                />
-                <div class="postTitle">
-                  <div class="postTxt">
-                    <p class="" th:text="${item.postTitle}">곡이름</p>
-                    <p class="" th:text="${item.postSinger}">가수이름</p>
-                    <p class="" th:text="${item.postAuth}">별명</p>
-                  </div>
+              <div class="postTxt">
+                <div class="postTxt-no">
+                  <p class="" th:text="${itemStat.index+1}">넘버</p>
                 </div>
-              </a>
+                <div class="postTxt-img">
+                  <img
+                    class=""
+                    th:src="@{/upload}+@{item.postAuthIcon}"
+                    alt=""
+                  />
+                </div>
+                <div class="postTxt-title">
+                  <p class="" th:text="${item.postAuth}">별명</p>
+                  <p class="" th:text="${item.postSinger}">가수이름</p>
+                  <p class="" th:text="${item.postTitle}">곡이름</p>
+                </div>
+              </div>
+              <div class="postTitle">
+                <a th:href="@{/board/view(postNo=${item.postNo})}">
+                  <img
+                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                  />
+                </a>
+                <div class="postTitle-sub">
+                  <p>자세한 내용을 확인 하세요.</p>
+                  <a class="btnHover btn btn-primary" href="">자세히 보기</a>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
       </div>
-
+    </section>
+    <!-- monthRanking -->
     <script th:inline="javascript">
       let moveMonth;
 

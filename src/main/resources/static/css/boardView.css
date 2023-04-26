@@ -30,7 +30,6 @@
   position: relative;
   text-align: center;
   display: flex;
-  box-shadow: inset 0 0 0 1px #35373f, 0px 1px 3px rgba(52, 54, 63, 0.1), 0px 4px 10px rgba(52, 54, 63, 0.15);
   transition: transform 0.15s;
   transform: translateZ(0);
 }
@@ -119,7 +118,7 @@
 
 .like.active {
   background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
-  border-radius: 100px;
+  outline: none;
 }
 
 .reply-date-md500, .board-view--replyBox__input-M {
@@ -134,7 +133,6 @@
 .boardView {
   max-width: 1280px;
   margin: 4%;
-  border-bottom: 1px solid;
 }
 .boardView-Area {
   width: 100%;
@@ -151,7 +149,7 @@
   justify-content: space-between;
 }
 .boardView-Video--title .title {
-  width: 100%;
+  width: 50%;
 }
 .boardView-Video--title .title-name p {
   font-size: 25px;
@@ -173,8 +171,7 @@
   margin: 30px 0;
 }
 .boardView-Video--title .like {
-  width: 8vw;
-  display: flex;
+  width: 7vw;
   margin-top: 10px;
 }
 .boardView-Video--title .like-good img {
@@ -182,7 +179,8 @@
   cursor: pointer;
 }
 .boardView-Video--title .like-btn {
-  margin-left: 30px;
+  margin-top: 20px;
+  margin-left: 95px;
 }
 .boardView-Video--title .like-btn button {
   border: none;
@@ -305,6 +303,13 @@
 .board-view--replyBox-subCont {
   display: flex;
 }
+.board-view--replyBox-subCont textarea {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+.board-view--replyBox-subCont textarea:focus {
+  outline: none;
+}
 .board-view--replyBox-subCont .replyCont {
   flex: 1;
   resize: none;
@@ -331,8 +336,9 @@
     width: 75vw;
     height: 42vw;
   }
-  .boardView-Video--title .like {
-    width: 10vw;
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 80px;
   }
 }
 @media screen and (max-width: 1400px) {
@@ -343,7 +349,11 @@
     width: 30vw;
   }
   .boardView-Video--title .like {
-    width: 13vw;
+    width: 8vw;
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 80px;
   }
 }
 @media screen and (max-width: 1230px) {
@@ -351,7 +361,11 @@
     margin: 0;
   }
   .boardView-Video--title .like {
-    width: 14vw;
+    width: 9vw;
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 75px;
   }
 }
 @media screen and (max-width: 1080px) {
@@ -372,7 +386,11 @@
     width: 190px !important;
   }
   .boardView-Video--title .like {
-    width: 17vw;
+    width: 11vw;
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 80px;
   }
 }
 @media screen and (max-width: 960px) {
@@ -380,19 +398,23 @@
     width: 69vw;
     height: 41vw;
   }
-  .boardView-Video--title .like {
-    margin-left: 28%;
-  }
   .board-view--replyBox .reply-contents--icon .menuBtn {
     right: 5%;
   }
   .boardView-Video--title .like {
-    width: 30vw;
+    width: 11vw;
+  }
+  .boardView-Video--title .like .default {
+    font-size: 12px;
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 70px;
   }
 }
 @media screen and (max-width: 855px) {
   .boardView {
-    margin-top: 15%;
+    margin-top: 20%;
   }
   .flex-box #mainPage-Area {
     margin-left: 0;
@@ -405,7 +427,14 @@
     width: 40vw;
   }
   .boardView-Video--title .like {
-    width: 34vw;
+    width: 12vw;
+  }
+  .boardView-Video--title .like .default {
+    font-size: 12px;
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 65px;
   }
   .title-btn {
     width: 20vw;
@@ -434,19 +463,12 @@
     width: 23px;
     margin-bottom: 5px;
   }
-  .boardView-Video--title .like-btn {
-    margin-left: 15px;
-  }
   .postLike {
     font-size: 12px;
   }
   .board-view--replyBox {
     width: 88vw;
     font-size: 13px;
-  }
-  .boardView-Video--title .like {
-    width: 35vw;
-    margin-left: 5vw;
   }
   .reply-date {
     display: none;
@@ -509,6 +531,7 @@
   .board-view--replyBox__input-M .replyCont {
     cursor: pointer;
     width: 100%;
+    background-color: #35373f;
   }
   .board-view--replyBox__input-M .replyCont:focus {
     outline: none;
@@ -534,5 +557,15 @@
   .board-view--replyBox .reply-contents--icon .menuBtn {
     font-size: 20px;
     transform: translateY(-17px);
+  }
+  .boardView-Video--title .like {
+    width: 17vw;
+  }
+  .boardView-Video--title .like .default {
+    font-size: 11px;
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 50px;
   }
 }

@@ -44,11 +44,7 @@
             </div><!-- title-btn -->
           </div><!-- title -->
           <div class="like">
-            <!-- <div class="like-good">
-              <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}" data-liked=""/> 
-              <span th:text="${boardDto.postLike}" class="postLike">0</span>
-            </div>like-good -->
-            <button class="like button-star">
+            <button class="btnHover like button-star">
               <canvas></canvas>
               <div class="label">
                 <span class="default">좋아요<span class="success"></span></span>
@@ -60,7 +56,7 @@
               </div>
             </button>
             <div class="like-btn">
-              <button class="btnOpen btnShare" id="shareModalBox">
+              <button class="btnOpen btnShare " id="shareModalBox">
                 <img src="/images/open.svg" alt="" />
               </button>
             </div><!-- like-btn -->
@@ -189,9 +185,9 @@
           </div>
           <div class="board-view--replyBox-subCont">
             <img class="replyIcon" th:src="@{/upload/}+${loggedUser.userIconReal}" alt="">
-            <textarea class="replyCont" name="replyCont" rows="2" >
+            <textarea class="replyCont" name="replyCont"  >
             </textarea>
-            <input type="button" class="btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"/>
+            <input type="button" class="btn btn-primary" value="작성" th:onclick="addReplyEvent(this)"/>
           </div>
         </th:block>
         <th:block th:if="${session.loggedUser == null}">
@@ -209,11 +205,7 @@
           </a>
         </th:block>
       </div>
-      <div class="board-view--replyBox__input board-view--replyBox__input-M">
-        <input type="button" class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }"/>
-        <!-- <input type="button" class="btn-primary btn-reply" value="작성"/> -->
-        <!-- <input type="checkbox" class="check-hidden"><span>비밀글로 작성하기</span> -->
-      </div>
+      
     </article>
     <!-- board-view--textBox -->
   </section><!-- boardView -->
@@ -244,47 +236,73 @@
       </div>
     </div>
 
-    <div id="shareModal" class="modal-wnd shareMo">
+    <!-- 공유 모달창 -->
+    <div id="deleteModal" class="modal-wnd deleteMo shareModal">
+      <div id="closeDeleteModal" class="shareModalClose"></div>
       <div class="modal-content">
         <div class="modal-content--title">
-          <p>공유</p>
+          <p>공유를 합니다.</p>
         </div>
         <div class="modal-content--txt">
-          <div class="modal-content--txt--icon">
-            <ul>
-              <li><button class="btn"><img src="/images/kakotalkIcon.png" alt="카카오톡" class="shareKakaoTalk"></button></li>
-              <li><button class="btn"><img src="/images/twitterIcon.png" alt="트위터" class="shareTwitter"></button></li>
-              <li><button class="btn"><img src="/images/facebookIcon.svg" alt="페이스북" class="shareFacebook"></button></li>
-            </ul>
-          </div>
-          <div class="modal-content--txt--url">
-            <input
-              type="text"
-              class="shareUrl"
-              th:value="'https://youtu.be/' + ${boardDto.postLink}"
-              readonly
-            />
-            <button class="btn btn-dark" onclick="copyUrl();">복사</button>
-          </div>
+          <p>
+            <div class="shareBox">
+              <div class="shareBox-Url">
+                <input type="text" class="shareUrl" th:value="'https://youtu.be/' + ${boardDto.postLink}" readonly/>
+              </div>
+              <div class="shareBox-item">
+                <button onclick="copyUrl();" class="btnHover like button-star copyUrl">
+                    <canvas></canvas>
+                    <div class="label">
+                      <span class="default">복사<span class="success"></span></span>
+                    </div>
+                    <div class="number">
+                      <span class="current">off</span>
+                      <span class="new">on</span>
+                      <div class="add">복사</div>
+                    </div>
+                </button>
+                <button class="btnHover like button-star shareTwitter">
+                  <canvas></canvas>
+                  <div class="label">
+                    <span class="default">트위터<span class="success"></span></span>
+                  </div>
+                  <div class="number">
+                    <span class="current">off</span>
+                    <span class="new">on</span>
+                    <div class="add">공유</div>
+                  </div>
+                </button>
+                <button class="btnHover like button-star shareFacebook">
+                <canvas></canvas>
+                <div class="label">
+                  <span class="default">페이스북<span class="success"></span></span>
+                </div>
+                <div class="number">
+                  <span class="current">off</span>
+                  <span class="new">on</span>
+                  <div class="add">공유</div>
+                </div>
+                </button>
+                <button class="btnHover like button-star shareKakaoTalk">
+                <canvas></canvas>
+                <div class="label">
+                  <span class="default">카카오톡<span class="success"></span></span>
+                </div>
+                <div class="number">
+                  <span class="current">off</span>
+                  <span class="new">on</span>
+                  <div class="add">공유</div>
+                </div>
+                </button>
+              </div>
+            </div>
+          </p>
         </div>
         <div class="modal-content--btn">
-          <button id="closeShareModal" class="btn btn-primary">닫기</button>
+          <button id="btnDeleteConfirm" class="btnHover btn btn-primary">확인</button>
+          <button id="closeDelete" class="btn btn-secondary">취소</button>
         </div>
       </div>
-    </div>
-
-    <!-- 덧글 삭제 모달창 -->
-    <div id="deleteReplyModal" class="modal-wnd">
-      <div class="modal-wnd-item">
-        <div class="modal-content modal-ReplyDelete">
-          <!-- 모달창 안에 여기 내용 작성 -->
-          <h3>정말로 삭제하시겠습니까?</h3>
-          <button id="deleteReplyConfirm">확인</button>
-          <button id="closeDeleteReply">취소</button>
-        </div>
-        <!-- ModalThis-content -->
-      </div>
-      <!-- write-modal--item -->
     </div>
 
     <!-- 덧글 삭제 모달창 -->
@@ -350,6 +368,8 @@
 
   </script>
     <script>
+
+      getModal($(".like-btn button"), $(".shareModal"), $(".shareModalClose"));
       getModal($("#deleteModalBox"), $("#deleteModal"), $(".closeDeleteModal"));
       getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
       getModal($(".deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
@@ -418,27 +438,10 @@
       }
     </script>
     <script th:inline="javascript">
-
-      //좋아요 상태 체크 함수 #권인호 작성
-      function getLike(postNo){
-        $.ajax({
-          url:"/member/getLike",
-          type:"POST",
-          data:{
-            postNo : postNo
-          },
-          success:function(response){
-            if(response == 1){
-              $(".like").addClass("active");
-            }
-          }
-        })
-      }
-
-
       //좋아요 History 연동 함수 #권인호 작성
       function updateLike(item){
         const postNo = $(item).data('postno');
+
         $.ajax({
           url:"/member/like",
           type:"POST",

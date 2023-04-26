@@ -30,7 +30,7 @@
   position: relative;
   text-align: center;
   display: flex;
-  box-shadow: inset 0 0 0 1px #35373f, 0px 1px 3px rgba(52, 54, 63, 0.1), 0px 4px 10px rgba(52, 54, 63, 0.15);
+  // box-shadow: inset 0 0 0 1px #35373f, 0px 1px 3px rgba(52, 54, 63, 0.1), 0px 4px 10px rgba(52, 54, 63, 0.15);
   transition: transform 0.15s;
   transform: translateZ(0);
 }
@@ -112,7 +112,7 @@
 
 .like.active {
   background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
-  border-radius: 100px;
+  outline: none;
 }
 
 
@@ -130,7 +130,6 @@
 .boardView {
   max-width: 1280px;
   margin: 4%;
-  border-bottom: 1px solid;
   &-Area {
     width: 100%;
     padding-bottom: 30px;
@@ -146,7 +145,7 @@
       display: flex;
       justify-content: space-between;
       .title {
-        width: 100%;
+        width: 50%;
         &-name {
           p {
             font-size: 25px;
@@ -175,8 +174,7 @@
         }//&-btn
       }//.title
       .like {
-        width: 8vw;
-        display: flex;
+        width: 7vw;
         margin-top: 10px;
         &-good {
           img {
@@ -185,7 +183,8 @@
           }
         }//&-good
         &-btn {
-          margin-left: 30px;
+          margin-top: 20px;
+          margin-left: 95px;
           button {
             border: none;
             outline: none;
@@ -323,6 +322,14 @@
     }
     &-subCont{
       display: flex;
+      textarea {
+        background-color: #1a1a1a;
+        color: #fff;
+        
+        &:focus {
+          outline: none;
+        }
+      }
       .replyCont {
         flex:1;
         resize: none;
@@ -355,7 +362,11 @@
     height: 42vw;
   }
   .boardView-Video--title .like {
-    width: 10vw;
+    // width: 7.5vw;
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 80px;
   }
 }//@media screen and (max-width: 1640px)
 @media screen and (max-width: 1400px) {
@@ -366,7 +377,11 @@
     width: 30vw;
   }
   .boardView-Video--title .like {
-    width: 13vw;
+    width: 8vw;
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 80px;
   }
 }//@media screen and (max-width: 1400px)
 @media screen and (max-width: 1230px) {
@@ -374,7 +389,11 @@
     margin: 0;
   }
   .boardView-Video--title .like {
-    width: 14vw;
+    width: 9vw;
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 75px;
   }
 }//@media screen and (max-width: 1230px)
 @media screen and (max-width: 1080px) {
@@ -395,7 +414,11 @@
     width: 190px !important;
   }
   .boardView-Video--title .like {
-    width: 17vw;
+    width: 11vw;
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 80px;
   }
 }//@media screen and (max-width: 1080px)
 @media screen and (max-width: 960px) {
@@ -403,19 +426,23 @@
     width: 69vw;
     height: 41vw;
   }
-  .boardView-Video--title .like {
-    margin-left: 28%;
-  }
   .board-view--replyBox .reply-contents--icon .menuBtn {
     right: 5%;
   }
   .boardView-Video--title .like {
-    width: 30vw;
+    width: 11vw;
+    .default {
+      font-size: 12px;
+    }
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 70px;
   }
 }//@media screen and (max-width: 960px)
 @media screen and (max-width: 855px) {
   .boardView {
-    margin-top: 15%;
+    margin-top: 20%;
   }
   .flex-box #mainPage-Area {
     margin-left: 0;
@@ -428,7 +455,14 @@
     width: 40vw;
   }
   .boardView-Video--title .like {
-    width: 34vw;
+    width: 12vw;
+    .default {
+      font-size: 12px;
+    }
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 65px;
   }
   .title-btn {
     width: 20vw;
@@ -457,22 +491,12 @@
     width: 23px;
     margin-bottom: 5px;
   }
-  .boardView-Video--title .like-btn {
-    margin-left: 15px;
-  }
   .postLike {
     font-size: 12px;
   }
-  // .boardView-Video--title .title {
-  //   width: 50vw;
-  // }
   .board-view--replyBox {
     width: 88vw;
     font-size: 13px;
-  }
-  .boardView-Video--title .like {
-    width: 35vw;
-    margin-left: 5vw;
   }
   .reply-date {
     display: none;
@@ -480,7 +504,6 @@
   .reply-date-md500 {
     display: flex;
     align-items: center;
-    // margin-bottom: 10px;
     .reply-date {
       display: block;
       width: 50vw !important;
@@ -535,6 +558,7 @@
     .replyCont {
       cursor: pointer;
       width: 100%;
+      background-color: #35373f;
       &:focus {
         outline: none;
       }
@@ -561,5 +585,15 @@
   .board-view--replyBox .reply-contents--icon .menuBtn {
     font-size: 20px;
     transform: translateY(-17px);
+  }
+  .boardView-Video--title .like {
+    width: 17vw;
+    .default {
+      font-size: 11px;
+    }
+  }
+  .boardView-Video--title .like-btn {
+    margin-top: 20px;
+    margin-left: 50px;
   }
 }//@media screen and (max-width: 500px)

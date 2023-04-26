@@ -1,6 +1,7 @@
 video, img {
   vertical-align: top;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 html {
