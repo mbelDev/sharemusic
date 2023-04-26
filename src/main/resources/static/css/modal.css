@@ -263,7 +263,6 @@
   justify-content: center;
 }
 .modal-mo .modal-wnd-item .headerLayout-Area--searchForm .input-group button {
-  background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
   padding: 0 14px;
 }
 .modal-mo .modal-wnd-item .headerLayout-Area--searchForm .input-group .form-outline #form1 {
@@ -433,13 +432,14 @@
 .deleteMo #closeDeleteModal {
   width: 100%;
   height: 100vh;
+  z-index: 98;
 }
 .deleteMo .modal-content {
+  z-index: 99;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 80;
   width: 500px;
   background-color: #fff;
   color: #000;
@@ -476,6 +476,31 @@
 }
 .deleteMo .modal-content--btn .inputFlex-btn button {
   width: 100%;
+}
+
+.shareModal .modal-content--txt {
+  padding: 10px 15px;
+}
+.shareModal .modal-content--txt .shareBox .shareBox-Url input {
+  width: 100% !important;
+}
+.shareModal .modal-content--txt .shareBox .shareBox-item {
+  margin-top: 10px;
+  display: flex;
+  gap: 4px;
+}
+.shareModal .modal-content--txt .shareBox .shareBox-item button {
+  border: none;
+}
+.shareModal .modal-content--txt .shareBox .shareBox-item button:focus {
+  outline: none;
+}
+.shareModal .modal-content--txt .shareBox .shareBox-item .button-star {
+  border-radius: 6px !important;
+}
+.shareModal .modal-content--txt .shareBox .shareBox-item .like {
+  width: 6vw;
+  outline: none;
 }
 
 @media screen and (max-width: 855px) {
@@ -594,7 +619,6 @@
     justify-content: center;
   }
   .modal-mo .modal-wnd-item .headerLayout-Area--searchForm .input-group button {
-    background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
     padding: 0 14px;
   }
   .modal-mo .modal-wnd-item .headerLayout-Area--searchForm .input-group .form-outline #form1 {

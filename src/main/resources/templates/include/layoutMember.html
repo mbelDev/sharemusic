@@ -28,16 +28,27 @@
   <link rel="stylesheet" href="/css/boardView.css" />
   <link rel="stylesheet" href="/css/boardModify.css" />
   <link rel="stylesheet" href="/css/boardWrite.css" />
+  <link rel="stylesheet" href="/css/monthRanking.css" />
+  <link rel="stylesheet" href="/css/weeklyRanking.css" />
   <link rel="stylesheet" href="/css/modal.css" />
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
   <script src="/js/mainJs/layout.js" defer></script>
   <script src="/js/mainJs/mainPage.js" defer></script>
   <script src="/js/board/view.js" defer></script>
+  <script src="/js/board/write.js" defer></script>
+    <script src="/js/board/modify.js" defer></script>
   <script src="/js/bootstrap.bundle.min.js"></script>
   <script src="/js/mdb.min.js"></script>
   <script src="/js/jquery-3.6.3.min.js"></script>
   <script src="/js/modal.js"></script>
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/loaders/DRACOLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/loaders/GLTFLoader.js"></script>
+<script src='https://unpkg.co/gsap@3/dist/gsap.min.js'></script>
+<script src='https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js'></script><script  src="./script.js"></script>
   
 </head>
 
@@ -190,7 +201,7 @@
             <input class="form-control" type="password" name="userPW" id="userPW" placeholder="유저 패스워드">
           </div>
           <div class="inputFlex-btn">
-            <button id="btnDeleteConfirm" class="btn btn-primary" onclick="withdraw()">회원탈퇴</button>
+            <button id="btnDeleteConfirm" class="btnHover btn btn-primary" onclick="withdraw()">회원탈퇴</button>
             <button id="closeDelete" class="btn btn-secondary">되돌아가기</button>
           </div>
         </div>
@@ -455,7 +466,7 @@ ATI Radeon 9500 128MB 이상
         </th:block>
         <th:block th:unless="${loggedUser == null}">
           <div class="comment-txt">
-            <a href="/board/write"><button class="btn btn-info">글 작성</button></a>
+            <a href="/board/write"><button class="btnHover btn btn-info">글 작성</button></a>
           </div>
           <div class="join line">
             <a href="/member/login"><span>마이페이지</span></a>
@@ -482,7 +493,7 @@ ATI Radeon 9500 128MB 이상
                   th:value="${searchTxt}"
                 />
               </div>
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btnHover btn btn-primary">
                 <img src="/images/search.svg" alt="" />
               </button>
             </div>

@@ -97,7 +97,6 @@ h1 {
   align-items: center;
   width: 100%;
   height: 50px;
-  cursor: pointer;
 }
 .flex-box #headerLayout-Area .headerLayout-Area--box .headerLayout-Area--infoForm .infoForm-All .infoForm-userNM .ic-settings {
   margin-top: 6px;
@@ -409,7 +408,6 @@ h1 {
   }
   .media855-Area--search button {
     padding: 0 10px;
-    background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
   }
   .media855-Area--search form {
     display: flex;

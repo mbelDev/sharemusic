@@ -272,7 +272,7 @@
           </th:block>
           <th:block th:unless="${loggedUser == null}">
             <div class="comment-txt">
-              <a href="/board/write"><button class="btn btn-info">글 작성</button></a>
+              <a href="/board/write"><button class="btnHover btn btn-info">글 작성</button></a>
             </div>
             <div class="join line">
               <a href="/member/login"><span>마이페이지</span></a>
@@ -299,7 +299,7 @@
                     th:value="${searchTxt}"
                   />
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btnHover btn btn-primary">
                   <img src="/images/search.svg" alt="" />
                 </button>
               </div>
