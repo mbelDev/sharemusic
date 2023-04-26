@@ -40,13 +40,12 @@
           </div>
           <!-- joinForm-Area--userName -->
           <div class="joinForm-Area--userFile">
-            <input
-              type="file"
-              class="userIconFile"
-              th:field="*{userIconFile}"
-              id="formFileMultiple"
-              onchange="setIcon(event);"
-            />
+            <div class="filebox fileArea">
+              <label for="file" class="btn btn-primary">이미지</label> 
+              <input class="upload-name" value="첨부파일" placeholder="첨부파일" disabled>
+              <input type="file" class="userIconFile" th:field="*{userIconFile}" id="file" onchange="setIcon(event);">
+          </div>
+            
             <p class="previewIcon"></p>
             
           </div>
@@ -94,6 +93,12 @@
   </body>
 
   <script>
+
+$("#file").on('change',function(){
+    let fileName = $("#file").val();
+    $(".upload-name").val(fileName);
+    });
+
     $(".btn-checkID").on("click", () => {
       const checkID = $(".userID").val();
       console.log(checkID);
@@ -132,6 +137,8 @@
 
       reader.readAsDataURL(event.target.files[0]);
     }
+
+    
 
   </script>
 </html>

@@ -22,3 +22,5 @@ function getModal02(getModal, getClose) {
     $(Modal).removeClass("modal-open");
   });
 }
+
+

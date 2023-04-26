@@ -1,42 +1,245 @@
 .monthRanking {
   padding: 80px;
 }
-.monthRanking-Area--no p {
-  outline: 1px solid red;
-  width: 100%;
-  height: 45vh;
-}
-.monthRanking-Area02 {
-  margin: 40px 0;
-}
-.monthRanking-Area02 .monthRanking-Area--no ul {
+.monthRanking #monthRankList ul {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  width: 100%;
-  height: auto;
-}
-.monthRanking-Area02 .monthRanking-Area--no ul li {
-  outline: 1px solid red;
-  width: 100%;
-  height: 40vh;
-}
-.monthRanking-Area03 .monthRanking-Area--no {
-  height: auto;
-}
-.monthRanking-Area03 .monthRanking-Area--no ul {
-  display: flex;
-  justify-content: left;
-  gap: 15px;
   flex-wrap: wrap;
 }
-.monthRanking-Area03 .monthRanking-Area--no ul li {
-  outline: 1px solid red;
-  width: 489.3px;
-  height: 30vh;
+.monthRanking #monthRankList ul li {
+  position: relative;
+  width: 17.5vw;
+  margin: 20px;
+}
+.monthRanking #monthRankList ul li img {
+  width: 100%;
+}
+.monthRanking #monthRankList ul li:nth-child(1) {
+  width: 24vw;
+}
+.monthRanking #monthRankList ul li:nth-child(2) {
+  width: 24vw;
+}
+.monthRanking #monthRankList ul li:nth-child(3) {
+  width: 24vw;
+}
+.monthRanking #monthRankList ul li .postTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7137254902);
+  opacity: 0;
+  transition: all 0.25s ease;
+  transition-delay: 0.2s;
+}
+.monthRanking #monthRankList ul li .postTitle .postTxt {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+.monthRanking #monthRankList ul li .postTitle .postTxt p {
+  font-size: 26px;
+}
+.monthRanking #monthRankList ul li .postTitle .postTxt p:nth-child(1) {
+  font-size: 13px;
+  font-weight: 200;
+  margin-bottom: 3px;
+}
+.monthRanking #monthRankList ul li .postTitle .postTxt p:nth-child(2) {
+  font-weight: 600;
+}
+.monthRanking #monthRankList ul li .postTitle .postTxt p:nth-child(3) {
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 200;
+}
+.monthRanking #monthRankList ul li .postTitle:hover {
+  opacity: 1;
 }
 
 .prevMonth,
 .nextMonth {
   cursor: pointer;
+}
+
+@media screen and (max-width: 1550px) {
+  .monthRanking #monthRankList ul li:nth-child(1),
+  .monthRanking #monthRankList ul li:nth-child(2),
+  .monthRanking #monthRankList ul li:nth-child(3) {
+    width: 23vw;
+    margin: 10px;
+  }
+  .monthRanking {
+    padding: 50px;
+  }
+}
+@media screen and (max-width: 1415px) {
+  .monthRanking #monthRankList ul li:nth-child(1),
+  .monthRanking #monthRankList ul li:nth-child(2),
+  .monthRanking #monthRankList ul li:nth-child(3) {
+    width: 23vw;
+  }
+  .monthRanking {
+    padding: 50px;
+  }
+}
+@media screen and (max-width: 1240px) {
+  .monthRanking #monthRankList ul li:nth-child(1),
+  .monthRanking #monthRankList ul li:nth-child(2),
+  .monthRanking #monthRankList ul li:nth-child(3) {
+    width: 22vw;
+  }
+  .monthRanking {
+    padding: 50px;
+  }
+}
+@media screen and (max-width: 1045px) {
+  .monthRanking #monthRankList ul li:nth-child(1),
+  .monthRanking #monthRankList ul li:nth-child(2),
+  .monthRanking #monthRankList ul li:nth-child(3) {
+    width: 21vw;
+  }
+  .monthRanking {
+    padding: 30px;
+  }
+}
+@media screen and (max-width: 960px) {
+  .monthRanking #monthRankList ul li:nth-child(1),
+  .monthRanking #monthRankList ul li:nth-child(2),
+  .monthRanking #monthRankList ul li:nth-child(3) {
+    width: 20vw;
+  }
+  .monthRanking {
+    padding: 20px;
+  }
+}
+@media screen and (max-width: 855px) {
+  .monthRanking #monthRankList ul li:nth-child(1) {
+    width: 100%;
+  }
+  .monthRanking #monthRankList ul li:nth-child(1) a img {
+    width: 100%;
+  }
+  .monthRanking #monthRankList ul li:nth-child(2),
+  .monthRanking #monthRankList ul li:nth-child(3) {
+    width: 47.4%;
+  }
+  .monthRanking #monthRankList ul li:nth-child(2) a img,
+  .monthRanking #monthRankList ul li:nth-child(3) a img {
+    width: 100%;
+  }
+  .monthRanking #monthRankList ul li {
+    width: 100%;
+    margin: 8px;
+  }
+  .monthRanking #monthRankList ul li a img {
+    width: 30%;
+  }
+  .monthRanking #monthRankList ul li:nth-child(1) .postTitle,
+  .monthRanking #monthRankList ul li:nth-child(2) .postTitle,
+  .monthRanking #monthRankList ul li:nth-child(3) .postTitle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7137254902);
+    opacity: 0;
+    transition: all 0.25s ease;
+    transition-delay: 0.2s;
+  }
+  .monthRanking #monthRankList ul li:nth-child(1) .postTitle:hover,
+  .monthRanking #monthRankList ul li:nth-child(2) .postTitle:hover,
+  .monthRanking #monthRankList ul li:nth-child(3) .postTitle:hover {
+    opacity: 1;
+  }
+  .monthRanking #monthRankList ul li .postTitle {
+    position: absolute;
+    top: 0;
+    left: 30%;
+    width: 79%;
+    height: 100%;
+    background: none;
+    opacity: 1;
+  }
+  .monthRanking #monthRankList ul li:nth-child(1) .postTitle .postTxt p:nth-child(3),
+  .monthRanking #monthRankList ul li:nth-child(2) .postTitle .postTxt p:nth-child(3),
+  .monthRanking #monthRankList ul li:nth-child(3) .postTitle .postTxt p:nth-child(3) {
+    margin-top: 15px;
+  }
+  .monthRanking #monthRankList ul li .postTitle .postTxt p:nth-child(3) {
+    margin-top: 45px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .monthRanking #monthRankList ul li:nth-child(1) {
+    width: 100%;
+  }
+  .monthRanking #monthRankList ul li:nth-child(1) a img {
+    width: 100%;
+  }
+  .monthRanking #monthRankList ul li:nth-child(2),
+  .monthRanking #monthRankList ul li:nth-child(3) {
+    width: 45.4%;
+  }
+  .monthRanking #monthRankList ul li:nth-child(2) a img,
+  .monthRanking #monthRankList ul li:nth-child(3) a img {
+    width: 100%;
+  }
+  .monthRanking #monthRankList ul li {
+    width: 100%;
+    margin: 8px;
+  }
+  .monthRanking #monthRankList ul li a img {
+    width: 35%;
+  }
+  .monthRanking #monthRankList ul li:nth-child(1) .postTitle,
+  .monthRanking #monthRankList ul li:nth-child(2) .postTitle,
+  .monthRanking #monthRankList ul li:nth-child(3) .postTitle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7137254902);
+    opacity: 0;
+    transition: all 0.25s ease;
+    transition-delay: 0.2s;
+  }
+  .monthRanking #monthRankList ul li:nth-child(1) .postTitle:hover,
+  .monthRanking #monthRankList ul li:nth-child(2) .postTitle:hover,
+  .monthRanking #monthRankList ul li:nth-child(3) .postTitle:hover {
+    opacity: 1;
+  }
+  .monthRanking #monthRankList ul li .postTitle {
+    position: absolute;
+    top: 8%;
+    left: 35%;
+    width: 79%;
+    height: 100%;
+    background: none;
+    opacity: 1;
+  }
+  .topAndbut {
+    text-align: left;
+  }
+  .monthRanking #monthRankList ul li .postTitle .postTxt p {
+    font-size: 16px;
+  }
+  .monthRanking #monthRankList ul li .postTitle .postTxt p:nth-child(1) {
+    font-size: 13px;
+    font-weight: 200;
+  }
+  .monthRanking #monthRankList ul li:nth-child(1) .postTitle .postTxt p:nth-child(3),
+  .monthRanking #monthRankList ul li:nth-child(2) .postTitle .postTxt p:nth-child(3),
+  .monthRanking #monthRankList ul li:nth-child(3) .postTitle .postTxt p:nth-child(3) {
+    margin-top: 15px;
+  }
+  .monthRanking #monthRankList ul li .postTitle .postTxt p:nth-child(3) {
+    margin-top: 30px;
+  }
+  .monthRanking {
+    margin-top: 100px;
+  }
 }

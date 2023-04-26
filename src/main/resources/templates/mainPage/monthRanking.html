@@ -29,43 +29,19 @@
                   <img
                     th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
                   />
-                  <p class="" th:text="${item.postTitle}">곡이름</p>
-                  <p class="" th:text="${item.postSinger}">가수이름</p>
-                  <p class="" th:text="${item.postAuth}">별명</p>
+                  <div class="postTitle">
+                    <div class="postTxt">
+                      <p class="" th:text="${item.postTitle}">곡이름</p>
+                      <p class="" th:text="${item.postSinger}">가수이름</p>
+                      <p class="" th:text="${item.postAuth}">별명</p>
+                    </div>
+                  </div>
                 </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-
-      <!-- monthRanking-page -->
-      <article class="monthRanking-Area monthRanking-Area01">
-        <div class="monthRanking-Area--no">
-          <p></p>
-        </div>
-        <!-- monthRanking-Area--no -->
-      </article>
-      <!-- monthRanking-Area -->
-      <article class="monthRanking-Area monthRanking-Area02">
-        <div class="monthRanking-Area--no">
-          <ul>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
-        <!-- monthRanking-Area--no -->
-      </article>
-      <!-- monthRanking-Area -->
-      <article class="monthRanking-Area monthRanking-Area03">
-        <div class="monthRanking-Area--no">
-          <ul>
-            <li></li>
-          </ul>
-        </div>
-        <!-- monthRanking-Area--no -->
-      </article>
-      <!-- monthRanking-Area -->
     </section>
     <!-- monthRanking -->
 

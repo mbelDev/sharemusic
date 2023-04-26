@@ -193,6 +193,12 @@ public class MemberServiceImpl implements MemberService {
     return result;
   }
 
+  //좋아요 정보 << History, Board >>
+  public int getLike(SendDataDto data) {
+    int result = historyDao.getLiked(data);
+    return result;
+  }
+
   //좋아요 업데이트 << History, Board >>
   public int updateLike(SendDataDto data) {
     int result = historyDao.getLiked(data);

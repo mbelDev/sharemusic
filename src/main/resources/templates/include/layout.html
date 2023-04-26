@@ -45,6 +45,12 @@
   <script src="/js/modal.js"></script>
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/loaders/DRACOLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/loaders/GLTFLoader.js"></script>
+<script src='https://unpkg.co/gsap@3/dist/gsap.min.js'></script>
+<script src='https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js'></script><script  src="./script.js"></script>
+
 </head>
 
 <body>
@@ -56,6 +62,186 @@
             <a href="/mainPage"><img src="/images/logo.png" alt="logo"/></a>
           </div>
         </article><!-- .headerLayout-Area--logo -->
+        <article class="headerLayout-Area--infoForm">
+          <!-- 기본 회원정보 -->
+          <th:block th:unless="${loggedUser == null}">
+            <div class="infoForm-All line">
+              <div class="infoForm-img">
+                <a href="/member/mypage"><img th:if="${loggedUser.userIconReal != null}" th:src="@{/upload/}+${loggedUser.userIconReal}" alt=""></a>
+                <a href=""><img th:if="${loggedUser.userIconReal == null}" th:src="@{/images/sampleprofile.jpg}" alt=""></a>
+              </div><!-- infoForm-img -->
+              <div class="infoForm-userNM">
+                <span th:text="${loggedUser.userNM}">별명</span>
+              </div><!-- infoForm-userNM -->
+              <!-- <div class="infoForm-userID">
+                <span th:text="${loggedUser.userID}">아이디</span>
+              </div> infoForm-userID -->
+              <!-- <div class="infoForm-userDate">
+                <span th:text="${loggedUser.userDate}">가입일자</span>
+              </div> infoForm-userDate -->
+            </div>
+          </th:block>
+        </article><!-- .headerLayout-Area--infoForm -->
+        <article class="headerLayout-Area--joinForm">
+          <th:block th:if="${loggedUser == null}">
+            <div class="join line">
+              <span><img src="/images/myimg.png" alt=""></span>
+              <a href="/member/login"><span>로그인</span></a>
+              <a href="/member/join"><span>회원가입</span></a>
+            </div>
+          </th:block>
+          <th:block th:unless="${loggedUser == null}">
+            <div class="comment-txt">
+              <a href="/board/write"><button class="btnHover btn btn-primary">글 작성</button></a>
+            </div>
+            <div class="join line">
+              <a href="/member/login"><span>마이페이지</span></a>
+              <a href="/member/logout"><span>로그아웃</span></a>
+            </div>
+          </th:block>
+        </article><!-- .headerLayout-Area--joinForm -->
+        <article class="headerLayout-Area--searchForm topAndbut">
+          <div class="search left-items">
+            <!-- 검색 기능 -->
+            <form
+              th:action="@{/mainPage/{category}(category=${category})}"
+            >
+              <div class="input-group">
+                <div class="form-outline">
+                  <!-- <input type="hidden" name="sort" th:value="${param.sort}" /> -->
+                  <input
+                    type="search"
+                    id="form1"
+                    class="form-control"
+                    name="searchTxt"
+                    placeholder="Music 검색"
+                    value=""
+                    th:value="${searchTxt}"
+                  />
+                </div>
+                <button type="submit" class="btnHover btn btn-primary">
+                  <img src="/images/search.svg" alt="" />
+                </button>
+              </div>
+            </form>
+          </div>
+        </article><!-- .headerLayout-Area--searchForm -->
+        <article class="headerLayout-Area--viewContents topAndbut">
+          <div class="view view01 line">
+            <ul>
+              <li><a href="/monthRanking" onclick="monthRanking()">
+                <div><img src="/images/navIcon01.png" alt=""><span>월간랭킹</span></div>
+              </a></li>
+              <li><a href="/weeklyRanking" onclick="weeklyRanking()">
+                <div><img src="/images/navIcon02.png" alt=""><span>주간랭킹</span></div>
+              </a></li>
+            </ul>
+          </div>
+        </article><!-- .headerLayout-Area--viewContents -->
+        <article class="headerLayout-Area--viewContents topAndbut">
+          <div class="view view02">
+            <ul>
+              <li><div><img src="/images/navIcon03.png" alt=""><a th:href="@{/mainPage/(sort=postNo)}"><span>전체보기</span></a></div></li>
+              <li id="modalGenreBtn"><div><img src="/images/navIcon04.png" alt=""><span>장르별</span></div></li>
+              <li id="modalEmoteBtn"><div><img src="/images/navIcon06.png" alt=""><span>감성별</span></div></li>
+            </ul>
+          </div>
+        </article><!-- .headerLayout-Area--viewContents -->
+        <article class="headerLayout-Area--viewContents topAndbut">
+          <div class="view view03 line">
+            <ul>
+              <li><div><img src="/images/navIcon07.png" alt=""><span>북마크</span></div></li>
+              <li><div><img src="/images/navIcon08.png" alt=""><span>좋아요</span></div></li>
+              <li><div><img src="/images/navIcon09.png" alt=""><span>구독</span></div></li>
+            </ul>
+          </div>
+        </article><!-- .headerLayout-Area--viewContents -->
+      </section><!-- #headerLayout-Area -->
+
+      <!-- 모바일 반응형 -->
+      <section class="media855">
+        <article class="media855-Area">
+          <div class="media855-Area--img">
+            <a href="/mainPage"><img src="/images/logo.png" alt=""></a>
+          </div><!-- media855-Area--img -->
+          <div class="media855-Area--search">
+            <!-- <form th:action="@{/mainPage/{category}(category=${category}, sort=postNo)}">
+              <input type="search" id="form1" class="" name="searchTxt" placeholder="Music 검색" value="" th:value="${searchTxt}">
+              <button type="submit" class="btn btn-primary">
+                <img src="/images/search.svg" alt="" />
+              </button>
+            </form> -->
+            <div class="media855-Area--search-meun">
+              <div class="meunClick">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div><!-- meunClick -->
+            </div><!-- media855-Area--meun -->
+          </div><!-- media855-Area--search -->
+        </article><!-- media855-Area -->
+      </section><!-- media855 -->
+    </header>
+  
+    <main id="mainPage-Area" class="" layout:fragment="contents">
+  
+    </main>
+  </div>
+
+      <!-- 모달창 -->
+      <div id="modalGenre" class="modal-wnd">
+          <div id="closeModalGenre" class="modalContents modalCategory">
+            <!-- 모달창 안에 여기 내용 작성 -->
+            <div class="modalCategory__box">
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='댄스&팝', sort=postNo)}"><img src="/images/music01.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='포크&어쿠스틱', sort=postNo)}"><img src="/images/music02.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='아이돌', sort=postNo)}"><img src="/images/music03.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='랩&힙합', sort=postNo)}"><img src="/images/music04.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='알앤비&소울', sort=postNo)}"><img src="/images/music05.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='일렉트로닉', sort=postNo)}"><img src="/images/music06.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='락&메탈', sort=postNo)}"><img src="/images/music07.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='재즈', sort=postNo)}"><img src="/images/music08.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='인디', sort=postNo)}"><img src="/images/music09.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='성인가요', sort=postNo)}"><img src="/images/music10.png" alt=""></a></span>
+            </div>
+          </div>
+          <!-- ModalThis-content -->
+      </div>
+      <div id="modalEmote" class="modal-wnd">
+        <div id="closeModalEmote" class="modalContents modalCategory">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <div class="modalCategory__box">
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='신남', sort=postNo)}"><img src="/images/mood01.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='우울', sort=postNo)}"><img src="/images/mood02.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='희열', sort=postNo)}"><img src="/images/mood03.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='으스스', sort=postNo)}"><img src="/images/mood04.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='웅장한', sort=postNo)}"><img src="/images/mood05.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='잔잔', sort=postNo)}"><img src="/images/mood06.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='설렘', sort=postNo)}"><img src="/images/mood07.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='애절한', sort=postNo)}"><img src="/images/mood08.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='몽환적', sort=postNo)}"><img src="/images/mood09.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='따뜻한', sort=postNo)}"><img src="/images/mood10.png" alt=""></a></span>
+          </div>
+        </div><!-- Modal-content -->
+      </div><!-- modal--category -->
+    </div><!-- modal -->
+
+    <!-- 로그인, 회원가입 -->
+    <div id="modalLogin" class="modal-wnd">
+      <div class="modal-wnd-item">
+        <button id="closeModalLogin">닫기</button>
+        <div class="modalContents">
+          <!-- 모달창 안에 여기 내용 작성 -->
+        </div><!-- ModalThis-content -->
+      </div><!-- modal--item -->
+    </div><!-- modal -->
+
+    <!-- 모바일 -->
+    <div id="modalMobile" class="modal-wnd modal-mo">
+      <div class="modal-wnd-item">
+        <div class="closeModalMobile-btn">
+          <span id="closeModalMobile" class="x-btn"></span>
+        </div>
         <article class="headerLayout-Area--infoForm">
           <!-- 기본 회원정보 -->
           <th:block th:unless="${loggedUser == null}">
@@ -150,97 +336,6 @@
             </ul>
           </div>
         </article><!-- .headerLayout-Area--viewContents -->
-      </section><!-- #headerLayout-Area -->
-      <!-- 모바일 반응형 -->
-      <section class="media855">
-        <article class="media855-Area">
-          <div class="media855-Area--img">
-            <a href="/mainPage"><img src="/images/logo.png" alt=""></a>
-          </div><!-- media855-Area--img -->
-          <div class="media855-Area--search">
-            <form th:action="@{/mainPage/{category}(category=${category}, sort=postNo)}">
-              <input type="search" id="form1" class="" name="searchTxt" placeholder="Music 검색" value="" th:value="${searchTxt}">
-              <button type="submit" class="btn btn-primary">
-                <img src="/images/search.svg" alt="" />
-              </button>
-            </form>
-            <div class="media855-Area--search-meun">
-              <div class="meunClick">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div><!-- meunClick -->
-            </div><!-- media855-Area--meun -->
-          </div><!-- media855-Area--search -->
-        </article><!-- media855-Area -->
-      </section><!-- media855 -->
-    </header>
-  
-    <main id="mainPage-Area" class="" layout:fragment="contents">
-  
-    </main>
-  </div>
-
-      <!-- 모달창 -->
-      <div id="modalGenre" class="modal-wnd">
-          <div id="closeModalGenre" class="modalContents modalCategory">
-            <!-- 모달창 안에 여기 내용 작성 -->
-            <div class="modalCategory__box">
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='댄스&팝', sort=postNo)}"><img src="/images/music01.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='포크&어쿠스틱', sort=postNo)}"><img src="/images/music02.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='아이돌', sort=postNo)}"><img src="/images/music03.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='랩&힙합', sort=postNo)}"><img src="/images/music04.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='알앤비&소울', sort=postNo)}"><img src="/images/music05.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='일렉트로닉', sort=postNo)}"><img src="/images/music06.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='락&메탈', sort=postNo)}"><img src="/images/music07.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='재즈', sort=postNo)}"><img src="/images/music08.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='인디', sort=postNo)}"><img src="/images/music09.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='성인가요', sort=postNo)}"><img src="/images/music10.png" alt=""></a></span>
-            </div>
-          </div>
-          <!-- ModalThis-content -->
-      </div>
-      <div id="modalEmote" class="modal-wnd">
-        <div id="closeModalEmote" class="modalContents modalCategory">
-          <!-- 모달창 안에 여기 내용 작성 -->
-          <div class="modalCategory__box">
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='신남', sort=postNo)}"><img src="/images/mood01.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='우울', sort=postNo)}"><img src="/images/mood02.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='희열', sort=postNo)}"><img src="/images/mood03.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='으스스', sort=postNo)}"><img src="/images/mood04.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='웅장한', sort=postNo)}"><img src="/images/mood05.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='잔잔', sort=postNo)}"><img src="/images/mood06.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='설렘', sort=postNo)}"><img src="/images/mood07.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='애절한', sort=postNo)}"><img src="/images/mood08.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='몽환적', sort=postNo)}"><img src="/images/mood09.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='따뜻한', sort=postNo)}"><img src="/images/mood10.png" alt=""></a></span>
-          </div>
-        </div><!-- Modal-content -->
-      </div><!-- modal--category -->
-    </div><!-- modal -->
-
-    <!-- 로그인, 회원가입 -->
-    <div id="modalLogin" class="modal-wnd">
-      <div class="modal-wnd-item">
-        <button id="closeModalLogin">닫기</button>
-        <div class="modalContents">
-          <!-- 모달창 안에 여기 내용 작성 -->
-        </div><!-- ModalThis-content -->
-      </div><!-- modal--item -->
-    </div><!-- modal -->
-
-    <!-- 모바일 -->
-    <div id="modalMobile" class="modal-wnd">
-      <div class="modal-wnd-item">
-        <button id="closeModalMobile">닫기</button>
-        <div class="modalContents">
-          <form  th:if="${emote} == null" th:action="@{/mainPage/{genre}(genre=${genre}, sort=postNo)}">
-            <input type="search" id="form1" class="" name="searchTxt" placeholder="Music 검색" value="" th:value="${searchTxt}">
-            <button type="submit" class="btn btn-primary">
-              <img src="/images/search.svg" alt="" />
-            </button>
-          </form>
-        </div><!-- ModalThis-content -->
       </div><!-- modal--item -->
     </div><!-- modal -->
 
@@ -248,7 +343,9 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script defer>
       getModal($("#modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
+      getModal($(".modal-mo #modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
       getModal($("#modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));
+      getModal($(".modal-mo #modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));
       getModal($("#modalLoginBtn"),$("#modalLogin"),$("#closeModalLogin"));
       getModal($(".meunClick"),$("#modalMobile"),$("#closeModalMobile"));
   </script>

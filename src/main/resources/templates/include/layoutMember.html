@@ -94,7 +94,7 @@
                   <input type="hidden" name="sort" th:value="${param.sort}" />
                   <input type="search" id="form1" class="form-control" name="searchTxt" placeholder="Music 검색" value="" th:value="${searchTxt}"/>
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btnHover btn btn-primary">
                   <img src="/images/search.svg" alt="" />
                 </button>
               </div>
@@ -145,15 +145,15 @@
       <section class="media855">
         <article class="media855-Area">
           <div class="media855-Area--img">
-            <img src="/images/logo.png" alt="">
+            <a href="/mainPage"><img src="/images/logo.png" alt=""></a>
           </div><!-- media855-Area--img -->
           <div class="media855-Area--search">
-            <form  th:if="${emote} == null" th:action="@{/mainPage/{genre}(genre=${genre}, sort=postNo)}">
+            <!-- <form th:action="@{/mainPage/{category}(category=${category}, sort=postNo)}">
               <input type="search" id="form1" class="" name="searchTxt" placeholder="Music 검색" value="" th:value="${searchTxt}">
               <button type="submit" class="btn btn-primary">
                 <img src="/images/search.svg" alt="" />
               </button>
-            </form>
+            </form> -->
             <div class="media855-Area--search-meun">
               <div class="meunClick">
                 <span></span>
@@ -173,7 +173,30 @@
     <section><!-----------------------------------[     모달 섹션     ]----------------------------------->
           
     <!-- 너 진짜 탈퇴할거야? 모달창 -->
-    <div id="withdrawModal" class="modal-wnd">
+    <div id="deleteModal" class="modal-wnd deleteMo">
+      <div id="closeDeleteModal"></div>
+      <div class="modal-content">
+        <div class="modal-content--title">
+          <p>정말로 회원 탈퇴를 진행하시겠습니까?</p>
+        </div>
+        <div class="modal-content--txt">
+          <p>
+            이 행동은 되돌릴 수 없습니다. 탈퇴하신 ID는 더 이상 이용하실 수 없으며 새로운 계정을 만드실 때에도 사용하실 수 없습니다.<br/>위 모든 사항을 이해하시고<em> 정말로 탈퇴를 원하신다면</em> 확인을 위하여 본인의 계정과 비밀번호를 한번 더 입력해 주십시오.
+          </p>
+        </div>
+        <div class="modal-content--btn">
+          <div class="inputFlex">
+            <input class="form-control" type="text" name="userID" id="userID" placeholder="유저 아이디">
+            <input class="form-control" type="password" name="userPW" id="userPW" placeholder="유저 패스워드">
+          </div>
+          <div class="inputFlex-btn">
+            <button id="btnDeleteConfirm" class="btn btn-primary" onclick="withdraw()">회원탈퇴</button>
+            <button id="closeDelete" class="btn btn-secondary">되돌아가기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div id="withdrawModal" class="modal-wnd">
       <div class="modal-wnd-item modal-withdraw">
         <div class="modal-content">
           <span>정말로 회원 탈퇴를 진행하시겠습니까?</span>
@@ -188,7 +211,7 @@
         </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
     <div id="siteTermsModal" class="modal-wnd">
@@ -393,11 +416,130 @@ ATI Radeon 9500 128MB 이상
 
   </div>
 
+  <!-- 모달창 -->
+  
+
+  <!-- 모바일 -->
+  <div id="modalMobile" class="modal-wnd modal-mo">
+    <div class="modal-wnd-item">
+      <div class="closeModalMobile-btn">
+        <span id="closeModalMobile" class="x-btn"></span>
+      </div>
+      <article class="headerLayout-Area--infoForm">
+        <!-- 기본 회원정보 -->
+        <th:block th:unless="${loggedUser == null}">
+          <div class="infoForm-All line">
+            <div class="infoForm-img">
+              <a href="/member/mypage"><img th:if="${loggedUser.userIconReal != null}" th:src="@{/upload/}+${loggedUser.userIconReal}" alt=""></a>
+              <a href=""><img th:if="${loggedUser.userIconReal == null}" th:src="@{/images/sampleprofile.jpg}" alt=""></a>
+            </div><!-- infoForm-img -->
+            <div class="infoForm-userNM">
+              <span th:text="${loggedUser.userNM}">별명</span>
+            </div><!-- infoForm-userNM -->
+            <!-- <div class="infoForm-userID">
+              <span th:text="${loggedUser.userID}">아이디</span>
+            </div> infoForm-userID -->
+            <!-- <div class="infoForm-userDate">
+              <span th:text="${loggedUser.userDate}">가입일자</span>
+            </div> infoForm-userDate -->
+          </div>
+        </th:block>
+      </article><!-- .headerLayout-Area--infoForm -->
+      <article class="headerLayout-Area--joinForm">
+        <th:block th:if="${loggedUser == null}">
+          <div class="join line">
+            <span><img src="/images/myimg.png" alt=""></span>
+            <a href="/member/login"><span>로그인</span></a>
+            <a href="/member/join"><span>회원가입</span></a>
+          </div>
+        </th:block>
+        <th:block th:unless="${loggedUser == null}">
+          <div class="comment-txt">
+            <a href="/board/write"><button class="btn btn-info">글 작성</button></a>
+          </div>
+          <div class="join line">
+            <a href="/member/login"><span>마이페이지</span></a>
+            <a href="/member/logout"><span>로그아웃</span></a>
+          </div>
+        </th:block>
+      </article><!-- .headerLayout-Area--joinForm -->
+      <article class="headerLayout-Area--searchForm topAndbut">
+        <div class="search left-items">
+          <!-- 검색 기능 -->
+          <form
+            th:action="@{/mainPage/{category}(category=${category})}"
+          >
+            <div class="input-group">
+              <div class="form-outline">
+                <!-- <input type="hidden" name="sort" th:value="${param.sort}" /> -->
+                <input
+                  type="search"
+                  id="form1"
+                  class="form-control"
+                  name="searchTxt"
+                  placeholder="Music 검색"
+                  value=""
+                  th:value="${searchTxt}"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <img src="/images/search.svg" alt="" />
+              </button>
+            </div>
+          </form>
+        </div>
+      </article><!-- .headerLayout-Area--searchForm -->
+      <article class="headerLayout-Area--viewContents viewContents01 topAndbut">
+        <div class="view view01 line">
+          <ul>
+            <!-- <li>
+              <a th:href="@{/mainPage/{genre}(genre='락', sort=${param.sort}, searchTxt=${param.searchTxt})}">락
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/mainPage/{genre}(genre='발라드', sort=${param.sort}, searchTxt=${param.searchTxt})}">발라드
+                </a>
+            </li>
+            <li>
+              <a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝
+              </a>
+            </li> -->
+            <li><div><img src="/images/navIcon01.png" alt=""><span>활동내역</span></div></li>
+            <li><div><img src="/images/navIcon02.png" alt=""><span>정보수정</span></div></li>
+          </ul>
+        </div>
+      </article><!-- .headerLayout-Area--viewContents -->
+      <article class="headerLayout-Area--viewContents viewContents02 topAndbut">
+        <div class="view view02">
+          <ul>
+            <li><div><img src="/images/navIcon03.png" alt=""><span><a th:href="@{/member/mypage/written}">작성 글</a></span></div></li>
+            <li id="modalGenreBtn"><div><img src="/images/navIcon04.png" alt=""><span><a th:href="@{/member/mypage/list?category=recent}">최근감상</a></span></div></li>
+            <li id="modalEmoteBtn"><div><img src="/images/navIcon06.png" alt=""><span><a th:href="@{/member/mypage/list?category=bookmark}">즐겨찾기</a></span></div></li>
+            <li><div><img src="/images/navIcon08.png" alt=""><span><a th:href="@{/member/mypage/list?category=liked}">좋아요</a></span></div></li>
+          </ul>
+        </div>
+      </article><!-- .headerLayout-Area--viewContents -->
+      <article class="headerLayout-Area--viewContents viewContents03 topAndbut">
+        <div class="view view03 line">
+          <ul>
+            <li><div><img src="/images/navIcon07.png" alt=""><span id="withdraw-btn">회원탈퇴</span></div></li>
+            <li><div><img src="/images/navIcon09.png" alt=""><span>이용약관</span></div></li>
+          </ul>
+        </div>
+      </article><!-- .headerLayout-Area--viewContents -->
+    </div><!-- modal--item -->
+  </div><!-- modal -->
+
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script>
-    getModal($("#withdraw-btn"),$("#withdrawModal"),$("#withdrawModal-close"));
-    getModal($("#siteTermsBtn"),$("#siteTermsModal"),$("#siteTermsClose"));
+    getModal($("#withdraw-btn"),$(".deleteMo"),$("#closeDeleteModal"));
+    getModal($("#modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
+      getModal($(".modal-mo #modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
+      getModal($("#modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));
+      getModal($(".modal-mo #modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));
+      getModal($("#modalLoginBtn"),$("#modalLogin"),$("#closeModalLogin"));
+      getModal($(".meunClick"),$("#modalMobile"),$("#closeModalMobile"));
 
     function withdraw(){
       $.ajax({

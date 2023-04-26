@@ -265,6 +265,18 @@ public class MemberController {
     return update;
   }
 
+  @PostMapping("/getlike")
+  @ResponseBody
+  public int getLike(HttpSession session, SendDataDto data) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return 0;
+    }
+    data.setUserID(loggedUser.getUserID());
+    int like = memberService.getLike(data);
+    return like;
+  }
+
   @PostMapping("/bookmark")
   @ResponseBody
   public int setBookmark(HttpSession session, SendDataDto data) {
