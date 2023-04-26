@@ -459,3 +459,32 @@ function starClick(button){
     });
   }
 }
+
+function follow(item){
+    $.ajax({
+        url:"/member/follow",
+        type:"post",
+        data:{
+          "followID" : $(item).data("postauthid")
+        },
+        success:function(response){
+          switch(response){
+            case -1 : alert("로그인 정보가 없습니다.");
+                    break;
+            case 1 : alert("팔로우 했어요!");
+                    item.classList.add("btn-primary");
+                    item.classList.remove("btn-secondary");
+                    break;
+                    case 0 : alert("팔로우 했었어요!");
+                    item.classList.add("btn-secondary");
+                     item.classList.remove("btn-primary");
+                    break;
+          }
+
+        },
+        error:function(err){
+            console.log(err);
+            alert("뭔가 문제가 발생했는데요...");
+        }
+    })
+}

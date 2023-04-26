@@ -15,4 +15,7 @@ public class LoggedDto {
   private int userPrincipal;
   private String userDate;
   private int postNo;
+  private int postLiked;
+  private int postBookmarked;
+  private int postFollowed;
 }

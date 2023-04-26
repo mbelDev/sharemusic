@@ -5,29 +5,36 @@
   xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{/include/layoutMember.html}">
   <main id="mainPage-Area" class="container" layout:fragment="contents">
-    <section class="main-constent--itmes">
+    <section class="history-written">
         <div style="display: flex; align-content: center; flex-direction: column;">
 
+            <h2 class="category-title">작성 글 목록</h2>
                 <div style="display: flex; justify-content: center;">
                     <!-- 작성 글 목록 -->
                     <!--   BOARD에서 POSTAUTH = USERID인 것들 불러오기 -->
-                    <ul>
-                        <li>
-                            <span>테스트1</span>
-                            <span>테스트2</span>
-                        </li>
-                        <li th:each="item:${historyList}">
-                            <a th:href="@{/board/view(postNo=${item.postNo})}">
-                                <img  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                                alt="" style="display:inline-block; width:246px; height: 138px;">
-                            </a>
-                                <span th:text="${item.postTitle}">곡 명</span>
-                                <span th:text="${item.postSinger}">가수 명</span>
-                                <span th:text="${item.postHits}">조회수</span>
-                                <span th:text="${item.postLike}">좋아요</span>
-                                <span th:text="${item.postDate}">작성일</span>
-                                <span class="btn-modify" style="display:inline-block; width:15px; height:15px; background:#fff" ></span>
-                                <span class="btn-delete postDeleteModal-btn" style="display:inline-block; width:15px; height:15px; background:#fff" ></span>
+                    <ul class="items">
+                        <li class="item" th:each="item:${historyList}">
+                            <div class="history-thumb">
+                                <a th:href="@{/board/view(postNo=${item.postNo})}">
+                                    <img  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                                    alt="" style="display:inline-block; width:246px; height: 138px;">
+                                </a>
+                            </div>
+                            <div class="history-cont">
+                                <div class="history-cont-info">
+                                    <span th:text="${item.postTitle}">곡 명</span>
+                                    <span th:text="${item.postSinger}">가수 명</span>
+                                </div>
+                                <div class="history-cont-data">
+                                    <span th:text="'조회수 : '+${item.postHits}">조회수</span>
+                                    <span th:text="'좋아요 : '+${item.postLike}">좋아요</span>
+                                    <span th:text="'작성일 : '+${item.postDate}">작성일</span>
+                                </div>
+                                <div class="history-cont-btns">
+                                    <span class="btn btn-modify btn-secondary" >수정</span>
+                                    <span class="btn btn-delete postDeleteModal-btn btn-dark" >삭제</span>
+                                </div>
+                            </div>
                         </li>
                         
                         <li th:if="${#lists.isEmpty(historyList)}">

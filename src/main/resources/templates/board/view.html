@@ -21,18 +21,33 @@
         <div class="boardView-Video--title">
           <div class="title">
             <input type="hidden" th:value="${boardDto.postNo}" id="postNo">
-            <div class="title-name">
-              <p th:text="${boardDto.postTitle}">곡이름</p>
-              <a class="btnHover" th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
-                <h1 th:text="${boardDto.postSinger}">가수</h1>
-              </a>
+            <div class="title-info">
+              <div class="title-name">
+                <p th:text="${boardDto.postTitle}">곡이름</p>
+                <a class="btnHover" th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
+                  <h1 th:text="${boardDto.postSinger}">가수</h1>
+                </a>
+              </div>
+              <div class="like-btn">
+                <button class="btnOpen btnShare" id="shareModalBox">
+                  <img src="/images/open.svg" alt="" />
+                </button>
+              </div>
             </div><!-- title-name -->
-            <div class="title-Date">
-              등록&nbsp;&nbsp; <span th:text="${boardDto.postDate}">0</span>
-              &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp; <span th:text="${boardDto.postHits}">0</span>
-            </div><!-- title-Date -->
+            <div class="title-Auth">
+              <img class="title-Auth-icon" th:src="@{/upload/}+${boardDto.postAuthIcon}" alt="">
+              <span class="title-Auth-name" th:text="${boardDto.postAuth}">작성자</span>
+              <span class="title-Auth-follow btn"  th:if="${loggedUser != null and loggedUser.userID != boardDto.postAuthID}"
+              th:classappend="${loggedUser == null ? 'btn-secondary' : loggedUser.postFollowed == 1 ? 'btn-primary' : 'btn-secondary'}" 
+              th:onclick="follow(this)" 
+              th:data-postAuthID="${boardDto.postAuthID}">구독</span>
+            </div>
             <div class="title-Content">
-              <h3 th:text="${boardDto.postCont}">본문</h3>
+              <div class="title-Date">
+                등록&nbsp;&nbsp; <span th:text="${boardDto.postDate}">0</span>
+                &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp; <span th:text="${boardDto.postHits}">0</span>
+              </div><!-- title-Date -->
+              <pre th:text="${boardDto.postCont}">본문</pre>
             </div>
             <div class="title-Genre">
               <a th:href="@{/mainPage/{category}(category=${boardDto.postGenre})}"><span th:text="'#' + ${boardDto.postGenre}">장르</span></a>
@@ -44,12 +59,14 @@
             </div><!-- title-btn -->
           </div><!-- title -->
           <span th:text="${boardDto.postLiked}"></span>
-          <div class="like">
-            <!-- <div class="like-good">
-              <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}" data-liked=""/> 
-              <span th:text="${boardDto.postLike}" class="postLike">0</span>
-            </div>like-good -->
-            <button class="like button-star" th:classappend="${boardDto.postLiked == 1 ? 'active' : ''}" th:onclick="updateLike(this)">
+          <!-- <div class="like-good">
+            <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}" data-liked=""/> 
+            <span th:text="${boardDto.postLike}" class="postLike">0</span>
+          </div>like-good -->
+          <!-- <div class="like">
+            <button class="like button-star" 
+            th:classappend="${loggedUser == null ? '' : loggedUser.postLiked == 1 ? 'active' : ''}" 
+            th:onclick="updateLike(this)">
               <canvas></canvas>
               <div class="label">
                 <span class="default">좋아요<span class="success"></span></span>
@@ -60,12 +77,8 @@
                 <div class="add">+1</div>
               </div>
             </button>
-            <div class="like-btn">
-              <button class="btnOpen btnShare" id="shareModalBox">
-                <img src="/images/open.svg" alt="" />
-              </button>
-            </div><!-- like-btn -->
-          </div><!-- like -->
+    
+          </div> -->
         </div><!-- boardView-Video--title -->
       </div><!-- boardView-Video -->
     </article><!-- boardView-Area -->
@@ -239,7 +252,7 @@
         </div>
         <div class="modal-content--btn">
           <button id="btnDeleteConfirm" class="btnHover btn btn-primary">확인</button>
-          <button id="closeDelete" class="btn btn-secondary">취소</button>
+          <button id="closeDeleteModal" class="btn btn-secondary">취소</button>
         </div>
       </div>
     </div>
@@ -275,20 +288,6 @@
 
     <!-- 덧글 삭제 모달창 -->
     <div id="deleteReplyModal" class="modal-wnd">
-      <div class="modal-wnd-item">
-        <div class="modal-content modal-ReplyDelete">
-          <!-- 모달창 안에 여기 내용 작성 -->
-          <h3>정말로 삭제하시겠습니까?</h3>
-          <button id="deleteReplyConfirm">확인</button>
-          <button id="closeDeleteReply">취소</button>
-        </div>
-        <!-- ModalThis-content -->
-      </div>
-      <!-- write-modal--item -->
-    </div>
-
-    <!-- 덧글 삭제 모달창 -->
-    <div id="deleteReplyModal" class="modal-wnd">
       <div class="modal-wnd-item modal-ReplyDelete">
         <div class="modal-content ">
           <!-- 모달창 안에 여기 내용 작성 -->
@@ -296,8 +295,10 @@
           <button class="btn btn-primary" id="deleteReplyConfirm" th:onclick="modalReplyDelete(this)">확인</button>
           <button class="btn btn-secondary" id="closeDeleteReply">취소</button>
         </div>
-        <!-- write-modal--item -->
       </div>
+    </div>
+
+
 
 
     <!---------- 기술적 문제로 잠시 보류 ---------->
@@ -315,26 +316,6 @@
         <!-- write-modal--item -->
       </div>
     </section>
-
-    <!--------------------------------------------------[            자바 스크립트 영역             ]-------------------------------------------------------------------------->
-
-    <!-- 덧글 모달창 -->
-    <div id="comReplyModal-M" class="modal-wnd">
-      <div class="modal-wnd-item">
-        <div class="modal-content modal-ReplyDelete">
-          <!-- 모달창 안에 여기 내용 작성 -->
-          <h3 style="color: black;">덧글 쓰기</h3>
-          
-          <button id="closeDeleteReply">확인</button>
-        </div>
-        <!-- ModalThis-content -->
-      </div>
-      <!-- write-modal--item -->
-    </div>
-
-    <!---------- 기술적 문제로 잠시 보류 ---------->
-
-  </section>
 
   
 <!--------------------------------------------------[            자바 스크립트 영역             ]-------------------------------------------------------------------------->

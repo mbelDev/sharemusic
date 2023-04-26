@@ -18,7 +18,9 @@
               <label class="btnHover btn btn-primary" id="profile-Btn" onclick="setBaseIcon();">프로필 업데이트</label> 
             </div><!-- fileArea -->
             <div class="fileArea" th:unless="${session.loggedUser.userID == userInfo.userID}">
-              <label class="btn btn-primary btn-follow" th:data-followID="${userInfo.userID}">이 유저 팔로우하기</label> 
+              <label class="btn btn-primary btn-follow" 
+              th:classappend="${loggedUser.postFollowed == 1 ? '' : 'btn-secondary'}"
+              th:data-followID="${userInfo.userID}">팔로우</label> 
             </div><!-- fileArea -->
           </div><!-- Area01-item--profile-img -->
           <div class="Area01-item--profile-form topAndbut">
@@ -98,7 +100,7 @@
       <div class="mainContent-Area02-title topAndbut">
         <h1>최근감상</h1>
         <button class="btnHover btn btn-primary"><a th:href="@{/member/mypage/list?category=recent}">더 보기</a></button>
-        <button class="btn btn-secondary" th:if="${session.loggedUser.userID == userInfo.userID}">전체삭제</button>
+        <button class="btn btn-secondary" id="recentDeleteBtn" th:if="${session.loggedUser.userID == userInfo.userID}">전체삭제</button>
       </div><!-- mainConstent-Area02-title -->
       <div class="mainContent-Area02-item">
         <div class="Area02-item--profile">
@@ -212,12 +214,29 @@
       </div>
     </div>
 
+    <!-- 시청기록 삭제 모달창 -->
+    <div id="recentDeleteModal" class="modal-wnd">
+      <div class="modal-recentDelete">
+        <div class="modal-content">
+          <!-- 모달창 안에 여기 내용 작성 -->
+          <div class="modal-recentDelete__icon">
+            <p>최근 시청한 내역을 모두 삭제합니다. 진행하시겠습니까?</p>
+          </div>
+          <div class="modal-recentDelete__btns">
+            <button id="recentDeleteConfirm" class="btn btn-primary" onclick="recentDelete();">확인</button>
+            <button id="recentDeleteModal-close" class="btn btn-secondary">취소</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section><!-----------------------[   모달 섹션   ]----------------------------------->
 
   <script src="/js/modal.js"></script>
   <script src="/js/history/up-to-history.js"></script>
   <script>
     getModal($("#profile-Btn"),$("#profileUpdateModal"),$("#profileUpdateModal-close"));
+    getModal($("#recentDeleteBtn"),$("#recentDeleteModal"),$("#recentDeleteClose"))
     followEvent();
    
   </script>

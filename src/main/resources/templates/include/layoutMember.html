@@ -71,19 +71,9 @@
           </th:block>
         </article><!-- .headerLayout-Area--infoForm -->
         <article class="headerLayout-Area--joinForm topAndbut">
-          <th:block th:if="${loggedUser == null}">
             <div class="join line">
-              <span><img src="/images/myimg.png" alt=""></span>
-              <a href="/member/login"><span>로그인</span></a>
-              <a href="/member/join"><span>회원가입</span></a>
-            </div>
-          </th:block>
-          <th:block th:unless="${loggedUser == null}">
-            <div class="join line">
-              <a href="/member/login"><span>마이페이지</span></a>
               <a href="/member/logout"><span>로그아웃</span></a>
             </div>
-          </th:block>
         </article><!-- .headerLayout-Area--joinForm -->
         <article class="headerLayout-Area--searchForm topAndbut">
           <div class="search left-items">
@@ -116,7 +106,9 @@
                 <a th:href="@{/mainPage/{genre}(genre='팝', sort=${param.sort}, searchTxt=${param.searchTxt})}">팝
                 </a>
               </li> -->
-              <li><div><img src="/images/navIcon01.png" alt=""><span>활동내역</span></div></li>
+              <li><a th:href="@{/member/mypage}">
+                <div><img src="/images/navIcon01.png" alt=""><span>활동내역</span></div>
+              </a></li>
               <li><div><img src="/images/navIcon02.png" alt=""><span>정보수정</span></div></li>
             </ul>
           </div>
@@ -135,7 +127,7 @@
           <div class="view view03 line">
             <ul>
               <li><div><img src="/images/navIcon07.png" alt=""><span id="withdraw-btn">회원탈퇴</span></div></li>
-              <li><div><img src="/images/navIcon09.png" alt=""><span id="siteTermsBtn">이용약관</span></div></li>
+              <li><div><img src="/images/navIcon09.png" alt=""><span id="siteTerms-btn">이용약관</span></div></li>
             </ul>
           </div>
         </article><!-- .headerLayout-Area--viewContents -->
@@ -174,7 +166,7 @@
           
     <!-- 너 진짜 탈퇴할거야? 모달창 -->
     <div id="deleteModal" class="modal-wnd deleteMo">
-      <div id="closeDeleteModal"></div>
+      <div class="closeDeleteModal"></div>
       <div class="modal-content">
         <div class="modal-content--title">
           <p>정말로 회원 탈퇴를 진행하시겠습니까?</p>
@@ -190,8 +182,8 @@
             <input class="form-control" type="password" name="userPW" id="userPW" placeholder="유저 패스워드">
           </div>
           <div class="inputFlex-btn">
-            <button id="btnDeleteConfirm" class="btn btn-primary" onclick="withdraw()">회원탈퇴</button>
-            <button id="closeDelete" class="btn btn-secondary">되돌아가기</button>
+            <button class="btn btn-primary" onclick="withdraw()">회원탈퇴</button>
+            <button class="btn btn-secondary closeDeleteModal">되돌아가기</button>
           </div>
         </div>
       </div>
@@ -533,7 +525,8 @@ ATI Radeon 9500 128MB 이상
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script>
-    getModal($("#withdraw-btn"),$(".deleteMo"),$("#closeDeleteModal"));
+    getModal($("#withdraw-btn"),$(".deleteMo"),$(".closeDeleteModal"));
+    getModal($("#siteTerms-btn"),$("#siteTermsModal"),$("#siteTermsClose"));
     getModal($("#modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
       getModal($(".modal-mo #modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
       getModal($("#modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));

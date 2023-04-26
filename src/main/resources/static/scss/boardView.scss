@@ -147,6 +147,10 @@
       justify-content: space-between;
       .title {
         width: 100%;
+        &-info{
+          display: flex;
+          justify-content: space-between;
+        }
         &-name {
           p {
             font-size: 25px;
@@ -164,8 +168,34 @@
             font-size: 35px;
           }
         }//&-name
+        &-Auth{
+          display: flex;
+          align-items: center;
+          &-icon{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+          }
+          &-name{
+            display: inline-block;
+            font-size: 25px;
+            font-weight: 300;
+            margin: 0 10px;
+          }
+          &-follow{
+            display: inline-block;
+          }
+
+        }
+        &-Content{
+          margin: 10px 0;
+          padding: 10px;
+          background: #1F1F1F;
+          border-radius: 5px;
+        }
         &-Date {
-          margin: 50px 0 0 0;
+          margin: 0 0 50px 0;
         }//&-Date
         &-Genre {
 
