@@ -58,9 +58,22 @@
   opacity: 1;
 }
 
-.prevMonth,
-.nextMonth {
+#month {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
+#month .prevMonth,
+#month .nextMonth {
   cursor: pointer;
+}
+#month .prevMonth:hover,
+#month .nextMonth:hover {
+  font-weight: bold;
+  color: #ff3672;
+}
+#month #monthDate {
+  padding: 0 8px;
 }
 
 @media screen and (max-width: 1550px) {

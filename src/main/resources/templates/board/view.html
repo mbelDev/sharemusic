@@ -238,13 +238,8 @@
           <p>확인을 누르면 게시글이 완전히 삭제됩니다.</p>
         </div>
         <div class="modal-content--btn">
-<<<<<<< HEAD
           <button id="btnDeleteConfirm" class="btn btn-primary">확인</button>
           <button id="closeDelete" class="btn btn-secondary closeDeleteModal">취소</button>
-=======
-          <button id="btnDeleteConfirm" class="btnHover btn btn-primary">확인</button>
-          <button id="closeDelete" class="btn btn-secondary">취소</button>
->>>>>>> 567974acede9b6839feacf45a227f46936938bff
         </div>
       </div>
     </div>
@@ -355,13 +350,7 @@
 
   </script>
     <script>
-<<<<<<< HEAD
       getModal($("#deleteModalBox"), $("#deleteModal"), $(".closeDeleteModal"));
-=======
-
-  
-      getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
->>>>>>> 567974acede9b6839feacf45a227f46936938bff
       getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
       getModal($(".deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
       // getModal($(".menuBtn"), $("#deleteReplyModal-M"), $("#deleteReplyModal-M  #closeDeleteReply"));
@@ -413,12 +402,6 @@
       });
     </script>
     <script th:inline="javascript">
-<<<<<<< HEAD
-      //좋아요 History 연동 함수 #권인호 작성
-      function updateLike(item){
-        const postNo = $(item).data('postno');
-
-=======
 
       //좋아요 상태 체크 함수 #권인호 작성
       function getLike(postNo){
@@ -440,7 +423,6 @@
       //좋아요 History 연동 함수 #권인호 작성
       function updateLike(item){
         const postNo = $(item).data('postno');
->>>>>>> 567974acede9b6839feacf45a227f46936938bff
         $.ajax({
           url:"/member/like",
           type:"POST",

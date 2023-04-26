@@ -10,33 +10,37 @@
       <div class="monthRanking-page topAndbut">
         <h2>월간랭킹</h2>
         <!-- 날짜이동버튼 -->
-        <div class="month">
-          <span class="prevMonth" onclick="prevMonth()"><==</span>
+        <div id="month">
+          <span class="material-icons prevMonth" onclick="prevMonth()">
+            west
+          </span>
           <div id="monthDate">
             <span th:text="${monthDate[STARTDATE]}">시작 날짜</span>
             <span>~</span>
             <span th:text="${monthDate[LASTDATE]}">끝 날짜</span>
           </div>
-            <span class="nextMonth" onclick="nextMonth()">==></span>
-          <!-- List 데이터 -->
-          <div id="monthRankList">
-            <ul>
-              <li th:each="item : ${monthRankList}">
-                <a th:href="@{/board/view(postNo=${item.postNo})}">
-                  <img
-                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                  />
-                  <div class="postTitle">
-                    <div class="postTxt">
-                      <p class="" th:text="${item.postTitle}">곡이름</p>
-                      <p class="" th:text="${item.postSinger}">가수이름</p>
-                      <p class="" th:text="${item.postAuth}">별명</p>
-                    </div>
+            <span class="material-icons nextMonth" onclick="nextMonth()">
+              east
+            </span>
+        </div>  
+        <!-- List 데이터 -->
+        <div id="monthRankList">
+          <ul>
+            <li th:each="item : ${monthRankList}">
+              <a th:href="@{/board/view(postNo=${item.postNo})}">
+                <img
+                  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                />
+                <div class="postTitle">
+                  <div class="postTxt">
+                    <p class="" th:text="${item.postTitle}">곡이름</p>
+                    <p class="" th:text="${item.postSinger}">가수이름</p>
+                    <p class="" th:text="${item.postAuth}">별명</p>
                   </div>
-                </a>
-              </li>
-            </ul>
-          </div>
+                </div>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 

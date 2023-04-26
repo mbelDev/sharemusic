@@ -52,21 +52,16 @@
 .modal-wnd .modalCategory__box__option a img {
   width: 13vw;
   margin: 10px 0;
-<<<<<<< HEAD
   cursor: pointer;
-=======
   transition: all 0.25s ease;
 }
 .modal-wnd .modalCategory__box__option a img:hover {
   transform: scale(105%);
   border-radius: 13px;
->>>>>>> 567974acede9b6839feacf45a227f46936938bff
 }
 
 .modal-profileUpdate {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  display: block;
   transform: translate(-50%, -50%);
 }
 .modal-profileUpdate .modal-content {
@@ -81,7 +76,6 @@
 .modal-profileUpdate__icon #testProfile {
   width: 300px;
   height: 300px;
-  margin-bottom: 5px;
 }
 .modal-profileUpdate__icon label {
   width: 100%;

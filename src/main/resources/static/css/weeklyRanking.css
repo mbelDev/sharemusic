@@ -52,6 +52,24 @@
   opacity: 1;
 }
 
+#weekly {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
+#weekly .prevWeekly,
+#weekly .nextWeekly {
+  cursor: pointer;
+}
+#weekly .prevWeekly:hover,
+#weekly .nextWeekly:hover {
+  font-weight: bold;
+  color: #ff3672;
+}
+#weekly #weeklyDate {
+  padding: 0 8px;
+}
+
 .prevWeekly,
 .nextWeekly {
   cursor: pointer;

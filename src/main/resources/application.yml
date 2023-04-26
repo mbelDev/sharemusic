@@ -7,15 +7,9 @@ spring:
       enabled: always
   thymeleaf:
     check-template-location: true
-<<<<<<< HEAD
     prefix: classpath:/templates
     suffix: .html
     cache: false
-=======
-    prefix:  classpath:/templates
-    suffix:  .html
-    cache:  false
->>>>>>> 567974acede9b6839feacf45a227f46936938bff
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:xe

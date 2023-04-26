@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <meta property="og: title" content="제목">
-  <meta property="og: url" content="url">
+  <meta property="og: url" content="54.180.108.32">
   <meta property="og: description" content="내용">
   <meta property="og: image" content="넣고싶은 이미지 경로">
 
@@ -17,7 +17,7 @@
   <meta name="twitter:url" content="54.180.108.32">
   <meta name="twitter:title" content="콘텐츠 제목" /> 
   <meta name="twitter:description" content="웹페이지 설명" /> 
-  <meta name="twitter:image" content="/images/logo-intro.png" /> 
+  <meta name="twitter:image" content="이미지 경로" /> 
 
   <title>Music</title>
 
@@ -27,7 +27,6 @@
   <link href="https://webfontworld.github.io/TheJamsil/TheJamsil.css" rel="stylesheet">
 
   <link rel="stylesheet" href="/font/helvetica/HelveticaBlack.ttf">
-
   <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
     rel="stylesheet">
   <link rel="stylesheet" href="/css/reset.css" />
@@ -55,12 +54,6 @@
   <script src="/js/jquery-3.6.3.min.js"></script>
   <script src="/js/modal.js"></script>
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/loaders/DRACOLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/loaders/GLTFLoader.js"></script>
-<script src='https://unpkg.co/gsap@3/dist/gsap.min.js'></script>
-<script src='https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js'></script><script  src="./script.js"></script>
 
 </head>
 
@@ -103,7 +96,7 @@
           </th:block>
           <th:block th:unless="${loggedUser == null}">
             <div class="comment-txt">
-              <a href="/board/write"><button class="btnHover btn btn-primary">글 작성</button></a>
+              <a href="/board/write"><button class="btn btn-info">글 작성</button></a>
             </div>
             <div class="join line">
               <a href="/member/login"><span>마이페이지</span></a>
@@ -130,7 +123,7 @@
                     th:value="${searchTxt}"
                   />
                 </div>
-                <button type="submit" class="btnHover btn btn-primary">
+                <button type="submit" class="btn btn-primary">
                   <img src="/images/search.svg" alt="" />
                 </button>
               </div>
