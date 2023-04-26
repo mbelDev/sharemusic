@@ -15,7 +15,7 @@
         <h1>VIDEO</h1>
       </div><!-- boardView-Area-title -->
       <div class="boardView-Video">
-        <iframe th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}+'?&controls=0&autohide=0&rel=0'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        <iframe th:src="'https://www.youtube.com/embed/' + ${boardDto.postLink}+'?&controls=1&autohide=0&rel=0'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
         <div class="boardView-Video--title">
           <div class="title">
@@ -33,8 +33,8 @@
               <h3 th:text="${boardDto.postCont}">본문</h3>
             </div>
             <div class="title-Genre">
-              <span th:text="'#' + ${boardDto.postGenre}">장르</span>
-              <span th:text="'#' + ${boardDto.postEmote}">감성</span>
+              <a th:href="@{/mainPage/{category}(category=${boardDto.postGenre})}"><span th:text="'#' + ${boardDto.postGenre}">장르</span></a>
+              <a th:href="@{/mainPage/{category}(category=${boardDto.postEmote})}"><span th:text="'#' + ${boardDto.postEmote}">감성</span></a>
             </div><!-- title-Genre -->
             <div class="title-btn" th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}">
               <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btn btn-primary">수정</a>
@@ -338,10 +338,8 @@
 
       // 트위터 공유
       $(".shareTwitter").on("click", function () {
-        const sendText = "테스트 중";
-        const pageUrl = encodeURIComponent(
-          "https://github.com/mbelDev/sharemusic"
-        );
+        const sendText = "노래 공유";
+        const pageUrl = encodeURIComponent(window.location.href);
         window.open(
           `https://twitter.com/intent/tweet?text=${sendText}&url=${pageUrl}`
         );
@@ -349,9 +347,7 @@
 
       // 페이스북 공유
       $(".shareFacebook").on("click", function () {
-        const pageUrl = encodeURIComponent(
-          "https://github.com/mbelDev/sharemusic"
-        );
+        const pageUrl = encodeURIComponent(window.location.href);
         window.open(`http://www.facebook.com/sharer/sharer.php?u=${pageUrl}`);
       });
 
@@ -365,14 +361,14 @@
             description: "", // 설명
             imageUrl: "", // 이미지 도메인
             link: {
-              webUrl: "", // 웹 링크
+              webUrl: window.location.href, // 웹 링크
             },
           },
           buttons: [
             {
               title: "자세히 보기",
               link: {
-                webUrl: "", // 웹 링크
+                webUrl: window.location.href, // 웹 링크
               },
             },
           ],
