@@ -64,7 +64,7 @@
           <!-- ranking-area -->
         </article>
         <!-- main-constent--ranking -->
-        <div class="line-one"></div>
+        <div class="line-one" id="musicList"></div>
         <article class="main-constent--listItem listItem--center">
           <div class="listItem-nav">
             <h1 class="topAndbut">뮤직리스트</h1>
@@ -74,7 +74,7 @@
                 <li>
                   <a
                     href="#"
-                    th:href="@{/mainPage/{category}(category=${category}, sort=postNo, searchTxt=${param.searchTxt})}"
+                    th:href="@{/mainPage/{category}(category=${category}, sort=postDate, searchTxt=${param.searchTxt})}"
                     >최신순</a
                   >
                 </li>
@@ -136,6 +136,21 @@
     </section>
     <!-- main-constent--itmes -->
 
+    <script th:inline="javascript">
+      // 정렬, 검색할 때 스크롤 이동
+      $(document).ready(function () {
+        const location = $("#musicList").offset().top;
+        const sort = /*[[${param.sort}]]*/ false;
+        const searchTxt = /*[[${param.searchTxt}]]*/ false;
+
+        if (sort != null) {
+          window.scrollTo({ top: location, behavior: "auto" });
+        }
+        if (searchTxt != null) {
+          window.scrollTo({ top: location, behavior: "auto" });
+        }
+      });
+    </script>
     <script>
       function testRespone01(genre) {
         $.ajax({

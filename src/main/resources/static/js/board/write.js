@@ -1,3 +1,8 @@
+// 취소 버튼
+function cancel() {
+  window.history.back();
+}
+
 // 유튜브 링크가 맞는지 확인&링크에서 영상의 id만 뽑아오기
 $("#btnWriteConfirm").on("click", function () {
   const url = $(".postLink").val();

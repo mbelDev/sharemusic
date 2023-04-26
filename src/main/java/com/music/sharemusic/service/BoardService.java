@@ -23,7 +23,7 @@ public interface BoardService {
   //index 에서 요청. 모든 글 불러오기
   //paging작업은 아직^^
 
-  public List<BoardDto> getRankPost();
+  public List<BoardDto> getRankPost(String category);
 
   // 랭킹 글들 불러오기
 

@@ -9,7 +9,6 @@
   flex-wrap: wrap;
 }
 .weeklyRanking-Area ul li {
-  outline: 1px solid red;
   position: relative;
   width: 25vw;
 }
@@ -52,9 +51,24 @@
   opacity: 1;
 }
 
-.prevWeekly,
-.nextWeekly {
+#weekly {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+#weekly .prevWeekly,
+#weekly .nextWeekly {
   cursor: pointer;
+}
+#weekly .prevWeekly:hover,
+#weekly .nextWeekly:hover {
+  font-weight: bold;
+  color: #ff3672;
+}
+#weekly #weeklyDate {
+  padding: 0 8px;
 }
 
 @media screen and (max-width: 1750px) {

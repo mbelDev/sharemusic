@@ -132,14 +132,14 @@
           </div>
           <div class="btns">
             <input type="hidden" name="postNo" th:value="${param.postNo}" />
-            <button type="submit" class="btnHover btn btn-primary" id="btnModifyConfirm">
+            <button
+              type="submit"
+              class="btnHover btn btn-primary"
+              id="btnModifyConfirm"
+            >
               등록
             </button>
-            <button
-              th:href="@{/board/view(postNo=${boardDto.postNo})}"
-              type="reset"
-              class="btn btn-secondary"
-            >
+            <button type="reset" class="btn btn-secondary" onclick="cancel()">
               취소
             </button>
           </div>

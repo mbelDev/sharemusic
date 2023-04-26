@@ -53,8 +53,8 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public List<BoardDto> getRankPost() {
-    List<BoardDto> result = boardDao.getRankPost();
+  public List<BoardDto> getRankPost(String category) {
+    List<BoardDto> result = boardDao.getRankPost(category);
     return result;
   }
 

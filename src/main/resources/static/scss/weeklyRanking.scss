@@ -8,7 +8,6 @@
       gap: 20px;
       flex-wrap: wrap;
       li {
-        outline: 1px solid red;
         position: relative;
         width: 25vw;
         a {
@@ -17,16 +16,18 @@
           }
           .postTitle {
             position: absolute;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             background-color: #000000b6;
             opacity: 0;
             transition: all 0.25s ease;
-            transition-delay: .2s;
+            transition-delay: 0.2s;
             .postTxt {
               position: absolute;
-              bottom: 10px; left: 10px;
+              bottom: 10px;
+              left: 10px;
               p {
                 font-size: 26px;
                 &:nth-child(1) {
@@ -54,18 +55,30 @@
   } //&-Area
 } //.weeklyRanking
 
-.prevWeekly,
-.nextWeekly {
-  cursor: pointer;
+#weekly {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  font-size: 18px;
+  margin-bottom: 20px;
+  .prevWeekly,
+  .nextWeekly {
+    cursor: pointer;
+    &:hover {
+      font-weight: bold;
+      color: #ff3672;
+    }
+  }
+  #weeklyDate {
+    padding: 0 8px;
+  }
 }
-
-
 
 @media screen and (max-width: 1750px) {
   .weeklyRanking-Area ul li {
     width: 24vw;
   }
-}//@media screen and (max-width: 1410px)
+} //@media screen and (max-width: 1410px)
 @media screen and (max-width: 1400px) {
   .weeklyRanking-Area ul li {
     width: 33vw;
@@ -76,22 +89,22 @@
   .weeklyRanking-Area ul li {
     width: 24vw;
   }
-}//@media screen and (max-width: 1400px)
+} //@media screen and (max-width: 1400px)
 @media screen and (max-width: 1200px) {
   .weeklyRanking-Area ul li {
     width: 23vw;
   }
-}//@media screen and (max-width: 1200px)
+} //@media screen and (max-width: 1200px)
 @media screen and (max-width: 1000px) {
   .weeklyRanking-Area ul li {
     width: 21vw;
   }
-}//@media screen and (max-width: 1000px)
+} //@media screen and (max-width: 1000px)
 @media screen and (max-width: 855px) {
   .weeklyRanking-Area ul li {
     width: 45vw;
   }
-}//@media screen and (max-width: 855px)
+} //@media screen and (max-width: 855px)
 @media screen and (max-width: 500px) {
   .weeklyRanking-Area ul li {
     width: 42vw;
@@ -102,4 +115,4 @@
   .weeklyRanking {
     margin-top: 100px;
   }
-}//@media screen and (max-width: 500px)
+} //@media screen and (max-width: 500px)

@@ -9,54 +9,61 @@
     <section class="weeklyRanking">
       <div class="weeklyRanking-page topAndbut">
         <h2>주간랭킹</h2>
-      </div>
-      <!-- weeklyRanking-page -->
-      <article class="weeklyRanking-Area">
-        <div id="weekly">
-          <span class="prevWeekly" onclick="prevWeekly()"><==</span>
-          <div id="weeklyDate">
-            <span th:text="${weeklyDate[STARTDATE]}">시작 날짜</span>
-            <span>~</span>
-            <span th:text="${weeklyDate[LASTDATE]}">끝 날짜</span>
+        <!-- weeklyRanking-page -->
+        <article class="weeklyRanking-Area">
+          <div id="weekly">
+            <span class="material-icons prevWeekly" onclick="prevWeekly()"
+              >west</span
+            >
+            <div id="weeklyDate">
+              <span th:text="${weeklyDate[STARTDATE]}">시작 날짜</span>
+              <span>~</span>
+              <span th:text="${weeklyDate[LASTDATE]}">끝 날짜</span>
+            </div>
+            <span class="material-icons nextWeekly" onclick="nextWeekly()"
+              >east</span
+            >
           </div>
-          <span class="nextWeekly" onclick="nextWeekly()">==></span>
-        </div>
-        <div id="weeklyRankList">
-          <ul>
-            <li th:each="item : ${weeklyRankList}">
-              <div class="postTxt">
-                <div class="postTxt-no">
-                  <p class="" th:text="${itemStat.index+1}">넘버</p>
+          <div id="weeklyRankList">
+            <ul>
+              <li th:each="item : ${weeklyRankList}">
+                <div class="postTxt">
+                  <div class="postTxt-no">
+                    <p class="" th:text="${itemStat.index+1}">넘버</p>
+                  </div>
+                  <div class="postTxt-img">
+                    <img
+                      class=""
+                      th:src="@{/upload}+@{item.postAuthIcon}"
+                      alt=""
+                    />
+                  </div>
+                  <div class="postTxt-title">
+                    <p class="" th:text="${item.postAuth}">별명</p>
+                    <p class="" th:text="${item.postSinger}">가수이름</p>
+                    <p class="" th:text="${item.postTitle}">곡이름</p>
+                  </div>
                 </div>
-                <div class="postTxt-img">
-                  <img class="" th:src="@{/upload}+@{item.postAuthIcon}" alt="">
+                <div class="postTitle">
+                  <a th:href="@{/board/view(postNo=${item.postNo})}">
+                    <img
+                      th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                    />
+                  </a>
+                  <div class="postTitle-sub">
+                    <p>자세한 내용을 확인 하세요.</p>
+                    <a class="btnHover btn btn-primary" href="">자세히 보기</a>
+                  </div>
                 </div>
-                <div class="postTxt-title">
-                  <p class="" th:text="${item.postAuth}">별명</p>
-                  <p class="" th:text="${item.postSinger}">가수이름</p>
-                  <p class="" th:text="${item.postTitle}">곡이름</p>
-                </div>
-              </div>
-              <div class="postTitle">
-                <a th:href="@{/board/view(postNo=${item.postNo})}">
-                  <img
-                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"/>
-                </a>
-                <div class="postTitle-sub">
-                  <p>자세한 내용을 확인 하세요.</p>
-                  <a class="btnHover btn btn-primary" href="">자세히 보기</a>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </article>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
       <!-- weeklyRanking-Area -->
     </section>
     <!-- weeklyRanking -->
 
-    
-      
     <script>
       let moveWeekly;
 
@@ -66,6 +73,7 @@
 
       if (sessionStorage.getItem("moveWeekly") != null) {
         moveWeekly = sessionStorage.getItem("moveWeekly");
+        showWeeklyRank(sessionStorage.getItem("moveWeekly"));
       } else {
         moveWeekly = 0;
       }
@@ -115,7 +123,6 @@
           $("#weeklyRankList").replaceWith(fragment);
         });
       }
-
     </script>
   </main>
 </html>
