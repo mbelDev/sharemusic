@@ -9,7 +9,6 @@
   flex-wrap: wrap;
 }
 .weeklyRanking-Area ul li {
-  outline: 1px solid red;
   position: relative;
   width: 25vw;
 }
@@ -55,7 +54,9 @@
 #weekly {
   display: flex;
   justify-content: center;
+  align-items: start;
   font-size: 18px;
+  margin-bottom: 20px;
 }
 #weekly .prevWeekly,
 #weekly .nextWeekly {
@@ -68,11 +69,6 @@
 }
 #weekly #weeklyDate {
   padding: 0 8px;
-}
-
-.prevWeekly,
-.nextWeekly {
-  cursor: pointer;
 }
 
 @media screen and (max-width: 1750px) {

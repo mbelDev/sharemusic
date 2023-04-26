@@ -47,7 +47,7 @@ public class indexController {
     Model model,
     @PathVariable(name = "category", required = false) String category,
     @RequestParam(defaultValue = "") String searchTxt,
-    @RequestParam(defaultValue = "postNo") String sort
+    @RequestParam(defaultValue = "postDate") String sort
   ) {
     if (loggedUser(session) != null) {
       LoggedDto loggedUser = loggedUser(session);
@@ -55,7 +55,7 @@ public class indexController {
     }
 
     // 상위 랭킹
-    List<BoardDto> rankList = boardService.getRankPost();
+    List<BoardDto> rankList = boardService.getRankPost(category);
     model.addAttribute("rankList", rankList);
 
     // 게시판 글
@@ -76,7 +76,7 @@ public class indexController {
     HttpSession session,
     Model model,
     @PathVariable(name = "category", required = false) String category,
-    @RequestParam(defaultValue = "postNo") String sort
+    @RequestParam(defaultValue = "postDate") String sort
   ) {
     String userID = null;
     if (loggedUser(session) != null) {
@@ -177,7 +177,7 @@ public class indexController {
     Model model,
     @PathVariable(name = "category", required = false) String category,
     @RequestParam(defaultValue = "") String searchTxt,
-    @RequestParam(defaultValue = "postNo") String sort
+    @RequestParam(defaultValue = "postDate") String sort
   ) {
     log.info(category);
     log.info(searchTxt);

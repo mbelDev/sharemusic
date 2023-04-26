@@ -112,7 +112,6 @@
             >
               <div class="input-group">
                 <div class="form-outline">
-                  <!-- <input type="hidden" name="sort" th:value="${param.sort}" /> -->
                   <input
                     type="search"
                     id="form1"
@@ -145,7 +144,7 @@
         <article class="headerLayout-Area--viewContents topAndbut">
           <div class="view view02">
             <ul>
-              <li><div><img src="/images/navIcon03.png" alt=""><a th:href="@{/mainPage/(sort=postNo)}"><span>전체보기</span></a></div></li>
+              <li><div><img src="/images/navIcon03.png" alt=""><a th:href="@{/mainPage/(sort=postDate)}"><span>전체보기</span></a></div></li>
               <li id="modalGenreBtn"><div><img src="/images/navIcon04.png" alt=""><span>장르별</span></div></li>
               <li id="modalEmoteBtn"><div><img src="/images/navIcon06.png" alt=""><span>감성별</span></div></li>
             </ul>
@@ -169,7 +168,7 @@
             <a href="/mainPage"><img src="/images/logo.png" alt=""></a>
           </div><!-- media855-Area--img -->
           <div class="media855-Area--search">
-            <!-- <form th:action="@{/mainPage/{category}(category=${category}, sort=postNo)}">
+            <!-- <form th:action="@{/mainPage/{category}(category=${category}, sort=postDate)}">
               <input type="search" id="form1" class="" name="searchTxt" placeholder="Music 검색" value="" th:value="${searchTxt}">
               <button type="submit" class="btn btn-primary">
                 <img src="/images/search.svg" alt="" />
@@ -197,16 +196,16 @@
           <div id="closeModalGenre" class="modalContents modalCategory">
             <!-- 모달창 안에 여기 내용 작성 -->
             <div class="modalCategory__box">
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='요즘 K-Pop', sort=postNo)}"><img src="/images/music01.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='여자 아이돌', sort=postNo)}"><img src="/images/music02.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='남자 아이돌', sort=postNo)}"><img src="/images/music03.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='슬픈 발라드', sort=postNo)}"><img src="/images/music04.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='편안한 알앤비', sort=postNo)}"><img src="/images/music05.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='요즘 국힙', sort=postNo)}"><img src="/images/music06.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='요즘 락', sort=postNo)}"><img src="/images/music07.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='EDM', sort=postNo)}"><img src="/images/music08.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='드라마 OST', sort=postNo)}"><img src="/images/music09.png" alt=""></a></span>
-              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='영화 OST', sort=postNo)}"><img src="/images/music10.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='요즘 K-Pop', sort=postDate)}"><img src="/images/music01.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='여자 아이돌', sort=postDate)}"><img src="/images/music02.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='남자 아이돌', sort=postDate)}"><img src="/images/music03.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='슬픈 발라드', sort=postDate)}"><img src="/images/music04.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='편안한 알앤비', sort=postDate)}"><img src="/images/music05.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='요즘 국힙', sort=postDate)}"><img src="/images/music06.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='요즘 락', sort=postDate)}"><img src="/images/music07.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='EDM', sort=postDate)}"><img src="/images/music08.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='드라마 OST', sort=postDate)}"><img src="/images/music09.png" alt=""></a></span>
+              <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='영화 OST', sort=postDate)}"><img src="/images/music10.png" alt=""></a></span>
             </div>
           </div>
           <!-- ModalThis-content -->
@@ -215,16 +214,16 @@
         <div id="closeModalEmote" class="modalContents modalCategory">
           <!-- 모달창 안에 여기 내용 작성 -->
           <div class="modalCategory__box">
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='지금인기', sort=postNo)}"><img src="/images/mood01.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='힙터질때', sort=postNo)}"><img src="/images/mood02.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='신났을때', sort=postNo)}"><img src="/images/mood03.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='우울할때', sort=postNo)}"><img src="/images/mood04.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='사랑할때', sort=postNo)}"><img src="/images/mood05.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='멍때릴때', sort=postNo)}"><img src="/images/mood06.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='운동할때', sort=postNo)}"><img src="/images/mood07.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='휴식할때', sort=postNo)}"><img src="/images/mood08.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='파티할때', sort=postNo)}"><img src="/images/mood09.png" alt=""></a></span>
-            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='외로울때', sort=postNo)}"><img src="/images/mood10.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='지금인기', sort=postDate)}"><img src="/images/mood01.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='힙터질때', sort=postDate)}"><img src="/images/mood02.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='신났을때', sort=postDate)}"><img src="/images/mood03.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='우울할때', sort=postDate)}"><img src="/images/mood04.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='사랑할때', sort=postDate)}"><img src="/images/mood05.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='멍때릴때', sort=postDate)}"><img src="/images/mood06.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='운동할때', sort=postDate)}"><img src="/images/mood07.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='휴식할때', sort=postDate)}"><img src="/images/mood08.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='파티할때', sort=postDate)}"><img src="/images/mood09.png" alt=""></a></span>
+            <span class="modalCategory__box__option"><a th:href="@{/mainPage/{category}(category='외로울때', sort=postDate)}"><img src="/images/mood10.png" alt=""></a></span>
           </div>
         </div><!-- Modal-content -->
       </div><!-- modal--category -->
@@ -292,7 +291,6 @@
             >
               <div class="input-group">
                 <div class="form-outline">
-                  <!-- <input type="hidden" name="sort" th:value="${param.sort}" /> -->
                   <input
                     type="search"
                     id="form1"
@@ -325,7 +323,7 @@
         <article class="headerLayout-Area--viewContents topAndbut">
           <div class="view view02">
             <ul>
-              <li><div><img src="/images/navIcon03.png" alt=""><a th:href="@{/mainPage/(sort=postNo)}"><span>전체보기</span></a></div></li>
+              <li><div><img src="/images/navIcon03.png" alt=""><a th:href="@{/mainPage/(sort=postDate)}"><span>전체보기</span></a></div></li>
               <li id="modalGenreBtn"><div><img src="/images/navIcon04.png" alt=""><span>장르별</span></div></li>
               <li id="modalEmoteBtn"><div><img src="/images/navIcon06.png" alt=""><span>감성별</span></div></li>
             </ul>
@@ -363,21 +361,6 @@
     function weeklyRanking() {
       if (sessionStorage.getItem("moveWeekly") != null) {
         sessionStorage.clear();
-      }
-    }
-
-    window.onpageshow = function(e) {
-      const pathName = window.location.pathname;
-      const sessionMonth = sessionStorage.getItem("moveMonth");
-      const sessionWeekly = sessionStorage.getItem("moveWeekly");
-
-      if ((window.performance && window.performance.navigation.type == 2)) {
-        if (pathName == "/monthRanking" && sessionMonth != null) {
-          showMonthRank(sessionMonth);
-        } 
-        else if (pathName == "/weeklyRanking" && sessionWeekly != null) {
-          showWeeklyRank(sessionWeekly);
-        }
       }
     }
   </script>

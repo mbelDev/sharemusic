@@ -238,7 +238,7 @@
           <p>확인을 누르면 게시글이 완전히 삭제됩니다.</p>
         </div>
         <div class="modal-content--btn">
-          <button id="btnDeleteConfirm" class="btn btn-primary">확인</button>
+          <button id="btnDeleteConfirm" class="btn btn-primary" th:onclick="boardDelete('[[${boardDto.postNo}]]')">확인</button>
           <button id="closeDelete" class="btn btn-secondary closeDeleteModal">취소</button>
         </div>
       </div>
@@ -400,6 +400,22 @@
           ],
         });
       });
+
+      // 글 삭제할 때 이벤트
+      function boardDelete(postNo) {
+        $.ajax({
+          url: "/board/delete",
+          type: "POST",
+          data: {"postNo": postNo},
+          success: function(response) {
+          if (response.msg == "ok") {
+            location.href=document.referrer;
+            } else {
+              location.reload();
+            }
+          }
+        })
+      }
     </script>
     <script th:inline="javascript">
 

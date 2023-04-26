@@ -9,41 +9,41 @@
     <section class="weeklyRanking">
       <div class="weeklyRanking-page topAndbut">
         <h2>주간랭킹</h2>
-      </div>
-      <!-- weeklyRanking-page -->
-      <article class="weeklyRanking-Area">
-        <div id="weekly">
-          <span class="material-icons prevWeekly" onclick="prevWeekly()"
-            >west</span
-          >
-          <div id="weeklyDate">
-            <span th:text="${weeklyDate[STARTDATE]}">시작 날짜</span>
-            <span>~</span>
-            <span th:text="${weeklyDate[LASTDATE]}">끝 날짜</span>
+        <!-- weeklyRanking-page -->
+        <article class="weeklyRanking-Area">
+          <div id="weekly">
+            <span class="material-icons prevWeekly" onclick="prevWeekly()"
+              >west</span
+            >
+            <div id="weeklyDate">
+              <span th:text="${weeklyDate[STARTDATE]}">시작 날짜</span>
+              <span>~</span>
+              <span th:text="${weeklyDate[LASTDATE]}">끝 날짜</span>
+            </div>
+            <span class="material-icons nextWeekly" onclick="nextWeekly()"
+              >east</span
+            >
           </div>
-          <span class="material-icons nextWeekly" onclick="nextWeekly()"
-            >east</span
-          >
-        </div>
-        <div id="weeklyRankList">
-          <ul>
-            <li th:each="item : ${weeklyRankList}">
-              <a th:href="@{/board/view(postNo=${item.postNo})}">
-                <img
-                  th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                />
-                <div class="postTitle">
-                  <div class="postTxt">
-                    <p class="" th:text="${item.postTitle}">곡이름</p>
-                    <p class="" th:text="${item.postSinger}">가수이름</p>
-                    <p class="" th:text="${item.postAuth}">별명</p>
+          <div id="weeklyRankList">
+            <ul>
+              <li th:each="item : ${weeklyRankList}">
+                <a th:href="@{/board/view(postNo=${item.postNo})}">
+                  <img
+                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                  />
+                  <div class="postTitle">
+                    <div class="postTxt">
+                      <p class="" th:text="${item.postTitle}">곡이름</p>
+                      <p class="" th:text="${item.postSinger}">가수이름</p>
+                      <p class="" th:text="${item.postAuth}">별명</p>
+                    </div>
                   </div>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </article>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
       <!-- weeklyRanking-Area -->
     </section>
     <!-- weeklyRanking -->
@@ -57,6 +57,7 @@
 
       if (sessionStorage.getItem("moveWeekly") != null) {
         moveWeekly = sessionStorage.getItem("moveWeekly");
+        showWeeklyRank(sessionStorage.getItem("moveWeekly"));
       } else {
         moveWeekly = 0;
       }

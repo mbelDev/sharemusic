@@ -55,16 +55,24 @@
 </select>
 
 <!-- 랭킹 글 불러오기 -->
-<select id="getRankPost" resultType="BoardDto">
+<select id="getRankPost" parameterType="String" resultType="BoardDto">
   SELECT * FROM (
-    SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
-  ) WHERE ROWNUM <![CDATA[<=]]> 5
+    SELECT * FROM BOARD 
+    <if test="category != null">
+    WHERE (
+      (POSTGENRE = #{category}) OR
+      (POSTEMOTE = #{category})
+    )
+    </if>
+    ORDER BY POSTLIKE DESC, POSTDATE DESC
+  ) WHERE
+    ROWNUM <![CDATA[<=]]> 5 
 </select>
 
 <!-- 월간 랭킹 글 불러오기  -->
 <select id="getMonthRankPost" parameterType="Integer" resultType="BoardDto">
   SELECT * FROM (
-      SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
+      SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTDATE DESC
     )
     WHERE 
     ROWNUM <![CDATA[<=]]> 10 AND
@@ -75,7 +83,7 @@
 <!-- 주간 랭킹 글 불러오기 -->
 <select id="getWeeklyRankPost" parameterType="Integer" resultType="BoardDto">
   SELECT * FROM (
-    SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
+    SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTDATE DESC
   ) 
   WHERE 
   ROWNUM <![CDATA[<=]]> 10 AND (

@@ -7,72 +7,66 @@
 >
   <main id="mainPage-Area" class="" layout:fragment="contents">
     <section class="main-constent--itmes">
-        <div class="main-constent--itmes-center" id="follow-page">
-          <div class="line-one"></div>
-          <article class="main-constent--listItem listItem--center">
-            <div class="listItem-nav">
-              <h1 class="topAndbut">뮤직리스트</h1>
-              <div class="update-data topAndbut">
-                <!-- 정렬 -->
-                <ul>
-                  <li>
-                    <a
-                      href="#"
-                      th:href="@{/mainPge/mylist/liked?sort=pstNo}"
-                      >최신순</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      th:href="@{/mainPge/mylist/like?sort=postHits}"
-                      >조회순</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      th:href="@{/mainPge/mylist/liked?sort=postLike}"
-                      >추천순</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- listItem-nav -->
-            <div class="getList-ItemBox">
-              <ul id="test">
-                <li th:each="item : ${postList}">
-                  <a
-                    href="/board/view"
-                    th:href="@{/board/view(postNo=${item.postNo})}"
+      <div class="main-constent--itmes-center" id="follow-page">
+        <div class="line-one"></div>
+        <article class="main-constent--listItem listItem--center">
+          <div class="listItem-nav">
+            <h1 class="topAndbut">뮤직리스트</h1>
+            <div class="update-data topAndbut">
+              <!-- 정렬 -->
+              <ul>
+                <li>
+                  <a href="#" th:href="@{/mainPge/mylist/liked?sort=postDate}"
+                    >최신순</a
                   >
-                    <div class="ItemBox-imgs">
-                      <img
-                        th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                      />
-                    </div>
-                    <!-- ItemBox-imgs -->
-                    <div class="ItemBox-content">
-                      <p class="ItemBox-postTitle" th:text="${item.postTitle}">
-                        곡이름
-                      </p>
-                      <p class="ItemBox-postSinger" th:text="${item.postSinger}">
-                        가수이름
-                      </p>
-                      <p class="ItemBox-postAuth" th:text="${item.postAuth}">
-                        별명
-                      </p>
-                    </div>
-                    <!-- ItemBox-content -->
-                  </a>
+                </li>
+                <li>
+                  <a href="#" th:href="@{/mainPge/mylist/like?sort=postHits}"
+                    >조회순</a
+                  >
+                </li>
+                <li>
+                  <a href="#" th:href="@{/mainPge/mylist/liked?sort=postLike}"
+                    >추천순</a
+                  >
                 </li>
               </ul>
             </div>
-            <!-- getList-ItemBox -->
-          </article>
-          <!-- main-constent--listItem -->
-        </div>
-      </section>
-    </main>
+          </div>
+          <!-- listItem-nav -->
+          <div class="getList-ItemBox">
+            <ul id="test">
+              <li th:each="item : ${postList}">
+                <a
+                  href="/board/view"
+                  th:href="@{/board/view(postNo=${item.postNo})}"
+                >
+                  <div class="ItemBox-imgs">
+                    <img
+                      th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                    />
+                  </div>
+                  <!-- ItemBox-imgs -->
+                  <div class="ItemBox-content">
+                    <p class="ItemBox-postTitle" th:text="${item.postTitle}">
+                      곡이름
+                    </p>
+                    <p class="ItemBox-postSinger" th:text="${item.postSinger}">
+                      가수이름
+                    </p>
+                    <p class="ItemBox-postAuth" th:text="${item.postAuth}">
+                      별명
+                    </p>
+                  </div>
+                  <!-- ItemBox-content -->
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- getList-ItemBox -->
+        </article>
+        <!-- main-constent--listItem -->
+      </div>
+    </section>
+  </main>
 </html>
