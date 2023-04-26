@@ -316,10 +316,10 @@ public class MemberController {
   @ResponseBody
   public int withdraw(HttpSession session, MemberDto memberDto) {
     LoggedDto loggedUser = loggedUser(session);
-    String userID = loggedUser.getUserID();
     if (loggedUser == null) {
       return -1;
     }
+    String userID = loggedUser.getUserID();
     MemberDto checkDto = memberService.getMemberOne(userID);
     if (
       !checkDto.getUserID().equals(userID) ||

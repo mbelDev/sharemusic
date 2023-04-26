@@ -43,12 +43,13 @@
             <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
             </div><!-- title-btn -->
           </div><!-- title -->
+          <span th:text="${boardDto.postLiked}"></span>
           <div class="like">
             <!-- <div class="like-good">
               <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}" data-liked=""/> 
               <span th:text="${boardDto.postLike}" class="postLike">0</span>
             </div>like-good -->
-            <button class="like button-star">
+            <button class="like button-star" th:classappend="${boardDto.postLiked == 1 ? 'active' : ''}" th:onclick="updateLike(this)">
               <canvas></canvas>
               <div class="label">
                 <span class="default">좋아요<span class="success"></span></span>
@@ -85,17 +86,16 @@
              or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
               <div class="reply-contents--icon">
                 <a th:href="@{|/member/user/${item.replyAuthID}|}">
-                  <!-- th:src="@{/upload/}+${item.replyIcon}" -->
-                  <img
+                  <!-- <img
                   src="/images/sampleprofile.jpg"
                     alt=""
                     class="replyIcon"
-                  />
-                  <!-- <img
-                  th:src="@{item.replyAuthIcon}"
+                  /> -->
+                  <img
+                  th:src="@{/upload/}+${item.replyAuthIcon}"
                   alt=""
                   class="replyIcon"
-                  /> -->
+                  />
                   <span th:text="${item.replyAuthNM}">홍길동</span>
                   <img
                   th:if="${item.replyHidden == 1}"
@@ -238,13 +238,8 @@
           <p>확인을 누르면 게시글이 완전히 삭제됩니다.</p>
         </div>
         <div class="modal-content--btn">
-<<<<<<< HEAD
-          <button id="btnDeleteConfirm" class="btn btn-primary">확인</button>
-          <button id="closeDelete" class="btn btn-secondary closeDeleteModal">취소</button>
-=======
           <button id="btnDeleteConfirm" class="btnHover btn btn-primary">확인</button>
           <button id="closeDelete" class="btn btn-secondary">취소</button>
->>>>>>> 567974acede9b6839feacf45a227f46936938bff
         </div>
       </div>
     </div>
@@ -347,21 +342,20 @@
   
   <script src="/js/board/view.js"></script>
   <script defer>
-        if (getLike(postNo)){
-        $(".current").text(c_liked-1);
-      }else{
-        $(".new").text(n_liked+1);
-      }
-
+    const c_like = parseInt($(".current").text());
+    const n_like = parseInt($(".new").text());
+    const like = $("button.like");
+    if($(like).hasClass("active")){
+      $(".current").text(c_like - 1);
+      starClick(like);
+    }else{
+      $(".new").text(n_like + 1);
+    }
   </script>
     <script>
-<<<<<<< HEAD
-      getModal($("#deleteModalBox"), $("#deleteModal"), $(".closeDeleteModal"));
-=======
-
+      const postNo = $("#postNo").val();
   
       getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
->>>>>>> 567974acede9b6839feacf45a227f46936938bff
       getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
       getModal($(".deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
       // getModal($(".menuBtn"), $("#deleteReplyModal-M"), $("#deleteReplyModal-M  #closeDeleteReply"));
@@ -413,34 +407,9 @@
       });
     </script>
     <script th:inline="javascript">
-<<<<<<< HEAD
-      //좋아요 History 연동 함수 #권인호 작성
-      function updateLike(item){
-        const postNo = $(item).data('postno');
-
-=======
-
-      //좋아요 상태 체크 함수 #권인호 작성
-      function getLike(postNo){
-        $.ajax({
-          url:"/member/getLike",
-          type:"POST",
-          data:{
-            postNo : postNo
-          },
-          success:function(response){
-            if(response == 1){
-              $(".like").addClass("active");
-            }
-          }
-        })
-      }
-
 
       //좋아요 History 연동 함수 #권인호 작성
       function updateLike(item){
-        const postNo = $(item).data('postno');
->>>>>>> 567974acede9b6839feacf45a227f46936938bff
         $.ajax({
           url:"/member/like",
           type:"POST",
@@ -451,11 +420,11 @@
             switch(response){
               case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용")
                 break;
-              case 0 : alert("좋았었습니다!!")
-                $(".like").removeClass("active");
+              case 0 :
+                star(item);
                 break;
-              case 1 : alert("좋아요!")
-                $(".like").addClass("active");
+              case 1 :
+                star(item);
                 break;
             }
           },
@@ -465,7 +434,7 @@
           }
         })
         .done(()=>{
-          reloadData(postNo);
+          // reloadData(postNo);
         })
       }
 

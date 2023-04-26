@@ -151,6 +151,19 @@
   font-size: 18px;
   margin: 0 0 25px 0;
 }
+.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postAuthIcon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postAuth {
+  display: inline-block;
+  margin-left: 5px;
+}
+.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postHits {
+  margin-top: 10px;
+  color: #777;
+}
 
 @media screen and (max-width: 1445px) {
   .main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a {

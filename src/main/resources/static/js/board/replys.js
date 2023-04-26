@@ -27,7 +27,6 @@ function addReplyEvent(item){
     })
     .done(function( fragment ){
         $("#reply-container").replaceWith(fragment);
-        addDeleteReplyEvent();
     });
 }
 

@@ -32,6 +32,13 @@ public class ReplysServiceImpl implements ReplysService {
       String targetNM = target.getReplyAuthNM();
       String userIcon = memberDao.getMemberOne(userID).getUserIconReal();
       item.setReplyGroupTarget(targetNM);
+
+      if (target.getReplyHidden() == 1) {
+        item.setReplyGroupTarget("비밀 덧글");
+      }
+      if (target.getReplyHidden() == 2) {
+        item.setReplyGroupTarget("삭제된 덧글");
+      }
       item.setReplyAuthIcon(userIcon);
     }
     return result;

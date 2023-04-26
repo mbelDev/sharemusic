@@ -1,6 +1,5 @@
 package com.music.sharemusic.service;
 
-import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.dto.MemberDto;
 import java.util.List;

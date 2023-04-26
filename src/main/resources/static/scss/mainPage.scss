@@ -161,6 +161,19 @@
           font-size: 18px;
           margin: 0 0 25px 0;
         }//.ItemBox-postSinger
+        .ItemBox-postAuthIcon{
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+        }
+        .ItemBox-postAuth{
+          display: inline-block;
+          margin-left: 5px;
+        }
+        .ItemBox-postHits{
+          margin-top: 10px;
+          color: #777;
+        }
       }//.ItemBox-content
     }//.getList-ItemBox
   }//.main-constent--listItem

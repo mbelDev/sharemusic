@@ -3,6 +3,7 @@ package com.music.sharemusic.controller;
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
 import com.music.sharemusic.service.BoardService;
+import com.music.sharemusic.service.MemberServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,9 @@ public class indexController {
 
   @Autowired
   BoardService boardService;
+
+  @Autowired
+  MemberServiceImpl memberService;
 
   public LoggedDto loggedUser(HttpSession session) {
     LoggedDto loggedUser = null;
@@ -64,6 +68,11 @@ public class indexController {
       searchTxt,
       sort
     );
+    for (BoardDto item : postList) {
+      String userIcon = getIcon(item);
+      log.info("icon==={}", userIcon);
+      item.setPostAuthIcon(userIcon);
+    }
     model.addAttribute("postList", postList);
 
     // 검색 기능 searchTxt
@@ -71,11 +80,11 @@ public class indexController {
     return "/mainPage/mainPage";
   }
 
-  @GetMapping(value = { "/mainPage/mylist/{category}" })
+  @GetMapping("/mainPage/mylist")
   public String myList(
     HttpSession session,
     Model model,
-    @PathVariable(name = "category", required = false) String category,
+    String category,
     @RequestParam(defaultValue = "postNo") String sort
   ) {
     String userID = null;
@@ -103,6 +112,11 @@ public class indexController {
       default:
         return "redirect:/mainPage";
     }
+    for (BoardDto item : postList) {
+      String userIcon = getIcon(item);
+      log.info("icon==={}", userIcon);
+      item.setPostAuthIcon(userIcon);
+    }
     log.info("test==={}", data);
     log.info("list === {}", postList);
     model.addAttribute("postList", postList);
@@ -125,7 +139,7 @@ public class indexController {
   public String reloadMonthRanking(Model model, int moveMonth) {
     List<BoardDto> monthRankList = boardService.getMonthRankPost(moveMonth);
     model.addAttribute("monthRankList", monthRankList);
-    
+
     String target = "/mainPage/monthRanking :: #monthRankList";
     return target;
   }
@@ -158,10 +172,9 @@ public class indexController {
     if (dateType.equals("month")) {
       Map<String, String> monthDate = boardService.getMonthRankDate(moveDate);
       model.addAttribute("monthDate", monthDate);
-      
+
       target = "/mainPage/monthRanking :: #monthDate";
-    } 
-    else {
+    } else {
       Map<String, String> weeklyDate = boardService.getWeeklyRankDate(moveDate);
       model.addAttribute("weeklyDate", weeklyDate);
 
@@ -195,6 +208,13 @@ public class indexController {
     model.addAttribute("searchTxt", searchTxt);
     String target = "/mainPage/mainPage :: #test";
     return target;
+  }
+
+  //프로필 사진 받아오기
+  public String getIcon(BoardDto boardDto) {
+    String userID = boardDto.getPostAuthID();
+    String postAuthIcon = memberService.getMemberOne(userID).getUserIconReal();
+    return postAuthIcon;
   }
 
   // //테스트용
