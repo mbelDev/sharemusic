@@ -2,9 +2,8 @@ package com.music.sharemusic.service;
 
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.LoggedDto;
-
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 public interface BoardService {
   public void putPost(BoardDto boardDto);
@@ -15,7 +14,11 @@ public interface BoardService {
 
   //view 에서 요청. 한 글 불러오기
 
-  public List<BoardDto> getPostAll(String category, String searchTxt, String sort);
+  public List<BoardDto> getPostAll(
+    String category,
+    String searchTxt,
+    String sort
+  );
 
   //index 에서 요청. 모든 글 불러오기
   //paging작업은 아직^^
@@ -53,5 +56,13 @@ public interface BoardService {
   // 글 누르면 조회수 업데이트
 
   public int deletePost(BoardDto boardDto);
+
   //view 에서 요청. 글 삭제하기
+
+  public List<BoardDto> getFollowList(Map<String, String> data);
+
+  //mainPage 에서 요청, 구독 한 사람들의 글들 불러오기
+
+  public List<BoardDto> getMyList(Map<String, String> data);
+  //mainPage 에서 요청, 좋아요,북마크 한 글들 불러오기
 }

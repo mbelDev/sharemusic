@@ -139,8 +139,8 @@ h1 {
       .headerLayout-Area--searchForm {
         .input-group {
           button {
-            background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
-            padding: 0 14px;
+            // background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
+            padding: 0 20px;
           }
           .form-outline {
             #form1 {
@@ -381,6 +381,73 @@ h1 {
   }//#mainPage-Area
 }//.flex-box
 
+.btnHover {
+  cursor: hand;
+  text-align: center;
+  text-transform: capitalize;
+  // border: 1px solid #7723ff;
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden!important;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  z-index: 10;
+}
+.btnHover:hover{
+  // border: 1px solid #ff3672;
+  color: #fff!important;
+}
+.btnHover::before {
+  content: '';
+  width: 0%;
+  height: 100%;
+  display: block;
+  background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
+  position: absolute;
+  -ms-transform: skewX(-20deg);
+  -webkit-transform: skewX(-20deg); 
+  transform: skewX(-20deg);   
+  left: -10%;
+  opacity: 1;
+  top: 0;
+  z-index: -12;
+  -moz-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  -o-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  -webkit-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  box-shadow:2px 0px 14px rgba(0,0,0,.6);
+} 
+.btnHover::after {
+  content: '';
+  width: 0%;
+  height: 100%;
+  display: block;
+  background: #80ffd3;
+  position: absolute;
+  -ms-transform: skewX(-20deg);
+  -webkit-transform: skewX(-20deg); 
+  transform: skewX(-20deg);   
+  left: -10%;
+  opacity: 0;
+  top: 0;
+  z-index: -15;
+  -webkit-transition: all .94s cubic-bezier(.2,.95,.57,.99);
+  -moz-transition: all .4s cubic-bezier(.2,.95,.57,.99);
+  -o-transition: all .4s cubic-bezier(.2,.95,.57,.99);
+  transition: all .4s cubic-bezier(.2,.95,.57,.99);
+  box-shadow: 2px 0px 14px rgba(0,0,0,.6);
+}
+.btnHover:hover::before, .btnHover:hover::before{
+opacity:1;
+width: 116%;
+}
+.btnHover:hover::after, .btnHover:hover::after{
+opacity:1;
+width: 120%;
+}
 
 
 @media screen and (max-width: 855px){

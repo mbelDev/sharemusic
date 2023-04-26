@@ -50,6 +50,31 @@ input {
 .joinForm-Area .joinForm-Area--bg .joinForm-Area--userFile {
   padding: 10px 0;
 }
+.joinForm-Area .joinForm-Area--bg .joinForm-Area--userFile .filebox {
+  display: flex;
+  align-items: center;
+}
+.joinForm-Area .joinForm-Area--bg .joinForm-Area--userFile .filebox .upload-name {
+  display: inline-block;
+  height: 40px;
+  padding: 0 10px;
+  vertical-align: middle;
+  background-color: #6c757d;
+  width: 100%;
+  color: #fff;
+}
+.joinForm-Area .joinForm-Area--bg .joinForm-Area--userFile .filebox label {
+  height: 40px;
+  width: 150px;
+}
+.joinForm-Area .joinForm-Area--bg .joinForm-Area--userFile .filebox input[type=file] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
 .joinForm-Area .joinForm-Area--bg .joinForm-Area--userFile .btn-uploadFile {
   padding: 10px 20px;
   color: #fff;
@@ -107,6 +132,10 @@ input {
   .joinForm-Area .joinForm-Area--bg02 .joinForm-Area--logo img {
     margin-top: 25px;
   }
+  .joinForm-Area .joinForm-Area--bg .joinForm-Area--userFile .filebox label,
+  .joinForm-Area .joinForm-Area--bg .joinForm-Area--userFile .filebox .upload-name {
+    font-size: 14px;
+  }
 }
 @media screen and (max-width: 500px) {
   .bg--login {
@@ -114,26 +143,5 @@ input {
   }
   .joinForm-Area .joinForm-Area--bg .joinForm-Area--logo img {
     width: 230px;
-  }
-}
-@media screen and (max-width: 320px) {
-  .bg--login {
-    padding: 8vw 13vw !important;
-  }
-  .joinForm-Area .joinForm-Area--bg .joinForm-Area--logo img {
-    width: 180px;
-  }
-  input {
-    height: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    padding: 3px 10px !important;
-    margin: 15px 0 !important;
-    font-size: 12px;
-    width: 100%;
-  }
-  button {
-    font-size: 12px !important;
-    height: 40px !important;
   }
 }

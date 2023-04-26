@@ -94,7 +94,7 @@
                   <input type="hidden" name="sort" th:value="${param.sort}" />
                   <input type="search" id="form1" class="form-control" name="searchTxt" placeholder="Music 검색" value="" th:value="${searchTxt}"/>
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btnHover btn btn-primary">
                   <img src="/images/search.svg" alt="" />
                 </button>
               </div>
@@ -173,7 +173,30 @@
     <section><!-----------------------------------[     모달 섹션     ]----------------------------------->
           
     <!-- 너 진짜 탈퇴할거야? 모달창 -->
-    <div id="withdrawModal" class="modal-wnd">
+    <div id="deleteModal" class="modal-wnd deleteMo">
+      <div id="closeDeleteModal"></div>
+      <div class="modal-content">
+        <div class="modal-content--title">
+          <p>정말로 회원 탈퇴를 진행하시겠습니까?</p>
+        </div>
+        <div class="modal-content--txt">
+          <p>
+            이 행동은 되돌릴 수 없습니다. 탈퇴하신 ID는 더 이상 이용하실 수 없으며 새로운 계정을 만드실 때에도 사용하실 수 없습니다.<br/>위 모든 사항을 이해하시고<em> 정말로 탈퇴를 원하신다면</em> 확인을 위하여 본인의 계정과 비밀번호를 한번 더 입력해 주십시오.
+          </p>
+        </div>
+        <div class="modal-content--btn">
+          <div class="inputFlex">
+            <input class="form-control" type="text" name="userID" id="userID" placeholder="유저 아이디">
+            <input class="form-control" type="password" name="userPW" id="userPW" placeholder="유저 패스워드">
+          </div>
+          <div class="inputFlex-btn">
+            <button id="btnDeleteConfirm" class="btn btn-primary" onclick="withdraw()">회원탈퇴</button>
+            <button id="closeDelete" class="btn btn-secondary">되돌아가기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div id="withdrawModal" class="modal-wnd">
       <div class="modal-wnd-item modal-withdraw">
         <div class="modal-content">
           <span>정말로 회원 탈퇴를 진행하시겠습니까?</span>
@@ -188,7 +211,7 @@
         </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
     <div id="siteTermsModal" class="modal-wnd">
@@ -510,7 +533,7 @@ ATI Radeon 9500 128MB 이상
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script>
-    getModal($("#withdraw-btn"),$("#withdrawModal"),$("#withdrawModal-close"));
+    getModal($("#withdraw-btn"),$(".deleteMo"),$("#closeDeleteModal"));
     getModal($("#modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
       getModal($(".modal-mo #modalGenreBtn"),$("#modalGenre"),$("#closeModalGenre"));
       getModal($("#modalEmoteBtn"),$("#modalEmote"),$("#closeModalEmote"));

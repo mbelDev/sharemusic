@@ -46,11 +46,20 @@
       width: 56.5vw;
       &__option {
         margin: 0.3vw;
+        overflow: hidden;
         a {
           img {
             width: 13vw;
             margin: 10px 0;
+<<<<<<< HEAD
             cursor: pointer;
+=======
+            transition: all 0.25s ease;
+            &:hover {
+              transform: scale(105%);
+              border-radius: 13px;
+            }
+>>>>>>> 567974acede9b6839feacf45a227f46936938bff
           }
         }
       }
@@ -59,6 +68,7 @@
 } //.write-modal
 
 //프로필 사진 업데이트 모달 #권인호 작성
+<<<<<<< HEAD
 .modal-profileUpdate {
   display: block;
   width: 400px;
@@ -70,9 +80,28 @@
     display: block;
     margin: 10px auto;
     #testProfile {
+=======
+.modal-profileUpdate{
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  .modal-content {
+    outline: 1px solid red;
+    width: 400px;
+    height: 550px;
+    background-color: #fff;
+    border-radius: 13px;
+    text-align: center;
+    padding: 50px;
+  }
+  &__icon{
+    #testProfile{
+>>>>>>> 567974acede9b6839feacf45a227f46936938bff
       width: 300px;
       height: 300px;
+      margin-bottom: 5px;
     }
+<<<<<<< HEAD
     label {
       display: block;
       margin: 5px auto;
@@ -81,6 +110,17 @@
   &__btns {
     display: block;
     margin: 15px auto;
+=======
+    label{
+      width: 100%;
+    }
+  }
+  &__btns{
+    margin-top: 60px;
+    button {
+      width: 30%;
+    }
+>>>>>>> 567974acede9b6839feacf45a227f46936938bff
   }
 }
 
@@ -508,7 +548,6 @@
     transform: translate(-50%, -50%);
     z-index: 80;
     width: 500px;
-    height: 200px;
     background-color: #fff;
     color: #000;
     border-radius: 8px;
@@ -526,11 +565,27 @@
       p {
         padding: 0 15px;
         font-weight: 400;
+          
       }
     }
     &--btn {
       padding: 13px 15px;
       text-align: right;
+      display: flex;
+      align-items: center;
+      .inputFlex {
+        text-align: left;
+      }
+      input {
+        display: inline;
+        width: 95%;
+      }
+      .inputFlex-btn {
+        button {
+          width: 100%;
+        }
+        
+      }
     }
   }
 }

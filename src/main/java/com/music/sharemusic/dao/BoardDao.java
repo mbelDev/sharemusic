@@ -1,9 +1,9 @@
 package com.music.sharemusic.dao;
 
 import com.music.sharemusic.dto.BoardDto;
-
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -46,5 +46,13 @@ public interface BoardDao {
   // 글 누르면 조회수 업데이트
 
   public int deletePost(BoardDto boardDto);
+
   //view 에서 요청. 글 삭제하기
+
+  public List<BoardDto> getFollowList(Map<String, String> data);
+
+  //mainPage 에서 요청, 구독 한 사람들의 글들 불러오기
+
+  public List<BoardDto> getMyList(Map<String, String> data);
+  //mainPage 에서 요청, 좋아요,북마크 한 글들 불러오기
 }

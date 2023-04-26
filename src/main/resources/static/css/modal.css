@@ -47,36 +47,50 @@
 }
 .modal-wnd .modalCategory__box__option {
   margin: 0.3vw;
+  overflow: hidden;
 }
 .modal-wnd .modalCategory__box__option a img {
   width: 13vw;
   margin: 10px 0;
+<<<<<<< HEAD
   cursor: pointer;
+=======
+  transition: all 0.25s ease;
+}
+.modal-wnd .modalCategory__box__option a img:hover {
+  transform: scale(105%);
+  border-radius: 13px;
+>>>>>>> 567974acede9b6839feacf45a227f46936938bff
 }
 
 .modal-profileUpdate {
-  display: block;
-  width: 400px;
-  height: 60%;
-  margin: 10% auto;
-  background: #fff;
-  border-radius: 13px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.modal-profileUpdate__icon {
-  display: block;
-  margin: 10px auto;
+.modal-profileUpdate .modal-content {
+  outline: 1px solid red;
+  width: 400px;
+  height: 550px;
+  background-color: #fff;
+  border-radius: 13px;
+  text-align: center;
+  padding: 50px;
 }
 .modal-profileUpdate__icon #testProfile {
   width: 300px;
   height: 300px;
+  margin-bottom: 5px;
 }
 .modal-profileUpdate__icon label {
-  display: block;
-  margin: 5px auto;
+  width: 100%;
 }
 .modal-profileUpdate__btns {
-  display: block;
-  margin: 15px auto;
+  margin-top: 60px;
+}
+.modal-profileUpdate__btns button {
+  width: 30%;
 }
 
 .modalLogin {
@@ -428,7 +442,6 @@
   transform: translate(-50%, -50%);
   z-index: 80;
   width: 500px;
-  height: 200px;
   background-color: #fff;
   color: #000;
   border-radius: 8px;
@@ -452,6 +465,18 @@
 .deleteMo .modal-content--btn {
   padding: 13px 15px;
   text-align: right;
+  display: flex;
+  align-items: center;
+}
+.deleteMo .modal-content--btn .inputFlex {
+  text-align: left;
+}
+.deleteMo .modal-content--btn input {
+  display: inline;
+  width: 95%;
+}
+.deleteMo .modal-content--btn .inputFlex-btn button {
+  width: 100%;
 }
 
 .shareMo {

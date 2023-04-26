@@ -1,3 +1,123 @@
+.button-star {
+  height: 40px;
+  --button-label-x: 24px;
+  --button-label-success-opacity: 0;
+  --button-star-scale: 0.75;
+  --button-star-greyscale: 85%;
+  --button-star-hue: 170deg;
+  --button-star-opacity: 0.45;
+  --button-star-add-opacity: 0;
+  --button-star-add-y: 16px;
+  --button-star-current-opacity: 1;
+  --button-star-current-y: 0px;
+  --button-star-new-opacity: 0;
+  --button-star-new-y: 16px;
+  -webkit-appearance: none;
+    -moz-appearance: none;
+          appearance: none;
+  border: none;
+  cursor: pointer;
+  background-color: #1f2024;
+  color: #fff;
+  border-radius: 13px;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  box-shadow: inset 0 0 0 1px #35373f, 0px 1px 3px rgba(52, 54, 63, 0.1), 0px 4px 10px rgba(52, 54, 63, 0.15);
+  transition: transform 0.15s;
+  transform: translateZ(0);
+}
+.button-star:active {
+  transform: scale(0.985, 0.98) translateZ(0);
+}
+.button-star canvas {
+  display: block;
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  z-index: 1;
+  left: -176px;
+  top: -84px;
+  pointer-events: none;
+  filter: Grayscale(var(--button-star-greyscale)) hue-rotate(var(--button-star-hue));
+  transform: scale(var(--button-star-scale));
+  transform-origin: 50% 52%;
+  opacity: var(--button-star-opacity);
+}
+.button-star .label {
+  width: 90px;
+  padding: 10px 0;
+  transform: translateZ(0);
+}
+.button-star .label .default {
+  display: block;
+  // transform: translateX(var(--button-label-x));
+}
+.button-star .label .default .success {
+  opacity: var(--button-label-success-opacity);
+}
+.button-star .number {
+  padding: 10px 0;
+  width: 44px;
+  position: relative;
+  transform: translateZ(0);
+}
+.button-star .number:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  bottom: 1px;
+  width: 1px;
+  background-color: #35373f;
+}
+.button-star .number .current {
+  color: #8a8d9b;
+  opacity: var(--button-star-current-opacity);
+  transform: translateY(var(--button-star-current-y));
+  transition: color 0.2s;
+  display: block;
+}
+.button-star .number .new {
+  opacity: var(--button-star-new-opacity);
+  transform: translateY(var(--button-star-new-y));
+  color: #fbfaaa;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  display: block;
+}
+.button-star .number .add {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  opacity: var(--button-star-add-opacity);
+  transform: translateY(var(--button-star-add-y));
+  pointer-events: none;
+  color: #ff3672;
+  font-weight: bold;
+  display: block;
+}
+
+
+
+.like.active {
+  background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
+  border-radius: 100px;
+}
+
+
+
+
 .reply-date-md500, .board-view--replyBox__input-M {
   display: none;
 }
@@ -8,6 +128,7 @@
 }
 
 .boardView {
+  max-width: 1280px;
   margin: 4%;
   border-bottom: 1px solid;
   &-Area {
@@ -18,22 +139,25 @@
   }//&-Area
   &-Video {
     iframe {
-      width: 1500px;
+      width: 1280px;
       height: 720px;
     }
     &--title {
       display: flex;
       justify-content: space-between;
       .title {
-        width: 50%;
+        width: 100%;
         &-name {
           p {
-            font-size: 30px;
+            font-size: 25px;
             font-weight: 300;
+            width: 100%;
+            margin-bottom: 5px;
           }
           a {
             h1 {
-              margin: 15px 0;
+              display: inline;
+              margin: 0 15px 0 0;
             }
           }
           h1 {
@@ -41,7 +165,7 @@
           }
         }//&-name
         &-Date {
-          margin: 10px 0;
+          margin: 50px 0 0 0;
         }//&-Date
         &-Genre {
 
@@ -51,9 +175,8 @@
         }//&-btn
       }//.title
       .like {
-        width: 50%;
+        width: 8vw;
         display: flex;
-        margin-left: 75%;
         margin-top: 10px;
         &-good {
           img {
@@ -94,6 +217,7 @@
       flex-grow: 1;
       min-height: 30px;
       width: 100%;
+
       &--icon {
         width: 100%;
         display: flex;
@@ -112,8 +236,6 @@
         }
         .menuBtn {
           position: absolute;
-          top: 0; right: 2%;
-          font-size: 30px;
           color: #777;
           top: 0;
           right: 0;
@@ -128,6 +250,9 @@
         .reply-contents--text{
           width: 80%;
           padding: 10px 0 10px 35px;
+          &.hidden{
+            display:none;
+          }
         }
         .reply-contents--box {
           display: flex;
@@ -192,6 +317,9 @@
     &-input {
       position: relative;
       margin-bottom: 5%;
+      &.modifyReply{
+        margin-bottom: 0px;
+      }
     }
     &-subCont{
       display: flex;
@@ -214,7 +342,7 @@
     border-radius: 5px;
     margin-right: 10px;
   }
-}
+
 
 
 
@@ -226,16 +354,19 @@
     width: 75vw;
     height: 42vw;
   }
+  .boardView-Video--title .like {
+    width: 10vw;
+  }
 }//@media screen and (max-width: 1640px)
 @media screen and (max-width: 1400px) {
   .title-btn {
     width: 13vw;
   }
-  .boardView-Video--title .like {
-    margin-left: 46%;
-  }
   .boardView-Video--title .title-Date {
     width: 30vw;
+  }
+  .boardView-Video--title .like {
+    width: 13vw;
   }
 }//@media screen and (max-width: 1400px)
 @media screen and (max-width: 1230px) {
@@ -243,7 +374,7 @@
     margin: 0;
   }
   .boardView-Video--title .like {
-    margin-left: 44%;
+    width: 14vw;
   }
 }//@media screen and (max-width: 1230px)
 @media screen and (max-width: 1080px) {
@@ -254,9 +385,6 @@
   .boardView-Video--title .title-Date {
     width: 35vw;
   }
-  .boardView-Video--title .like {
-    margin-left: 34%;
-  }
   .title-btn {
     width: 15vw;
   }
@@ -265,6 +393,9 @@
   }
   .board-view--replyBox .reply-date {
     width: 190px !important;
+  }
+  .boardView-Video--title .like {
+    width: 17vw;
   }
 }//@media screen and (max-width: 1080px)
 @media screen and (max-width: 960px) {
@@ -277,6 +408,9 @@
   }
   .board-view--replyBox .reply-contents--icon .menuBtn {
     right: 5%;
+  }
+  .boardView-Video--title .like {
+    width: 30vw;
   }
 }//@media screen and (max-width: 960px)
 @media screen and (max-width: 855px) {
@@ -294,7 +428,7 @@
     width: 40vw;
   }
   .boardView-Video--title .like {
-    margin-left: 36%;
+    width: 34vw;
   }
   .title-btn {
     width: 20vw;
@@ -302,10 +436,10 @@
 }//@media screen and (max-width: 855px)
 @media screen and (max-width: 500px) {
   .boardView-Video--title .title-name p {
-    font-size: 23px;
+    font-size: 16px;
   }
   .boardView-Video--title .title-name h1 {
-    font-size: 28px;
+    font-size: 25px;
   }
   .boardView-Video--title .title-Date, .boardView-Video--title .title-Genre {
     font-size: 12px;
@@ -337,7 +471,7 @@
     font-size: 13px;
   }
   .boardView-Video--title .like {
-    width: 25vw;
+    width: 35vw;
     margin-left: 5vw;
   }
   .reply-date {

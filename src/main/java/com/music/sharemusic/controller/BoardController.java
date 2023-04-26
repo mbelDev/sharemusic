@@ -234,6 +234,28 @@ public class BoardController {
     }
   }
 
+  //덧글수정 #권인호
+  @PostMapping("/reply/modify")
+  public String modiftReply(
+    ReplysDto replysDto,
+    Model model,
+    HttpSession session
+  ) {
+    if (session.getAttribute("loggedUser") == null) {
+      return "로그인 정보가 없습니다";
+    }
+    LoggedDto replysAuth = (LoggedDto) session.getAttribute("loggedUser");
+    int postNo = replysAuth.getPostNo();
+    replysDto.setReplyAuthID(replysAuth.getUserID());
+    replysDto.setPostNo(postNo);
+    replysService.updateReply(replysDto);
+    List<ReplysDto> replysList = replysService.getReplyAll(postNo);
+    model.addAttribute("replysList", replysList);
+    BoardDto boardDto = boardService.getPostOne(postNo);
+    model.addAttribute("boardDto", boardDto);
+    return "/board/view :: #reply-container";
+  }
+
   //덧글삭제 권인호
   @PostMapping("/reply/delete")
   public String deleteReply(

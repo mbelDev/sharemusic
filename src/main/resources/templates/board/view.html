@@ -6,6 +6,7 @@
   layout:decorate="~{/include/layout.html}"
 >
 <main id="mainPage-Area" class="mainPageView-Area" layout:fragment="contents">
+  
   <script src="/js/board/replys.js"></script>
   <section class="boardView">
 <!--------------------------------------------------[             본문 표시 창            ]-------------------------------------------------------------------------->
@@ -19,9 +20,10 @@
         </iframe>
         <div class="boardView-Video--title">
           <div class="title">
+            <input type="hidden" th:value="${boardDto.postNo}" id="postNo">
             <div class="title-name">
               <p th:text="${boardDto.postTitle}">곡이름</p>
-              <a th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
+              <a class="btnHover" th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
                 <h1 th:text="${boardDto.postSinger}">가수</h1>
               </a>
             </div><!-- title-name -->
@@ -37,15 +39,26 @@
               <a th:href="@{/mainPage/{category}(category=${boardDto.postEmote})}"><span th:text="'#' + ${boardDto.postEmote}">감성</span></a>
             </div><!-- title-Genre -->
             <div class="title-btn" th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}">
-              <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btn btn-primary">수정</a>
+              <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btnHover btn btn-primary">수정</a>
             <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
             </div><!-- title-btn -->
           </div><!-- title -->
           <div class="like">
-            <div class="like-good">
-              <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}" data-liked=""/>          <!--  <<<<<<<<<<<<<<  좋아요 버튼     -->
+            <!-- <div class="like-good">
+              <img class="good-img" src="/images/good.svg" onclick="updateLike('.good-img');" th:data-postno="${boardDto.postNo}" data-liked=""/> 
               <span th:text="${boardDto.postLike}" class="postLike">0</span>
-            </div><!-- like-good -->
+            </div>like-good -->
+            <button class="like button-star">
+              <canvas></canvas>
+              <div class="label">
+                <span class="default">좋아요<span class="success"></span></span>
+              </div>
+              <div class="number">
+                <span class="current" th:text="${boardDto.postLike}">0</span>
+                <span class="new" th:text="${boardDto.postLike}">1</span>
+                <div class="add">+1</div>
+              </div>
+            </button>
             <div class="like-btn">
               <button class="btnOpen btnShare" id="shareModalBox">
                 <img src="/images/open.svg" alt="" />
@@ -78,6 +91,11 @@
                     alt=""
                     class="replyIcon"
                   />
+                  <!-- <img
+                  th:src="@{item.replyAuthIcon}"
+                  alt=""
+                  class="replyIcon"
+                  /> -->
                   <span th:text="${item.replyAuthNM}">홍길동</span>
                   <img
                   th:if="${item.replyHidden == 1}"
@@ -92,14 +110,14 @@
                   session.loggedUser != null and
                   session.loggedUser.userID == item.replyAuthID}">
                   <div class="menuBtn">
-                    <span class="menuBtn-modify modifyReplyBtn" id="modifyReplyBtn">수정</span>
+                    <span class="menuBtn-modify modifyReplyBtn" id="modifyReplyBtn" th:onclick="openModifyReplyEvent(this)">수정</span>
                     <span class="menuBtn-delete deleteReplyBtn" id="deleteReplyBtn" th:onclick="openDeleteReplyEvent(this)">삭제</span>
                   </div>
                 </th:block>
                 <!--  덧글 내용  -->
                 <div class="reply-contents--text">
                   <p th:if="${item.replyGroup!=0}" th:text="${item.replyGroupTarget}+'님에게 답변'" style="color:#777;"></p>
-                  <p th:text="${item.replyCont}">덧글 내용</p>
+                  <p class="context" th:text="${item.replyCont}">덧글 내용</p>
                 </div>
                 <div class="reply-contents--box">
                   <div class="reply-date" th:text="${item.replyDate}">작성일자</div>
@@ -148,8 +166,8 @@
            th:if="${item.replyHidden == 2}">
             <div class="reply-contents--icon">
               <a>
-                <span class="replyIcon">
-                <span th:text="${item.replyNo}">홍길동</span>
+                <img src="/images/sampleprofile.jpg" class="replyIcon"/>
+                <span th:text="${item.replyNo}+'번 덧글'">홍길동</span>
 
               </a>
               <div class="reply-contents--text">
@@ -220,8 +238,13 @@
           <p>확인을 누르면 게시글이 완전히 삭제됩니다.</p>
         </div>
         <div class="modal-content--btn">
+<<<<<<< HEAD
           <button id="btnDeleteConfirm" class="btn btn-primary">확인</button>
           <button id="closeDelete" class="btn btn-secondary closeDeleteModal">취소</button>
+=======
+          <button id="btnDeleteConfirm" class="btnHover btn btn-primary">확인</button>
+          <button id="closeDelete" class="btn btn-secondary">취소</button>
+>>>>>>> 567974acede9b6839feacf45a227f46936938bff
         </div>
       </div>
     </div>
@@ -323,8 +346,22 @@
   
   
   <script src="/js/board/view.js"></script>
+  <script defer>
+        if (getLike(postNo)){
+        $(".current").text(c_liked-1);
+      }else{
+        $(".new").text(n_liked+1);
+      }
+
+  </script>
     <script>
+<<<<<<< HEAD
       getModal($("#deleteModalBox"), $("#deleteModal"), $(".closeDeleteModal"));
+=======
+
+  
+      getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
+>>>>>>> 567974acede9b6839feacf45a227f46936938bff
       getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
       getModal($(".deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
       // getModal($(".menuBtn"), $("#deleteReplyModal-M"), $("#deleteReplyModal-M  #closeDeleteReply"));
@@ -376,10 +413,34 @@
       });
     </script>
     <script th:inline="javascript">
+<<<<<<< HEAD
       //좋아요 History 연동 함수 #권인호 작성
       function updateLike(item){
         const postNo = $(item).data('postno');
 
+=======
+
+      //좋아요 상태 체크 함수 #권인호 작성
+      function getLike(postNo){
+        $.ajax({
+          url:"/member/getLike",
+          type:"POST",
+          data:{
+            postNo : postNo
+          },
+          success:function(response){
+            if(response == 1){
+              $(".like").addClass("active");
+            }
+          }
+        })
+      }
+
+
+      //좋아요 History 연동 함수 #권인호 작성
+      function updateLike(item){
+        const postNo = $(item).data('postno');
+>>>>>>> 567974acede9b6839feacf45a227f46936938bff
         $.ajax({
           url:"/member/like",
           type:"POST",
@@ -391,8 +452,10 @@
               case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용")
                 break;
               case 0 : alert("좋았었습니다!!")
+                $(".like").removeClass("active");
                 break;
               case 1 : alert("좋아요!")
+                $(".like").addClass("active");
                 break;
             }
           },
@@ -407,67 +470,23 @@
       }
 
       //좋아요 완료 후 숫자 변경 #권인호
-      function reloadData(_postNo){
-        $.ajax({
-          url:"/board/getLike",
-          type:"POST",
-          data:{
-            postNo: _postNo
-          },
-          success:function(response){
-            $(".postLike").text(response);
-          },
-          error:function(err){
-            console.log(err);
-            alert("뭔가 심상치않은 일이 생긴거야.");
-            location.href="redirect:/uri";
-          }
-        })
-      }
-
-      /*<![CDATA[*/
-      const postNo = [[${boardDto.postNo}]];
-      const postLike = $(".postLike").text();
-
-        // 추천 수 누를 때 이벤트
-        function postGood() {
-          console.log("btnPostLikeClicked");
-          const sendData = {
-            postNo: postNo
-          }
-
-          $.ajax({
-            url: "/board/updateLike",
-            type: "POST",
-            data: sendData,
-            success: function(response) {
-              if (response.result != null) {
-                $(".postLike").text(response.postLike);
-              }
-            },
-            error: function(err) {
-              console.log(err);
-            }
-          })
-        }
-
-        $("#btnDeleteConfirm").on("click", function() {
-          console.log("btnDeleteClicked");
-          $.ajax({
-            url: "/board/delete",
-            type: "POST",
-            data: {"postNo": postNo},
-            success: function(response) {
-              if (response.msg == "ok") {
-                 location.href="/mainPage/";
-              } else {
-                location.reload();
-              }
-            }
-          })
-        })
-
-      /*]]>*/
+      // function reloadData(_postNo){
+      //   $.ajax({
+      //     url:"/board/getLike",
+      //     type:"POST",
+      //     data:{
+      //       postNo: _postNo
+      //     },
+      //     success:function(response){
+      //       $(".postLike").text(response);
+      //     },
+      //     error:function(err){
+      //       console.log(err);
+      //       alert("뭔가 심상치않은 일이 생긴거야.");
+      //       location.href="redirect:/uri";
+      //     }
+      //   })
+      // }
     </script>
   </main>
 </html>
