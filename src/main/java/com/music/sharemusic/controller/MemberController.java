@@ -1,5 +1,6 @@
 package com.music.sharemusic.controller;
 
+import com.music.sharemusic.dao.HistoryDao;
 import com.music.sharemusic.dto.BoardDto;
 import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
@@ -38,6 +39,9 @@ public class MemberController {
 
   @Autowired
   MemberServiceImpl memberService;
+
+  @Autowired
+  HistoryDao historyDao;
 
   public LoggedDto loggedUser(HttpSession session) {
     LoggedDto loggedUser = null;
@@ -83,7 +87,11 @@ public class MemberController {
     if (memberService.getMemberOne(userID).getUserPrincipal() == -1) {
       return "redirect:/member/alert";
     }
-
+    SendDataDto data = new SendDataDto();
+    data.setUserID(loggedUser.getUserID());
+    data.setFollowID(userID);
+    int follow = historyDao.getFollow(data);
+    loggedUser.setPostFollowed(follow);
     MemberInfoDto userInfo = memberService.getMemberInfo(userID);
     model.addAttribute("userInfo", userInfo);
     log.info(loggedUser.getUserID());
@@ -301,6 +309,18 @@ public class MemberController {
     return result;
   }
 
+  @PostMapping("/recent/delete")
+  @ResponseBody
+  public int recentDelete(HttpSession session) {
+    LoggedDto loggedUser = loggedUser(session);
+    if (loggedUser == null) {
+      return -1;
+    }
+    String userID = loggedUser.getUserID();
+    historyDao.deleteHistoryAll(userID);
+    return 1;
+  }
+
   @GetMapping("/logout")
   public String logout(HttpSession session, SessionStatus status) {
     if (session != null) {
@@ -316,10 +336,10 @@ public class MemberController {
   @ResponseBody
   public int withdraw(HttpSession session, MemberDto memberDto) {
     LoggedDto loggedUser = loggedUser(session);
-    String userID = loggedUser.getUserID();
     if (loggedUser == null) {
       return -1;
     }
+    String userID = loggedUser.getUserID();
     MemberDto checkDto = memberService.getMemberOne(userID);
     if (
       !checkDto.getUserID().equals(userID) ||

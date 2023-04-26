@@ -1,71 +1,61 @@
-function likeEvent(){
-    const btnsLike = document.querySelectorAll(".btn-like");
-    btnsLike.forEach((item)=>{
-        item.addEventListener("click",(e)=>{
-            const sendData = {
-                "postNo":item.dataset.postno
-                //좋아요는 기록 조작의 우려가 있어서 서버에서 좋아요 여부 처리
-            }
-            $.ajax({
-                url:"/member/like",
-                type:"post",
-                data:sendData,
-                success:function(response){
-                    switch(response){
-                        case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용") 
-                        location.href="/member/login"
-                          break;
-                        case 0 : alert("좋았었습니다!!")
-                          $(".like-good").removeClass("liked");
-                        // $(item).parent().parent('li').addClass('cancel');
-                        // $(item).addClass('cancel')
-                          break;
-                        case 1 : alert("좋아요!")
-                          $(".like-good").addClass("liked");
-                        // $(item).parent().parent('li').removeClass('cancel');
-                        // $(item).removeClass('cancel')
-                          break;
-                      }
-                },
-                error:function(err){
-                    console.log(err);
-                }
-            })
-        })
+function likeEvent(item){
+  const sendData = {
+    "postNo":item.dataset.postno
+    //좋아요는 기록 조작의 우려가 있어서 서버에서 좋아요 여부 처리
+    }
+    $.ajax({
+        url:"/member/like",
+        type:"post",
+        data:sendData,
+        success:function(response){
+            switch(response){
+                case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용") 
+                location.href="/member/login"
+                  break;
+                case 0 : 
+                  $(item).removeClass("btn-dark");
+                // $(item).parent().parent('li').addClass('cancel');
+                // $(item).addClass('cancel')
+                  break;
+                case 1 : 
+                  $(item).addClass("btn-dark");
+                // $(item).parent().parent('li').removeClass('cancel');
+                // $(item).removeClass('cancel')
+                  break;
+              }
+        },
+        error:function(err){
+            console.log(err);
+        }
     })
   }
-function bookmarkEvent(){
-    const btnsBookmark = document.querySelectorAll(".btn-bookmark");
-    btnsBookmark.forEach((item)=>{
-        item.addEventListener("click",(e)=>{
-            const sendData = {
-                "postNo":item.dataset.postno,
+function bookmarkEvent(item){
+  const sendData = {
+    "postNo":item.dataset.postno,
+  }
+  $.ajax({
+      url:"/member/bookmark",
+      type:"post",
+      data:sendData,
+      success:function(response){
+          console.log(response);
+          switch(response){
+              case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용") 
+              location.href="/member/login"
+                break;
+              case 0 : 
+              $(item).removeClass('btn-info')
+                break;
+              case 1 : 
+              $(item).addClass('btn-info')
+                break;
             }
-            $.ajax({
-                url:"/member/bookmark",
-                type:"post",
-                data:sendData,
-                success:function(response){
-                    console.log(response);
-                    switch(response){
-                        case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용") 
-                        location.href="/member/login"
-                          break;
-                        case 0 : alert("북마크 했었어요!!")
-                        $(item).addClass('cancel')
-                          break;
-                        case 1 : alert("북마크 했습니다!")
-                        $(item).removeClass('cancel')
-                          break;
-                      }
 
-                },
-                error:function(err){
-                    console.log(err);
-                }
-            })
-        })
-    })
+      },
+      error:function(err){
+          console.log(err);
+      }
+  })
 }
 function followEvent(){
     const btnsBookmark = document.querySelectorAll(".btn-follow");
@@ -82,10 +72,10 @@ function followEvent(){
                 success:function(response){
                     if(response){
                         alert("팔로우 했어요!");
-                        item.classList.add("followd");
-                    }else{
+                        item.classList.remove("btn-secondary");
+                      }else{
                         alert("팔로우 했었어요!");
-                        item.classList.remove("followed");
+                        item.classList.add("btn-secondary");
                     }
                 },
                 error:function(err){
@@ -178,4 +168,18 @@ function setIcon(event) {
     $("#updateProfile-userNM").addClass("hidden");
     $("#originalProfile-userNM").removeClass("hidden");
     $("#profile-modify").removeClass("hidden");
+  }
+
+  function recentDelete(){
+    $.ajax({
+      url:"/member/recent/delete",
+      type:"POST",
+      success:function(response){
+        console.log(response)
+      },
+      error:function(err){
+        console.log(err);
+        alert("알 수 없는 오류가 발생했습니다.");
+      }
+    })
   }

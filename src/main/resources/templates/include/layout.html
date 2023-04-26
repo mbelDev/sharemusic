@@ -161,9 +161,15 @@
         <article class="headerLayout-Area--viewContents topAndbut">
           <div class="view view03 line">
             <ul>
-              <li><div><img src="/images/navIcon07.png" alt=""><span>북마크</span></div></li>
-              <li><div><img src="/images/navIcon08.png" alt=""><span>좋아요</span></div></li>
-              <li><div><img src="/images/navIcon09.png" alt=""><span>구독</span></div></li>
+              <li><a th:href="@{/mainPage/mylist?category=bookmark}">
+                <div><img src="/images/navIcon07.png" alt=""><span>북마크</span></div>
+              </a></li>
+              <li><a th:href="@{/mainPage/mylist?category=liked}">
+                <div><img src="/images/navIcon08.png" alt=""><span>좋아요</span></div>
+              </a></li>
+              <li><a th:href="@{/mainPage/mylist?category=follow}">
+                <div><img src="/images/navIcon09.png" alt=""><span>구독</span></div>
+              </a></li>
             </ul>
           </div>
         </article><!-- .headerLayout-Area--viewContents -->

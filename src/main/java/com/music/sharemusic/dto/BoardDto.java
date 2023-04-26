@@ -2,7 +2,6 @@ package com.music.sharemusic.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,13 +29,15 @@ public class BoardDto {
   private String postLink; // 유튜브 링크 varchar2 300
 
   @NotBlank(message = "장르는 필수 입력 사항입니다.")
-  private String postGenre; // 장르 
+  private String postGenre; // 장르
 
   @NotBlank(message = "감성은 필수 입력 사항입니다.")
-  private String postEmote; // 감성 
+  private String postEmote; // 감성
 
   private int postLike; // 추천수
   private int postHits; // 조회수
   private String postDate; // 작성일자
   private String postAuthID; // 작성자 아이디
+  private int postLiked; //좋아요가 눌려있습니까?
+  private String postAuthIcon;
 }

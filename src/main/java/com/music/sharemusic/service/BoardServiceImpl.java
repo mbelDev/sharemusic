@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-@Log4j2
 public class BoardServiceImpl implements BoardService {
 
   @Autowired

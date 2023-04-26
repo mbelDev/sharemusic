@@ -149,7 +149,11 @@
   justify-content: space-between;
 }
 .boardView-Video--title .title {
-  width: 50%;
+  width: 100%;
+}
+.boardView-Video--title .title-info {
+  display: flex;
+  justify-content: space-between;
 }
 .boardView-Video--title .title-name p {
   font-size: 25px;
@@ -164,8 +168,33 @@
 .boardView-Video--title .title-name h1 {
   font-size: 35px;
 }
+.boardView-Video--title .title-Auth {
+  display: flex;
+  align-items: center;
+}
+.boardView-Video--title .title-Auth-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.boardView-Video--title .title-Auth-name {
+  display: inline-block;
+  font-size: 25px;
+  font-weight: 300;
+  margin: 0 10px;
+}
+.boardView-Video--title .title-Auth-follow {
+  display: inline-block;
+}
+.boardView-Video--title .title-Content {
+  margin: 10px 0;
+  padding: 10px;
+  background: #1F1F1F;
+  border-radius: 5px;
+}
 .boardView-Video--title .title-Date {
-  margin: 50px 0 0 0;
+  margin: 0 0 50px 0;
 }
 .boardView-Video--title .title-btn {
   margin: 30px 0;

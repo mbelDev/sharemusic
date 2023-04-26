@@ -1,21 +1,16 @@
 package com.music.sharemusic.controller;
 
+import com.music.sharemusic.dao.HistoryDao;
 import com.music.sharemusic.dto.BoardDto;
-import com.music.sharemusic.dto.HistoryDto;
 import com.music.sharemusic.dto.LoggedDto;
-import com.music.sharemusic.dto.ReplyReplyDto;
 import com.music.sharemusic.dto.ReplysDto;
 import com.music.sharemusic.dto.SendDataDto;
 import com.music.sharemusic.service.BoardService;
-import com.music.sharemusic.service.MemberService;
 import com.music.sharemusic.service.MemberServiceImpl;
-import com.music.sharemusic.service.ReplysService;
 import com.music.sharemusic.service.ReplysServiceImpl;
-import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +39,12 @@ public class BoardController {
 
   @Autowired
   ReplysServiceImpl replysService;
+
+  @Autowired
+  MemberServiceImpl memberService;
+
+  @Autowired
+  HistoryDao historyDao;
 
   @ModelAttribute("loggedUser")
   public LoggedDto loggedUser(HttpSession session) {
@@ -74,15 +75,28 @@ public class BoardController {
 
   @GetMapping("/view")
   public String view(HttpSession session, int postNo, Model model) {
+    BoardDto boardDto = boardService.getPostOne(postNo);
+    // List<BoardDto> recentDto = boardService.getRecentAuth(boardDto.getUserID());
     if (loggedUser(session) != null) {
       LoggedDto loggedUser = loggedUser(session);
       loggedUser.setPostNo(postNo);
       // HistoryDto historyDto = memberService.getHistoryLiked(loggedUser);
       boardService.updateHits(loggedUser);
+      SendDataDto data = new SendDataDto();
+      data.setPostNo(postNo);
+      data.setFollowID(boardDto.getPostAuthID());
+      data.setUserID(loggedUser.getUserID());
+      int liked = historyDao.getLiked(data);
+      loggedUser.setPostLiked(liked);
+      int bookmark = historyDao.getBookmark(data);
+      loggedUser.setPostBookmarked(bookmark);
+      int follow = historyDao.getFollow(data);
+      loggedUser.setPostFollowed(follow);
       //로그인 정보가 있을 때만 조회수 증가
     }
-    BoardDto boardDto = boardService.getPostOne(postNo);
-    // List<BoardDto> recentDto = boardService.getRecentAuth(boardDto.getUserID());
+    String userIcon = getIcon(boardDto);
+    boardDto.setPostAuthIcon(userIcon);
+
     model.addAttribute("boardDto", boardDto);
     List<ReplysDto> replysList = replysService.getReplyAll(postNo);
     model.addAttribute("replysList", replysList);
@@ -299,5 +313,12 @@ public class BoardController {
     BoardDto boardDto = boardService.getPostOne(postNo);
     model.addAttribute("boardDto", boardDto);
     return "/board/view :: #reply-container";
+  }
+
+  //프로필 사진 받아오기
+  public String getIcon(BoardDto boardDto) {
+    String userID = boardDto.getPostAuthID();
+    String postAuthIcon = memberService.getMemberOne(userID).getUserIconReal();
+    return postAuthIcon;
   }
 }

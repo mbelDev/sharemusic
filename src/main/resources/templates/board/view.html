@@ -21,18 +21,33 @@
         <div class="boardView-Video--title">
           <div class="title">
             <input type="hidden" th:value="${boardDto.postNo}" id="postNo">
-            <div class="title-name">
-              <p th:text="${boardDto.postTitle}">곡이름</p>
-              <a class="btnHover" th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
-                <h1 th:text="${boardDto.postSinger}">가수</h1>
-              </a>
+            <div class="title-info">
+              <div class="title-name">
+                <p th:text="${boardDto.postTitle}">곡이름</p>
+                <a class="btnHover" th:href="@{/mainPage/(searchTxt=${boardDto.postSinger})}">
+                  <h1 th:text="${boardDto.postSinger}">가수</h1>
+                </a>
+              </div>
+              <div class="like-btn">
+                <button class="btnOpen btnShare" id="shareModalBox">
+                  <img src="/images/open.svg" alt="" />
+                </button>
+              </div>
             </div><!-- title-name -->
-            <div class="title-Date">
-              등록&nbsp;&nbsp; <span th:text="${boardDto.postDate}">0</span>
-              &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp; <span th:text="${boardDto.postHits}">0</span>
-            </div><!-- title-Date -->
+            <div class="title-Auth">
+              <img class="title-Auth-icon" th:src="@{/upload/}+${boardDto.postAuthIcon}" alt="">
+              <span class="title-Auth-name" th:text="${boardDto.postAuth}">작성자</span>
+              <span class="title-Auth-follow btn"  th:if="${loggedUser != null and loggedUser.userID != boardDto.postAuthID}"
+              th:classappend="${loggedUser == null ? 'btn-secondary' : loggedUser.postFollowed == 1 ? 'btn-primary' : 'btn-secondary'}" 
+              th:onclick="follow(this)" 
+              th:data-postAuthID="${boardDto.postAuthID}">구독</span>
+            </div>
             <div class="title-Content">
-              <h3 th:text="${boardDto.postCont}">본문</h3>
+              <div class="title-Date">
+                등록&nbsp;&nbsp; <span th:text="${boardDto.postDate}">0</span>
+                &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp; <span th:text="${boardDto.postHits}">0</span>
+              </div><!-- title-Date -->
+              <pre th:text="${boardDto.postCont}">본문</pre>
             </div>
             <div class="title-Genre">
               <a th:href="@{/mainPage/{category}(category=${boardDto.postGenre})}"><span th:text="'#' + ${boardDto.postGenre}">장르</span></a>
@@ -43,7 +58,7 @@
             <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
             </div><!-- title-btn -->
           </div><!-- title -->
-          <div class="like">
+          <!-- <div class="like">
             <button class="btnHover like button-star">
               <canvas></canvas>
               <div class="label">
@@ -59,8 +74,8 @@
               <button class="btnOpen btnShare " id="shareModalBox">
                 <img src="/images/open.svg" alt="" />
               </button>
-            </div><!-- like-btn -->
-          </div><!-- like -->
+            </div>
+          </div> -->
         </div><!-- boardView-Video--title -->
       </div><!-- boardView-Video -->
     </article><!-- boardView-Area -->
@@ -81,17 +96,16 @@
              or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
               <div class="reply-contents--icon">
                 <a th:href="@{|/member/user/${item.replyAuthID}|}">
-                  <!-- th:src="@{/upload/}+${item.replyIcon}" -->
-                  <img
+                  <!-- <img
                   src="/images/sampleprofile.jpg"
                     alt=""
                     class="replyIcon"
-                  />
-                  <!-- <img
-                  th:src="@{item.replyAuthIcon}"
+                  /> -->
+                  <img
+                  th:src="@{/upload/}+${item.replyAuthIcon}"
                   alt=""
                   class="replyIcon"
-                  /> -->
+                  />
                   <span th:text="${item.replyAuthNM}">홍길동</span>
                   <img
                   th:if="${item.replyHidden == 1}"
@@ -231,7 +245,7 @@
         </div>
         <div class="modal-content--btn">
           <button id="btnDeleteConfirm" class="btnHover btn btn-primary">확인</button>
-          <button id="closeDelete" class="btn btn-secondary closeDeleteModal">취소</button>
+          <button id="closeDeleteModal" class="btn btn-secondary">취소</button>
         </div>
       </div>
     </div>
@@ -314,8 +328,10 @@
           <button class="btn btn-primary" id="deleteReplyConfirm" th:onclick="modalReplyDelete(this)">확인</button>
           <button class="btn btn-secondary" id="closeDeleteReply">취소</button>
         </div>
-        <!-- write-modal--item -->
       </div>
+    </div>
+
+
 
 
     <!---------- 기술적 문제로 잠시 보류 ---------->
@@ -334,43 +350,26 @@
       </div>
     </section>
 
-    <!--------------------------------------------------[            자바 스크립트 영역             ]-------------------------------------------------------------------------->
-
-    <!-- 덧글 모달창 -->
-    <div id="comReplyModal-M" class="modal-wnd">
-      <div class="modal-wnd-item">
-        <div class="modal-content modal-ReplyDelete">
-          <!-- 모달창 안에 여기 내용 작성 -->
-          <h3 style="color: black;">덧글 쓰기</h3>
-          
-          <button id="closeDeleteReply">확인</button>
-        </div>
-        <!-- ModalThis-content -->
-      </div>
-      <!-- write-modal--item -->
-    </div>
-
-    <!---------- 기술적 문제로 잠시 보류 ---------->
-
-  </section>
-
   
 <!--------------------------------------------------[            자바 스크립트 영역             ]-------------------------------------------------------------------------->
   
   
   <script src="/js/board/view.js"></script>
   <script defer>
-        if (getLike(postNo)){
-        $(".current").text(c_liked-1);
-      }else{
-        $(".new").text(n_liked+1);
-      }
-
+    const c_like = parseInt($(".current").text());
+    const n_like = parseInt($(".new").text());
+    const like = $("button.like");
+    if($(like).hasClass("active")){
+      $(".current").text(c_like - 1);
+      starClick(like);
+    }else{
+      $(".new").text(n_like + 1);
+    }
   </script>
     <script>
-
-      getModal($(".like-btn button"), $(".shareModal"), $(".shareModalClose"));
-      getModal($("#deleteModalBox"), $("#deleteModal"), $(".closeDeleteModal"));
+      const postNo = $("#postNo").val();
+  
+      getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
       getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
       getModal($(".deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
       // getModal($(".menuBtn"), $("#deleteReplyModal-M"), $("#deleteReplyModal-M  #closeDeleteReply"));
@@ -422,10 +421,9 @@
       });
     </script>
     <script th:inline="javascript">
+
       //좋아요 History 연동 함수 #권인호 작성
       function updateLike(item){
-        const postNo = $(item).data('postno');
-
         $.ajax({
           url:"/member/like",
           type:"POST",
@@ -436,11 +434,11 @@
             switch(response){
               case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용")
                 break;
-              case 0 : alert("좋았었습니다!!")
-                $(".like").removeClass("active");
+              case 0 :
+                star(item);
                 break;
-              case 1 : alert("좋아요!")
-                $(".like").addClass("active");
+              case 1 :
+                star(item);
                 break;
             }
           },
@@ -450,7 +448,7 @@
           }
         })
         .done(()=>{
-          reloadData(postNo);
+          // reloadData(postNo);
         })
       }
 

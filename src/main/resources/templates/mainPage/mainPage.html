@@ -116,9 +116,13 @@
                     <p class="ItemBox-postSinger" th:text="${item.postSinger}">
                       가수이름
                     </p>
-                    <p class="ItemBox-postAuth" th:text="${item.postAuth}">
-                      별명
+                    <div>
+                      <img class="ItemBox-postAuthIcon" th:src="@{/upload/}+${item.postAuthIcon}" alt="" style="width:30px; height:30px;">
+                      <p class="ItemBox-postAuth" th:text="${item.postAuth}">
+                        별명
+                    </span>
                     </p>
+                    <p class="ItemBox-postHits" th:text="'조회수 : '+${item.postHits}"></p>
                   </div>
                   <!-- ItemBox-content -->
                 </a>
