@@ -1,5 +1,8 @@
 
 window.onload = function(){
+  const c_liked = $(".current").text();
+  const n_liked = $(".current").text();
+  const postNo = $("#postNo").val();
   let swiper = new Swiper(".boardView-swiper", {
     slidesPerView: 3,
     spaceBetween: 30,
@@ -9,22 +12,18 @@ window.onload = function(){
       disableOnInteraction: false,
     },
   });
-
-  
-
-  
   
 }
-  function colorClike(){}
-  let good = document.querySelector(".like-good");
-  let like = document.querySelector(".like");
-  werjwkrj();
 
-  function werjwkrj(){
-    like.addEventListener("click", function(){
-      good.classList.toggle('liked')
-    });
-  }
+  // let good = document.querySelector(".like-good");
+  // let like = document.querySelector(".like");
+  // werjwkrj();
+
+  // function werjwkrj(){
+  //   like.addEventListener("click", function(){
+  //     good.classList.toggle('liked')
+  //   });
+  // }
 
   const addLight = (x, y, z, i, s) => {
     const light = new THREE.PointLight(0xffffff, i);

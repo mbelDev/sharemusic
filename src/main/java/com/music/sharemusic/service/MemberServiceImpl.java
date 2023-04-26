@@ -167,8 +167,8 @@ public class MemberServiceImpl implements MemberService {
   }
 
   public List<BoardDto> getHistoryWritten(MemberDto memberDto) {
-    String userNM = memberDto.getUserNM();
-    List<BoardDto> result = historyDao.getHistoryWritten(userNM);
+    String userID = memberDto.getUserID();
+    List<BoardDto> result = historyDao.getHistoryWritten(userID);
     return result;
   }
 
@@ -190,6 +190,12 @@ public class MemberServiceImpl implements MemberService {
     String userID = memberDto.getUserID();
     List<HistoryDto> result = historyDao.getHistoryBookmark(userID);
     dependency(result);
+    return result;
+  }
+
+  //좋아요 정보 << History, Board >>
+  public int getLike(SendDataDto data) {
+    int result = historyDao.getLiked(data);
     return result;
   }
 

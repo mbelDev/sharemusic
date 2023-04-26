@@ -8,7 +8,7 @@
 <insert id="putPost" parameterType="BoardDto">
   INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{postAuth}, 
     #{postTitle}, #{postSinger}, #{postCont}, #{postLink},
-    #{postGenre}, #{postEmote}, 0, 0, SYSDATE)
+    #{postGenre}, #{postEmote}, 0, 0, SYSDATE, #{postAuthID})
 </insert>
 
 <!-- 한 글 불러오기 -->
@@ -28,16 +28,30 @@
     )
   </if>
   <if test = "category != null">
-    AND 
+    AND (
     (POSTGENRE = #{category}) OR
     (POSTEMOTE = #{category})
+    )
   </if>
     ORDER BY ${sort} desc
 </select>
 
 <!-- 팔로우 중인 글 불러오기 #권인호 -->
-<select id="getPostFollow" parameterType="HashMap" resultType="BoardDto">
-  SELECT * FROM BOARD WHERE POSTAUTHID IN (SELECT FOLLOWID FROM FOLLOW WHERE USERID = #{userID}) ORDER BY POSTAUTHID, POSTDATE
+<select id="getFollowList" parameterType="HashMap" resultType="BoardDto">
+  SELECT * FROM BOARD WHERE POSTAUTHID IN (SELECT FOLLOWID FROM FOLLOW WHERE USERID = #{userID}) ORDER BY ${sort} desc
+</select>
+
+<!-- 마이리스트 불러오기 #권인호 -->
+<select id="getMyList" parameterType="HashMap" resultType="BoardDto">
+  SELECT * FROM BOARD WHERE POSTNO IN (SELECT POSTNO FROM HISTORY WHERE USERID = #{userID}
+  <if test="category.equals('liked')">
+   AND LIKED = 1 
+  </if>
+  <if test="category.equals('bookmark')">
+   AND BOOKMARK = 1 
+  </if>
+  )
+  ORDER BY ${sort} desc
 </select>
 
 <!-- 랭킹 글 불러오기 -->
@@ -53,7 +67,7 @@
       SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
     )
     WHERE 
-    ROWNUM <![CDATA[<=]]> 5 AND
+    ROWNUM <![CDATA[<=]]> 10 AND
     TO_CHAR(POSTDATE, 'YYYYMM') = (
     SELECT TO_CHAR(ADD_MONTHS(TRUNC(SYSDATE, 'MONTH'), -1 + #{moveMonth}), 'YYYYMM') FROM DUAL)
 </select>
@@ -64,7 +78,7 @@
     SELECT * FROM BOARD ORDER BY POSTLIKE DESC, POSTNO DESC
   ) 
   WHERE 
-  ROWNUM <![CDATA[<=]]> 5 AND (
+  ROWNUM <![CDATA[<=]]> 10 AND (
   TO_CHAR(POSTDATE, 'YYYYMMDD') BETWEEN 
     (SELECT TO_CHAR(TRUNC(SYSDATE, 'iw') - 7 + (7 * #{moveWeekly}), 'YYYYMMDD') FROM DUAL) AND
     (SELECT TO_CHAR(TRUNC(SYSDATE, 'iw') - 1 + (7 * #{moveWeekly}), 'YYYYMMDD') FROM DUAL)

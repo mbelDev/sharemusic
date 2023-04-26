@@ -16,12 +16,14 @@ function likeEvent(){
                         location.href="/member/login"
                           break;
                         case 0 : alert("좋았었습니다!!")
+                          $(".like-good").removeClass("liked");
                         // $(item).parent().parent('li').addClass('cancel');
-                        $(item).addClass('cancel')
+                        // $(item).addClass('cancel')
                           break;
                         case 1 : alert("좋아요!")
+                          $(".like-good").addClass("liked");
                         // $(item).parent().parent('li').removeClass('cancel');
-                        $(item).removeClass('cancel')
+                        // $(item).removeClass('cancel')
                           break;
                       }
                 },

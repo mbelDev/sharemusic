@@ -11,7 +11,7 @@
 
 <!-- 최근 작성 목록 -->
   <select id="getHistoryWritten" parameterType="String" resultType="BoardDto">
-    SELECT * FROM BOARD WHERE POSTAUTH = #{userNM} ORDER BY POSTDATE DESC
+    SELECT * FROM BOARD WHERE POSTAUTHID = #{userID} ORDER BY POSTDATE DESC
   </select>
 
 <!-- 최근 작성 목록 최근 5개 -->

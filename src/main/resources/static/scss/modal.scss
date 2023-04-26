@@ -15,6 +15,7 @@
     width: 70%;
     height: 60%;
     background-color: #fff;
+    color: #111;
     border-radius: 13px;
     position: fixed;
     top: 20%;
@@ -39,7 +40,8 @@
     position: relative;
     &__box {
       position: absolute;
-      top: 50%; left: 52%;
+      top: 50%;
+      left: 52%;
       transform: translate(-50%, -50%);
       width: 56.5vw;
       &__option {
@@ -49,6 +51,7 @@
           img {
             width: 13vw;
             margin: 10px 0;
+            cursor: pointer;
             transition: all 0.25s ease;
             &:hover {
               transform: scale(105%);
@@ -56,21 +59,10 @@
             }
           }
         }
-        // write modify 모달
-        // span {
-        //   display: grid;
-        //   width: 100%;
-        //   height: 100%;
-        //   text-align: center;
-        //   padding: auto 0px;
-        //   align-items: center;
-        //   cursor: pointer;
-        // }
       }
     }
   }
 } //.write-modal
-
 
 //프로필 사진 업데이트 모달 #권인호 작성
 .modal-profileUpdate{
@@ -78,7 +70,6 @@
   top: 50%; left: 50%;
   transform: translate(-50%,-50%);
   .modal-content {
-    outline: 1px solid red;
     width: 400px;
     height: 550px;
     background-color: #fff;
@@ -120,37 +111,36 @@
     background-color: #fff;
   }
 }
-
 //회원 탈퇴 모달 #권인호
-.modal-withdraw{
-  .modal{
-    &-content{
-    color:#333;
-    em{
-      color:#700;
+.modal-withdraw {
+  .modal {
+    &-content {
+      color: #333;
+      em {
+        color: #700;
+      }
+      padding: 2%;
+      text-align: center;
     }
-    padding: 2%;
-    text-align: center;
-  }
-  &-btns{
-    margin: 3%;
-  }
+    &-btns {
+      margin: 3%;
+    }
   }
 }
 //이용약관 모달 #권인호
-.modal-siteTerms{
-  .modal{
-    &-content{
+.modal-siteTerms {
+  .modal {
+    &-content {
       position: relative;
       display: block;
       height: 100%;
       padding: 5%;
       text-align: center;
-      .terms{
-        &-title{
+      .terms {
+        &-title {
           color: #333;
         }
-        &-content{
+        &-content {
           color: #333;
           overflow-y: scroll;
           height: 80%;
@@ -160,21 +150,21 @@
       }
     }
   }
-  #siteTermsClose{
+  #siteTermsClose {
     margin-top: 2.5%;
   }
 }
 
 //덧글 삭제 모달 #권인호
-#deleteReplyModal{
-  .modal-ReplyDelete{
+#deleteReplyModal {
+  .modal-ReplyDelete {
     left: 30%;
     top: 40%;
     width: 40%;
     height: 20%;
     color: #111;
-    .modal{
-      &-content{
+    .modal {
+      &-content {
         position: relative;
         display: block;
         height: 100%;
@@ -199,7 +189,8 @@
       .x-btn {
         cursor: pointer;
         position: absolute;
-        top: 5%; right: 10%;
+        top: 5%;
+        right: 10%;
         width: 50px;
         height: 50px;
         &::before {
@@ -210,7 +201,8 @@
           background-color: #fff;
           transform: rotate(45deg);
           position: absolute;
-          top: 45%; right: 20%;
+          top: 45%;
+          right: 20%;
         }
         &::after {
           content: "";
@@ -220,15 +212,15 @@
           background-color: #fff;
           transform: rotate(-45deg);
           position: absolute;
-          top: 45%; right: 20%;
+          top: 45%;
+          right: 20%;
         }
-    }//.closeModalMobile-btn
-    
-    }//#closeModalMobile
+      } //.closeModalMobile-btn
+    } //#closeModalMobile
     .mo-logged {
       display: flex;
       align-items: center;
-      justify-content: space-around
+      justify-content: space-around;
     }
     .headerLayout-Area--infoForm {
       display: flex;
@@ -243,7 +235,7 @@
             width: 50px;
             height: 50px;
           }
-        }//.infoForm-img
+        } //.infoForm-img
         .infoForm-userNM {
           display: flex;
           align-items: center;
@@ -255,17 +247,17 @@
             margin-left: 5px;
             font-size: 15px;
           }
-        }//.infoForm-userNM
-      }//.infoForm-All
-    }//.headerLayout-Area--infoForm
+        } //.infoForm-userNM
+      } //.infoForm-All
+    } //.headerLayout-Area--infoForm
     .comment-txt {
       display: flex;
       justify-content: center;
       margin: 16px 0;
-        button {
-          font-size: 16px;
-        }
-    }//.comment
+      button {
+        font-size: 16px;
+      }
+    } //.comment
     .headerLayout-Area--joinForm {
       display: flex;
       justify-content: center;
@@ -292,7 +284,7 @@
           }
         }
       }
-    }//.headerLayout-Area--joinForm
+    } //.headerLayout-Area--joinForm
     .headerLayout-Area--searchForm {
       display: flex;
       justify-content: center;
@@ -310,9 +302,9 @@
               outline: 1px solid #ff3672;
             }
           }
-        }//.form-outline
-      }//.input-group
-    }//.headerLayout-Area--searchForm
+        } //.form-outline
+      } //.input-group
+    } //.headerLayout-Area--searchForm
     .headerLayout-Area--viewContents {
       display: flex;
       justify-content: center;
@@ -328,7 +320,7 @@
             div {
               display: flex;
               align-items: center;
-              transition: all .7s ease;
+              transition: all 0.7s ease;
               img {
                 margin-right: 7px;
                 width: 20px;
@@ -380,7 +372,7 @@
             }
           }
         }
-      }//.view01
+      } //.view01
       .view02 {
         li {
           &:nth-child(1) {
@@ -452,7 +444,7 @@
             }
           }
         }
-      }//.view02
+      } //.view02
       .view03 {
         ul {
           margin-right: 20px;
@@ -510,10 +502,10 @@
             }
           }
         }
-      }//.view03
-    }//.headerLayout-Area--viewContents
-  }//.modal-wnd-item
-}//#modalMobile
+      } //.view03
+    } //.headerLayout-Area--viewContents
+  } //.modal-wnd-item
+} //#modalMobile
 
 // 삭제 모달
 .deleteMo {
@@ -527,7 +519,8 @@
   .modal-content {
     z-index: 99;
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
     background-color: #fff;
@@ -572,34 +565,75 @@
   }
 }
 
-// 공유하기 모달
-.shareModal {
-  .modal-content--txt {
-    padding: 10px 15px;
-    .shareBox {
-      .shareBox-Url {
-        input {
-          width: 100% !important;
-        }
+// 공유 모달
+.shareMo {
+  width: 100%;
+  height: 100vh;
+
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 80;
+    width: 500px;
+    height: 348px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 8px;
+    &--title {
+      padding: 20px 15px;
+      p {
+        font-size: 20px;
+        font-weight: 700;
       }
-      .shareBox-item {
-        margin-top: 10px;
-        display: flex;
-        gap: 4px;
-        button {
-          border: none;
-          &:focus {
-            outline: none;
+    }
+    &--txt {
+      padding: 30px 0;
+      border-top: 1px solid #75757560;
+      border-bottom: 1px solid #75757560;
+      p {
+        padding: 0 15px;
+        font-weight: 400;
+      }
+      &--icon {
+        ul {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 30px;
+          .btn {
+            display: block;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            padding: 0;
+            margin: 0 20px;
+            border-radius: 100%;
+            background-color: transparent;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
           }
         }
-        .button-star {
-          border-radius: 6px !important;
-        }
-        .like {
-          width: 6vw;
-          outline: none;
+      }
+      &--url {
+        display: flex;
+        justify-content: center;
+
+        input {
+          width: 380px;
+          height: 50px;
         }
       }
+    }
+    &--btn {
+      display: flex;
+      justify-content: center;
+      padding: 13px 15px;
+      text-align: right;
     }
   }
 }
@@ -621,7 +655,8 @@
         .x-btn {
           cursor: pointer;
           position: absolute;
-          top: 5%; right: 10%;
+          top: 5%;
+          right: 10%;
           width: 50px;
           height: 50px;
           &::before {
@@ -632,7 +667,8 @@
             background-color: #fff;
             transform: rotate(45deg);
             position: absolute;
-            top: 45%; right: 20%;
+            top: 45%;
+            right: 20%;
           }
           &::after {
             content: "";
@@ -642,15 +678,15 @@
             background-color: #fff;
             transform: rotate(-45deg);
             position: absolute;
-            top: 45%; right: 20%;
+            top: 45%;
+            right: 20%;
           }
-      }//.closeModalMobile-btn
-      
-      }//#closeModalMobile
+        } //.closeModalMobile-btn
+      } //#closeModalMobile
       .mo-logged {
         display: flex;
         align-items: center;
-        justify-content: space-around
+        justify-content: space-around;
       }
       .headerLayout-Area--infoForm {
         display: flex;
@@ -665,7 +701,7 @@
               width: 50px;
               height: 50px;
             }
-          }//.infoForm-img
+          } //.infoForm-img
           .infoForm-userNM {
             display: flex;
             align-items: center;
@@ -677,17 +713,17 @@
               margin-left: 5px;
               font-size: 15px;
             }
-          }//.infoForm-userNM
-        }//.infoForm-All
-      }//.headerLayout-Area--infoForm
+          } //.infoForm-userNM
+        } //.infoForm-All
+      } //.headerLayout-Area--infoForm
       .comment-txt {
         display: flex;
         justify-content: center;
         margin: 16px 0;
-          button {
-            font-size: 16px;
-          }
-      }//.comment
+        button {
+          font-size: 16px;
+        }
+      } //.comment
       .headerLayout-Area--joinForm {
         display: flex;
         justify-content: center;
@@ -714,7 +750,7 @@
             }
           }
         }
-      }//.headerLayout-Area--joinForm
+      } //.headerLayout-Area--joinForm
       .headerLayout-Area--searchForm {
         display: flex;
         justify-content: center;
@@ -732,9 +768,9 @@
                 outline: 1px solid #ff3672;
               }
             }
-          }//.form-outline
-        }//.input-group
-      }//.headerLayout-Area--searchForm
+          } //.form-outline
+        } //.input-group
+      } //.headerLayout-Area--searchForm
       .headerLayout-Area--viewContents {
         display: flex;
         justify-content: center;
@@ -750,7 +786,7 @@
               div {
                 display: flex;
                 align-items: center;
-                transition: all .7s ease;
+                transition: all 0.7s ease;
                 img {
                   margin-right: 7px;
                   width: 20px;
@@ -802,7 +838,7 @@
               }
             }
           }
-        }//.view01
+        } //.view01
         .view02 {
           li {
             &:nth-child(1) {
@@ -874,7 +910,7 @@
               }
             }
           }
-        }//.view02
+        } //.view02
         .view03 {
           ul {
             margin-right: 20px;
@@ -932,10 +968,10 @@
               }
             }
           }
-        }//.view03
-      }//.headerLayout-Area--viewContents
-    }//.modal-wnd-item
-  }//#modalMobile
+        } //.view03
+      } //.headerLayout-Area--viewContents
+    } //.modal-wnd-item
+  } //#modalMobile
   #modalGenre {
     z-index: 99;
   }
@@ -947,7 +983,6 @@
   .modal-mo {
     .modal-wnd-item {
       padding: 50px 20vw;
-
     }
   }
 }

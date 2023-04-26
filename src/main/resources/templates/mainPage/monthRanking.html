@@ -9,18 +9,15 @@
     <section class="monthRanking">
       <div class="monthRanking-page topAndbut">
         <h2>월간랭킹</h2>
-
+        <!-- 날짜이동버튼 -->
         <div class="month">
-          <!-- 날짜이동버튼 -->
+          <span class="prevMonth" onclick="prevMonth()"><==</span>
           <div id="monthDate">
-            <span class="prevMonth" onclick="prevMonth()"><==</span>
-            <span class="startDay" th:text="${monthDate[STARTDAY]}"
-              >시작 날짜</span
-            >
+            <span th:text="${monthDate[STARTDATE]}">시작 날짜</span>
             <span>~</span>
-            <span th:text="${monthDate[LASTDAY]}">끝 날짜</span>
-            <span class="nextMonth" onclick="nextMonth()">==></span>
+            <span th:text="${monthDate[LASTDATE]}">끝 날짜</span>
           </div>
+            <span class="nextMonth" onclick="nextMonth()">==></span>
           <!-- List 데이터 -->
           <div id="monthRankList">
             <ul>
@@ -57,7 +54,10 @@
     <!-- monthRanking -->
     <script th:inline="javascript">
       let moveMonth;
-      let date = new Date();
+
+      if (window.performance && window.performance.navigation.type == 1) {
+        sessionStorage.clear();
+      }
 
       if (sessionStorage.getItem("moveMonth") != null) {
         moveMonth = sessionStorage.getItem("moveMonth");
@@ -92,6 +92,19 @@
             moveMonth: moveMonth,
           },
           async: false,
+          success(response) {
+            $.ajax({
+              url: "/reload/moveDate",
+              type: "POST",
+              data: {
+                dateType: "month",
+                moveDate: moveMonth,
+              },
+              async: false,
+            }).done(function (fragment) {
+              $("#monthDate").replaceWith(fragment);
+            });
+          },
         }).done(function (fragment) {
           sessionStorage.setItem("moveMonth", moveMonth);
           $("#monthRankList").replaceWith(fragment);

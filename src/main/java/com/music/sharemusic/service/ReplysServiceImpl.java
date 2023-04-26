@@ -28,8 +28,11 @@ public class ReplysServiceImpl implements ReplysService {
         continue;
       }
       ReplysDto target = replysDao.getReply(replyNo);
+      String userID = item.getReplyAuthID();
       String targetNM = target.getReplyAuthNM();
+      String userIcon = memberDao.getMemberOne(userID).getUserIconReal();
       item.setReplyGroupTarget(targetNM);
+      item.setReplyAuthIcon(userIcon);
     }
     return result;
   }
@@ -67,6 +70,7 @@ public class ReplysServiceImpl implements ReplysService {
   }
 
   public void updateReply(ReplysDto replysDto) {
+    log.info("reply==={}", replysDto);
     replysDao.updateReply(replysDto);
   }
 

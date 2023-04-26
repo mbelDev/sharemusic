@@ -38,4 +38,5 @@ public class BoardDto {
   private int postLike; // 추천수
   private int postHits; // 조회수
   private String postDate; // 작성일자
+  private String postAuthID; // 작성자 아이디
 }

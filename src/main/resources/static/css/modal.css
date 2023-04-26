@@ -15,6 +15,7 @@
   width: 70%;
   height: 60%;
   background-color: #fff;
+  color: #111;
   border-radius: 13px;
   position: fixed;
   top: 20%;
@@ -51,6 +52,7 @@
 .modal-wnd .modalCategory__box__option a img {
   width: 13vw;
   margin: 10px 0;
+  cursor: pointer;
   transition: all 0.25s ease;
 }
 .modal-wnd .modalCategory__box__option a img:hover {
@@ -65,7 +67,6 @@
   transform: translate(-50%, -50%);
 }
 .modal-profileUpdate .modal-content {
-  outline: 1px solid red;
   width: 400px;
   height: 550px;
   background-color: #fff;
@@ -478,29 +479,71 @@
   width: 100%;
 }
 
-.shareModal .modal-content--txt {
-  padding: 10px 15px;
+.shareMo {
+  width: 100%;
+  height: 100vh;
 }
-.shareModal .modal-content--txt .shareBox .shareBox-Url input {
-  width: 100% !important;
+.shareMo .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 80;
+  width: 500px;
+  height: 348px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 8px;
 }
-.shareModal .modal-content--txt .shareBox .shareBox-item {
-  margin-top: 10px;
+.shareMo .modal-content--title {
+  padding: 20px 15px;
+}
+.shareMo .modal-content--title p {
+  font-size: 20px;
+  font-weight: 700;
+}
+.shareMo .modal-content--txt {
+  padding: 30px 0;
+  border-top: 1px solid rgba(117, 117, 117, 0.3764705882);
+  border-bottom: 1px solid rgba(117, 117, 117, 0.3764705882);
+}
+.shareMo .modal-content--txt p {
+  padding: 0 15px;
+  font-weight: 400;
+}
+.shareMo .modal-content--txt--icon ul {
   display: flex;
-  gap: 4px;
+  justify-content: center;
+  margin-bottom: 30px;
 }
-.shareModal .modal-content--txt .shareBox .shareBox-item button {
-  border: none;
+.shareMo .modal-content--txt--icon ul .btn {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  margin: 0 20px;
+  border-radius: 100%;
+  background-color: transparent;
 }
-.shareModal .modal-content--txt .shareBox .shareBox-item button:focus {
-  outline: none;
+.shareMo .modal-content--txt--icon ul .btn img {
+  width: 100%;
+  height: 100%;
 }
-.shareModal .modal-content--txt .shareBox .shareBox-item .button-star {
-  border-radius: 6px !important;
+.shareMo .modal-content--txt--url {
+  display: flex;
+  justify-content: center;
 }
-.shareModal .modal-content--txt .shareBox .shareBox-item .like {
-  width: 6vw;
-  outline: none;
+.shareMo .modal-content--txt--url input {
+  width: 380px;
+  height: 50px;
+}
+.shareMo .modal-content--btn {
+  display: flex;
+  justify-content: center;
+  padding: 13px 15px;
+  text-align: right;
 }
 
 @media screen and (max-width: 855px) {
