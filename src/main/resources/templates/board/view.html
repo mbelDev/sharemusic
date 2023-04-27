@@ -87,7 +87,7 @@
       <ul id="reply-container" th:if="${replysList} != null">
         <li th:Each="item:${replysList}" class="reply" th:data-replyno="${item.replyNo}">
           <!-- <p th:text="${item.replyNo}"></p> -->
-          <span th:if="${item.replyLevel} > 0" th:each="num : ${#numbers.sequence(0, item.replyLevel-1)}" style="display:block; width:10px;"></span>
+          <span th:if="${item.replyLevel} > 0" th:each="num : ${#numbers.sequence(0, item.replyLevel-1)}" style="display:block; width:15px;"></span>
 
           <th:block th:if="${item.replyHidden != 2}">
             <div class="reply-contents"
@@ -102,6 +102,7 @@
                     class="replyIcon"
                   /> -->
                   <img
+                  th:if="${item.replyHidden == 0}"
                   th:src="@{/upload/}+${item.replyAuthIcon}"
                   alt=""
                   class="replyIcon"
@@ -176,7 +177,7 @@
            th:if="${item.replyHidden == 2}">
             <div class="reply-contents--icon">
               <a>
-                <img src="/images/sampleprofile.jpg" class="replyIcon"/>
+                <img src="/images/sampleprofile.jpg" class="replyIcon deleted"/>
                 <span th:text="${item.replyNo}+'번 덧글'">홍길동</span>
 
               </a>
@@ -199,9 +200,8 @@
           </div>
           <div class="board-view--replyBox-subCont">
             <img class="replyIcon" th:src="@{/upload/}+${loggedUser.userIconReal}" alt="">
-            <textarea class="replyCont" name="replyCont"  >
-            </textarea>
-            <input type="button" class="btn btn-primary" value="작성" th:onclick="addReplyEvent(this)"/>
+            <textarea class="replyCont" id="replyCont" name="replyCont"  ></textarea>
+            <span type="button" class="btn btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"></span>
           </div>
         </th:block>
         <th:block th:if="${session.loggedUser == null}">
@@ -212,9 +212,8 @@
           <a th:href="@{/member/login}">
             <div class="board-view--replyBox-subCont">
               <img class="replyIcon" th:src="@{/images/sampleprofile.jpg}" alt="">
-              <textarea class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }" rows="2" >
-              </textarea>
-              <input type="button" class="btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"/>
+              <textarea class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }" rows="2" ></textarea>
+              <span type="button" class="btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"></span>
             </div>
           </a>
         </th:block>
@@ -250,6 +249,8 @@
       </div>
     </div>
 
+     <div id="shareModal" class="modal-wnd shareMo">
+  
     <!-- 공유 모달창 -->
     <div id="deleteModal" class="modal-wnd deleteMo shareModal">
       <div id="closeDeleteModal" class="shareModalClose"></div>

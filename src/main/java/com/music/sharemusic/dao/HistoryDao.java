@@ -68,7 +68,12 @@ public interface HistoryDao {
   //나를 팔로우 한 사람 수
   public int getCountFollower(String userID);
 
-  //
+  //userID의 모든 시청 기록 삭제
+  public void deleteRecentAll(String userID);
+
+  //userID의 postNo에 대한 시청 기록 삭제
+  public void deleteRecentOne(LoggedDto loggdeUser);
+
   //userID의 모든 기록 삭제
   public void deleteHistoryAll(String userID);
 

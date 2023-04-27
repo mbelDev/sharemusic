@@ -317,7 +317,7 @@ public class MemberController {
       return -1;
     }
     String userID = loggedUser.getUserID();
-    historyDao.deleteHistoryAll(userID);
+    historyDao.deleteRecentAll(userID);
     return 1;
   }
 

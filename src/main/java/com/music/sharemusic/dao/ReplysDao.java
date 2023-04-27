@@ -28,6 +28,8 @@ public interface ReplysDao {
 
   public int getReplyNextStep(ReplysDto replysDto);
 
+  public int getReplyNoNextStep(ReplysDto replysDto);
+
   public int getReplyLevel(ReplysDto replysDto);
 
   public void setReplyStepOnePlus(ReplysDto replysDto);

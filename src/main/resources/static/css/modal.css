@@ -152,6 +152,27 @@
   text-align: center;
 }
 
+#recentDeleteModal .modal-recentDelete {
+  left: 30%;
+  top: 40%;
+  width: 40%;
+  height: 20%;
+  color: #111;
+}
+#recentDeleteModal .modal-recentDelete .modal-content {
+  position: relative;
+  display: block;
+  height: 100%;
+  padding: 5%;
+  text-align: center;
+}
+#recentDeleteModal .modal-recentDelete .modal-content__title {
+  text-align: center;
+}
+#recentDeleteModal .modal-recentDelete .modal-content__btns {
+  margin-top: 15px;
+}
+
 .modal-mo .modal-wnd-item {
   width: 100%;
   height: 100vh;

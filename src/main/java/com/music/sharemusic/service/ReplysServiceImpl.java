@@ -24,13 +24,14 @@ public class ReplysServiceImpl implements ReplysService {
     List<ReplysDto> result = replysDao.getReplyAll(postNo);
     for (ReplysDto item : result) {
       int replyNo = item.getReplyGroup();
+      String userID = item.getReplyAuthID();
+      String userIcon = memberDao.getMemberOne(userID).getUserIconReal();
+      item.setReplyAuthIcon(userIcon);
       if (replyNo == 0) {
         continue;
       }
       ReplysDto target = replysDao.getReply(replyNo);
-      String userID = item.getReplyAuthID();
       String targetNM = target.getReplyAuthNM();
-      String userIcon = memberDao.getMemberOne(userID).getUserIconReal();
       item.setReplyGroupTarget(targetNM);
 
       if (target.getReplyHidden() == 1) {
@@ -39,7 +40,6 @@ public class ReplysServiceImpl implements ReplysService {
       if (target.getReplyHidden() == 2) {
         item.setReplyGroupTarget("삭제된 덧글");
       }
-      item.setReplyAuthIcon(userIcon);
     }
     return result;
   }
@@ -64,13 +64,19 @@ public class ReplysServiceImpl implements ReplysService {
     replysDto.setReplyAuthID(replyAuth.getUserID());
     replysDto.setReplyAuthNM(replyAuth.getUserNM());
     int step;
+    int group = replysDto.getReplyGroup();
     int level = replysDao.getReplyLevel(replysDto);
     replysDto.setReplyLevel(level + 1);
+    log.info("old Dto = {}", replysDto);
+    replysDto = getReplyNoMaxStep(replysDto);
+    log.info("new Dto = {}", replysDto);
     step = replysDao.getReplyNextStep(replysDto);
     if (step == 0) {
       step = replysDao.getReplyStep(replysDto);
     }
     replysDto.setReplyStep(step);
+    replysDto.setReplyLevel(level + 1);
+    replysDto.setReplyGroup(group);
     replysDao.setReplyStepOnePlus(replysDto);
     replysDto.setReplyStep(step + 1);
     replysDao.putReply(replysDto);
@@ -84,6 +90,20 @@ public class ReplysServiceImpl implements ReplysService {
   public void deleteReply(ReplysDto replysDto) {
     log.info("replyDto==={}", replysDto);
     replysDao.deleteReply(replysDto);
+  }
+
+  public ReplysDto getReplyNoMaxStep(ReplysDto replysDto) {
+    ReplysDto result = replysDto;
+    int replyNo = replysDao.getReplyNoNextStep(replysDto);
+    int replyLevel = replysDto.getReplyLevel() + 1;
+    if (replyNo == 0) {
+      return replysDto;
+    } else {
+      replysDto.setReplyGroup(replyNo);
+      replysDto.setReplyLevel(replyLevel);
+      result = getReplyNoMaxStep(replysDto);
+    }
+    return result;
   }
 
   //기본 CRUD 이벤트들

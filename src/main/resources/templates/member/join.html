@@ -46,7 +46,11 @@
               <input type="file" class="userIconFile" th:field="*{userIconFile}" id="file" onchange="setIcon(event);">
           </div>
             
-            <p class="previewIcon"></p>
+            <p class="previewIcon_test"></p>
+            <img 
+            src=""
+            class="previewIcon"
+            id="testProfile"></img>
             
           </div>
           <!-- joinForm-Area--userFile -->
@@ -124,19 +128,18 @@ $("#file").on('change',function(){
 
     // 이미지
     function setIcon(event) {
-      let reader = new FileReader();
+    var reader = new FileReader();
 
-      reader.onload = function (event) {
-        let img = document.createElement("img");
-        img.setAttribute("src", event.target.result);
-        console.log(event.target.result);
-        img.setAttribute("style", "width:100%; height:100%;");
-        document.querySelector(".previewIcon").appendChild(img);
-        //appendChild말고 replace방법을 찾아보자.
-      };
+    reader.onload = function (event) {
+      $("#testProfile").attr("src",event.target.result);
+      $("#testProfile").addClass("set");
 
-      reader.readAsDataURL(event.target.files[0]);
-    }
+      //appendChild말고 replace방법을 찾아보자.
+      //이것이 그 방법이다.
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+  }
 
     
 

@@ -1,9 +1,11 @@
 //덧글 입력 처리 함수
 function addReplyEvent(item){
     //item = 작성 버튼
-    const content = $(item).siblings('.replyCont').val();
+    const content = $(item).siblings('#replyCont').val();
     const hidden = $(item).closest('.board-view--replyBox-input').find('.check-hidden').is(":checked")==true ? 1 : 0 ; 
     //작성 버튼을 기준으로 형제 element에서 덧글 내용과 비밀글 체크를 받아온다
+    console.log($(item).siblings('.replyCont'));
+    console.log(content+"/"+hidden);
     $.ajax({
         url: "/board/reply",
         type:"POST",

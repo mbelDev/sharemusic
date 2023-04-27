@@ -25,6 +25,12 @@
     SELECT NVL(MAX(REPLYSTEP),0) FROM REPLYS WHERE POSTNO = #{postNo} AND REPLYGROUP = #{replyGroup} AND REPLYLEVEL = #{replyLevel}
   </select>
 
+  <!-- 내가 달려는 덧글의 다음LEVEL의 제일 큰 STEP을 가진 REPLYNO 받아오기 -->
+  <!-- 이걸 재귀로 돌려서 null이 나올 때 까지 돌리고 null이 나오면 그 replyNo로 getReplyStep을 실행한다. -->
+  <select id="getReplyNoNextStep" parameterType="ReplysDto" resultType="Integer">
+    SELECT NVL(MAX(REPLYNO),0) FROM REPLYS WHERE POSTNO = #{postNo} AND REPLYSTEP = (SELECT NVL(MAX(REPLYSTEP),0) FROM REPLYS WHERE POSTNO = #{postNo} AND REPLYGROUP = #{replyGroup} AND REPLYLEVEL = #{replyLevel})
+  </select>
+
   <!-- 내가 달려는 덧글의 STEP 받아오기 -->
   <select id="getReplyStep" parameterType="ReplysDto" resultType="Integer">
     SELECT REPLYSTEP FROM REPLYS WHERE POSTNO = #{postNo} AND REPLYNO = #{replyGroup}

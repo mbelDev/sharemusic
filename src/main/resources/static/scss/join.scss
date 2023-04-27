@@ -81,6 +81,16 @@ input {
         background-color: #1414148f;
         cursor: pointer;
       }
+      #testProfile{
+        max-width: 400px;
+        max-height: 400px;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        &.set{
+          opacity:1;
+        }
+      }
     } //.joinForm-Area--userFile
     .joinForm-Area--btn {
       margin-top: 40px;
