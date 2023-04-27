@@ -1,6 +1,7 @@
 .monthRanking {
   padding: 50px;
-  #monthRankList {
+}
+  .monthRankList {
     ul {
       li {
         width: 100%;
@@ -40,7 +41,7 @@
               background-size: cover;
               position: absolute;
               top: 35%;
-              left: 1.5%;
+              left: 20px;
             }
           }
         }
@@ -58,7 +59,7 @@
               background-size: cover;
               position: absolute;
               top: 35%;
-              left: 1.5%;
+              left: 20px;
             }
           }
         }
@@ -76,7 +77,7 @@
               background-size: cover;
               position: absolute;
               top: 35%;
-              left: 1.5%;
+              left: 20px;
             }
           }
         }
@@ -84,10 +85,12 @@
           display: flex;
           align-items: center;
           &-no {
+            width: 100px;
             height: 100%;
-            padding: 0 50px;
+            text-align: center;
             font-size: 2vw;
             font-weight: bold;
+            margin-right: 3vw;
           } //&-no
           &-img {
             width: 10vw;
@@ -117,6 +120,7 @@
         .postTitle {
           position: relative;
           transition: all 0.25s ease;
+          margin-right: 50px;
           &:hover {
             transform: translateY(3%);
           }
@@ -124,27 +128,29 @@
             img {
               width: 25vw;
               border-radius: 23px;
-              margin-right: 50px;
             }
           }
           .postTitle-sub {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            padding-top: 25%;
-            padding-left: 2vw;
-            opacity: 0;
-            width: 91%;
+            top: 0; left: 0;
+            width: 100%;
             height: 100%;
-            transition: all 0.25s ease;
-            transition-delay: 0.2s;
-            background: rgba(black, 0.6);
             border-radius: 23px;
-            p {
-              font-size: 1.5vw;
-              font-weight: 800;
+            opacity: 0;
+            background-color: #0000009f;
+            transition: all 0.4s ease;
+            transition-delay: 0.1s;
+            span {
+              position: absolute;
+              top: 50%; left: 50%;
+              transform: translate(-50%, -50%);
+              p {
+                font-size: 1vw;
+              }
             }
             a {
+              width: 100%;
+              height: 100%;
               padding: 0.7vw 1.5vw;
               border-radius: 6px;
               margin-top: 15px;
@@ -157,7 +163,6 @@
       }
     }
   } //#monthRankList
-} //.monthRanking
 
 #month {
   display: flex;
@@ -176,219 +181,336 @@
   }
 }
 
-@media screen and (max-width: 1550px) {
-  .monthRanking #monthRankList ul li:nth-child(1),
-  .monthRanking #monthRankList ul li:nth-child(2),
-  .monthRanking #monthRankList ul li:nth-child(3) {
-    width: 23vw;
-    margin: 10px;
+@media screen and (max-width: 1690px) {
+  .monthRankList ul li:nth-child(1) .postTxt-no::after,
+  .monthRankList ul li:nth-child(2) .postTxt-no::after,
+  .monthRankList ul li:nth-child(3) .postTxt-no::after {
+    width: 4vw;
+    height: 6vw;
+    top: 35%;
+    left: 28px;
+}
+.monthRankList ul li .postTxt-no {
+  margin-right: auto;
+
   }
-  .monthRanking {
-    padding: 50px;
+}
+@media screen and (max-width: 1470px) {
+  .monthRankList ul li:nth-child(1) .postTxt-no::after,
+  .monthRankList ul li:nth-child(2) .postTxt-no::after,
+  .monthRankList ul li:nth-child(3) .postTxt-no::after {
+    width: 4vw;
+    height: 6vw;
+    top: 35%;
+    left: 35px;
+}
+}
+@media screen and (max-width: 1190px) {
+  .monthRankList ul li:nth-child(1) .postTxt-no::after,
+  .monthRankList ul li:nth-child(2) .postTxt-no::after,
+  .monthRankList ul li:nth-child(3) .postTxt-no::after {
+    width: 5vw;
+    height: 7vw;
+    top: 35%;
+    left: 30px;
   }
-} //@media screen and (max-width: 1550px)
-@media screen and (max-width: 1415px) {
-  .monthRanking #monthRankList ul li:nth-child(1),
-  .monthRanking #monthRankList ul li:nth-child(2),
-  .monthRanking #monthRankList ul li:nth-child(3) {
-    width: 23vw;
+  .monthRankList ul li .postTxt-no {
+    font-size: 3vw;
   }
-  .monthRanking {
-    padding: 50px;
+  .monthRankList ul li .postTxt-img {
+    min-width: 10vw;
+    min-height: 10vw;
+    outline: 1px solid red;
   }
-} //@media screen and (max-width: 1415px)
-@media screen and (max-width: 1240px) {
-  .monthRanking #monthRankList ul li:nth-child(1),
-  .monthRanking #monthRankList ul li:nth-child(2),
-  .monthRanking #monthRankList ul li:nth-child(3) {
-    width: 22vw;
+  .monthRankList ul li .postTxt-title p:nth-child(1) {
+    font-size: 2vw;
   }
-  .monthRanking {
-    padding: 50px;
+  .monthRankList ul li .postTxt-title p:nth-child(2) {
+    font-size: 1.4vw;
   }
-} //@media screen and (max-width: 1240px)
-@media screen and (max-width: 1045px) {
-  .monthRanking #monthRankList ul li:nth-child(1),
-  .monthRanking #monthRankList ul li:nth-child(2),
-  .monthRanking #monthRankList ul li:nth-child(3) {
-    width: 21vw;
+  .monthRankList ul li .postTxt-title p:nth-child(3) {
+    font-size: 1.1vw;
   }
-  .monthRanking {
-    padding: 30px;
-  }
-} //@media screen and (max-width: 1045px)
-@media screen and (max-width: 960px) {
-  .monthRanking #monthRankList ul li:nth-child(1),
-  .monthRanking #monthRankList ul li:nth-child(2),
-  .monthRanking #monthRankList ul li:nth-child(3) {
+  .monthRankList ul li .postTitle a img {
     width: 20vw;
   }
+  .monthRankList ul li .postTitle .postTitle-sub {
+    padding-top: 15%;
+    padding-left: 2vw;
+  }
+  .postTxt-title {
+    width: 300px;
+  }
   .monthRanking {
-    padding: 20px;
+    padding: 10px;
   }
-} //@media screen and (max-width: 960px)
+}
+@media screen and (max-width: 1060px) {
+  .monthRankList ul li:nth-child(1) .postTxt-no::after,
+  .monthRankList ul li:nth-child(2) .postTxt-no::after,
+  .monthRankList ul li:nth-child(3) .postTxt-no::after {
+    width: 5vw;
+    height: 7vw;
+    top: 35%;
+    left: 30px;
+  }
+  .monthRankList ul li .postTxt-no {
+    font-size: 3vw;
+  }
+  .monthRankList ul li .postTxt-img {
+    min-width: 10vw;
+    min-height: 10vw;
+    outline: 1px solid red;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(1) {
+    font-size: 2vw;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(2) {
+    font-size: 1.4vw;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(3) {
+    font-size: 1.1vw;
+  }
+  .monthRankList ul li .postTitle a img {
+    width: 20vw;
+  }
+  .monthRankList ul li .postTitle .postTitle-sub {
+    padding-top: 15%;
+    padding-left: 2vw;
+  }
+  .postTxt-title {
+    width: 250px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .monthRankList ul li:nth-child(1) .postTxt-no::after,
+  .monthRankList ul li:nth-child(2) .postTxt-no::after,
+  .monthRankList ul li:nth-child(3) .postTxt-no::after {
+    width: 5vw;
+    height: 7vw;
+    top: 35%;
+    left: 30px;
+  }
+  .monthRankList ul li .postTxt-no {
+    font-size: 3vw;
+  }
+  .monthRankList ul li .postTxt-img {
+    min-width: 10vw;
+    min-height: 10vw;
+    outline: 1px solid red;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(1) {
+    font-size: 2vw;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(2) {
+    font-size: 1.4vw;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(3) {
+    font-size: 1.1vw;
+  }
+  .monthRankList ul li .postTitle a img {
+    width: 20vw;
+  }
+  .monthRankList ul li .postTitle .postTitle-sub {
+    padding-top: 15%;
+    padding-left: 2vw;
+  }
+  .postTxt-title {
+    width: 200px;
+  }
+}
+@media screen and (max-width: 915px) {
+  .monthRankList ul li:nth-child(1) .postTxt-no::after,
+  .monthRankList ul li:nth-child(2) .postTxt-no::after,
+  .monthRankList ul li:nth-child(3) .postTxt-no::after {
+    width: 5vw;
+    height: 7vw;
+    top: 35%;
+    left: 30px;
+  }
+  .monthRankList ul li .postTxt-no {
+    font-size: 3vw;
+  }
+  .monthRankList ul li .postTxt-img {
+    min-width: 10vw;
+    min-height: 10vw;
+    outline: 1px solid red;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(1) {
+    font-size: 2vw;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(2) {
+    font-size: 1.5vw;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(3) {
+    font-size: 1.2vw;
+  }
+  .monthRankList ul li .postTitle a img {
+    width: 20vw;
+  }
+  .monthRankList ul li .postTitle .postTitle-sub {
+    padding-top: 15%;
+    padding-left: 2vw;
+  }
+  .postTxt-title {
+    width: 22vw;
+  }
+}
+@media screen and (max-width: 960px) {
+  .monthRankList ul li:nth-child(1) .postTxt-no::after,
+  .monthRankList ul li:nth-child(2) .postTxt-no::after,
+  .monthRankList ul li:nth-child(3) .postTxt-no::after {
+    width: 5vw;
+    height: 7vw;
+    top: 35%;
+    left: 30px;
+  }
+  .monthRankList ul li .postTxt-no {
+    font-size: 3vw;
+  }
+  .monthRankList ul li .postTxt-img {
+    min-width: 10vw;
+    min-height: 10vw;
+    outline: 1px solid red;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(1) {
+    font-size: 2vw;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(2) {
+    font-size: 1.5vw;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(3) {
+    font-size: 1.2vw;
+  }
+  .monthRankList ul li .postTitle a img {
+    width: 20vw;
+  }
+  .monthRankList ul li .postTitle .postTitle-sub {
+    padding-top: 15%;
+    padding-left: 2vw;
+  }
+  .postTxt-title {
+    width: 22vw;
+  }
+  .monthRankList ul li .postTitle .postTitle-sub span p {
+    width: 100px;
+  }
+}
 @media screen and (max-width: 855px) {
-  .monthRanking #monthRankList ul li:nth-child(1) {
-    width: 100%;
+  .monthRankList ul li:nth-child(1) .postTxt-no::after,
+  .monthRankList ul li:nth-child(2) .postTxt-no::after,
+  .monthRankList ul li:nth-child(3) .postTxt-no::after {
+    width: 6vw;
+    height: 8.5vw;
+    top: 25%;
+    left: 30px;
   }
-  .monthRanking #monthRankList ul li:nth-child(1) a img {
-    width: 100%;
+  .monthRankList ul li .postTxt-no {
+    font-size: 3vw;
   }
-  .monthRanking #monthRankList ul li:nth-child(2),
-  .monthRanking #monthRankList ul li:nth-child(3) {
-    width: 47.4%;
+  .monthRankList ul li .postTxt-img {
+    min-width: 10vw;
+    min-height: 10vw;
+    outline: 1px solid red;
   }
-  .monthRanking #monthRankList ul li:nth-child(2) a img,
-  .monthRanking #monthRankList ul li:nth-child(3) a img {
-    width: 100%;
+  .monthRankList ul li .postTxt-title p:nth-child(1) {
+    font-size: 2.3vw;
   }
-  .monthRanking #monthRankList ul li {
-    width: 100%;
-    margin: 8px;
+  .monthRankList ul li .postTxt-title p:nth-child(2) {
+    font-size: 1.7vw;
   }
-  .monthRanking #monthRankList ul li a img {
-    width: 30%;
+  .monthRankList ul li .postTxt-title p:nth-child(3) {
+    font-size: 1.5vw;
   }
-  .monthRanking #monthRankList ul li:nth-child(1) .postTitle,
-  .monthRanking #monthRankList ul li:nth-child(2) .postTitle,
-  .monthRanking #monthRankList ul li:nth-child(3) .postTitle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7137254902);
-    opacity: 0;
-    transition: all 0.25s ease;
-    transition-delay: 0.2s;
+  .monthRankList ul li .postTitle a img {
+    width: 32vw;
   }
-  .monthRanking #monthRankList ul li:nth-child(1) .postTitle:hover,
-  .monthRanking #monthRankList ul li:nth-child(2) .postTitle:hover,
-  .monthRanking #monthRankList ul li:nth-child(3) .postTitle:hover {
-    opacity: 1;
+  .monthRankList ul li .postTitle .postTitle-sub {
+    padding-top: 15%;
+    padding-left: 2vw;
   }
-  .monthRanking #monthRankList ul li .postTitle {
-    position: absolute;
-    top: 0;
-    left: 30%;
-    width: 79%;
-    height: 100%;
-    background: none;
-    opacity: 1;
-  }
-  .monthRanking
-    #monthRankList
-    ul
-    li:nth-child(1)
-    .postTitle
-    .postTxt
-    p:nth-child(3),
-  .monthRanking
-    #monthRankList
-    ul
-    li:nth-child(2)
-    .postTitle
-    .postTxt
-    p:nth-child(3),
-  .monthRanking
-    #monthRankList
-    ul
-    li:nth-child(3)
-    .postTitle
-    .postTxt
-    p:nth-child(3) {
-    margin-top: 15px;
-  }
-  .monthRanking #monthRankList ul li .postTitle .postTxt p:nth-child(3) {
-    margin-top: 45px;
-  }
-} //@media screen and (max-width: 850px)
-@media screen and (max-width: 500px) {
-  .monthRanking #monthRankList ul li:nth-child(1) {
-    width: 100%;
-  }
-  .monthRanking #monthRankList ul li:nth-child(1) a img {
-    width: 100%;
-  }
-  .monthRanking #monthRankList ul li:nth-child(2),
-  .monthRanking #monthRankList ul li:nth-child(3) {
-    width: 45.4%;
-  }
-  .monthRanking #monthRankList ul li:nth-child(2) a img,
-  .monthRanking #monthRankList ul li:nth-child(3) a img {
-    width: 100%;
-  }
-  .monthRanking #monthRankList ul li {
-    width: 100%;
-    margin: 8px;
-  }
-  .monthRanking #monthRankList ul li a img {
-    width: 35%;
-  }
-  .monthRanking #monthRankList ul li:nth-child(1) .postTitle,
-  .monthRanking #monthRankList ul li:nth-child(2) .postTitle,
-  .monthRanking #monthRankList ul li:nth-child(3) .postTitle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7137254902);
-    opacity: 0;
-    transition: all 0.25s ease;
-    transition-delay: 0.2s;
-  }
-  .monthRanking #monthRankList ul li:nth-child(1) .postTitle:hover,
-  .monthRanking #monthRankList ul li:nth-child(2) .postTitle:hover,
-  .monthRanking #monthRankList ul li:nth-child(3) .postTitle:hover {
-    opacity: 1;
-  }
-  .monthRanking #monthRankList ul li .postTitle {
-    position: absolute;
-    top: 8%;
-    left: 35%;
-    width: 79%;
-    height: 100%;
-    background: none;
-    opacity: 1;
-  }
-  .topAndbut {
-    text-align: left;
-  }
-  .monthRanking #monthRankList ul li .postTitle .postTxt p {
-    font-size: 16px;
-  }
-  .monthRanking #monthRankList ul li .postTitle .postTxt p:nth-child(1) {
-    font-size: 13px;
-    font-weight: 200;
-  }
-  .monthRanking
-    #monthRankList
-    ul
-    li:nth-child(1)
-    .postTitle
-    .postTxt
-    p:nth-child(3),
-  .monthRanking
-    #monthRankList
-    ul
-    li:nth-child(2)
-    .postTitle
-    .postTxt
-    p:nth-child(3),
-  .monthRanking
-    #monthRankList
-    ul
-    li:nth-child(3)
-    .postTitle
-    .postTxt
-    p:nth-child(3) {
-    margin-top: 15px;
-  }
-  .monthRanking #monthRankList ul li .postTitle .postTxt p:nth-child(3) {
-    margin-top: 30px;
+  .postTxt-title {
+    width: 30vw;
   }
   .monthRanking {
     margin-top: 100px;
+    padding: 30px;
   }
-} //@media screen and (max-width: 500px)
+  .monthRankList ul li {
+    padding: 80px 0 100px 0;
+  }
+  .monthRankList ul li .postTxt-img {
+    min-width: 13vw;
+    min-height: 13vw;
+  }
+  .monthRankList ul li .postTitle .postTitle-sub span p {
+    font-size: 2vw;
+    width: 150px;
+  }
+  
+}
+@media screen and (max-width: 500px) {
+  .monthRankList ul li:nth-child(1) .postTxt-no::after,
+  .monthRankList ul li:nth-child(2) .postTxt-no::after,
+  .monthRankList ul li:nth-child(3) .postTxt-no::after {
+    width: 8vw;
+    height: 12.5vw;
+    top: 30%;
+    left: 10px;
+  }
+  .monthRankList ul li .postTxt-no {
+    font-size: 3vw;
+    margin-left: 20px;
+    width: 50%;
+    text-align: left;
+    
+    p {
+      width: 60px;
+      font-size: 20px;
+    }
+  }
+  .monthRankList ul li .postTxt-img {
+    min-width: 10vw;
+    min-height: 10vw;
+    outline: 1px solid red;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(1) {
+    font-size: 2.3vw;
+    text-align: left;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(2) {
+    font-size: 1.7vw;
+    text-align: left;
+  }
+  .monthRankList ul li .postTxt-title p:nth-child(3) {
+    font-size: 1.5vw;
+    text-align: left;
+  }
+  .monthRankList ul li .postTitle a img {
+    width: 45vw;
+  }
+  .monthRankList ul li .postTitle .postTitle-sub {
+    padding-top: 15%;
+    padding-left: 2vw;
+  }
+  .postTxt-title {
+    width: 30vw;
+    display: none;
+  }
+  .monthRanking {
+    margin-top: 100px;
+    padding: 30px;
+  }
+  .monthRankList ul li {
+    padding: 80px 0 100px 0;
+  }
+  .monthRankList ul li .postTxt-img {
+    min-width: 13vw;
+    min-height: 13vw;
+    margin-right: 20px;
+  }
+  .monthRankList ul li .postTitle .postTitle-sub span p {
+    font-size: 2vw;
+    width: 100px;
+  }
+}

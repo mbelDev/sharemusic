@@ -31,7 +31,7 @@
                 <input type="text" name="userNM" id="userNM" th:placeholder="${loggedUser.userNM}">
                 <input type="hidden" name="userIcon" id="userIcon" th:value="default">
                 <button class="btnHover btn btn-primary" id="profile-userNM" onclick="updateUserNM();">수정 완료</button>
-                <label class="btnHover-o btn btn-secondary" id="profile-cancel" onclick="closeInputNM();">취소</label>
+                <label class="btnHover-x btn btn-secondary" id="profile-cancel" onclick="closeInputNM();">취소</label>
               </form>
               <!-- <span>
                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
@@ -193,8 +193,8 @@
           <div class="modal-profileUpdate__icon">
             <p id="previewIcon"><img th:src="@{/upload/}+${userInfo.userIconReal}" id="testProfile"></p>
     
-            <label class="btn btn-success" for="formFileMultiple">파일 선택</label>
-            <label class="btn btn-dark" id="fileRemove" onclick="removeIcon();">파일 제거</label>
+            <label class="btnHover btn btn-primary" for="formFileMultiple">파일 선택</label>
+            <label class="btnHover-x btn btn-dark" id="fileRemove" onclick="removeIcon();">파일 제거</label>
             <form id="updateProfile-uploadFile">
               <input
               type="file"
@@ -207,8 +207,8 @@
             </form>
           </div>
           <div class="modal-profileUpdate__btns">
-            <button id="updateProfileConfirm" class="btn btn-primary" onclick="updateProfile();">확인</button>
-            <button id="profileUpdateModal-close" class="btn btn-secondary">취소</button>
+            <button id="updateProfileConfirm" class="btnHover btn btn-primary" onclick="updateProfile();">확인</button>
+            <button id="profileUpdateModal-close" class="btnHover-x btn btn-secondary">취소</button>
           </div>
         </div>
       </div>

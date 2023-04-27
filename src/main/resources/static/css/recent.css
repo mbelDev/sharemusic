@@ -56,7 +56,7 @@
   margin-right: 15px;
 }
 .recent-page .recent-page--listBox .recent-page--list .flex ul li .btns .btn-dark {
-  background-color: #bb2d3b;
+  background-image: linear-gradient(120deg, #ff3672 0%, #7723ff 100%);
 }
 .recent-page .recent-page--listBox .recent-page--list .flex .conten {
   display: flex;

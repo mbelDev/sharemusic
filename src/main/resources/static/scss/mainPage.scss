@@ -72,6 +72,11 @@
                           font-size: 18px;
                           margin-bottom: 10px;
                         }
+                        &:nth-child(2) {
+                          font-weight: bold;
+                          font-size: 20px;
+                          margin-bottom: 10px;
+                        }
                       }
                       .swiper-txts--postAuth {
                         p {
@@ -345,18 +350,7 @@
   }
 } //@media screen and (max-width: 600px)
 @media screen and (max-width: 500px) {
-  .main-constent--itmes
-    .main-constent--ranking
-    .ranking-area
-    .ranking-box
-    .swiper
-    .swiper-wrapper
-    .swiper-slide
-    a
-    .swiper-title
-    .swiper-title-num
-    p
-    img {
+  .main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-title-num p img {
     width: 60px;
     transform: rotate(-10deg);
     padding-left: 5px;
@@ -364,26 +358,13 @@
   .ranking-box.topAndbut {
     margin: 0 0 0 10px;
   }
+  .swiper-txts--postTitle {
+    text-align: left;
+  }
+  .swiper-txts--postAuth {
+    text-align: right;
+  }
+  .main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts .swiper-txts--postAuth p {
+    margin-right: 0 !important;
+  }
 } //@media screen and (max-width: 500px)
-@media screen and (max-width: 320px) {
-  .main-constent--itmes .main-constent--listItem .getList-ItemBox ul li a img {
-    width: 86vw;
-    height: auto;
-  }
-  .main-constent--itmes
-    .main-constent--ranking
-    .ranking-area
-    .ranking-box
-    .swiper
-    .swiper-wrapper
-    .swiper-slide
-    a {
-    width: 87vw;
-  }
-  .media855-Area--search form {
-    display: none;
-  }
-  .ranking-box.topAndbut {
-    margin: 0 0 0 5px;
-  }
-} //@media screen and (max-width: 320px)

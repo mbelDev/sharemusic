@@ -57,24 +57,25 @@ public class indexController {
       LoggedDto loggedUser = loggedUser(session);
       model.addAttribute("loggedUser", loggedUser);
     }
-
+log.info("test1");
     // 상위 랭킹
     List<BoardDto> rankList = boardService.getRankPost(category);
     model.addAttribute("rankList", rankList);
-
+    log.info("test2");
     // 게시판 글
     List<BoardDto> postList = boardService.getPostAll(
       category,
       searchTxt,
       sort
     );
+    log.info("test3");
     for (BoardDto item : postList) {
       String userIcon = getIcon(item);
       log.info("icon==={}", userIcon);
       item.setPostAuthIcon(userIcon);
     }
     model.addAttribute("postList", postList);
-
+    log.info("test4");
     // 검색 기능 searchTxt
     model.addAttribute("searchTxt", searchTxt);
     return "/mainPage/mainPage";

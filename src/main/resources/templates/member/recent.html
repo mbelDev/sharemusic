@@ -87,16 +87,13 @@
                   >
                     좋아요
                   </span>
-                  <span
-                    type="button"
-                    class="btn-bookmark btn btn-secondary bookmark"
-                    th:classappend="${item.bookmark == 1 ? 'btn-info' : ''}"
-                    th:data-userID="${loggedUser.userID}"
-                    th:data-postNo="${item.postNo}"
-                    th:data-bookmark="${item.bookmark}"
-                    th:onclick="bookmarkEvent(this)"
-                  >
-                    구독
+                  <span type="button" class="btn-bookmark btn btn-secondary bookmark btnHover-x" 
+                  th:classappend="${item.bookmark == 1 ? 'btn-info' : ''}"
+                  th:data-userID="${loggedUser.userID}" 
+                  th:data-postNo="${item.postNo}" 
+                  th:data-bookmark="${item.bookmark}"
+                  th:onclick="bookmarkEvent(this)">
+                  구독
                   </span>
                 </div>
               </li>

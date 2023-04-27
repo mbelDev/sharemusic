@@ -64,7 +64,7 @@
         <article class="headerLayout-Area--infoForm topAndbut">
           <!-- 기본 회원정보 -->
           <th:block th:unless="${loggedUser == null}">
-            <div class="infoForm-All line">
+            <div class="infoForm-All">
               <div class="infoForm-img">
                 <a href="/member/mypage"><img th:if="${loggedUser.userIconReal != null}" th:src="@{/upload/}+${loggedUser.userIconReal}" alt=""></a>
                 <a href=""><img th:if="${loggedUser.userIconReal == null}" th:src="@{/images/sampleprofile.jpg}" alt=""></a>
@@ -83,7 +83,7 @@
         </article><!-- .headerLayout-Area--infoForm -->
         <article class="headerLayout-Area--joinForm topAndbut">
             <div class="join line">
-              <a href="/member/logout"><span>로그아웃</span></a>
+              <a href="/member/logout"><span class="btnHover btn btn-primary">로그아웃</span></a>
             </div>
         </article><!-- .headerLayout-Area--joinForm -->
         <article class="headerLayout-Area--searchForm topAndbut">
@@ -194,7 +194,7 @@
           </div>
           <div class="inputFlex-btn">
             <button class="btn btn-primary btnHover" onclick="withdraw()">회원탈퇴</button>
-            <button class="btn btn-secondary closeDeleteModal">되돌아가기</button>
+            <button class="btnHover-x btn btn-secondary closeDeleteModal">되돌아가기</button>
           </div>
         </div>
       </div>
@@ -410,7 +410,7 @@ ATI Radeon 9500 128MB 이상
 2.종전의 약관은 본 약관으로 대체합니다.
             </pre>
           </span>
-          <span class="btn btn-primary" id="siteTermsClose">닫기</span>
+          <span class="btnHover btn btn-primary" id="siteTermsClose">닫기</span>
         </div>
       </div>
     </div>

@@ -30,8 +30,14 @@
               </div>
               <div class="like-btn">
                   <div class="like-good">
-                    <img class="good-img" src="/images/good.svg" onclick="updateLike(this);" th:data-postno="${boardDto.postNo}"/> 
-                    <span th:text="${boardDto.postLike}" class="postLike">0</span>
+                    <div class="like-good-sub btnHover" th:classappend="${loggedUser != null and loggedUser.postLiked == 1 ? 'check' : ''}" onclick="updateLike(this);" th:data-postno="${boardDto.postNo}">
+                      <div>
+                        <p>좋아요</p>
+                      </div>
+                      <div>
+                        <span th:text="${boardDto.postLike}" class="postLike">0</span>
+                      </div>
+                    </div>
                   </div><!-- like-good -->
                   <div class="like-share">
                     <button class="btnOpen btnShare" id="shareModalBox">
@@ -41,8 +47,10 @@
               </div>
             </div><!-- title-name -->
             <div class="title-Auth">
-              <img class="title-Auth-icon" th:src="@{/upload/}+${boardDto.postAuthIcon}" alt="">
-              <span class="title-Auth-name" th:text="${boardDto.postAuth}">작성자</span>
+              <a th:href="@{/member/user/}+${boardDto.postAuthID}">
+                <img class="title-Auth-icon" th:src="@{/upload/}+${boardDto.postAuthIcon}" alt="">
+                <span class="title-Auth-name" th:text="${boardDto.postAuth}">작성자</span>
+              </a>
               <span class="title-Auth-follow btn"  th:if="${loggedUser != null and loggedUser.userID != boardDto.postAuthID}"
               th:classappend="${loggedUser == null ? 'btn-secondary' : loggedUser.postFollowed == 1 ? 'btn-primary' : 'btn-secondary'}" 
               th:onclick="follow(this)" 
@@ -61,7 +69,7 @@
             </div><!-- title-Genre -->
             <div class="title-btn" th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}">
               <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btnHover btn btn-primary">수정</a>
-            <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
+            <button id="deleteModalBox" class="btnHover-x btn btn-secondary">삭제</button>
             </div><!-- title-btn -->
           </div><!-- title -->
           <!-- <div class="like">
@@ -208,7 +216,7 @@
           <div class="board-view--replyBox-subCont">
             <img class="replyIcon" th:src="@{/upload/}+${loggedUser.userIconReal}" alt="">
             <textarea class="replyCont" id="replyCont" name="replyCont"  ></textarea>
-            <button class="btn btn-primary btn-reply" th:onclick="addReplyEvent(this)">작성</ㅠ>
+            <button type="button" class="btn btn-primary btn-reply" th:onclick="addReplyEvent(this)">작성</button>
           </div>
         </th:block>
         <th:block th:if="${session.loggedUser == null}">
@@ -219,8 +227,8 @@
           <a th:href="@{/member/login}">
             <div class="board-view--replyBox-subCont">
               <img class="replyIcon" th:src="@{/images/sampleprofile.jpg}" alt="">
-              <textarea class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }" rows="2" ></textarea>
-              <button class="btn-primary btn-reply" th:onclick="addReplyEvent(this)">작성</button>
+              <textarea class="replyCont" name="replyCont" rows="2" >로그인 해 주세요</textarea>
+              <button type="button" class="btn btn-primary btn-reply" th:onclick="addReplyEvent(this)">작성</button>
             </div>
           </a>
         </th:block>
@@ -250,8 +258,8 @@
           <p>확인을 누르면 게시글이 완전히 삭제됩니다.</p>
         </div>
         <div class="modal-content--btn">
-          <button id="btnDeleteConfirm" class="btn btn-primary" th:onclick="boardDelete('[[${boardDto.postNo}]]')">확인</button>
-          <button id="closeDeleteModal" class="btn btn-secondary">취소</button>
+          <button id="btnDeleteConfirm" class="btnHover btn btn-primary" th:onclick="boardDelete('[[${boardDto.postNo}]]')">확인</button>
+          <button id="closeDeleteModal" class="btnHover-x btn btn-secondary">취소</button>
         </div>
       </div>
     </div>
@@ -423,9 +431,11 @@
               break;
             case 0 :
               // star(item);
+              $(item).removeClass("check");
               break;
             case 1 :
               // star(item);
+              $(item).addClass("check");
               break;
           }
         },

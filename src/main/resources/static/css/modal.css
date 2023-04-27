@@ -483,6 +483,9 @@
   display: flex;
   align-items: center;
 }
+.deleteMo .modal-content--btn #btnDeleteConfirm {
+  margin-right: 10px;
+}
 .deleteMo .modal-content--btn .inputFlex {
   text-align: left;
 }
