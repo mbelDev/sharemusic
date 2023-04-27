@@ -127,6 +127,11 @@ public class indexController {
   @GetMapping("/monthRanking")
   public String monthRanking(Model model) {
     List<BoardDto> monthRankList = boardService.getMonthRankPost(0);
+    for (BoardDto item : monthRankList) {
+      String userIcon = getIcon(item);
+      log.info("icon==={}", userIcon);
+      item.setPostAuthIcon(userIcon);
+    }
     model.addAttribute("monthRankList", monthRankList);
 
     Map<String, String> monthDate = boardService.getMonthRankDate(0);
@@ -138,6 +143,11 @@ public class indexController {
   @PostMapping("/reload/monthRanking")
   public String reloadMonthRanking(Model model, int moveMonth) {
     List<BoardDto> monthRankList = boardService.getMonthRankPost(moveMonth);
+    for (BoardDto item : monthRankList) {
+      String userIcon = getIcon(item);
+      log.info("icon==={}", userIcon);
+      item.setPostAuthIcon(userIcon);
+    }
     model.addAttribute("monthRankList", monthRankList);
 
     String target = "/mainPage/monthRanking :: #monthRankList";
@@ -148,6 +158,11 @@ public class indexController {
   @GetMapping("/weeklyRanking")
   public String weeklyRanking(Model model) {
     List<BoardDto> weeklyRankList = boardService.getWeeklyRankPost(0);
+    for (BoardDto item : weeklyRankList) {
+      String userIcon = getIcon(item);
+      log.info("icon==={}", userIcon);
+      item.setPostAuthIcon(userIcon);
+    }
     model.addAttribute("weeklyRankList", weeklyRankList);
 
     Map<String, String> weeklyDate = boardService.getWeeklyRankDate(0);
@@ -158,6 +173,11 @@ public class indexController {
   @PostMapping("/reload/weeklyRanking")
   public String reloadWeeklyRanking(Model model, int moveWeekly) {
     List<BoardDto> weeklyRankList = boardService.getWeeklyRankPost(moveWeekly);
+    for (BoardDto item : weeklyRankList) {
+      String userIcon = getIcon(item);
+      log.info("icon==={}", userIcon);
+      item.setPostAuthIcon(userIcon);
+    }
     model.addAttribute("weeklyRankList", weeklyRankList);
 
     String target = "/mainPage/weeklyRanking :: #weeklyRankList";

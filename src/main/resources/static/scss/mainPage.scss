@@ -126,6 +126,15 @@
               }
             }
           }
+          .sortDate.selected {
+            color: #ff3672;
+          }
+          .sortHits.selected {
+            color: #ff3672;
+          }
+          .sortLike.selected {
+            color: #ff3672;
+          }
         }
       } //.update-data
     } //.listItem-nav
@@ -161,32 +170,32 @@
           margin: 0;
           line-height: 1;
         }
-        .ItemBox-postTitle {
+        .ItemBox-postSinger {
           margin: 15px 0 10px 0;
         } //.ItemBox-postTitle
-        .ItemBox-postSinger {
+        .ItemBox-postTitle {
           font-family: "SBAggroB";
           font-weight: bold;
           font-size: 18px;
           margin: 0 0 25px 0;
-        }//.ItemBox-postSinger
-        .ItemBox-postAuthIcon{
+        } //.ItemBox-postSinger
+        .ItemBox-postAuthIcon {
           display: inline-block;
           width: 30px;
           height: 30px;
         }
-        .ItemBox-postAuth{
+        .ItemBox-postAuth {
           display: inline-block;
           margin-left: 5px;
         }
-        .ItemBox-postHits{
+        .ItemBox-postHits {
           margin-top: 10px;
           color: #777;
         }
-      }//.ItemBox-content
-    }//.getList-ItemBox
-  }//.main-constent--listItem
-}//.main-constent--itmes
+      } //.ItemBox-content
+    } //.getList-ItemBox
+  } //.main-constent--listItem
+} //.main-constent--itmes
 
 @media screen and (max-width: 1445px) {
   .main-constent--itmes

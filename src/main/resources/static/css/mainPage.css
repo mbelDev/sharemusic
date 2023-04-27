@@ -114,6 +114,15 @@
 .main-constent--itmes .main-constent--listItem .listItem-nav .update-data ul li a:hover::after {
   width: 100%;
 }
+.main-constent--itmes .main-constent--listItem .listItem-nav .update-data ul .sortDate.selected {
+  color: #ff3672;
+}
+.main-constent--itmes .main-constent--listItem .listItem-nav .update-data ul .sortHits.selected {
+  color: #ff3672;
+}
+.main-constent--itmes .main-constent--listItem .listItem-nav .update-data ul .sortLike.selected {
+  color: #ff3672;
+}
 .main-constent--itmes .main-constent--listItem .getList-ItemBox ul {
   display: flex;
   justify-content: left;
@@ -142,10 +151,10 @@
   margin: 0;
   line-height: 1;
 }
-.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postTitle {
+.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postSinger {
   margin: 15px 0 10px 0;
 }
-.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postSinger {
+.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postTitle {
   font-family: "SBAggroB";
   font-weight: bold;
   font-size: 18px;
