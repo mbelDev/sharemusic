@@ -56,11 +56,11 @@
                     </div>
                     <!-- ItemBox-imgs -->
                     <div class="ItemBox-content">
-                      <p class="ItemBox-postTitle" th:text="${item.postTitle}">
-                        곡이름
-                      </p>
                       <p class="ItemBox-postSinger" th:text="${item.postSinger}">
                         가수이름
+                      </p>
+                      <p class="ItemBox-postTitle" th:text="${item.postTitle}">
+                        곡이름
                       </p>
                       <div>
                         <img class="ItemBox-postAuthIcon" th:src="@{/upload/}+${item.postAuthIcon}" alt="" style="width:30px; height:30px;">

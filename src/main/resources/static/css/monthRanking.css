@@ -1,8 +1,7 @@
 .monthRanking {
   padding: 50px;
 }
-.monthRanking #monthRankList ul li,
-.monthRanking #weeklyRankList ul li {
+.monthRanking #monthRankList ul li {
   width: 100%;
   height: 18vw;
   display: flex;
@@ -13,8 +12,7 @@
   position: relative;
   transition: all 0.4s ease;
 }
-.monthRanking #monthRankList ul li:hover,
-.monthRanking #weeklyRankList ul li:hover {
+.monthRanking #monthRankList ul li:hover {
   -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -22,12 +20,10 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   transform: scale(101%);
 }
-.monthRanking #monthRankList ul li:nth-child(1) .postTxt-no,
-.monthRanking #weeklyRankList ul li:nth-child(1) .postTxt-no {
+.monthRanking #monthRankList ul li:nth-child(1) .postTxt-no {
   color: #131313;
 }
-.monthRanking #monthRankList ul li:nth-child(1) .postTxt-no::after,
-.monthRanking #weeklyRankList ul li:nth-child(1) .postTxt-no::after {
+.monthRanking #monthRankList ul li:nth-child(1) .postTxt-no::after {
   content: "";
   display: block;
   width: 4vw;
@@ -40,12 +36,10 @@
   top: 35%;
   left: 1.5%;
 }
-.monthRanking #monthRankList ul li:nth-child(2) .postTxt-no,
-.monthRanking #weeklyRankList ul li:nth-child(2) .postTxt-no {
+.monthRanking #monthRankList ul li:nth-child(2) .postTxt-no {
   color: #131313;
 }
-.monthRanking #monthRankList ul li:nth-child(2) .postTxt-no::after,
-.monthRanking #weeklyRankList ul li:nth-child(2) .postTxt-no::after {
+.monthRanking #monthRankList ul li:nth-child(2) .postTxt-no::after {
   content: "";
   display: block;
   width: 4vw;
@@ -58,12 +52,10 @@
   top: 35%;
   left: 1.5%;
 }
-.monthRanking #monthRankList ul li:nth-child(3) .postTxt-no,
-.monthRanking #weeklyRankList ul li:nth-child(3) .postTxt-no {
+.monthRanking #monthRankList ul li:nth-child(3) .postTxt-no {
   color: #131313;
 }
-.monthRanking #monthRankList ul li:nth-child(3) .postTxt-no::after,
-.monthRanking #weeklyRankList ul li:nth-child(3) .postTxt-no::after {
+.monthRanking #monthRankList ul li:nth-child(3) .postTxt-no::after {
   content: "";
   display: block;
   width: 4vw;
@@ -76,62 +68,51 @@
   top: 35%;
   left: 1.5%;
 }
-.monthRanking #monthRankList ul li .postTxt,
-.monthRanking #weeklyRankList ul li .postTxt {
+.monthRanking #monthRankList ul li .postTxt {
   display: flex;
   align-items: center;
 }
-.monthRanking #monthRankList ul li .postTxt-no,
-.monthRanking #weeklyRankList ul li .postTxt-no {
+.monthRanking #monthRankList ul li .postTxt-no {
   height: 100%;
   padding: 0 50px;
   font-size: 2vw;
   font-weight: bold;
 }
-.monthRanking #monthRankList ul li .postTxt-img,
-.monthRanking #weeklyRankList ul li .postTxt-img {
+.monthRanking #monthRankList ul li .postTxt-img {
   width: 10vw;
   height: 10vw;
   outline: 1px solid red;
   border-radius: 33px;
 }
-.monthRanking #monthRankList ul li .postTxt-title p,
-.monthRanking #weeklyRankList ul li .postTxt-title p {
+.monthRanking #monthRankList ul li .postTxt-title p {
   margin-left: 30px;
 }
-.monthRanking #monthRankList ul li .postTxt-title p:nth-child(1),
-.monthRanking #weeklyRankList ul li .postTxt-title p:nth-child(1) {
+.monthRanking #monthRankList ul li .postTxt-title p:nth-child(1) {
   font-size: 2vw;
   font-weight: 700;
   margin-bottom: 3vw;
 }
-.monthRanking #monthRankList ul li .postTxt-title p:nth-child(2),
-.monthRanking #weeklyRankList ul li .postTxt-title p:nth-child(2) {
+.monthRanking #monthRankList ul li .postTxt-title p:nth-child(2) {
   font-size: 1vw;
   font-weight: 600;
   margin-bottom: 10px;
 }
-.monthRanking #monthRankList ul li .postTxt-title p:nth-child(3),
-.monthRanking #weeklyRankList ul li .postTxt-title p:nth-child(3) {
+.monthRanking #monthRankList ul li .postTxt-title p:nth-child(3) {
   font-size: 0.8vw;
 }
-.monthRanking #monthRankList ul li .postTitle,
-.monthRanking #weeklyRankList ul li .postTitle {
+.monthRanking #monthRankList ul li .postTitle {
   position: relative;
   transition: all 0.25s ease;
 }
-.monthRanking #monthRankList ul li .postTitle:hover,
-.monthRanking #weeklyRankList ul li .postTitle:hover {
+.monthRanking #monthRankList ul li .postTitle:hover {
   transform: translateY(3%);
 }
-.monthRanking #monthRankList ul li .postTitle a img,
-.monthRanking #weeklyRankList ul li .postTitle a img {
+.monthRanking #monthRankList ul li .postTitle a img {
   width: 25vw;
   border-radius: 23px;
   margin-right: 50px;
 }
-.monthRanking #monthRankList ul li .postTitle .postTitle-sub,
-.monthRanking #weeklyRankList ul li .postTitle .postTitle-sub {
+.monthRanking #monthRankList ul li .postTitle .postTitle-sub {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -145,19 +126,16 @@
   background: rgba(0, 0, 0, 0.6);
   border-radius: 23px;
 }
-.monthRanking #monthRankList ul li .postTitle .postTitle-sub p,
-.monthRanking #weeklyRankList ul li .postTitle .postTitle-sub p {
+.monthRanking #monthRankList ul li .postTitle .postTitle-sub p {
   font-size: 1.5vw;
   font-weight: 800;
 }
-.monthRanking #monthRankList ul li .postTitle .postTitle-sub a,
-.monthRanking #weeklyRankList ul li .postTitle .postTitle-sub a {
+.monthRanking #monthRankList ul li .postTitle .postTitle-sub a {
   padding: 0.7vw 1.5vw;
   border-radius: 6px;
   margin-top: 15px;
 }
-.monthRanking #monthRankList ul li .postTitle .postTitle-sub:hover,
-.monthRanking #weeklyRankList ul li .postTitle .postTitle-sub:hover {
+.monthRanking #monthRankList ul li .postTitle .postTitle-sub:hover {
   opacity: 1;
 }
 
