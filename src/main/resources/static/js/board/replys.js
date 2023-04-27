@@ -93,6 +93,7 @@ function modifyReplyEvent(item){
 //덧글의 덧글을 달기위해 입력창을 생성하는 함수
 function openReplyReplyEvent(item){
     $('div.replyReply').remove();
+    $('div.modifyReply').remove();
     const test = $(".board-view--replyBox-input").clone();
     const replyno = $(item).data("replyno");
     $(test).addClass("replyReply");
@@ -105,6 +106,7 @@ function openReplyReplyEvent(item){
 //덧글 수정을 위해 수정 입력창을 생성하는 함수
 function openModifyReplyEvent(item){
     $('div.modifyReply').remove();
+    $('div.replyReply').remove();
     $('.reply-contents--text.hidden').removeClass('hidden');
     const root = $(item).closest('div.reply-contents');
     const originTxt = root.find('.context').text();

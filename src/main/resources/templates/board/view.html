@@ -29,9 +29,15 @@
                 </a>
               </div>
               <div class="like-btn">
-                <button class="btnOpen btnShare" id="shareModalBox">
-                  <img src="/images/open.svg" alt="" />
-                </button>
+                  <div class="like-good">
+                    <img class="good-img" src="/images/good.svg" onclick="updateLike(this);" th:data-postno="${boardDto.postNo}"/> 
+                    <span th:text="${boardDto.postLike}" class="postLike">0</span>
+                  </div><!-- like-good -->
+                  <div class="like-share">
+                    <button class="btnOpen btnShare" id="shareModalBox">
+                      <img src="/images/open.svg" alt="" />
+                    </button>
+                  </div><!-- like-btn -->
               </div>
             </div><!-- title-name -->
             <div class="title-Auth">
@@ -96,13 +102,7 @@
              or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
               <div class="reply-contents--icon">
                 <a th:href="@{|/member/user/${item.replyAuthID}|}">
-                  <!-- <img
-                  src="/images/sampleprofile.jpg"
-                    alt=""
-                    class="replyIcon"
-                  /> -->
                   <img
-                  th:if="${item.replyHidden == 0}"
                   th:src="@{/upload/}+${item.replyAuthIcon}"
                   alt=""
                   class="replyIcon"
@@ -249,7 +249,6 @@
       </div>
     </div>
 
-     <div id="shareModal" class="modal-wnd shareMo">
   
     <!-- 공유 모달창 -->
     <div id="shareModal" class="modal-wnd deleteMo shareModal">
@@ -347,7 +346,10 @@
         </div>
         <!-- write-modal--item -->
       </div>
-    </section>
+    </div>
+
+    
+  </section>
 
   
 <!--------------------------------------------------[            자바 스크립트 영역             ]-------------------------------------------------------------------------->
@@ -365,126 +367,126 @@
       $(".new").text(n_like + 1);
     }
   </script>
-    <script>
-      const postNo = $("#postNo").val();
-  
-      getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
-      getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
-      getModal($(".deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
-      // getModal($(".menuBtn"), $("#deleteReplyModal-M"), $("#deleteReplyModal-M  #closeDeleteReply"));
-      // getModal($(".board-view--replyBox__input-M"), $("#comReplyModal-M"), $("#comReplyModal-M  #closeDeleteReply"));
+  <script>
+    const postNo = $("#postNo").val();
 
-      // 복사 버튼 누르면 url 복사
-      async function copyUrl() {
-        const shareUrl = $(".shareUrl").val();
-        await navigator.clipboard.writeText(shareUrl);
-      }
+    getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
+    getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
+    getModal($(".deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
+    // getModal($(".menuBtn"), $("#deleteReplyModal-M"), $("#deleteReplyModal-M  #closeDeleteReply"));
+    // getModal($(".board-view--replyBox__input-M"), $("#comReplyModal-M"), $("#comReplyModal-M  #closeDeleteReply"));
 
-      // 트위터 공유
-      $(".shareTwitter").on("click", function () {
-        const sendText = "노래 공유";
-        const pageUrl = encodeURIComponent(window.location.href);
-        window.open(
-          `https://twitter.com/intent/tweet?text=${sendText}&url=${pageUrl}`
-        );
-      });
+    // 복사 버튼 누르면 url 복사
+    async function copyUrl() {
+      const shareUrl = $(".shareUrl").val();
+      await navigator.clipboard.writeText(shareUrl);
+    }
 
-      // 페이스북 공유
-      $(".shareFacebook").on("click", function () {
-        const pageUrl = encodeURIComponent(window.location.href);
-        window.open(`http://www.facebook.com/sharer/sharer.php?u=${pageUrl}`);
-      });
+    // 트위터 공유
+    $(".shareTwitter").on("click", function () {
+      const sendText = "노래 공유";
+      const pageUrl = encodeURIComponent(window.location.href);
+      window.open(
+        `https://twitter.com/intent/tweet?text=${sendText}&url=${pageUrl}`
+      );
+    });
 
-      // 카카오톡 공유
-      Kakao.init("8d6a18d8dcc3f8eea775c4c852f086c0");
-      $(".shareKakaoTalk").on("click", function () {
-        Kakao.Link.sendDefault({
-          objectType: "feed",
-          content: {
-            title: "Music", // 제목
-            description: "내용", // 내용
-            imageUrl: "/images/logo.png", // 이미지 도메인
+    // 페이스북 공유
+    $(".shareFacebook").on("click", function () {
+      const pageUrl = encodeURIComponent(window.location.href);
+      window.open(`http://www.facebook.com/sharer/sharer.php?u=${pageUrl}`);
+    });
+
+    // 카카오톡 공유
+    Kakao.init("8d6a18d8dcc3f8eea775c4c852f086c0");
+    $(".shareKakaoTalk").on("click", function () {
+      Kakao.Link.sendDefault({
+        objectType: "feed",
+        content: {
+          title: "Music", // 제목
+          description: "내용", // 내용
+          imageUrl: "/images/logo.png", // 이미지 도메인
+          link: {
+            webUrl: window.location.href, // 웹 링크
+          },
+        },
+        buttons: [
+          {
+            title: "자세히 보기",
             link: {
               webUrl: window.location.href, // 웹 링크
             },
           },
-          buttons: [
-            {
-              title: "자세히 보기",
-              link: {
-                webUrl: window.location.href, // 웹 링크
-              },
-            },
-          ],
-        });
+        ],
       });
+    });
 
-      // 글 삭제할 때 이벤트
-      function boardDelete(postNo) {
-        $.ajax({
-          url: "/board/delete",
-          type: "POST",
-          data: {"postNo": postNo},
-          success: function(response) {
-          if (response.msg == "ok") {
-            location.href=document.referrer;
-            } else {
-              location.reload();
-            }
+    // 글 삭제할 때 이벤트
+    function boardDelete(postNo) {
+      $.ajax({
+        url: "/board/delete",
+        type: "POST",
+        data: {"postNo": postNo},
+        success: function(response) {
+        if (response.msg == "ok") {
+          location.href=document.referrer;
+          } else {
+            location.reload();
           }
-        })
-      }
-    </script>
-    <script th:inline="javascript">
+        }
+      })
+    }
+  </script>
+  <script th:inline="javascript">
 
-      //좋아요 History 연동 함수 #권인호 작성
-      function updateLike(item){
-        $.ajax({
-          url:"/member/like",
-          type:"POST",
-          data:{
-            postNo: postNo
-          },
-          success:function(response){
-            switch(response){
-              case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용")
-                break;
-              case 0 :
-                star(item);
-                break;
-              case 1 :
-                star(item);
-                break;
-            }
-          },
-          error:function(err){
-            console.log(err);
-            alert("로그인 정보가 업써요. 로그인 해 주셰용. 여기다 당신 이름 석 자만 적어쥬셰용.");
+    //좋아요 History 연동 함수 #권인호 작성
+    function updateLike(item){
+      $.ajax({
+        url:"/member/like",
+        type:"POST",
+        data:{
+          postNo: postNo
+        },
+        success:function(response){
+          switch(response){
+            case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용")
+              break;
+            case 0 :
+              // star(item);
+              break;
+            case 1 :
+              // star(item);
+              break;
           }
-        })
-        .done(()=>{
-          // reloadData(postNo);
-        })
-      }
+        },
+        error:function(err){
+          console.log(err);
+          alert("로그인 정보가 업써요. 로그인 해 주셰용. 여기다 당신 이름 석 자만 적어쥬셰용.");
+        }
+      })
+      .done(()=>{
+        reloadData(postNo);
+      })
+    }
 
-      //좋아요 완료 후 숫자 변경 #권인호
-      // function reloadData(_postNo){
-      //   $.ajax({
-      //     url:"/board/getLike",
-      //     type:"POST",
-      //     data:{
-      //       postNo: _postNo
-      //     },
-      //     success:function(response){
-      //       $(".postLike").text(response);
-      //     },
-      //     error:function(err){
-      //       console.log(err);
-      //       alert("뭔가 심상치않은 일이 생긴거야.");
-      //       location.href="redirect:/uri";
-      //     }
-      //   })
-      // }
-    </script>
+    // 좋아요 완료 후 숫자 변경 #권인호
+    function reloadData(_postNo){
+      $.ajax({
+        url:"/board/getLike",
+        type:"POST",
+        data:{
+          postNo: _postNo
+        },
+        success:function(response){
+          $(".postLike").text(response);
+        },
+        error:function(err){
+          console.log(err);
+          alert("뭔가 심상치않은 일이 생긴거야.");
+          location.href="redirect:/uri";
+        }
+      })
+    }
+  </script>
   </main>
 </html>
