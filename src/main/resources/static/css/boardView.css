@@ -228,6 +228,8 @@
   position: relative;
   display: flex;
   margin: 5px auto;
+  padding: 5px;
+  background-color: #1a1a1a;
 }
 .board-view--replyBox .reply-container {
   width: 100%;
@@ -246,7 +248,9 @@
   position: relative;
 }
 .board-view--replyBox .reply-contents--icon a {
-  width: 8%;
+  display: flex;
+  align-items: center;
+  width: 80%;
 }
 .board-view--replyBox .reply-contents--icon img {
   width: 30px;
@@ -281,11 +285,12 @@
   height: 20px;
   position: absolute;
   top: 5px;
-  margin-left: 5px;
+  left: 5px;
 }
 .board-view--replyBox .reply-contents--btns {
   position: relative;
   display: flex;
+  text-align: center;
   flex-grow: 0;
   justify-content: left;
   width: 100%;
@@ -530,15 +535,15 @@
     opacity: 0.5;
   }
   .reply-date-md500 .reply-contents--btns {
-    display: block;
+    display: flex;
     padding-top: 5px;
   }
   .reply-date-md500 .reply-contents--btns span {
     background: none;
     border-radius: auto;
-    margin-left: auto;
   }
   .reply-date-md500 .reply-contents--btns .replyReplyBtn {
+    text-align: center;
     padding: 5px 10px;
   }
   .reply-contents--icon {

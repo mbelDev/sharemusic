@@ -94,6 +94,7 @@ function modifyReplyEvent(item){
 function openReplyReplyEvent(item){
     $('div.replyReply').remove();
     $('div.modifyReply').remove();
+    $('.reply-contents--text.hidden').removeClass('hidden');
     const test = $(".board-view--replyBox-input").clone();
     const replyno = $(item).data("replyno");
     $(test).addClass("replyReply");

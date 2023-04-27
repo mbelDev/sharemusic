@@ -471,11 +471,11 @@ function follow(item){
           switch(response){
             case -1 : alert("로그인 정보가 없습니다.");
                     break;
-            case 1 : alert("팔로우 했어요!");
+            case 1 : 
                     item.classList.add("btn-primary");
                     item.classList.remove("btn-secondary");
                     break;
-                    case 0 : alert("팔로우 했었어요!");
+                    case 0 : 
                     item.classList.add("btn-secondary");
                      item.classList.remove("btn-primary");
                     break;

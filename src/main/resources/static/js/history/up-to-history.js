@@ -67,10 +67,8 @@ function followEvent(){
                 data:sendData,
                 success:function(response){
                     if(response){
-                        alert("팔로우 했어요!");
                         item.classList.remove("btn-secondary");
                       }else{
-                        alert("팔로우 했었어요!");
                         item.classList.add("btn-secondary");
                     }
                 },

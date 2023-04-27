@@ -115,16 +115,7 @@
                     class="replyLockedIcon"
                   />
                 </a>
-                <!--  덧글 수정/삭제 모달버튼  -->
-                <th:block th:if="${
-                  item.replyHidden != 2 and
-                  session.loggedUser != null and
-                  session.loggedUser.userID == item.replyAuthID}">
-                  <div class="menuBtn">
-                    <span class="menuBtn-modify modifyReplyBtn" id="modifyReplyBtn" th:onclick="openModifyReplyEvent(this)">수정</span>
-                    <span class="menuBtn-delete deleteReplyBtn" id="deleteReplyBtn" th:onclick="openDeleteReplyEvent(this)">삭제</span>
-                  </div>
-                </th:block>
+
                 <!--  덧글 내용  -->
                 <div class="reply-contents--text">
                   <p th:if="${item.replyGroup!=0}" th:text="${item.replyGroupTarget}+'님에게 답변'" style="color:#777;"></p>
@@ -137,6 +128,14 @@
                   or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
                   or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
                     <span id="replyReplyBtn" class="replyReplyBtn" th:data-replyno="${item.replyNo}" th:onclick="openReplyReplyEvent(this)">답글쓰기</span>
+                    <!--  덧글 수정/삭제 모달버튼  -->
+                    <th:block th:if="${
+                      item.replyHidden != 2 and
+                      session.loggedUser != null and
+                      session.loggedUser.userID == item.replyAuthID}">
+                        <span class="replyReplyBtn" id="modifyReplyBtn" th:onclick="openModifyReplyEvent(this)">수정</span>
+                        <span class="replyReplyBtn" id="deleteReplyBtn" th:onclick="openDeleteReplyEvent(this)">삭제</span>
+                    </th:block>
                     <th:block th:if="${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false}">
                     </th:block>
                   </div>
@@ -151,6 +150,14 @@
                 or (${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false})
                 or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
                   <span id="replyReplyBtn" class="replyReplyBtn replyReplyBtn-M" th:data-replyno="${item.replyNo}" th:onclick="openReplyReplyEvent(this)">답글쓰기</span>
+                  <!--  덧글 수정/삭제 모달버튼  -->
+                  <th:block th:if="${
+                    item.replyHidden != 2 and
+                    session.loggedUser != null and
+                    session.loggedUser.userID == item.replyAuthID}">
+                    <span class="replyReplyBtn-M" id="modifyReplyBtn" th:onclick="openModifyReplyEvent(this)">수정</span>
+                    <span class="replyReplyBtn-M" id="deleteReplyBtn" th:onclick="openDeleteReplyEvent(this)">삭제</span>
+                  </th:block>
                   <th:block th:if="${session.loggedUser != null ? session.loggedUser.userID == item.replyAuthID : false}">
                   </th:block>
                 </div>
@@ -201,7 +208,7 @@
           <div class="board-view--replyBox-subCont">
             <img class="replyIcon" th:src="@{/upload/}+${loggedUser.userIconReal}" alt="">
             <textarea class="replyCont" id="replyCont" name="replyCont"  ></textarea>
-            <span type="button" class="btn btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"></span>
+            <button class="btn btn-primary btn-reply" th:onclick="addReplyEvent(this)">작성</ㅠ>
           </div>
         </th:block>
         <th:block th:if="${session.loggedUser == null}">
@@ -213,7 +220,7 @@
             <div class="board-view--replyBox-subCont">
               <img class="replyIcon" th:src="@{/images/sampleprofile.jpg}" alt="">
               <textarea class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }" rows="2" ></textarea>
-              <span type="button" class="btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"></span>
+              <button class="btn-primary btn-reply" th:onclick="addReplyEvent(this)">작성</button>
             </div>
           </a>
         </th:block>
@@ -251,68 +258,31 @@
 
   
     <!-- 공유 모달창 -->
-    <div id="shareModal" class="modal-wnd deleteMo shareModal">
+    <div id="shareModal" class="modal-wnd shareMo">
       <div class="modal-content">
         <div class="modal-content--title">
-          <p>공유를 합니다.</p>
+          <p>공유</p>
         </div>
         <div class="modal-content--txt">
-          <p>
-            <div class="shareBox">
-              <div class="shareBox-Url">
-                <input type="text" class="shareUrl" th:value="'https://youtu.be/' + ${boardDto.postLink}" readonly/>
-              </div>
-              <div class="shareBox-item">
-                <button onclick="copyUrl();" class="btnHover like button-star copyUrl">
-                    <canvas></canvas>
-                    <div class="label">
-                      <span class="default">복사<span class="success"></span></span>
-                    </div>
-                    <div class="number">
-                      <span class="current">off</span>
-                      <span class="new">on</span>
-                      <div class="add">복사</div>
-                    </div>
-                </button>
-                <button class="btnHover like button-star shareTwitter">
-                  <canvas></canvas>
-                  <div class="label">
-                    <span class="default">트위터<span class="success"></span></span>
-                  </div>
-                  <div class="number">
-                    <span class="current">off</span>
-                    <span class="new">on</span>
-                    <div class="add">공유</div>
-                  </div>
-                </button>
-                <button class="btnHover like button-star shareFacebook">
-                <canvas></canvas>
-                <div class="label">
-                  <span class="default">페이스북<span class="success"></span></span>
-                </div>
-                <div class="number">
-                  <span class="current">off</span>
-                  <span class="new">on</span>
-                  <div class="add">공유</div>
-                </div>
-                </button>
-                <button class="btnHover like button-star shareKakaoTalk">
-                <canvas></canvas>
-                <div class="label">
-                  <span class="default">카카오톡<span class="success"></span></span>
-                </div>
-                <div class="number">
-                  <span class="current">off</span>
-                  <span class="new">on</span>
-                  <div class="add">공유</div>
-                </div>
-                </button>
-              </div>
-            </div>
-          </p>
+          <div class="modal-content--txt--icon">
+            <ul>
+              <li><button class="btn"><img src="/images/kakotalkIcon.png" alt="카카오톡" class="shareKakaoTalk"></button></li>
+              <li><button class="btn"><img src="/images/twitterIcon.png" alt="트위터" class="shareTwitter"></button></li>
+              <li><button class="btn"><img src="/images/facebookIcon.svg" alt="페이스북" class="shareFacebook"></button></li>
+            </ul>
+          </div>
+          <div class="modal-content--txt--url">
+            <input
+              type="text"
+              class="shareUrl"
+              th:value="'https://youtu.be/' + ${boardDto.postLink}"
+              readonly
+            />
+            <button class="btn btn-dark" onclick="copyUrl();">복사</button>
+          </div>
         </div>
         <div class="modal-content--btn">
-          <button id="closeShareModal" class="btn btn-secondary">취소</button>
+          <button id="closeShareModal" class="btn btn-primary">닫기</button>
         </div>
       </div>
     </div>
