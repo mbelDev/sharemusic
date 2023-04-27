@@ -487,3 +487,8 @@ h1 {
     margin: 6px 0;
   }
 }
+@media screen and (max-width: 500px) {
+  #headerLayout-Area {
+    width: 100vw;
+  }
+}

@@ -6,7 +6,7 @@
   layout:decorate="~{/include/layout.html}"
 >
   <main id="mainPage-Area" class="mypage-Area" layout:fragment="contents">
-    <section class="weeklyRanking monthRanking">
+    <section class="weeklyRanking">
       <div class="weeklyRanking-page topAndbut">
         <h2>주간랭킹</h2>
         <!-- 날짜이동버튼 -->
@@ -19,38 +19,24 @@
             <span>~</span>
             <span th:text="${weeklyDate[LASTDATE]}">끝 날짜</span>
           </div>
-          
-          <div id="weeklyRankList" class="monthRankList">
-            <ul>
-              <li th:each="item : ${weeklyRankList}">
-                <div class="postTxt">
-                  <div class="postTxt-no">
-                    <p class="" th:text="${itemStat.index+1}">넘버</p>
-                  </div>
-                  <div class="postTxt-img">
-                    <img
-                      class=""
-                      th:src="@{/upload}+${item.postAuthIcon}"
-                      alt=""
-                    />
-                  </div>
-                  <div class="postTxt-title">
-                    <p class="" th:text="${item.postAuth}">별명</p>
-                    <p class="" th:text="${item.postSinger}">가수이름</p>
-                    <p class="" th:text="${item.postTitle}">곡이름</p>
-                  </div>
+          <span class="material-icons nextWeekly" onclick="nextWeekly()">
+            east
+          </span>
+        </div>
+        <!-- List 데이터 -->
+        <div id="weeklyRankList">
+          <ul>
+            <li th:each="item : ${weeklyRankList}">
+              <div class="postTxt">
+                <div class="postTxt-no">
+                  <p class="" th:text="${itemStat.index+1}">넘버</p>
                 </div>
-                <div class="postTitle">
-                  <a th:href="@{/board/view(postNo=${item.postNo})}">
-                    <img
-                      th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
-                    />
-                  </a>
-                  <div class="postTitle-sub">
-                    <a href="">
-                      <span><p class="btnHover btn btn-primary">자세히 보기</p></span>
-                    </a>
-                  </div>
+                <div class="postTxt-img">
+                  <img
+                    class=""
+                    th:src="@{/upload/}+${item.postAuthIcon}"
+                    alt=""
+                  />
                 </div>
                 <div class="postTxt-title">
                   <p class="" th:text="${item.postAuth}">별명</p>

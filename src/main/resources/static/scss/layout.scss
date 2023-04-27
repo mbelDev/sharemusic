@@ -598,3 +598,9 @@ h1 {
     } //&-Area
   } //.media855
 } //@media screen and (max-width: 855px)
+
+@media screen and (max-width: 500px) {
+  #headerLayout-Area{
+    width: 100vw;
+  }
+}

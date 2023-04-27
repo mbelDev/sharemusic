@@ -1,3 +1,142 @@
+.weeklyRanking {
+  padding: 50px;
+}
+.weeklyRanking #weeklyRankList ul li {
+  width: 100%;
+  height: 18vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  border-bottom: 1px solid rgba(80, 80, 80, 0.3490196078);
+  position: relative;
+  transition: all 0.4s ease;
+}
+.weeklyRanking #weeklyRankList ul li:hover {
+  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  transform: scale(101%);
+}
+.weeklyRanking #weeklyRankList ul li:nth-child(1) .postTxt-no {
+  color: #131313;
+}
+.weeklyRanking #weeklyRankList ul li:nth-child(1) .postTxt-no::after {
+  content: "";
+  display: block;
+  width: 4vw;
+  height: 6vw;
+  background-image: url("/images/num01.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 35%;
+  left: 1.5%;
+}
+.weeklyRanking #weeklyRankList ul li:nth-child(2) .postTxt-no {
+  color: #131313;
+}
+.weeklyRanking #weeklyRankList ul li:nth-child(2) .postTxt-no::after {
+  content: "";
+  display: block;
+  width: 4vw;
+  height: 6vw;
+  background-image: url("/images/num02.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 35%;
+  left: 1.5%;
+}
+.weeklyRanking #weeklyRankList ul li:nth-child(3) .postTxt-no {
+  color: #131313;
+}
+.weeklyRanking #weeklyRankList ul li:nth-child(3) .postTxt-no::after {
+  content: "";
+  display: block;
+  width: 4vw;
+  height: 6vw;
+  background-image: url("/images/num03.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 35%;
+  left: 1.5%;
+}
+.weeklyRanking #weeklyRankList ul li .postTxt {
+  display: flex;
+  align-items: center;
+}
+.weeklyRanking #weeklyRankList ul li .postTxt-no {
+  height: 100%;
+  padding: 0 50px;
+  font-size: 2vw;
+  font-weight: bold;
+}
+.weeklyRanking #weeklyRankList ul li .postTxt-img {
+  width: 10vw;
+  height: 10vw;
+  outline: 1px solid red;
+  border-radius: 33px;
+}
+.weeklyRanking #weeklyRankList ul li .postTxt-title p {
+  margin-left: 30px;
+}
+.weeklyRanking #weeklyRankList ul li .postTxt-title p:nth-child(1) {
+  font-size: 2vw;
+  font-weight: 700;
+  margin-bottom: 3vw;
+}
+.weeklyRanking #weeklyRankList ul li .postTxt-title p:nth-child(2) {
+  font-size: 1vw;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.weeklyRanking #weeklyRankList ul li .postTxt-title p:nth-child(3) {
+  font-size: 0.8vw;
+}
+.weeklyRanking #weeklyRankList ul li .postTitle {
+  position: relative;
+  transition: all 0.25s ease;
+}
+.weeklyRanking #weeklyRankList ul li .postTitle:hover {
+  transform: translateY(3%);
+}
+.weeklyRanking #weeklyRankList ul li .postTitle a img {
+  width: 25vw;
+  border-radius: 23px;
+  margin-right: 50px;
+}
+.weeklyRanking #weeklyRankList ul li .postTitle .postTitle-sub {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-top: 25%;
+  padding-left: 2vw;
+  opacity: 0;
+  width: 91%;
+  height: 100%;
+  transition: all 0.25s ease;
+  transition-delay: 0.2s;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 23px;
+}
+.weeklyRanking #weeklyRankList ul li .postTitle .postTitle-sub p {
+  font-size: 1.5vw;
+  font-weight: 800;
+}
+.weeklyRanking #weeklyRankList ul li .postTitle .postTitle-sub a {
+  padding: 0.7vw 1.5vw;
+  border-radius: 6px;
+  margin-top: 15px;
+}
+.weeklyRanking #weeklyRankList ul li .postTitle .postTitle-sub:hover {
+  opacity: 1;
+}
+
 #weekly {
   display: flex;
   justify-content: center;
@@ -14,4 +153,191 @@
 }
 #weekly #weeklyDate {
   padding: 0 8px;
+}
+
+@media screen and (max-width: 1550px) {
+  .weeklyRanking #weeklyRankList ul li:nth-child(1),
+  .weeklyRanking #weeklyRankList ul li:nth-child(2),
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) {
+    width: 23vw;
+    margin: 10px;
+  }
+  .weeklyRanking {
+    padding: 50px;
+  }
+}
+@media screen and (max-width: 1415px) {
+  .weeklyRanking #weeklyRankList ul li:nth-child(1),
+  .weeklyRanking #weeklyRankList ul li:nth-child(2),
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) {
+    width: 23vw;
+  }
+  .weeklyRanking {
+    padding: 50px;
+  }
+}
+@media screen and (max-width: 1240px) {
+  .weeklyRanking #weeklyRankList ul li:nth-child(1),
+  .weeklyRanking #weeklyRankList ul li:nth-child(2),
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) {
+    width: 22vw;
+  }
+  .weeklyRanking {
+    padding: 50px;
+  }
+}
+@media screen and (max-width: 1045px) {
+  .weeklyRanking #weeklyRankList ul li:nth-child(1),
+  .weeklyRanking #weeklyRankList ul li:nth-child(2),
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) {
+    width: 21vw;
+  }
+  .weeklyRanking {
+    padding: 30px;
+  }
+}
+@media screen and (max-width: 960px) {
+  .weeklyRanking #weeklyRankList ul li:nth-child(1),
+  .weeklyRanking #weeklyRankList ul li:nth-child(2),
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) {
+    width: 20vw;
+  }
+  .weeklRanking {
+    padding: 20px;
+  }
+}
+@media screen and (max-width: 855px) {
+  .weeklyRanking #weeklyRankList ul li:nth-child(1) {
+    width: 100%;
+  }
+  .weeklyRanking #weeklyRankList ul li:nth-child(1) a img {
+    width: 100%;
+  }
+  .weeklyRanking #weeklyRankList ul li:nth-child(2),
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) {
+    width: 47.4%;
+  }
+  .weeklyRanking #weeklyRankList ul li:nth-child(2) a img,
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) a img {
+    width: 100%;
+  }
+  .weeklyRanking #weeklyRankList ul li {
+    width: 100%;
+    margin: 8px;
+  }
+  .weeklyRanking #weeklyRankList ul li a img {
+    width: 30%;
+  }
+  .weeklyRanking #weeklyRankList ul li:nth-child(1) .postTitle,
+  .weeklyRanking #weeklyRankList ul li:nth-child(2) .postTitle,
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) .postTitle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7137254902);
+    opacity: 0;
+    transition: all 0.25s ease;
+    transition-delay: 0.2s;
+  }
+  .weeklyRanking #weeklyRankList ul li:nth-child(1) .postTitle:hover,
+  .weeklyRanking #weeklyRankList ul li:nth-child(2) .postTitle:hover,
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) .postTitle:hover {
+    opacity: 1;
+  }
+  .weeklyRanking #weeklyRankList ul li .postTitle {
+    position: absolute;
+    top: 0;
+    left: 30%;
+    width: 79%;
+    height: 100%;
+    background: none;
+    opacity: 1;
+  }
+  .weeklyRanking #weeklyRankList ul li:nth-child(1) .postTitle .postTxt p:nth-child(3),
+  .weeklyRanking #weeklyRankList ul li:nth-child(2) .postTitle .postTxt p:nth-child(3),
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) .postTitle .postTxt p:nth-child(3) {
+    margin-top: 15px;
+  }
+  .weeklyRanking #weeklyRankList ul li .postTitle .postTxt p:nth-child(3) {
+    margin-top: 45px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .weeklyRanking #weeklyRankList ul li:nth-child(1) {
+    width: 100%;
+  }
+  .weeklyRanking #weeklyRankList ul li:nth-child(1) a img {
+    width: 100%;
+  }
+  .weeklyRanking #weeklyRankList ul li:nth-child(2),
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) {
+    width: 45.4%;
+  }
+  .weeklkyRanking #weeklyRankList ul li:nth-child(2) a img,
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) a img {
+    width: 100%;
+  }
+  .weeklyRanking #weeklyRankList ul li {
+    width: 100%;
+    margin: 8px;
+  }
+  .weeklyRanking #weeklyRankList ul li a img {
+    width: 35%;
+  }
+  .weeklyRanking #weeklyRankList ul li:nth-child(1) .postTitle,
+  .weeklyRanking #weeklyRankList ul li:nth-child(2) .postTitle,
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) .postTitle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7137254902);
+    opacity: 0;
+    transition: all 0.25s ease;
+    transition-delay: 0.2s;
+  }
+  .weeklyRanking #weeklyRankList ul li:nth-child(1) .postTitle:hover,
+  .weeklyRanking #weeklyRankList ul li:nth-child(2) .postTitle:hover,
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) .postTitle:hover {
+    opacity: 1;
+  }
+  .weeklyRanking #weeklyRankList ul li .postTitle {
+    position: absolute;
+    top: 8%;
+    left: 35%;
+    width: 79%;
+    height: 100%;
+    background: none;
+    opacity: 1;
+  }
+  .topAndbut {
+    text-align: left;
+  }
+  .weeklyRanking #weeklyRankList ul li .postTitle .postTxt p {
+    font-size: 16px;
+  }
+  .weeklyRanking #weeklyRankList ul li .postTitle .postTxt p:nth-child(1) {
+    font-size: 13px;
+    font-weight: 200;
+  }
+  .weeklkyRanking #weeklyRankList ul li:nth-child(1) .postTitle .postTxt p:nth-child(3),
+  .weeklyRanking #weeklyRankList ul li:nth-child(2) .postTitle .postTxt p:nth-child(3),
+  .weeklyRanking #weeklyRankList ul li:nth-child(3) .postTitle .postTxt p:nth-child(3) {
+    margin-top: 15px;
+  }
+  .weeklyRanking #weeklyRankList ul li .postTitle .postTxt p:nth-child(3) {
+    margin-top: 30px;
+  }
+  .weeklyRanking {
+    margin-top: 100px;
+  }
+}
+.postTxt-img img {
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  border-radius: 33px;
 }
