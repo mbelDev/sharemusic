@@ -34,14 +34,14 @@
                 <div class="postTxt-img">
                   <img
                     class=""
-                    th:src="@{/upload}+@{item.postAuthIcon}"
+                    th:src="@{/upload}+${item.postAuthIcon}"
                     alt=""
                   />
                 </div>
                 <div class="postTxt-title">
                   <p class="" th:text="${item.postAuth}">별명</p>
-                  <p class="" th:text="${item.postSinger}">가수이름</p>
                   <p class="" th:text="${item.postTitle}">곡이름</p>
+                  <p class="" th:text="${item.postSinger}">가수이름</p>
                 </div>
               </div>
               <div class="postTitle">
@@ -51,7 +51,7 @@
                   />
                 </a>
                 <div class="postTitle-sub">
-                  <a href="">
+                  <a th:href="@{board/view(postNo=${item.postNo})}">
                     <span><p class="btnHover btn btn-primary">자세히 보기</p></span>
                   </a>
                 </div>
@@ -62,6 +62,7 @@
       </div>
     </section>
     <!-- monthRanking -->
+
     <script th:inline="javascript">
       let moveMonth;
 

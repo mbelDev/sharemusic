@@ -154,6 +154,10 @@
 .boardView-Video--title .title-info {
   display: flex;
   justify-content: space-between;
+  margin-top: 10px;
+}
+.boardView-Video--title .title-name {
+  margin-bottom: 30px;
 }
 .boardView-Video--title .title-name p {
   font-size: 25px;
@@ -203,20 +207,47 @@
   width: 7vw;
   margin-top: 10px;
 }
-.boardView-Video--title .like-good img {
-  width: 30px;
+.boardView-Video--title .like-good-sub {
+  min-width: 60px;
+  height: 40px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  border-radius: 33px;
+  background-color: #35373f;
   cursor: pointer;
 }
-.boardView-Video--title .like-btn {
+.boardView-Video--title .like-good p {
+  margin-right: 30px;
+  position: relative;
+}
+.boardView-Video--title .like-good p::before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 15px;
+  background-color: #0e0e0e;
+  position: absolute;
+  bottom: 0;
+  right: -15px;
+}
+.boardView-Video--title .like-good span {
+  display: inline-block;
+  padding-top: 2px;
+}
+.boardView-Video--title .like-share {
+  display: flex;
   margin-top: 20px;
   margin-left: 95px;
+  transform: translateX(-30%);
 }
-.boardView-Video--title .like-btn button {
+.boardView-Video--title .like-share button {
   border: none;
   outline: none;
   background-color: #0e0e0e;
 }
-.boardView-Video--title .like-btn button img {
+.boardView-Video--title .like-share button img {
   width: 25px;
 }
 
@@ -356,6 +387,9 @@
   border-radius: 5px;
   margin-right: 10px;
 }
+.replyIcon.deleted {
+  opacity: 0;
+}
 
 @media screen and (max-width: 1640px) {
   .flex-box #mainPage-Area {
@@ -366,8 +400,12 @@
     height: 42vw;
   }
   .boardView-Video--title .like-btn {
+    display: flex;
     margin-top: 20px;
     margin-left: 80px;
+  }
+  .boardView-Video--title .like-btn .like-good {
+    min-width: 60px;
   }
 }
 @media screen and (max-width: 1400px) {
@@ -381,6 +419,7 @@
     width: 8vw;
   }
   .boardView-Video--title .like-btn {
+    display: flex;
     margin-top: 20px;
     margin-left: 80px;
   }
@@ -393,6 +432,7 @@
     width: 9vw;
   }
   .boardView-Video--title .like-btn {
+    display: flex;
     margin-top: 20px;
     margin-left: 75px;
   }
@@ -418,6 +458,7 @@
     width: 11vw;
   }
   .boardView-Video--title .like-btn {
+    display: flex;
     margin-top: 20px;
     margin-left: 80px;
   }
@@ -437,6 +478,7 @@
     font-size: 12px;
   }
   .boardView-Video--title .like-btn {
+    display: flex;
     margin-top: 20px;
     margin-left: 70px;
   }
@@ -462,6 +504,7 @@
     font-size: 12px;
   }
   .boardView-Video--title .like-btn {
+    display: flex;
     margin-top: 20px;
     margin-left: 65px;
   }
@@ -594,6 +637,7 @@
     font-size: 11px;
   }
   .boardView-Video--title .like-btn {
+    display: flex;
     margin-top: 20px;
     margin-left: 50px;
   }

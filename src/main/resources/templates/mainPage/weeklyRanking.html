@@ -9,20 +9,15 @@
     <section class="weeklyRanking monthRanking">
       <div class="weeklyRanking-page topAndbut">
         <h2>주간랭킹</h2>
-        <!-- weeklyRanking-page -->
-        <article class="weeklyRanking-Area">
-          <div id="weekly">
-            <span class="material-icons prevWeekly" onclick="prevWeekly()"
-              >west</span
-            >
-            <div id="weeklyDate">
-              <span th:text="${weeklyDate[STARTDATE]}">시작 날짜</span>
-              <span>~</span>
-              <span th:text="${weeklyDate[LASTDATE]}">끝 날짜</span>
-            </div>
-            <span class="material-icons nextWeekly" onclick="nextWeekly()"
-              >east</span
-            >
+        <!-- 날짜이동버튼 -->
+        <div id="weekly">
+          <span class="material-icons prevWeekly" onclick="prevWeekly()">
+            west
+          </span>
+          <div id="weeklyDate">
+            <span th:text="${weeklyDate[STARTDATE]}">시작 날짜</span>
+            <span>~</span>
+            <span th:text="${weeklyDate[LASTDATE]}">끝 날짜</span>
           </div>
           
           <div id="weeklyRankList" class="monthRankList">
@@ -35,7 +30,7 @@
                   <div class="postTxt-img">
                     <img
                       class=""
-                      th:src="@{/upload}+@{item.postAuthIcon}"
+                      th:src="@{/upload}+${item.postAuthIcon}"
                       alt=""
                     />
                   </div>
@@ -57,12 +52,31 @@
                     </a>
                   </div>
                 </div>
-              </li>
-            </ul>
-          </div>
-        </article>
+                <div class="postTxt-title">
+                  <p class="" th:text="${item.postAuth}">별명</p>
+                  <p class="" th:text="${item.postTitle}">곡이름</p>
+                  <p class="" th:text="${item.postSinger}">가수이름</p>
+                </div>
+              </div>
+              <div class="postTitle">
+                <a th:href="@{/board/view(postNo=${item.postNo})}">
+                  <img
+                    th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
+                  />
+                </a>
+                <div class="postTitle-sub">
+                  <p>자세한 내용을 확인 하세요.</p>
+                  <a
+                    class="btnHover btn btn-primary"
+                    th:href="@{board/view(postNo=${item.postNo})}"
+                    >자세히 보기</a
+                  >
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-      <!-- weeklyRanking-Area -->
     </section>
     <!-- weeklyRanking -->
 

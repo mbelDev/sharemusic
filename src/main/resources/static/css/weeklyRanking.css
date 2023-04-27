@@ -1,9 +1,7 @@
 #weekly {
   display: flex;
   justify-content: center;
-  align-items: start;
   font-size: 18px;
-  margin-bottom: 20px;
 }
 #weekly .prevWeekly,
 #weekly .nextWeekly {

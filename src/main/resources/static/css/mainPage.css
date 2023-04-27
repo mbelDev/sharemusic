@@ -77,6 +77,11 @@
   font-size: 18px;
   margin-bottom: 10px;
 }
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts p:nth-child(2) {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
 .main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts .swiper-txts--postAuth p {
   margin-right: 50px;
 }
@@ -114,6 +119,15 @@
 .main-constent--itmes .main-constent--listItem .listItem-nav .update-data ul li a:hover::after {
   width: 100%;
 }
+.main-constent--itmes .main-constent--listItem .listItem-nav .update-data ul .sortDate.selected {
+  color: #ff3672;
+}
+.main-constent--itmes .main-constent--listItem .listItem-nav .update-data ul .sortHits.selected {
+  color: #ff3672;
+}
+.main-constent--itmes .main-constent--listItem .listItem-nav .update-data ul .sortLike.selected {
+  color: #ff3672;
+}
 .main-constent--itmes .main-constent--listItem .getList-ItemBox ul {
   display: flex;
   justify-content: left;
@@ -142,10 +156,10 @@
   margin: 0;
   line-height: 1;
 }
-.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postTitle {
+.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postSinger {
   margin: 15px 0 10px 0;
 }
-.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postSinger {
+.main-constent--itmes .main-constent--listItem .getList-ItemBox .ItemBox-content .ItemBox-postTitle {
   font-family: "SBAggroB";
   font-weight: bold;
   font-size: 18px;
@@ -272,19 +286,13 @@
   .ranking-box.topAndbut {
     margin: 0 0 0 10px;
   }
-}
-@media screen and (max-width: 320px) {
-  .main-constent--itmes .main-constent--listItem .getList-ItemBox ul li a img {
-    width: 86vw;
-    height: auto;
+  .swiper-txts--postTitle {
+    text-align: left;
   }
-  .main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a {
-    width: 87vw;
+  .swiper-txts--postAuth {
+    text-align: right;
   }
-  .media855-Area--search form {
-    display: none;
-  }
-  .ranking-box.topAndbut {
-    margin: 0 0 0 5px;
+  .main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts .swiper-txts--postAuth p {
+    margin-right: 0 !important;
   }
 }

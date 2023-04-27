@@ -41,10 +41,10 @@
                         <div class="swiper-txt">
                           <div class="swiper-txts">
                             <div class="swiper-txts--postTitle">
-                              <p class="" th:text="${item.postTitle}">곡이름</p>
                               <p class="" th:text="${item.postSinger}">
                                 가수이름
                               </p>
+                              <p class="" th:text="${item.postTitle}">곡이름</p>
                             </div>
                             <div class="swiper-txts--postAuth">
                               <p class="" th:text="${item.postAuth}">별명</p>
@@ -78,14 +78,14 @@
                     >최신순</a
                   >
                 </li>
-                <li>
+                <li class="sortHits">
                   <a
                     href="#"
                     th:href="@{/mainPage/{category}(category=${category}, sort=postHits, searchTxt=${param.searchTxt})}"
                     >조회순</a
                   >
                 </li>
-                <li>
+                <li class="sortLike">
                   <a
                     href="#"
                     th:href="@{/mainPage/{category}(category=${category}, sort=postLike, searchTxt=${param.searchTxt})}"
@@ -110,11 +110,11 @@
                   </div>
                   <!-- ItemBox-imgs -->
                   <div class="ItemBox-content">
-                    <p class="ItemBox-postTitle" th:text="${item.postTitle}">
-                      곡이름
-                    </p>
                     <p class="ItemBox-postSinger" th:text="${item.postSinger}">
                       가수이름
+                    </p>
+                    <p class="ItemBox-postTitle" th:text="${item.postTitle}">
+                      곡이름
                     </p>
                     <div>
                       <img class="ItemBox-postAuthIcon" th:src="@{/upload/}+${item.postAuthIcon}" alt="" style="width:30px; height:30px;">
@@ -137,7 +137,7 @@
     <!-- main-constent--itmes -->
 
     <script th:inline="javascript">
-      // 정렬, 검색할 때 스크롤 이동
+      // 정렬, 검색할 때 스크롤 이동, 정렬
       $(document).ready(function () {
         const location = $("#musicList").offset().top;
         const sort = /*[[${param.sort}]]*/ false;
@@ -148,6 +148,20 @@
         }
         if (searchTxt != null) {
           window.scrollTo({ top: location, behavior: "auto" });
+        }
+
+        if (sort == 'postDate' || sort == null) {
+          $(".sortDate").addClass("selected");
+          $(".sortHits").removeClass("selected");
+          $(".sortLike").removeClass("selected");
+        } else if (sort == 'postHits') {
+          $(".sortDate").removeClass("selected");
+          $(".sortHits").addClass("selected");
+          $(".sortLike").removeClass("selected");
+        } else if (sort == 'postLike') {
+          $(".sortDate").removeClass("selected");
+          $(".sortHits").removeClass("selected");
+          $(".sortLike").addClass("selected");
         }
       });
     </script>

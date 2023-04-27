@@ -211,6 +211,7 @@ public class BoardController {
     Model model,
     HttpSession session
   ) {
+    log.info("reply Cont = {}", replysDto);
     if (session.getAttribute("loggedUser") == null) {
       return "<script>alert('로그인 해 주세용 여기에 당신 이름 석 자만 적어주세용.');location.href='/member/login';</script>";
     } else {

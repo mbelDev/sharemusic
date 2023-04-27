@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,7 @@ public class MemberServiceImpl implements MemberService {
     if (uploadFile.getOriginalFilename() != "") {
       UUID uuid = UUID.randomUUID();
       String userIconPath = uploadFile.getOriginalFilename();
+      checkFormat(userIconPath);
       String userIconReal = uuid + "_" + userIconPath;
       Path imgFilePath = Paths.get(uploadFolder + userIconReal); // C:\tempStorage
       memberDto.setUserIcon(userIconPath);
@@ -76,6 +78,18 @@ public class MemberServiceImpl implements MemberService {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  //확장자 검사
+  public int checkFormat(String fileName) {
+    String formatName = fileName
+      .substring(fileName.lastIndexOf(".") + 1)
+      .toLowerCase();
+    String[] supportFormat = { "bmp", "jpg", "jpeg", "png" };
+    if (!Arrays.asList(supportFormat).contains(formatName)) {
+      throw new IllegalArgumentException("지원하지 않는 format 입니다.");
+    }
+    return 1;
   }
 
   //오류 검증 Validate

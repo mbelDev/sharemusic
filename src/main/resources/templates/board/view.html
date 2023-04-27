@@ -29,18 +29,30 @@
                 </a>
               </div>
               <div class="like-btn">
-                <button class="btnOpen btnShare" id="shareModalBox">
-                  <img src="/images/open.svg" alt="" />
-                </button>
+                  <div class="like-good">
+                    <div class="like-good-sub btnHover" onclick="updateLike(this);" th:data-postno="${boardDto.postNo}">
+                      <div>
+                        <p>좋아요</p>
+                      </div>
+                      <div>
+                        <span th:text="${boardDto.postLike}" class="postLike">0</span>
+                      </div>
+                    </div>
+                  </div><!-- like-good -->
+                  <div class="like-share">
+                    <button class="btnOpen btnShare" id="shareModalBox">
+                      <img src="/images/open.svg" alt="" />
+                    </button>
+                  </div><!-- like-btn -->
               </div>
             </div><!-- title-name -->
             <div class="title-Auth">
               <img class="title-Auth-icon" th:src="@{/upload/}+${boardDto.postAuthIcon}" alt="">
               <span class="title-Auth-name" th:text="${boardDto.postAuth}">작성자</span>
-              <span class="title-Auth-follow btn"  th:if="${loggedUser != null and loggedUser.userID != boardDto.postAuthID}"
+              <!-- <span class="title-Auth-follow btn"  th:if="${loggedUser != null and loggedUser.userID != boardDto.postAuthID}"
               th:classappend="${loggedUser == null ? 'btn-secondary' : loggedUser.postFollowed == 1 ? 'btn-primary' : 'btn-secondary'}" 
               th:onclick="follow(this)" 
-              th:data-postAuthID="${boardDto.postAuthID}">구독</span>
+              th:data-postAuthID="${boardDto.postAuthID}">구독</span> -->
             </div>
             <div class="title-Content">
               <div class="title-Date">
@@ -55,7 +67,7 @@
             </div><!-- title-Genre -->
             <div class="title-btn" th:if="${session.loggedUser != null} and ${session.loggedUser.userNM == boardDto.postAuth}">
               <a href="/board/modify" th:href="@{/board/modify(postNo=${boardDto.postNo})}" class="btnHover btn btn-primary">수정</a>
-            <button id="deleteModalBox" class="btn btn-secondary">삭제</button>
+            <button id="deleteModalBox" class="btnHover-x btn btn-secondary">삭제</button>
             </div><!-- title-btn -->
           </div><!-- title -->
           <!-- <div class="like">
@@ -87,7 +99,7 @@
       <ul id="reply-container" th:if="${replysList} != null">
         <li th:Each="item:${replysList}" class="reply" th:data-replyno="${item.replyNo}">
           <!-- <p th:text="${item.replyNo}"></p> -->
-          <span th:if="${item.replyLevel} > 0" th:each="num : ${#numbers.sequence(0, item.replyLevel-1)}" style="display:block; width:10px;"></span>
+          <span th:if="${item.replyLevel} > 0" th:each="num : ${#numbers.sequence(0, item.replyLevel-1)}" style="display:block; width:15px;"></span>
 
           <th:block th:if="${item.replyHidden != 2}">
             <div class="reply-contents"
@@ -96,11 +108,6 @@
              or (${session.loggedUser != null ? session.loggedUser.userNM == boardDto.postAuth : false})">
               <div class="reply-contents--icon">
                 <a th:href="@{|/member/user/${item.replyAuthID}|}">
-                  <!-- <img
-                  src="/images/sampleprofile.jpg"
-                    alt=""
-                    class="replyIcon"
-                  /> -->
                   <img
                   th:src="@{/upload/}+${item.replyAuthIcon}"
                   alt=""
@@ -176,7 +183,7 @@
            th:if="${item.replyHidden == 2}">
             <div class="reply-contents--icon">
               <a>
-                <img src="/images/sampleprofile.jpg" class="replyIcon"/>
+                <img src="/images/sampleprofile.jpg" class="replyIcon deleted"/>
                 <span th:text="${item.replyNo}+'번 덧글'">홍길동</span>
 
               </a>
@@ -199,9 +206,8 @@
           </div>
           <div class="board-view--replyBox-subCont">
             <img class="replyIcon" th:src="@{/upload/}+${loggedUser.userIconReal}" alt="">
-            <textarea class="replyCont" name="replyCont"  >
-            </textarea>
-            <input type="button" class="btn btn-primary" value="작성" th:onclick="addReplyEvent(this)"/>
+            <textarea class="replyCont" id="replyCont" name="replyCont"  ></textarea>
+            <span type="button" class="btn btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"></span>
           </div>
         </th:block>
         <th:block th:if="${session.loggedUser == null}">
@@ -212,9 +218,8 @@
           <a th:href="@{/member/login}">
             <div class="board-view--replyBox-subCont">
               <img class="replyIcon" th:src="@{/images/sampleprofile.jpg}" alt="">
-              <textarea class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }" rows="2" >
-              </textarea>
-              <input type="button" class="btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"/>
+              <textarea class="replyCont" name="replyCont" th:value="${session.loggedUser == null ? '로그인 해 주세요' : '' }" rows="2" ></textarea>
+              <span type="button" class="btn-primary btn-reply" value="작성" th:onclick="addReplyEvent(this)"></span>
             </div>
           </a>
         </th:block>
@@ -244,15 +249,15 @@
           <p>확인을 누르면 게시글이 완전히 삭제됩니다.</p>
         </div>
         <div class="modal-content--btn">
-          <button id="btnDeleteConfirm" class="btn btn-primary" th:onclick="boardDelete('[[${boardDto.postNo}]]')">확인</button>
-          <button id="closeDeleteModal" class="btn btn-secondary">취소</button>
+          <button id="btnDeleteConfirm" class="btnHover btn btn-primary" th:onclick="boardDelete('[[${boardDto.postNo}]]')">확인</button>
+          <button id="closeDeleteModal" class="btnHover-x btn btn-secondary">취소</button>
         </div>
       </div>
     </div>
 
+  
     <!-- 공유 모달창 -->
-    <div id="deleteModal" class="modal-wnd deleteMo shareModal">
-      <div id="closeDeleteModal" class="shareModalClose"></div>
+    <div id="shareModal" class="modal-wnd deleteMo shareModal">
       <div class="modal-content">
         <div class="modal-content--title">
           <p>공유를 합니다.</p>
@@ -313,8 +318,7 @@
           </p>
         </div>
         <div class="modal-content--btn">
-          <button id="btnDeleteConfirm" class="btnHover btn btn-primary">확인</button>
-          <button id="closeDelete" class="btn btn-secondary">취소</button>
+          <button id="closeShareModal" class="btn btn-secondary">취소</button>
         </div>
       </div>
     </div>
@@ -348,7 +352,10 @@
         </div>
         <!-- write-modal--item -->
       </div>
-    </section>
+    </div>
+
+    
+  </section>
 
   
 <!--------------------------------------------------[            자바 스크립트 영역             ]-------------------------------------------------------------------------->
@@ -366,126 +373,126 @@
       $(".new").text(n_like + 1);
     }
   </script>
-    <script>
-      const postNo = $("#postNo").val();
-  
-      getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
-      getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
-      getModal($(".deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
-      // getModal($(".menuBtn"), $("#deleteReplyModal-M"), $("#deleteReplyModal-M  #closeDeleteReply"));
-      // getModal($(".board-view--replyBox__input-M"), $("#comReplyModal-M"), $("#comReplyModal-M  #closeDeleteReply"));
+  <script>
+    const postNo = $("#postNo").val();
 
-      // 복사 버튼 누르면 url 복사
-      async function copyUrl() {
-        const shareUrl = $(".shareUrl").val();
-        await navigator.clipboard.writeText(shareUrl);
-      }
+    getModal($("#deleteModalBox"), $("#deleteModal"), $("#closeDeleteModal"));
+    getModal($("#shareModalBox"), $("#shareModal"), $("#closeShareModal"));
+    getModal($(".deleteReplyBtn"), $("#deleteReplyModal"), $("#closeDeleteReply"));
+    // getModal($(".menuBtn"), $("#deleteReplyModal-M"), $("#deleteReplyModal-M  #closeDeleteReply"));
+    // getModal($(".board-view--replyBox__input-M"), $("#comReplyModal-M"), $("#comReplyModal-M  #closeDeleteReply"));
 
-      // 트위터 공유
-      $(".shareTwitter").on("click", function () {
-        const sendText = "노래 공유";
-        const pageUrl = encodeURIComponent(window.location.href);
-        window.open(
-          `https://twitter.com/intent/tweet?text=${sendText}&url=${pageUrl}`
-        );
-      });
+    // 복사 버튼 누르면 url 복사
+    async function copyUrl() {
+      const shareUrl = $(".shareUrl").val();
+      await navigator.clipboard.writeText(shareUrl);
+    }
 
-      // 페이스북 공유
-      $(".shareFacebook").on("click", function () {
-        const pageUrl = encodeURIComponent(window.location.href);
-        window.open(`http://www.facebook.com/sharer/sharer.php?u=${pageUrl}`);
-      });
+    // 트위터 공유
+    $(".shareTwitter").on("click", function () {
+      const sendText = "노래 공유";
+      const pageUrl = encodeURIComponent(window.location.href);
+      window.open(
+        `https://twitter.com/intent/tweet?text=${sendText}&url=${pageUrl}`
+      );
+    });
 
-      // 카카오톡 공유
-      Kakao.init("8d6a18d8dcc3f8eea775c4c852f086c0");
-      $(".shareKakaoTalk").on("click", function () {
-        Kakao.Link.sendDefault({
-          objectType: "feed",
-          content: {
-            title: "", // 제목
-            description: "", // 설명
-            imageUrl: "", // 이미지 도메인
+    // 페이스북 공유
+    $(".shareFacebook").on("click", function () {
+      const pageUrl = encodeURIComponent(window.location.href);
+      window.open(`http://www.facebook.com/sharer/sharer.php?u=${pageUrl}`);
+    });
+
+    // 카카오톡 공유
+    Kakao.init("8d6a18d8dcc3f8eea775c4c852f086c0");
+    $(".shareKakaoTalk").on("click", function () {
+      Kakao.Link.sendDefault({
+        objectType: "feed",
+        content: {
+          title: "Music", // 제목
+          description: "내용", // 내용
+          imageUrl: "/images/logo.png", // 이미지 도메인
+          link: {
+            webUrl: window.location.href, // 웹 링크
+          },
+        },
+        buttons: [
+          {
+            title: "자세히 보기",
             link: {
               webUrl: window.location.href, // 웹 링크
             },
           },
-          buttons: [
-            {
-              title: "자세히 보기",
-              link: {
-                webUrl: window.location.href, // 웹 링크
-              },
-            },
-          ],
-        });
+        ],
       });
+    });
 
-      // 글 삭제할 때 이벤트
-      function boardDelete(postNo) {
-        $.ajax({
-          url: "/board/delete",
-          type: "POST",
-          data: {"postNo": postNo},
-          success: function(response) {
-          if (response.msg == "ok") {
-            location.href=document.referrer;
-            } else {
-              location.reload();
-            }
+    // 글 삭제할 때 이벤트
+    function boardDelete(postNo) {
+      $.ajax({
+        url: "/board/delete",
+        type: "POST",
+        data: {"postNo": postNo},
+        success: function(response) {
+        if (response.msg == "ok") {
+          location.href=document.referrer;
+          } else {
+            location.reload();
           }
-        })
-      }
-    </script>
-    <script th:inline="javascript">
+        }
+      })
+    }
+  </script>
+  <script th:inline="javascript">
 
-      //좋아요 History 연동 함수 #권인호 작성
-      function updateLike(item){
-        $.ajax({
-          url:"/member/like",
-          type:"POST",
-          data:{
-            postNo: postNo
-          },
-          success:function(response){
-            switch(response){
-              case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용")
-                break;
-              case 0 :
-                star(item);
-                break;
-              case 1 :
-                star(item);
-                break;
-            }
-          },
-          error:function(err){
-            console.log(err);
-            alert("로그인 정보가 업써요. 로그인 해 주셰용. 여기다 당신 이름 석 자만 적어쥬셰용.");
+    //좋아요 History 연동 함수 #권인호 작성
+    function updateLike(item){
+      $.ajax({
+        url:"/member/like",
+        type:"POST",
+        data:{
+          postNo: postNo
+        },
+        success:function(response){
+          switch(response){
+            case -1 : alert("로그인 정보가 업써용 여따가 당신 이름 석쟈만 적어쥬세용")
+              break;
+            case 0 :
+              // star(item);
+              break;
+            case 1 :
+              // star(item);
+              break;
           }
-        })
-        .done(()=>{
-          // reloadData(postNo);
-        })
-      }
+        },
+        error:function(err){
+          console.log(err);
+          alert("로그인 정보가 업써요. 로그인 해 주셰용. 여기다 당신 이름 석 자만 적어쥬셰용.");
+        }
+      })
+      .done(()=>{
+        reloadData(postNo);
+      })
+    }
 
-      //좋아요 완료 후 숫자 변경 #권인호
-      // function reloadData(_postNo){
-      //   $.ajax({
-      //     url:"/board/getLike",
-      //     type:"POST",
-      //     data:{
-      //       postNo: _postNo
-      //     },
-      //     success:function(response){
-      //       $(".postLike").text(response);
-      //     },
-      //     error:function(err){
-      //       console.log(err);
-      //       alert("뭔가 심상치않은 일이 생긴거야.");
-      //       location.href="redirect:/uri";
-      //     }
-      //   })
-      // }
-    </script>
+    // 좋아요 완료 후 숫자 변경 #권인호
+    function reloadData(_postNo){
+      $.ajax({
+        url:"/board/getLike",
+        type:"POST",
+        data:{
+          postNo: _postNo
+        },
+        success:function(response){
+          $(".postLike").text(response);
+        },
+        error:function(err){
+          console.log(err);
+          alert("뭔가 심상치않은 일이 생긴거야.");
+          location.href="redirect:/uri";
+        }
+      })
+    }
+  </script>
   </main>
 </html>

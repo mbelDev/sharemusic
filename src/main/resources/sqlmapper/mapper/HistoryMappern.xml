@@ -6,7 +6,7 @@
 
 <!-- 최근 시청 목록 -->
   <select id="getHistoryRecent" parameterType="String" resultType="HistoryDto">
-    SELECT * FROM HISTORY WHERE USERID = #{userID} ORDER BY READDATE DESC
+    SELECT * FROM HISTORY WHERE USERID = #{userID} AND READDATE IS NOT NULL ORDER BY READDATE DESC
   </select>
 
 <!-- 최근 작성 목록 -->
@@ -109,6 +109,15 @@
 
 <!-- 각종 수치를 얻는 곳 -->
 
+<!-- userID의 열람 기록 삭제 -->
+  <update id="deleteRecentAll" parameterType="String">
+    UPDATE HISTORY SET READDATE = null WHERE USERID = #{userID}
+  </update>
+
+<!-- userID의 특정postNo 열람 기록 삭제 -->
+  <update id="deleteRecentOne" parameterType="Map">
+    UPDATE HISTORY SET READDATE = null WHERE USERID = #{userID} AND POSTNO = #{postNo}
+  </update>
 
 <!-- userID의 모든 기록 삭제 -->
   <delete id="deleteHistoryAll" parameterType="String">

@@ -14,13 +14,9 @@ function likeEvent(item){
                   break;
                 case 0 : 
                   $(item).removeClass("btn-dark");
-                // $(item).parent().parent('li').addClass('cancel');
-                // $(item).addClass('cancel')
                   break;
                 case 1 : 
                   $(item).addClass("btn-dark");
-                // $(item).parent().parent('li').removeClass('cancel');
-                // $(item).removeClass('cancel')
                   break;
               }
         },
@@ -104,7 +100,6 @@ function setIcon(event) {
     reader.readAsDataURL(event.target.files[0]);
   }
   function setBaseIcon(){
-    console.log("aa");
     $("#testProfile").attr("th:src" , "@{/upload/}+${userInfo.userIconReal}");
   }
 
@@ -176,6 +171,13 @@ function setIcon(event) {
       type:"POST",
       success:function(response){
         console.log(response)
+        switch(response){
+          case -1 : alert("로그인 정보가 없습니다.");
+          break;
+          case 1 : alert("시청기록을 모두 삭제했습니다.");
+          location.reload(true);
+          break;
+        }
       },
       error:function(err){
         console.log(err);

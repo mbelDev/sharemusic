@@ -1,9 +1,11 @@
 //덧글 입력 처리 함수
 function addReplyEvent(item){
     //item = 작성 버튼
-    const content = $(item).siblings('.replyCont').val();
+    const content = $(item).siblings('#replyCont').val();
     const hidden = $(item).closest('.board-view--replyBox-input').find('.check-hidden').is(":checked")==true ? 1 : 0 ; 
     //작성 버튼을 기준으로 형제 element에서 덧글 내용과 비밀글 체크를 받아온다
+    console.log($(item).siblings('.replyCont'));
+    console.log(content+"/"+hidden);
     $.ajax({
         url: "/board/reply",
         type:"POST",
@@ -91,6 +93,7 @@ function modifyReplyEvent(item){
 //덧글의 덧글을 달기위해 입력창을 생성하는 함수
 function openReplyReplyEvent(item){
     $('div.replyReply').remove();
+    $('div.modifyReply').remove();
     const test = $(".board-view--replyBox-input").clone();
     const replyno = $(item).data("replyno");
     $(test).addClass("replyReply");
@@ -103,6 +106,7 @@ function openReplyReplyEvent(item){
 //덧글 수정을 위해 수정 입력창을 생성하는 함수
 function openModifyReplyEvent(item){
     $('div.modifyReply').remove();
+    $('div.replyReply').remove();
     $('.reply-contents--text.hidden').removeClass('hidden');
     const root = $(item).closest('div.reply-contents');
     const originTxt = root.find('.context').text();
