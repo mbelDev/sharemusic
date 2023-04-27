@@ -24,7 +24,7 @@
           </span>
         </div>
         <!-- List 데이터 -->
-        <div id="monthRankList">
+        <div id="monthRankList" class="monthRankList">
           <ul>
             <li th:each="item : ${monthRankList}">
               <div class="postTxt">
@@ -51,8 +51,9 @@
                   />
                 </a>
                 <div class="postTitle-sub">
-                  <p>자세한 내용을 확인 하세요.</p>
-                  <a class="btnHover btn btn-primary" href="">자세히 보기</a>
+                  <a href="">
+                    <span><p class="btnHover btn btn-primary">자세히 보기</p></span>
+                  </a>
                 </div>
               </div>
             </li>

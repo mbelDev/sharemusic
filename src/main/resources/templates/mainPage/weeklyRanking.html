@@ -6,7 +6,7 @@
   layout:decorate="~{/include/layout.html}"
 >
   <main id="mainPage-Area" class="mypage-Area" layout:fragment="contents">
-    <section class="weeklyRanking">
+    <section class="weeklyRanking monthRanking">
       <div class="weeklyRanking-page topAndbut">
         <h2>주간랭킹</h2>
         <!-- weeklyRanking-page -->
@@ -24,7 +24,8 @@
               >east</span
             >
           </div>
-          <div id="weeklyRankList">
+          
+          <div id="weeklyRankList" class="monthRankList">
             <ul>
               <li th:each="item : ${weeklyRankList}">
                 <div class="postTxt">
@@ -51,8 +52,9 @@
                     />
                   </a>
                   <div class="postTitle-sub">
-                    <p>자세한 내용을 확인 하세요.</p>
-                    <a class="btnHover btn btn-primary" href="">자세히 보기</a>
+                    <a href="">
+                      <span><p class="btnHover btn btn-primary">자세히 보기</p></span>
+                    </a>
                   </div>
                 </div>
               </li>

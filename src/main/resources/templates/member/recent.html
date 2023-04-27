@@ -46,7 +46,7 @@
                   th:onclick="likeEvent(this)">
                   좋아요
                   </span>
-                  <span type="button" class="btn-bookmark btn btn-secondary bookmark" 
+                  <span type="button" class="btn-bookmark btn btn-secondary bookmark btnHover-x" 
                   th:classappend="${item.bookmark == 1 ? 'btn-info' : ''}"
                   th:data-userID="${loggedUser.userID}" 
                   th:data-postNo="${item.postNo}" 
