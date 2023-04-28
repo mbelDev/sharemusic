@@ -14,13 +14,10 @@
             <!-- 상위 랭킹 -->
             <h1 class="topAndbut">랭킹</h1>
             <div class="ranking-box topAndbut">
-              <div class="swiper mySwiper">
+              <div class="profileMySwipers mySwiper">
                 <ul class="swiper-wrapper">
                   <li class="swiper-slide" th:each="item, i : ${rankList}">
-                    <a
-                      href="/board/view"
-                      th:href="@{/board/view(postNo=${item.postNo})}"
-                    >
+                    <a href="/board/view" th:href="@{/board/view(postNo=${item.postNo})}">
                       <div class="swiper-title">
                         <img
                           th:src="@{${'https://img.youtube.com/vi/' + item.postLink + '/mqdefault.jpg'}}"
@@ -40,7 +37,7 @@
                         <!-- swiper-title-num -->
                         <div class="swiper-txt">
                           <div class="swiper-txts">
-                            <div class="swiper-txts--postTitle">
+                            <div class="swiper-txtsswiper-txts--postTitle">
                               <p class="" th:text="${item.postSinger}">
                                 가수이름
                               </p>

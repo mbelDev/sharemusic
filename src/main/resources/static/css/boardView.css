@@ -37,7 +37,7 @@
   margin-bottom: 30px;
 }
 .boardView-Video--title .title-name p {
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 300;
   width: 100%;
   margin-bottom: 5px;
@@ -65,7 +65,7 @@
 }
 .boardView-Video--title .title-Auth-name {
   display: inline-block;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 300;
   margin: 0 10px;
 }
@@ -80,6 +80,16 @@
 }
 .boardView-Video--title .title-Date {
   margin: 0 0 50px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.boardView-Video--title .title-Date .like-share button {
+  border: none;
+  outline: none;
+  background-color: #1f1f1f;
+}
+.boardView-Video--title .title-Date .like-share button img {
+  width: 25px;
 }
 .boardView-Video--title .title-btn {
   margin: 30px 0;
@@ -119,14 +129,6 @@
 }
 .boardView-Video--title .like-btn {
   display: flex;
-}
-.boardView-Video--title .like-share button {
-  border: none;
-  outline: none;
-  background-color: #0e0e0e;
-}
-.boardView-Video--title .like-share button img {
-  width: 40px;
 }
 
 .board-view--replyBox .reply {
@@ -295,9 +297,6 @@
   .title-btn {
     width: 13vw;
   }
-  .boardView-Video--title .title-Date {
-    width: 30vw;
-  }
   .boardView-Video--title .like {
     width: 8vw;
   }
@@ -324,9 +323,6 @@
   .boardView-Video iframe {
     width: 72vw;
     height: 41vw;
-  }
-  .boardView-Video--title .title-Date {
-    width: 35vw;
   }
   .title-btn {
     width: 15vw;
@@ -377,9 +373,6 @@
     width: 90vw;
     height: 52vw;
   }
-  .boardView-Video--title .title-Date {
-    width: 40vw;
-  }
   .boardView-Video--title .like {
     width: 12vw;
   }
@@ -393,135 +386,5 @@
   }
   .title-btn {
     width: 20vw;
-  }
-}
-@media screen and (max-width: 500px) {
-  .boardView-Video--title .title-name p {
-    font-size: 16px;
-  }
-  .boardView-Video--title .title-name h1 {
-    font-size: 25px;
-  }
-  .boardView-Video--title .title-Date, .boardView-Video--title .title-Genre {
-    font-size: 12px;
-  }
-  .boardView-Video--title .title-Date {
-    width: 50vw;
-  }
-  .boardView-Video--title .title-btn {
-    width: 30vw;
-  }
-  .boardView-Video--title .like-good img {
-    width: 25px;
-  }
-  .boardView-Video--title .like-btn button img {
-    width: 40px;
-    margin-bottom: 5px;
-  }
-  .postLike {
-    font-size: 12px;
-  }
-  .board-view--replyBox {
-    width: 88vw;
-    font-size: 13px;
-  }
-  .reply-date {
-    display: none;
-  }
-  .reply-date-md500 {
-    display: flex;
-    align-items: center;
-  }
-  .reply-date-md500 .reply-date {
-    display: block;
-    width: 50vw !important;
-    text-align: left;
-    padding: 5px 0 0 35px;
-    opacity: 0.5;
-  }
-  .reply-date-md500 .reply-contents--btns {
-    display: flex;
-    padding-top: 5px;
-  }
-  .reply-date-md500 .reply-contents--btns span {
-    background: none;
-    border-radius: auto;
-  }
-  .reply-date-md500 .reply-contents--btns .replyReplyBtn {
-    text-align: center;
-    padding: 5px 10px;
-  }
-  .reply-contents--icon {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  .reply-contents--icon a {
-    width: 20%;
-  }
-  .reply-contents--icon .menuBtn {
-    display: block;
-    margin-right: 10px;
-    padding: 10px 10px;
-    transform: translateY(-30px);
-    cursor: pointer;
-    right: 0 !important;
-  }
-  .reply-contents--btns {
-    display: none;
-  }
-  .reply-contents {
-    display: flex;
-    flex-direction: column;
-  }
-  .reply-contents--text {
-    padding: 10px 0 10px 35px;
-  }
-  .board-view--replyBox__input {
-    display: none;
-  }
-  .board-view--replyBox__input-M {
-    display: block;
-  }
-  .board-view--replyBox__input-M .replyCont {
-    cursor: pointer;
-    width: 100%;
-    background-color: #35373f;
-  }
-  .board-view--replyBox__input-M .replyCont:focus {
-    outline: none;
-  }
-  .reply-contents--btns span {
-    display: block;
-    text-align: left;
-  }
-  .replyReplyBtn {
-    display: none !important;
-  }
-  .replyReplyBtn.replyReplyBtn-M {
-    display: block !important;
-    width: 100px;
-    margin: 0 !important;
-  }
-  .board-view--replyBox .reply-contents--icon a {
-    width: 20%;
-  }
-  .board-view--replyBox .reply-contents--icon span {
-    font-weight: 500;
-  }
-  .board-view--replyBox .reply-contents--icon .menuBtn {
-    font-size: 20px;
-    transform: translateY(-17px);
-  }
-  .boardView-Video--title .like {
-    width: 17vw;
-  }
-  .boardView-Video--title .like .default {
-    font-size: 11px;
-  }
-  .boardView-Video--title .like-btn {
-    display: flex;
-    margin-top: 20px;
-    margin-left: 50px;
   }
 }

@@ -1,6 +1,7 @@
 video, img {
   vertical-align: top;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 html {
@@ -49,76 +50,6 @@ html {
   width: 500px;
 }
 
-@keyframes ball {
-  0% {
-    top: 0px;
-  }
-  to {
-    top: 50px;
-  }
-}
-.containers {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  z-index: 99;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateY(20%);
-  animation: ball 1s ease-in Infinite Alternate;
-}
-
-svg {
-  display: block;
-  width: 100%;
-  height: 300px;
-  font-family: "AppleSDGothicNeoH";
-  margin: 0 auto;
-  font-weight: bold;
-  font-size: 8vw;
-}
-
-.text-copy {
-  fill: none;
-  stroke: white;
-  stroke-dasharray: 6% 29%;
-  stroke-width: 5px;
-  stroke-dashoffset: 0%;
-  animation: stroke-offset 5.5s infinite linear;
-}
-
-.text-copy:nth-child(1) {
-  stroke: #ff3672;
-  animation-delay: -1;
-}
-
-.text-copy:nth-child(2) {
-  stroke: #7723ff;
-  animation-delay: -2s;
-}
-
-.text-copy:nth-child(3) {
-  stroke: #80ffd3;
-  animation-delay: -3s;
-}
-
-.text-copy:nth-child(4) {
-  stroke: #BD0034;
-  animation-delay: -4s;
-}
-
-.text-copy:nth-child(5) {
-  stroke: #fcff36;
-  animation-delay: -5s;
-}
-
-@keyframes stroke-offset {
-  100% {
-    stroke-dashoffset: -35%;
-  }
-}
 @media screen and (max-width: 1400px) {
   #intro-Area .intro-Area--section .intro-Area--article .intro-Area--video {
     width: 170%;
@@ -128,6 +59,14 @@ svg {
   }
   html {
     max-width: 1400px;
+  }
+  .neon {
+    font-size: 8vw;
+    line-height: 8vw;
+  }
+  .flux {
+    font-size: 8vw;
+    line-height: 8vw;
   }
 }
 @media screen and (max-width: 1200px) {
@@ -143,6 +82,14 @@ svg {
   html {
     max-width: 1200px;
   }
+  .neon {
+    font-size: 9vw !important;
+    line-height: 9vw !important;
+  }
+  .flux {
+    font-size: 9vw !important;
+    line-height: 9vw !important;
+  }
 }
 @media screen and (max-width: 770px) {
   #intro-Area .intro-Area--section .intro-Area--article .intro-Area--video {
@@ -157,6 +104,14 @@ svg {
   html {
     max-width: 770px;
   }
+  .neon {
+    font-size: 12vw !important;
+    line-height: 12vw !important;
+  }
+  .flux {
+    font-size: 12vw !important;
+    line-height: 12vw !important;
+  }
 }
 @media screen and (max-width: 500px) {
   #intro-Area .intro-Area--section .intro-Area--article .intro-Area--video {
@@ -170,5 +125,86 @@ svg {
   }
   html {
     max-width: 500px;
+  }
+  .neon {
+    font-size: 15vw !important;
+    line-height: 15vw !important;
+  }
+  .flux {
+    font-size: 15vw !important;
+    line-height: 15vw !important;
+  }
+}
+@font-face {
+  font-family: neon;
+  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+}
+.containers {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  z-index: 99;
+  position: absolute;
+  top: 63%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.4s ease;
+}
+
+.neon {
+  font-family: neon;
+  color: #ff3672;
+  font-size: 6vw;
+  line-height: 6vw;
+  text-shadow: 0 0 10vw #ff3672;
+  transition: all 0.25s ease;
+}
+.neon:hover {
+  transform: scale(110%);
+}
+
+.flux {
+  font-family: neon;
+  color: #7723ff;
+  font-size: 6vw;
+  line-height: 6vw;
+  text-shadow: 0 0 10vw #7723ff;
+  transition: all 0.25s ease;
+}
+.flux:hover {
+  transform: scale(110%);
+}
+
+.neon {
+  animation: neon 1s ease infinite;
+  -moz-animation: neon 1s ease infinite;
+  -webkit-animation: neon 1s ease infinite;
+}
+
+@keyframes neon {
+  0%, 100% {
+    text-shadow: 0 0 1vw #ff3672, 0 0 3vw #ff3672, 0 0 10vw #ff3672, 0 0 10vw #ff3672, 0 0 0.4vw #80ffd3, 0.5vw 0.5vw 0.1vw #80ffd3;
+    color: #ff3672;
+  }
+  50% {
+    text-shadow: 0 0 0.5vw #ff7aa2, 0 0 1.5vw #ff7aa2, 0 0 5vw #ff7aa2, 0 0 5vw #ff7aa2, 0 0 0.2vw #ff7aa2, 0.5vw 0.5vw 0.1vw #80ffd3;
+    color: #ff7aa2;
+  }
+}
+.flux {
+  animation: flux 2s linear infinite;
+  -moz-animation: flux 2s linear infinite;
+  -webkit-animation: flux 2s linear infinite;
+  -o-animation: flux 2s linear infinite;
+}
+
+@keyframes flux {
+  0%, 100% {
+    text-shadow: 0 0 1vw #7723ff, 0 0 3vw #7723ff, 0 0 10vw #7723ff, 0 0 10vw #7723ff, 0 0 0.4vw #80ffd3, 0.5vw 0.5vw 0.1vw #80ffd3;
+    color: #7723ff;
+  }
+  50% {
+    text-shadow: 0 0 0.5vw #ae7bff, 0 0 1.5vw #ae7bff, 0 0 5vw #ae7bff, 0 0 5vw #ae7bff, 0 0 0.2vw #ae7bff, 0.5vw 0.5vw 0.1vw #80ffd3;
+    color: #ae7bff;
   }
 }

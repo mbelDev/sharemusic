@@ -1,11 +1,8 @@
 
 // 스와이퍼
 
-  $('.swiper').each(function(index) {
-    t = $(this);
-    t.addClass('swiepr-' + index);
   
-    let swiper = new Swiper( ".swiper", {
+    let swiperd = new Swiper( ".profileMySwipers", {
       speed: 3000,
       loop: true,
       slidesPerView: "auto",
@@ -33,16 +30,16 @@
         },
       },
     });
-  });
 
-  $('.profileMySwiper').each(function(index) {
-    t = $(this);
-    t.addClass('profileMySwiper-' + index);
-  
+
     let swiper = new Swiper( ".profileMySwiper", {
       slidesPerView: 6,
       spaceBetween: 300,
       loop: true,
+      autoplay: {
+        delay: 3000, //add
+        disableOnInteraction: false,
+      },
       breakpoints: {
       856: {
         slidesPerView: 6,  
@@ -76,8 +73,4 @@
       
     }
     });
-  });
-
-
-
 

@@ -39,11 +39,6 @@
                       </div>
                     </div>
                   </div><!-- like-good -->
-                  <div class="like-share">
-                    <button class="btnOpen btnShare" id="shareModalBox">
-                      <img src="/images/open.svg" alt="" />
-                    </button>
-                  </div><!-- like-btn -->
               </div>
             </div><!-- title-name -->
             <div class="title-Auth">
@@ -58,8 +53,15 @@
             </div>
             <div class="title-Content">
               <div class="title-Date">
-                등록&nbsp;&nbsp; <span th:text="${boardDto.postDate}">0</span>
-                &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp; <span th:text="${boardDto.postHits}">0</span>
+                <div>
+                  등록&nbsp;&nbsp; <span th:text="${boardDto.postDate}">0</span>
+                  &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; 조회수&nbsp;&nbsp; <span th:text="${boardDto.postHits}">0</span>
+                </div>
+                <div class="like-share">
+                  <button class="btnOpen btnShare" id="shareModalBox">
+                    <img src="/images/open.svg" alt="" />
+                  </button>
+                </div><!-- like-btn -->
               </div><!-- title-Date -->
               <pre th:text="${boardDto.postCont}">본문</pre>
             </div>

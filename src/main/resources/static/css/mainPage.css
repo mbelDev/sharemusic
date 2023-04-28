@@ -7,43 +7,43 @@
   font-family: "HelveticaBlack";
   width: 100%;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers {
   font-family: "SBAggroB";
   font-weight: bold;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper {
   gap: 5px;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide {
   width: 530px;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a {
   display: inline-block;
   width: 500px;
   height: 280px;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title {
   position: relative;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title > .swiper-txt:hover {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title > .swiper-txt:hover {
   opacity: 1;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title img {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title img {
   width: 100%;
   height: 100%;
   border-radius: 8px;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-title-num {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title .swiper-title-num {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-title-num p img {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title .swiper-title-num p img {
   width: 80px;
   transform: rotate(-10deg);
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt {
   position: absolute;
   top: 0;
   left: 0;
@@ -55,7 +55,7 @@
   transition: all 0.6s ease;
   transition-delay: 0.2s;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -66,23 +66,23 @@
   align-items: center;
   width: 100%;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts p {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts p {
   margin: 0;
   padding: 0;
   line-height: 1;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts p:nth-child(1) {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts p:nth-child(1) {
   font-family: "HelveticaBlack";
   font-weight: 600;
   font-size: 18px;
   margin-bottom: 10px;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts p:nth-child(2) {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts p:nth-child(2) {
   font-weight: bold;
   font-size: 20px;
   margin-bottom: 10px;
 }
-.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .swiper .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts .swiper-txts--postAuth p {
+.main-constent--itmes .main-constent--ranking .ranking-area .ranking-box .profileMySwipers .swiper-wrapper .swiper-slide a .swiper-title .swiper-txt .swiper-txts .swiper-txts--postAuth p {
   margin-right: 50px;
 }
 .main-constent--itmes .main-constent--listItem .listItem-nav {
